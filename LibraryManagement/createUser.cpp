@@ -190,7 +190,10 @@ void writeFile()
 // Tạo người dùng
 void getUser(int typeAccount)
 {
-	if (typeAccount == 1)
+	/* Kiểm tra xem tài khoản đăng nhập hiện tại có phải là admin hay không?
+	   Nếu là admin thì thực hiện chức năng.
+	   Ngược lại không được tạo tài khoản (vì tạo tài khoản duy nhất là quyền của admin.) */
+	if (typeAccount == 1) 
 	{
 		writeFile();
 		printf("Tao nguoi dung thanh cong!\n");

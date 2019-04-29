@@ -113,7 +113,7 @@ void editProfile()
 
 	fclose(fCur);
 
-	FILE *fw = fopen("Release/Current/currentUser.bin", "wb");
+	FILE *fw = fopen("Release/Current/currentUser.bin", "wb"); // cập nhật lại thông tin trong file currentUser
 	fwrite(&curUser, sizeof(Users), 1, fw);
 	fclose(fw);
 
