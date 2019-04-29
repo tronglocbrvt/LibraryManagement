@@ -1,6 +1,5 @@
 #include "Menu.h"
 #include "commonFunction.h"
-#include <windows.h>
 
 //=================================================
 // on window

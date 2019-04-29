@@ -110,3 +110,28 @@ bool isNumber(char c)
 	return 0;
 }
 
+//Chỉnh màu chữ và màu nền
+/*
+0 black
+1 blue
+2 green
+3 aqua
+4 red
+5 purple
+6 yellow
+7 white
+8 gray
+9 light blue
+10 light green
+11 light aqua
+12 light red
+13 light purple
+14 light yellow
+15 bright white
+*/
+
+void textBgColor(int colorText, int colorBG) // cplusplus
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
+}
+

@@ -10,3 +10,7 @@ int numDaysOfMonth(int Month, int Year);
 bool isPossibleDay(int Day, int Month, int Year);
 
 bool isNumber(char c);
+
+void textBgColor(int colorText, int colorBG);
+
+

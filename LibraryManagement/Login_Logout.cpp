@@ -1,5 +1,7 @@
 ﻿#include "Login_Logout.h"
 #include "Menu.h"
+#include "commonFunction.h"
+
 /* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
 	1: Admin
 	2: Chuyên viên
@@ -49,8 +51,11 @@ int Logout()
 //Hàm đăng nhập
 int Login()
 {
-	gotoxy(30,0);
-	printf("Moi ban dang nhap: \n\n");
+	gotoxy(30,1);
+	textBgColor(4,11);
+	printf(" Moi ban dang nhap: \n\n");
+
+	textBgColor(7, 0);
 	printf("Nhap ten tai khoan: ");
 	char *username = new char[21];
 	scanf("%s", username);
@@ -63,6 +68,6 @@ int Login()
 
 	delete[] username;
 	delete[] password;
-
+	
 	return typeAccount;
 }
