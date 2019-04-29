@@ -113,9 +113,9 @@ void editProfile()
 
 	fclose(fCur);
 
-	FILE *f1 = fopen("Release/Current/currentUser.bin", "wb");
-	fwrite(&curUser, sizeof(Users), 1, f1);
-	fclose(f1);
+	FILE *fw = fopen("Release/Current/currentUser.bin", "wb");
+	fwrite(&curUser, sizeof(Users), 1, fw);
+	fclose(fw);
 
 	updateFile(curUser);
 
