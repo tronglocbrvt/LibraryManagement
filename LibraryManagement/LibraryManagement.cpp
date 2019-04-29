@@ -23,15 +23,20 @@ int main()
 				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
 				getch();
 			}
-		} while (typeAccount == 0);
+			else if (typeAccount == -1)
+			{
+				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
+				getch();
+			}
+		} while (typeAccount == 0 || typeAccount == -1);
 
 		printf("Dang nhap thanh cong!\n");
 
 		//getUser(typeAccount);
 		//ChangePassword();
 		//editProfile();
-		decentraliseUser(typeAccount);
-		system("pause");
+		//decentraliseUser(typeAccount);
+		//system("pause");
 		bool continueSwit = true;
 		while (continueSwit){
 			printfMenu(); // ke vien khung ung dung

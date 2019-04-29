@@ -1,5 +1,5 @@
 ﻿#include "Login_Logout.h"
-
+#include "Menu.h"
 /* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
 	1: Admin
 	2: Chuyên viên
@@ -32,8 +32,7 @@ int checkLogin(char *Username, char *Password)
 			}
 			else
 			{
-				printf("Tai khoan cua ban dang o trang thai Blocked!\n");
-				return 0;
+				return -1;
 			}
 		}
 	}
@@ -50,6 +49,8 @@ int Logout()
 //Hàm đăng nhập
 int Login()
 {
+	gotoxy(30,0);
+	printf("Moi ban dang nhap: \n\n");
 	printf("Nhap ten tai khoan: ");
 	char *username = new char[21];
 	scanf("%s", username);

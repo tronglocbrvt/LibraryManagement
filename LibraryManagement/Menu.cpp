@@ -24,17 +24,9 @@
 
 
 int printLoginMenu(){
-	// printf("*******************************************\n");
-	// gotoxy(10,1);
-	// printf("yasuo\n");
-
-	/*printf("Nhap ten tai khoan: ");
-	char *username = new char[20];
-	scanf("%s", username);
-
-	printf("Nhap mat khau: ");
-	char *password = new char[16];
-	scanf("%s", password);*/
+	 printf("*******************************************\n");
+	 gotoxy(10,1);
+	 printf("yasuo\n");
 
 	// do somthing here: check if username is exist and password is right
 	bool checkUsername = 1;
