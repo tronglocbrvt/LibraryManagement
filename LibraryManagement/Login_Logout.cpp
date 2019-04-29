@@ -1,4 +1,5 @@
 ﻿#include "Login_Logout.h"
+
 /* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
 	1: Admin
 	2: Chuyên viên
@@ -22,10 +23,18 @@ int checkLogin(char *Username, char *Password)
 
 		if ((strcmp(A.Username, Username) == 0) && (strcmp(A.Password, Password) == 0))
 		{
-			fwrite(&A, sizeof(Users), 1, fCur);
-			fclose(fCur);
-			fclose(f);
-			return A.typeAccount;
+			if (A.Status == 1)
+			{
+				fwrite(&A, sizeof(Users), 1, fCur);
+				fclose(fCur);
+				fclose(f);
+				return A.typeAccount;
+			}
+			else
+			{
+				printf("Tai khoan cua ban dang o trang thai Blocked!\n");
+				return 0;
+			}
 		}
 	}
 	return 0;
