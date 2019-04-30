@@ -19,6 +19,7 @@ bool checkUsername(char *Username)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
+			fclose(f);
 			return false;
 		}
 	}

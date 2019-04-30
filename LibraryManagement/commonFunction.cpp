@@ -134,4 +134,3 @@ void textBgColor(int colorText, int colorBG) // cplusplus
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
 }
-

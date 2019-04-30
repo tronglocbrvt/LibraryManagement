@@ -52,10 +52,10 @@ int Logout()
 int Login()
 {
 	gotoxy(30,1);
-	textBgColor(4,11);
+	textBgColor(RED,LIGHTAQUA);
 	printf(" Moi ban dang nhap: \n\n");
 
-	textBgColor(7, 0);
+	textBgColor(WHITE, BLACK);
 	printf("Nhap ten tai khoan: ");
 	char *username = new char[21];
 	scanf("%s", username);

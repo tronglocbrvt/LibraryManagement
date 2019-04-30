@@ -9,6 +9,10 @@ void viewProfile()
 	Users curUser;
 
 	FILE *fCur = fopen("Release/Current/currentUser.bin", "rb");
+
+	if (fCur == NULL)
+		return;
+
 	fread(&curUser, sizeof(Users), 1, fCur);
 
 	printf("--------------------------------------------------------\n");
@@ -50,6 +54,10 @@ void editProfile()
 	int temp;
 
 	FILE *fCur = fopen("Release/Current/currentUser.bin", "rb");
+
+	if (fCur == NULL)
+		return;
+
 	fread(&curUser, sizeof(Users), 1, fCur);
 
 	bool end = false;
@@ -114,6 +122,10 @@ void editProfile()
 	fclose(fCur);
 
 	FILE *fw = fopen("Release/Current/currentUser.bin", "wb"); // cập nhật lại thông tin trong file currentUser
+
+	if (fw == NULL)
+		return;
+
 	fwrite(&curUser, sizeof(Users), 1, fw);
 	fclose(fw);
 

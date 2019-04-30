@@ -6,6 +6,7 @@ void updateFile(Users curUser)
 
 	FILE *fo = fopen("Release/Users/Users.bin", "rb");
 	FILE *ftemp = fopen("Release/Users/userTemp.bin", "wb");
+
 	if (fo == NULL || ftemp == NULL)
 		return;
 
@@ -37,6 +38,9 @@ void ChangePassword()
 
 	FILE *f = fopen("Release/Current/currentUser.bin", "rb"); // mở File chứa thông tin tài khoản đang đăng nhập
 
+	if (f == NULL)
+		return; 
+
 	fread(&curUser, sizeof(Users), 1, f);
 	do
 	{
@@ -65,6 +69,10 @@ void ChangePassword()
 	fclose(f);
 
 	FILE *fw = fopen("Release/Current/currentUser.bin", "wb");
+
+	if (fw == NULL)
+		return;
+
 	fwrite(&curUser, sizeof(Users), 1, fw);
 	fclose(fw);
 

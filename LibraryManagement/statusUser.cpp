@@ -1,28 +1,28 @@
-﻿#include "decentraliseUsers.h"
+﻿#include "statusUser.h"
 #include "createUser.h"
 #include "changePassword.h"
 
-void inforDecentraliseUser()
+void inforStatusUser()
 {
 	Users A;
 
 	FILE *f = fopen("Release/Users/Users.bin", "rb");
-
+	
 	if (f == NULL)
 		return;
 
 	while (fread(&A, sizeof(Users), 1, f) != NULL)
 	{
-		if (A.typeAccount == 2)
-			printf("%s\t\t%s\n", A.Username, "Chuyen vien");
-		else if (A.typeAccount == 3)
-			printf("%s\t\t%s\n", A.Username, "Quan li");
+		if (A.Status == 0)
+			printf("%s\t\t%s\n", A.Username, "Blocked");
+		else if (A.Status == 1)
+			printf("%s\t\t%s\n", A.Username, "Actived");
 	}
 
 	fclose(f);
 }
 
-void decentraliseUser(int typeAccount)
+void changeStatusUser(int typeAccount)
 {
 	if (typeAccount != 1)
 	{
@@ -30,10 +30,10 @@ void decentraliseUser(int typeAccount)
 		return;
 	}
 
-	inforDecentraliseUser();
+	inforStatusUser();
 
 	char *Username = new char[21];
-	int flag; 
+	int flag;
 
 	do
 	{
@@ -50,7 +50,7 @@ void decentraliseUser(int typeAccount)
 
 	Users A;
 	FILE *f = fopen("Release/Users/Users.bin", "rb");
-
+	
 	if (f == NULL)
 		return;
 
@@ -58,7 +58,7 @@ void decentraliseUser(int typeAccount)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
-			getTypeAccount(A);
+			getStatus(A);
 			break;
 		}
 	}
@@ -67,9 +67,9 @@ void decentraliseUser(int typeAccount)
 
 	updateFile(A);
 
-	printf("Ban da phan quyen thanh cong!\n");
+	printf("Ban da cap nhat trang thai thanh cong!\n");
 
-	inforDecentraliseUser();
-	
+	inforStatusUser();
+
 	delete[] Username;
 }

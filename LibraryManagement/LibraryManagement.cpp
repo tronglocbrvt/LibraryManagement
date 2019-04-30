@@ -6,7 +6,7 @@
 #include "changePassword.h"
 #include "changeProfile.h"
 #include "decentraliseUsers.h"
-
+#include "statusUser.h"
 
 int main()
 {
@@ -20,26 +20,27 @@ int main()
 			typeAccount = Login(); // Đăng nhập, trả về 0 nếu thất bại, trả về 1 nếu là admin, trả về 2 là chuyên viên, trả về 3 là quản lý
 			if (typeAccount == 0)
 			{
-				textBgColor(4, 0);
+				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
 				getch();
 			}
 			else if (typeAccount == -1)
 			{
-				textBgColor(4, 0);
+				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
 				getch();
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 
-		textBgColor(4, 0);
+		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
-		textBgColor(7, 0);
+		textBgColor(WHITE, BLACK);
 
 		//getUser(typeAccount);
 		//ChangePassword();
 		//editProfile();
 		//decentraliseUser(typeAccount);
+		//changeStatusUser(typeAccount);
 		system("pause");
 		bool continueSwit = true;
 		while (continueSwit){

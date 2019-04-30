@@ -1,6 +1,6 @@
 #pragma once
 #include "LibraryManagement.h"
 
-void inforUser();
+void inforDecentraliseUser();
 
 void decentraliseUser(int typeAccount);

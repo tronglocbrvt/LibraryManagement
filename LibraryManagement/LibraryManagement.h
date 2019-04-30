@@ -9,6 +9,26 @@
 #include <string.h>
 #include <windows.h>
 
+enum Color
+{
+	BLACK,
+	BLUE,
+	GREEN,
+	AQUA,
+	RED,
+	PURPLE,
+	YELLOW,
+	WHITE,
+	GRAY,
+	LIGHTBLUE,
+	LIGHTGREEN,
+	LIGHTAQUA,
+	LIGHTRED,
+	LIGHTPURPLE,
+	LIGHTYELLOW,
+	LIGHTWHITE,
+};
+
 struct Day
 {
 	int Date; 

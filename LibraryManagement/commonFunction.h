@@ -13,4 +13,3 @@ bool isNumber(char c);
 
 void textBgColor(int colorText, int colorBG);
 
-

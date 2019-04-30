@@ -84,6 +84,7 @@
     <ClInclude Include="LibraryManagement.h" />
     <ClInclude Include="Login_Logout.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="statusUser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="changePassword.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="LibraryManagement.cpp" />
     <ClCompile Include="Login_Logout.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="statusUser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
