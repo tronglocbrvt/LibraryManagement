@@ -103,6 +103,81 @@ bool isPossibleDay(int Day, int Month, int Year)
 	return true;
 }
 
+
+
+// cong 1 vao mot chuoi so -> dung de sinh ma so lien tuc
+int plusOneIntoAChar(char &numch){
+	if (numch < '0' && numch > '9')
+	{
+		return -1;
+	}
+	else if (numch == '9')
+	{
+		numch = '0';
+		return 1;
+	}
+	else {
+		numch += 1;
+		return 0;
+ 	}
+}
+bool plusOneIntoAString(char* numStr){
+
+	int length = strlen(numStr) -1;
+	while (length >= 0){
+		switch(plusOneIntoAChar(numStr[length])){
+			case -1:
+				return false;
+				break;
+			case 0:
+				length = -1;
+				break;
+		}
+		length--;
+	}
+
+	return true;
+}
+
+Day getExpiredDay(Day orginDay){
+
+	Day plusDay;
+	plusDay = orginDay;
+	plusDay.Date += _MAX_DAY_EXPIRES_;
+
+	while (!isPossibleDay(plusDay.Date, plusDay.Month, plusDay.Year)){
+		if (plusDay.Date > numDaysOfMonth(plusDay.Month, plusDay.Year))
+		{
+			plusDay.Date -= numDaysOfMonth(plusDay.Month, plusDay.Year);
+			if ((++plusDay.Month) > 12)
+			{
+				plusDay.Month = 1;
+				plusDay.Year++;
+			}
+		}
+	}
+
+	return plusDay;
+
+}
+
+Day getToday(){
+    time_t rawtime;
+    struct tm * timeinfo; // khai bao mot con tro cua struct thoi gian
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    sprintf(output, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
+    Day days;
+    days.Date 	= timeinfo->tm_mday;
+    days.Month 	= timeinfo->tm_mon + 1;
+    days.Year 	= timeinfo->tm_year + 1900;
+
+    return days;
+}
+
 bool isNumber(char c)
 {
 	if (c >= '0' && c <= '9')
