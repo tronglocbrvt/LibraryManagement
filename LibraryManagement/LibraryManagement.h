@@ -1,6 +1,7 @@
 ﻿#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_CHOICE  7
+#define _MAX_DAY_EXPIRES_ 365
 
 #include <stdio.h>
 #include <tchar.h>
