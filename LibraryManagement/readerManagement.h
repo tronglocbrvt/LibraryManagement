@@ -9,3 +9,4 @@ void printfReader(Readers reader);
 
 Readers setReaderInf(char *readerID);
 
+Readers editReaderInf(char *readerID);
