@@ -19,3 +19,6 @@ bool isNumber(char c);
 
 void textBgColor(int colorText, int colorBG);
 
+// bool getInfWithNote(, char *note){
+
+// }
