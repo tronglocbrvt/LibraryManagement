@@ -25,7 +25,6 @@
 int printLoginMenu(){
 	 printf("*******************************************\n");
 	 gotoxy(10,1);
-	 printf("yasuo\n");
 
 	// do somthing here: check if username is exist and password is right
 	bool checkUsername = 1;
@@ -63,4 +62,17 @@ void printfMenu(){
 
 
 
+}
+
+
+int printfEditReaderInf(){ // return max choices
+	printf("Sua ten doc gia\n");
+	printf("Sua CMND\n");
+	printf("Sua ngay thang nam sinh\n");
+	printf("Doi gioi tinh\n" );
+	printf("Sua dia chi email\n");
+	printf("Sua dia chi sinh song\n");
+	printf("Dieu chinh ngay het han the\n");
+
+	return 7;
 }
