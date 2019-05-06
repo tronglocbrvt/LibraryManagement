@@ -4,9 +4,9 @@
 #include "commonFunction.h"
 #include "LibraryManagement.h"
 
-
+char *getNationalID();
 void printfReader(Readers reader);
 
 Readers setReaderInf(char *readerID);
 
-Readers editReaderInf(char *readerID);
+bool editReaderInf(Readers *reader);
