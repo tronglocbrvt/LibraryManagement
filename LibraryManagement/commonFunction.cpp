@@ -14,7 +14,6 @@ int getNumberPressKey(int MAX){
 			// Terminates the loop 
 			// when escape is pressed 
 			if (ch >= '0' && ch <= int(max) + 48)
-				// if (int(ch) == 27) 
 				break; 
 			if (ch == 27)
 			{
@@ -139,7 +138,7 @@ bool plusOneIntoAString(char* numStr){
 	return true;
 }
 
-Day getExpiredDay(Day orginDay){
+Day getExpiredDay(Day orginDay){ 
 
 	Day plusDay;
 	plusDay = orginDay;
@@ -183,6 +182,29 @@ bool isNumber(char c)
 	if (c >= '0' && c <= '9')
 		return 1;
 	return 0;
+}
+
+Day getDayFrmUser(){
+	Day day;
+	do
+	{
+		printf("Nhap ngay: ");
+		scanf("%d", &day.Date);
+		temp = getchar();
+
+		printf("Nhap thang: ");
+		scanf("%d", &day.Month);
+		temp = getchar();
+
+		printf("Nhap nam: ");
+		scanf("%d", &day.Year);
+		temp = getchar();
+
+		if (!isPossibleDay(day.Date, day.Month, day.Year))
+			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
+		else break;
+	} while (1);
+	return day;
 }
 
 //Chỉnh màu chữ và màu nền
