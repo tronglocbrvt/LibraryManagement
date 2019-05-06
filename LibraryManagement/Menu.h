@@ -11,3 +11,4 @@ void printfMainMenu();
 
 void printfMenu();
 
+int printfEditReaderInf();
