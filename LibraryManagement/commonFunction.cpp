@@ -1,4 +1,5 @@
-﻿#include "commonFunction.h"
+#include "commonFunction.h"
+#include "time.h"
 
 //Hàm kiểm tra số nhập từ bàn phím
 int getNumberPressKey(int MAX){
@@ -167,7 +168,8 @@ Day getToday(){
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
-    sprintf(output, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
+    fprintf(stdout, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
     Day days;
     days.Date 	= timeinfo->tm_mday;
@@ -190,7 +192,7 @@ Day getDayFrmUser(){
 	{
 		printf("Nhap ngay: ");
 		scanf("%d", &day.Date);
-		temp = getchar();
+		int temp = getchar();
 
 		printf("Nhap thang: ");
 		scanf("%d", &day.Month);
