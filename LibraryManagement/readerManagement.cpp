@@ -1,4 +1,6 @@
 #include "readerManagement.h"
+#include "commonFunction.h"
+#include "Menu.h"
 
 char *getNationalID()
 {
@@ -55,7 +57,7 @@ Readers setReaderInf(char *readerID){
 	printf("Nhap ngay thang nam sinh:\n");
 	reader.Birthday = getDayFrmUser();
 
-	strcpy(&reader.NationID, getNationalID());
+	strcpy(reader.NationID, getNationalID());
 
 	printf("Nhap dia chi: ");
 	gets(reader.Address);
@@ -87,38 +89,38 @@ bool editReaderInf(Readers *reader){
 	switch(getNumberPressKey(printfEditReaderInf())){
 		case 1:
 			printf("Nhap Ho va Ten: ");
-			gets(reader.Fullname);
+			gets(reader->Fullname);
 			break;
 		case 2:
 			printf("Nhap moi CMND de sua:\n");
-			strcpy(reader->NationID, getNationalID);
+			strcpy(reader->NationID, getNationalID());
 			break;
 		case 3:
 			printf("Nhap ngay thang nam sinh:\n");
-			reader.Birthday = getDayFrmUser();
+			reader->Birthday = getDayFrmUser();
 			break;
 		case 4:
 			do
 			{
 				printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-				scanf("%d", &reader.Sex);
-				temp = getchar();
+				scanf("%d", &reader->Sex);
+				int temp = getchar();
 
-				if (reader.Sex != 0 && reader.Sex != 1)
+				if (reader->Sex != 0 && reader->Sex != 1)
 					printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
 				else break;
 			} while (1);
 			break;
 		case 5:
 			printf("Nhap dia chi email / thu dien tu: ");
-			gets(reader.Email);
+			gets(reader->Email);
 			break;
 		case 6:
 			printf("Nhap dia chi: ");
-			gets(reader.Address);
+			gets(reader->Address);
 			break;
 		case 7:
-			reader.expireCard = getExpiredDay(getToday());
+			reader->expireCard = getExpiredDay(getToday());
 			break;
 
 	}
