@@ -14,9 +14,8 @@ bool plusOneIntoAString(char* numStr);
 
 Day getExpiredDay(Day orginDay);
 Day getToday();
-
 bool isNumber(char c);
-
+Day getDayFrmUser();
 void textBgColor(int colorText, int colorBG);
 
 // bool getInfWithNote(, char *note){

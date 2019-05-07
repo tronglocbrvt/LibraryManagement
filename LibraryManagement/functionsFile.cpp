@@ -1,4 +1,4 @@
-#include "functionsFile"
+#include "functionsFile.h"
 
 FILE *openFile(char *nameFile, char *mode){
 
