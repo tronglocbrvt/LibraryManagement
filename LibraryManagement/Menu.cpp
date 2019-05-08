@@ -65,14 +65,20 @@ void printfMenu(){
 }
 
 
-int printfEditReaderInf(){ // return max choices
-	printf("Sua ten doc gia\n");
-	printf("Sua CMND\n");
-	printf("Sua ngay thang nam sinh\n");
-	printf("Doi gioi tinh\n" );
-	printf("Sua dia chi email\n");
-	printf("Sua dia chi sinh song\n");
-	printf("Dieu chinh ngay het han the\n");
+int printfMenuReaderManagement(){
+	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	printf("2. Them doc gia.\n");
+	printf("3. Chinh sua thong tin mot doc gia.\n");
+	printf("4. Xoa thong tin mot doc gia.\n");
+	printf("5. Xem thong tin mot doc gia.\n");
+	printf("0. Quay ve\n");
 
-	return 7;
+	return 5;
+}
+int printfSubMenuReaderManagement(){
+	printf("1. Tim doc gia theo Ho va ten\n");
+	printf("2. Tim doc gia theo CMND\n");
+	printf("0. Quay ve\n");
+
+	return 2;
 }
