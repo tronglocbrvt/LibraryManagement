@@ -2,7 +2,7 @@
 #include "time.h"
 
 //Hàm kiểm tra số nhập từ bàn phím
-int getNumberPressKey(int MAX){
+int getNumberPressKey(int MAX, int MIN = 0){
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
 	printf("Nhan so de chon: ");
@@ -14,7 +14,7 @@ int getNumberPressKey(int MAX){
 			// printf("ban chon: %c\n", );
 			// Terminates the loop 
 			// when escape is pressed 
-			if (ch >= '0' && ch <= int(max) + 48)
+			if (ch >= MIN + '0' && ch <= int(max) + '0')
 				break; 
 			if (ch == 27)
 			{
@@ -28,7 +28,7 @@ int getNumberPressKey(int MAX){
 
 	}
 
-	return int(ch - 48);
+	return int(ch - '0');
 }
 
 // Hàm kiểm tra năm nhuận
@@ -237,3 +237,54 @@ void textBgColor(int colorText, int colorBG) // cplusplus
 void printfDay(Day day){
 	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
 }
+
+
+// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+// ------------------------------------Link List-----------------------------------------------
+// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+
+//======================================================
+// << Hàm khởi tạo danh sách và node
+LLNodeReader *Init(){
+	LLNodeReader *ls = new LLNodeReader();
+	ls->pHead = NULL;
+	ls->pTail = NULL;
+	checkNull(ls);
+	return ls;
+}
+NodeReader *InitNode(const Readers *data){
+	NodeReader *no = new NodeReader();
+	no->pNext = new NodeReader();
+	no->pPrev = new NodeReader();
+	*no->reader = *data;
+
+	return no;
+}
+//======================================================
+	
+NodeReader *fAddAtTail(LLNodeReader *ls, const Readers *data){ // Thêm vào cuối danh sách một struct >> Readers
+	NodeReader *no = InitNode(data);
+	if (no == NULL)
+	{
+		return NULL;
+	}
+
+	// Tạo liên kết
+	no->pPrev = ls->pTail; 
+	no->pNext = NULL;
+	if (ls->pTail == NULL) // nếu danh sách rỗng
+	{
+		ls->pHead = no;
+	}
+	else {
+		ls->pTail->pNext = no;
+	}
+	ls->pTail = no;
+
+	return no;
+}
+
+//=============================================================================================
+//=============================================================================================
