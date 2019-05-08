@@ -81,9 +81,11 @@
     <ClInclude Include="commonFunction.h" />
     <ClInclude Include="createUser.h" />
     <ClInclude Include="decentraliseUsers.h" />
+    <ClInclude Include="functionsFile.h" />
     <ClInclude Include="LibraryManagement.h" />
     <ClInclude Include="Login_Logout.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="readerManagement.h" />
     <ClInclude Include="statusUser.h" />
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +94,11 @@
     <ClCompile Include="commonFunction.cpp" />
     <ClCompile Include="createUser.cpp" />
     <ClCompile Include="decentraliseUsers.cpp" />
+    <ClCompile Include="functionsFile.cpp" />
     <ClCompile Include="LibraryManagement.cpp" />
     <ClCompile Include="Login_Logout.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="readerManagement.cpp" />
     <ClCompile Include="statusUser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
