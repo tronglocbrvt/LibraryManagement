@@ -18,6 +18,7 @@ bool isNumber(char c);
 Day getDayFrmUser();
 void textBgColor(int colorText, int colorBG);
 
+void printfDay(Day day);
 // bool getInfWithNote(, char *note){
 
 // }
