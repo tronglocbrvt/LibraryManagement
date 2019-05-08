@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_CHOICE  7
 #define _MAX_DAY_EXPIRES_ 365
+#define _F_GOI_TINH_(int sex) (sex == 1 ? (char*)"Nam" : (char*)"Nu")
 
 #include <stdio.h>
 #include <tchar.h>
@@ -80,4 +81,16 @@ struct BorrowBooks
 	char ISBN[11]; // Mã sách gồm 10 số
 	Day borrowBookDay; // Ngày mượn sách
 	Day returnBookDay; // Ngày trả sách thực tế
+};
+
+struct NodeReader
+{
+	Readers *reader;
+	NodeReader *pNext;
+	NodeReader *pPrev;
+};
+struct LLNodeReader
+{
+	NodeReader *pHead;
+	NodeReader *pTail;
 };
