@@ -12,3 +12,6 @@ void printfMainMenu();
 void printfMenu();
 
 int printfEditReaderInf();
+
+int printfMenuReaderManagement();
+int printfSubMenuReaderManagement();
