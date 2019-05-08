@@ -233,3 +233,7 @@ void textBgColor(int colorText, int colorBG) // cplusplus
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
 }
+
+void printfDay(Day day){
+	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
+}
