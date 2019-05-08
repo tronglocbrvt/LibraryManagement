@@ -1,5 +1,5 @@
 ﻿#include "changeProfile.h"
-#include  "commonFunction.h"
+#include "commonFunction.h"
 #include "createUser.h"
 #include "changePassword.h"
 
