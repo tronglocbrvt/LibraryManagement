@@ -31,6 +31,49 @@ char *getNationalID()
 	} while (flag == 0);
 	return idNa;
 }
+
+Readers *findReaderWithID(const FILE *&fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
+	Readers *reader = new Readers();
+	long int currentPoiter = ftell(fileReader);
+	fseek(fileReader, 0, SEEK_SET);
+
+	if (fileReader == NULL || reader == NULL)
+	{
+		return NULL;
+	}
+	
+	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+		if (strcmp(reader->ID, personID) == 0)
+		{
+			break;
+		}
+	}
+	
+	fseek(fileReader, currentPoiter, SEEK_SET);
+	return reader;
+}
+
+Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm kiếm đọc giả theo họ tên
+	Readers *reader = new Readers();
+	long int currentPoiter = ftell(fileReader);
+	fseek(fileReader, 0, SEEK_SET);
+
+	if (fileReader == NULL || reader == NULL)
+	{
+		return NULL;
+	}
+	
+	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+		if (strcmp(reader->Fullname, personName) == 0)
+		{
+			break;
+		}
+	}
+	
+	fseek(fileReader, currentPoiter, SEEK_SET);
+	return reader;
+}
+
 void printfReader(Readers reader){
 
 	printf("Ma doc gia:\t\t%s\n", reader.ID);
@@ -87,6 +130,24 @@ bool printfAllReader(const LLNodeReader *ls){ // int ra thông tin đọc giả 
 	return 1;
 }
 
+bool getAllReaderToLL(const FILE *&fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
+	Readers *reader = new Readers();
+	long int currentPoiter = ftell(fileReader);
+	fseek(fileReader, 0, SEEK_SET);
+
+	if (fileReader == NULL || reader == NULL)
+	{
+		return 0;
+	}
+	
+	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
+	}
+	
+	fseek(fileReader, currentPoiter, SEEK_SET);
+	return 1;
+}
+
 Readers *setReaderInf(char *readerID){
 	Readers *reader;
 	int temp;
@@ -124,6 +185,23 @@ Readers *setReaderInf(char *readerID){
 	reader->expireCard = getExpiredDay(reader->creatCard);
 	//
 	return reader;
+}
+
+bool addAnInfToFile(const FILE *fileReader, const Readers *reader){	// thêm thông tin đọc giả vào file
+
+	if (fileReader == NULL || reader == NULL)
+	{
+		return 0;
+	}
+
+	long int currentPoiter = ftell(fileReader);
+	fseek(fileReader, 0, SEEK_END);
+
+	fwrite(reader, sizeof(Readers), 1, fileReader);
+
+	fseel(fileReader, currentPoiter, SEEK_SET);
+
+	return 1;
 }
 
 bool editReaderInf(Readers *reader){
