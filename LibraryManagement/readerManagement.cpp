@@ -37,7 +37,9 @@ Readers *findReaderWithID(const FILE *&fileReader, char *&personID){	// Tìm ki�
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
 
-	if (fileReader == NULL || reader == NULL)
+	reader = NULL;
+
+	if (fileReader == NULL)
 	{
 		return NULL;
 	}
@@ -58,7 +60,9 @@ Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
 
-	if (fileReader == NULL || reader == NULL)
+	reader = NULL;
+
+	if (fileReader == NULL)
 	{
 		return NULL;
 	}
@@ -71,6 +75,26 @@ Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm
 	}
 	
 	fseek(fileReader, currentPoiter, SEEK_SET);
+	return reader;
+}
+
+Readers *getTheLastReader(const FILE *&fileReader){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+	long int current = ftell(fileReader);
+
+	Readers *reader = new Readers();
+
+	fseek(fileReader, 0, SEEK_SET);
+	fread(reader, sizeof(Readers), 1, fileReader); // lấy độc giả đầu
+	if (reader == NULL)
+	{
+		return NULL;
+	}
+
+	fseek(fileReader, -sizeof(Readers), SEEK_END);
+	fread(reader, sizeof(Readers), 1, fileReader); // lấy đọc giả cuối
+
+	fseek(fileReader, current, SEEK_SET);
+
 	return reader;
 }
 
@@ -245,6 +269,41 @@ bool editReaderInf(Readers *reader){
 
 	}
 	return true;
+}
+
+bool viewInfAReader(FILE *fileReader){ // Xem thông tin của một người cụ thể
+	int choice = 0;
+	Readers	*reader = new Readers();
+	char *StrGetFrmUser = new char();
+
+	reader = NULL;
+
+	if (fileReader == NULL)
+	{
+		return 0;
+	}
+
+	do {
+		choice = getNumberPressKey(printfSubMenuReaderManagement());
+		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
+
+		switch (choice){
+			case 1:
+				*reader = *findReaderWithID(StrGetFrmUser);
+				break;
+			case 2:
+				*reader = *findReaderWithName(StrGetFrmUser);
+				break;
+		}
+		if (reader == NULL) // tức độc giả không thay đổi -> không tìm thấy.
+		{
+			printf("Doc gia nay khong ton tai\n");
+			return 0;
+		}
+		printfReader(*reader);
+	}while (choice != 0);
+
+	return 1;
 }
 
 
