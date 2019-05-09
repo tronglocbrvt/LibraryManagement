@@ -11,6 +11,8 @@ Readers *findReaderWithID(const FILE *&fileReader, char *&personID);	// Tìm ki�
 
 Readers *findReaderWithName(const FILE *&fileReader, char *&personName);	// Tìm kiếm đọc giả theo họ tên
 
+Readers *getTheLastReader(const FILE *&fileReader); // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+
 void printfReader(const Readers &reader); // in thông tin đọc giả
 bool printfAllReader(const FILE *&fileReader);	// đọc toàn bộ thông tin đọc giả từ file và in ra -> không đưa vào link list
 
@@ -42,35 +44,34 @@ bool updateReaderToFile(const FILE *fileReader, const Readers *reader){	// cập
 
 	// 2 trường hợp: 1: cập nhập bằng linklist, 2: cập nhật trực tiếp
 
-bool viewInfAReader(FILE *fileReader){
-	int choice = 0;
-	Readers	*reader = new Readers();
-	char *StrGetFrmUser = new char();
+bool viewInfAReader(FILE *fileReader); // Xem thông tin của một người cụ thể
 
-	if (fileReader == NULL || reader == NULL)
-	{
-		return 0;
-	}
-	do {
-		choice = getNumberPressKey(printfSubMenuReaderManagement());
-		int getEnter = getchar();
-		gets(StrGetFrmUser);
-
-		switch (choice){
-			case 1:
-				*reader = *findReaderWithID(StrGetFrmUser);
-				break;
-			case 2:
-				*reader = *findReaderWithName(StrGetFrmUser);
-				break;
-		}
-
-		printfReader(*reader);
-	}while (choice != 0);
+bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc giả
 
 	return 1;
 }
+bool deleteReaderInfToFile(FILE *fileReader){	//
 
+	return 1;
+}
+bool addNewReaderInfToFile(FILE *fileReader){ // doing here
+	int choice = 0;
+	Readers	*reader = new Readers();
+	char *StrGetFrmUser = new char();
+	
+	if (fileReader == NULL)
+	{
+		return 0;
+	}
+
+	*reader = *getTheLastReader(fileReader);
+	if (reader == NULL)
+	{
+		
+	}
+
+	return 1;
+}
 
 void runReaderManagement(){
 
@@ -97,7 +98,9 @@ void runReaderManagement(){
 			
 				break;
 			case 5:
-				
+				viewInfAReader(pFile);
+				break;
+			default:
 				break;
 		}
 	}while (choice != 0);
