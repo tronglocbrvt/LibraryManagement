@@ -238,6 +238,14 @@ void printfDay(Day day){
 	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
 }
 
+char *getStringFrmUser(char *note){
+	printf("%s:\t", note);
+	char *strGet = new char();
+	int getEnter = getchar();
+	gets(strGet);
+
+	return strGet;
+}
 
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
