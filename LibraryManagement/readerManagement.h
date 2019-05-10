@@ -33,100 +33,14 @@ bool askToUpdateReaderToFile();	// cập nhật thông tin đọc giả vào fil
 bool viewInfAReader(FILE *fileReader); // Xem thông tin của một người cụ thể
 
 bool deleteReader(const FILE *&fileReader, const Readers *&reader); // xoá một độc giả
+bool editReader(Readers *&reader); // sửa thông tin độc giả >> doing here 
 
-bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc giả
-	Readers	*reader = InitNode();
-	LLNodeReader *&lsReader = Init();
-	
-	if (fileReader == NULL || getTheLastReader(fileReader) == NULL)
-	{
-		return 0;
-	}
+bool editReaderInfToFile(FILE *fileReader);	// chỉnh sửa thông tin đọc giả >> hàm khởi chaỵ
 
-	int choice = 0;
-	char *StrGetFrmUser = new char();
-
-	do {
-		choice = getNumberPressKey(printfSubMenuReaderManagement());
-		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
-
-		switch (choice){
-			case 1: // tìm kiếm theo CMND
-				*reader = *findReaderWithID(fileReader, StrGetFrmUser);
-				if (reader == NULL)
-				{
-					printf("Doc gia nay khong ton tai.\n");
-					system("pause");
-					continue;
-				}
-				break;
-			case 2: // tìm kiếm theo tên
-				findListReaderWithName(fileReader, StrGetFrmUser, lsReader);
-				if (lsReader->pHead == NULL)
-				{
-					printf("Doc gia nay khong ton tai.\n");
-					system("pause");
-					continue;
-				}
-				break;
-		}
-		system("cls");
-	}while (choice != 0);
-
-	switch (askToUpdateReaderToFile()){
-		case 1: // có
-			if (reader != NULL)
-			{
-				deleteReader(fileReader, reader);
-			}
-			else if (lsReader->pHead != NULL)
-			{
-				deleteReader(fileReader, lsReader->pHead);
-			}
-			else return 0;
-			break;
-		default: // không
-			return 0;
-	}
-	return 1;
-
-}
 bool deleteReaderInfToFile(FILE *fileReader);	// xoá thông tin một độc giả - hàm khởi chạy -- lọc >> doing here
 
 bool addNewReaderInfToFile(FILE *fileReader);  // thêm độc giả vào database
 
-void runReaderManagement(){
-
-	FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-	if (fileReader == NULL)
-	{
-		FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "wb");
-	}
-
-	int choice = 0;
-	do {
-		choice = getNumberPressKey(printfMenuReaderManagement());
-		switch (choice){
-			case 1:
-				printfAllReader(fileReader);
-				break;
-			case 2: // printf("2. Them doc gia.\n");
-				addNewReaderInfToFile(fileReader);
-				break;
-			case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
-			
-				break;
-			case 4: // printf("4. Xoa thong tin mot doc gia.\n");
-				deleteReaderInfToFile(FILE *fileReader);
-				break;
-			case 5:
-				viewInfAReader(fileReader);
-				break;
-			default:
-				break;
-		}
-	}while (choice != 0);
-
-}
+void runReaderManagement(); // khởi chạy quản lý đọc giả
 
 
