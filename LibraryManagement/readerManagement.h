@@ -84,10 +84,10 @@ bool addNewReaderInfToFile(FILE *fileReader){
 
 void runReaderManagement(){
 
-	FILE *pFile = fopen("Release/Reader/databaseReader.bin", "rb");
-	if (pFile == NULL)
+	FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	if (fileReader == NULL)
 	{
-		FILE *pFile = fopen("Release/Reader/databaseReader.bin", "wb");
+		FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "wb");
 	}
 
 	int choice = 0;
@@ -95,10 +95,10 @@ void runReaderManagement(){
 		choice = getNumberPressKey(printfMenuReaderManagement());
 		switch (choice){
 			case 1:
-				printfAllReader(pFile);
+				printfAllReader(fileReader);
 				break;
 			case 2: // printf("2. Them doc gia.\n");
-				
+				addNewReaderInfToFile(fileReader);
 				break;
 			case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
 			
@@ -107,7 +107,7 @@ void runReaderManagement(){
 			
 				break;
 			case 5:
-				viewInfAReader(pFile);
+				viewInfAReader(fileReader);
 				break;
 			default:
 				break;
