@@ -32,7 +32,7 @@ char *getNationalID()
 	return idNa;
 }
 
-Readers *findReaderWithID(const FILE *&fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
+Readers *findReaderWithNationID(const FILE *&fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
