@@ -417,6 +417,105 @@ bool deleteReader(const FILE *&fileReader, const Readers *&reader){ // xoá mộ
 
 	return true;
 }
+bool editReader(Readers *&reader){ // sửa thông tin độc giả >> doing here 
+	switch(getNumberPressKey(editInfReaderMenu())){
+		case 1: // printf("1. Sua Ho va ten\n");
+			printf("Nhap Ho va Ten: ");
+			gets(reader->Fullname);
+			break;
+		case 2: // printf("2. Doi CMND\n");
+			strcpy(reader->NationID, getNationalID());
+			break;
+		case 3: // printf("3. Doi ngay sinh\n");
+			printf("Nhap ngay thang nam sinh:\n");
+			*reader->Birthday = getDayFrmUser();
+			break;
+		case 4: // printf("4. Doi gioi tinh\n");
+			do
+			{
+				printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
+				scanf("%d", &reader->Sex);
+				temp = getchar();
+
+				if (reader->Sex != 0 && reader->Sex != 1)
+					printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
+				else break;
+			} while (1);
+			break;
+		case 5: // printf("5. Doi Email\n");
+			printf("Nhap dia chi email / thu dien tu: ");
+			gets(reader->Email);
+			break;
+		case 6: // printf("6. Doi dia chi\n");
+			printf("Nhap dia chi: ");
+			gets(reader->Address);
+			break;
+		case 7: 
+			printf("7. Gia han the toi ngay ");
+			reader->expireCard = getExpiredDay(getToday());
+			printfDay(reader->expireCard);
+			break;
+		default: // printf("0. Quay ve\n");
+			break;
+	}
+	//
+}
+
+bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc giả >> hàm khởi chaỵ
+	Readers	*reader = InitNode();
+	LLNodeReader *&lsReader = Init();
+	
+	if (fileReader == NULL || getTheLastReader(fileReader) == NULL)
+	{
+		return 0;
+	}
+
+	int choice = 0;
+	char *StrGetFrmUser = new char();
+
+	do {
+		choice = getNumberPressKey(printfSubMenuReaderManagement());
+		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
+
+		switch (choice){
+			case 1: // tìm kiếm theo CMND
+				*reader = *findReaderWithID(fileReader, StrGetFrmUser);
+				if (reader == NULL)
+				{
+					printf("Doc gia nay khong ton tai.\n");
+					system("pause");
+					continue;
+				}
+				break;
+			case 2: // tìm kiếm theo tên
+				findListReaderWithName(fileReader, StrGetFrmUser, lsReader);
+				if (lsReader->pHead == NULL)
+				{
+					printf("Doc gia nay khong ton tai.\n");
+					system("pause");
+					continue;
+				}
+				break;
+		}
+
+		Readers *readerTemp = new Readers();
+		if (lsReader->pHead != NULL)
+		{
+			printfAllReader(lsReader);
+			readerTemp = findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: "))
+			printf("Da chon!\n");
+			system("pause");
+		}
+
+		if (askToUpdateReaderToFile() == true){
+			deleteReader(fileReader, reader);
+			addAnInfToFile(fileReader, readerTemp);
+		}
+		system("cls");
+	}while (choice != 0);
+	return 1;
+
+}
 
 bool deleteReaderInfToFile(FILE *fileReader){	// xoá thông tin một độc giả - hàm khởi chạy -- lọc >> doing here
 	Readers	*reader = InitNode();
@@ -454,27 +553,57 @@ bool deleteReaderInfToFile(FILE *fileReader){	// xoá thông tin một độc gi
 				}
 				break;
 		}
+		if (askToUpdateReaderToFile() == true){
+			if (reader != NULL)
+				{
+					deleteReader(fileReader, reader);
+				}
+				else if (lsReader->pHead != NULL)
+				{
+					printfAllReader(lsReader);
+					deleteReader(fileReader, findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: ")));
+				}
+				else return 0;
+				
+		}
 		system("cls");
 	}while (choice != 0);
-
-	switch (askToUpdateReaderToFile()){
-		case 1: // có
-			if (reader != NULL)
-			{
-				deleteReader(fileReader, reader);
-			}
-			else if (lsReader->pHead != NULL)
-			{
-				printfAllReader(lsReader);
-				deleteReader(fileReader, findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: ")));
-			}
-			else return 0;
-			break;
-		default: // không
-			return 0;
-	}
 	return 1;
 }
 
+
+void runReaderManagement(){
+
+	FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	if (fileReader == NULL)
+	{
+		FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "wb");
+	}
+
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(printfMenuReaderManagement());
+		switch (choice){
+			case 1:
+				printfAllReader(fileReader);
+				break;
+			case 2: // printf("2. Them doc gia.\n");
+				addNewReaderInfToFile(fileReader);
+				break;
+			case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
+				editReaderInfToFile(fileReader);
+				break;
+			case 4: // printf("4. Xoa thong tin mot doc gia.\n");
+				deleteReaderInfToFile(FILE *fileReader);
+				break;
+			case 5:
+				viewInfAReader(fileReader);
+				break;
+			default:
+				break;
+		}
+	}while (choice != 0);
+
+}
 
 
