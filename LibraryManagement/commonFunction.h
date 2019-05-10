@@ -10,7 +10,7 @@ int numDaysOfMonth(int Month, int Year);
 bool isPossibleDay(int Day, int Month, int Year);
 
 int plusOneIntoAChar(char &numch);
-bool plusOneIntoAString(char* numStr);
+bool plusOneIntoAString(char* &numStr);
 
 Day getExpiredDay(Day orginDay);
 Day getToday();
