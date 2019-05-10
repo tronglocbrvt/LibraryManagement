@@ -19,12 +19,9 @@ Day getDayFrmUser();
 void textBgColor(int colorText, int colorBG);
 
 void printfDay(Day day);
-// bool getInfWithNote(, char *note){
-
-// }
 
 char *getStringFrmUser(char *note);
-
+int getNumber(char *note);
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
 // ------------------------------------Link List-----------------------------------------------
@@ -34,11 +31,12 @@ char *getStringFrmUser(char *note);
 //======================================================
 // << Hàm khởi tạo danh sách và node
 LLNodeReader *Init();
-NodeReader *InitNode(const Readers *data);
+NodeReader *InitNode(const Readers *data = new Readers());
 //======================================================
 	
-NodeReader *fAddAtTail(LLNodeReader *ls, const Readers *data); // Thêm vào cuối danh sách một struct >> Readers
-
+NodeReader *fAddAtTail(LLNodeReader *&ls, const Readers *&data); // Thêm vào cuối danh sách một struct >> Readers
+void printfLLNodeReader(const LLNodeReader *&lsReader);
+Readers *findReaderAtNumberic(const LLNodeReader *&lsReader, const int &numberic);
 
 //=============================================================================================
 //=============================================================================================
