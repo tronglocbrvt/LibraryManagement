@@ -594,7 +594,7 @@ void runReaderManagement(){
 				editReaderInfToFile(fileReader);
 				break;
 			case 4: // printf("4. Xoa thong tin mot doc gia.\n");
-				deleteReaderInfToFile(FILE *fileReader);
+				deleteReaderInfToFile(fileReader);
 				break;
 			case 5:
 				viewInfAReader(fileReader);
