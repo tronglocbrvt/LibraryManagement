@@ -82,3 +82,15 @@ int printfSubMenuReaderManagement(){
 
 	return 2;
 }
+int editInfReaderMenu(){
+	printf("1. Sua Ho va ten\n");
+	printf("2. Doi CMND\n");
+	printf("3. Doi ngay sinh\n");
+	printf("4. Doi gioi tinh\n");
+	printf("5. Doi Email\n");
+	printf("6. Doi dia chi\n");
+	printf("7. Gia han the\n");
+	printf("0. Quay ve\n");
+
+	return 7;
+}
