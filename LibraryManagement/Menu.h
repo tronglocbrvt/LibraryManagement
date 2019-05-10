@@ -15,3 +15,4 @@ int printfEditReaderInf();
 
 int printfMenuReaderManagement();
 int printfSubMenuReaderManagement();
+int editInfReaderMenu();
