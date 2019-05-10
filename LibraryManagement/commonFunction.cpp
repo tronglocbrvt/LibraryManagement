@@ -1,5 +1,6 @@
 #include "commonFunction.h"
 #include "time.h"
+#include "readerManagement.h"
 
 //Hàm kiểm tra số nhập từ bàn phím
 int getNumberPressKey(int MAX, int MIN = 0){
@@ -246,7 +247,12 @@ char *getStringFrmUser(char *note){
 
 	return strGet;
 }
-
+int getNumber(char *note){
+	printf("%s\n", note);
+	int x = 0;
+	scanf("%d", &x);
+	return x;
+}
 // --------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------
 // ------------------------------------Link List-----------------------------------------------
@@ -259,10 +265,10 @@ LLNodeReader *Init(){
 	LLNodeReader *ls = new LLNodeReader();
 	ls->pHead = NULL;
 	ls->pTail = NULL;
-	checkNull(ls);
+
 	return ls;
 }
-NodeReader *InitNode(const Readers *data){
+NodeReader *InitNode(const Readers *data = new Readers()){
 	NodeReader *no = new NodeReader();
 	no->pNext = new NodeReader();
 	no->pPrev = new NodeReader();
@@ -270,9 +276,10 @@ NodeReader *InitNode(const Readers *data){
 
 	return no;
 }
+
 //======================================================
 	
-NodeReader *fAddAtTail(LLNodeReader *ls, const Readers *data){ // Thêm vào cuối danh sách một struct >> Readers
+NodeReader *fAddAtTail(LLNodeReader *&ls, const Readers *&data){ // Thêm vào cuối danh sách một struct >> Readers
 	NodeReader *no = InitNode(data);
 	if (no == NULL)
 	{
@@ -292,6 +299,26 @@ NodeReader *fAddAtTail(LLNodeReader *ls, const Readers *data){ // Thêm vào cu�
 	ls->pTail = no;
 
 	return no;
+}
+void printfLLNodeReader(const LLNodeReader *&lsReader){
+	NodeReader *pNow = InitNode();
+	pNow = lsReader->pHead;
+	while (pNow != NULL){
+		printfReader(pNow);
+		pNow = pNow->pNext;
+	}
+}
+Readers *findReaderAtNumberic(const LLNodeReader *&lsReader, const int &numberic){
+	Readers *reader = new Readers();
+	NodeReader *pNow = InitNode();
+	
+	pNow = lsReader->pHead;
+	while(pNow != NULL && numberic > 1){
+		pNow = pNow->pNext;
+		numberic--;
+	}
+
+	return pNow->reader;
 }
 
 //=============================================================================================
