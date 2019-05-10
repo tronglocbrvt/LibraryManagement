@@ -121,7 +121,7 @@ int plusOneIntoAChar(char &numch){
 		return 0;
  	}
 }
-bool plusOneIntoAString(char* numStr){
+bool plusOneIntoAString(char* &numStr){
 
 	int length = strlen(numStr) -1;
 	while (length >= 0){
