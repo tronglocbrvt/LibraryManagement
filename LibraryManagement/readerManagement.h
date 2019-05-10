@@ -7,7 +7,7 @@
 
 char *getNationalID();
 
-Readers *findReaderWithID(const FILE *&fileReader, char *&personID);	// Tìm kiếm đọc giả theo CMND
+Readers *findReaderWithNationID(const FILE *&fileReader, char *&personID);	// Tìm kiếm đọc giả theo CMND
 
 Readers *findReaderWithName(const FILE *&fileReader, char *&personName);	// Tìm kiếm đọc giả theo họ tên
 
@@ -25,21 +25,12 @@ bool addAnInfToFile(const FILE *fileReader, const Readers *reader);	// thêm th�
 
 bool editReaderInf(Readers *reader); // sửa thông tin đọc giả
 
-bool updateReaderToFile(const FILE *fileReader, const Readers *reader){	// cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không
+bool askToUpdateReaderToFile(){	// cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không
 	printf("Ban co chan muon cap nhat khong\n");
 	printf("1. Co\n");
 	printf("2. Khong\n");
 
-	switch (getNumberPressKey(2,1)){
-		case 1:
-
-			return 1;
-			break;
-		case 2:
-			return 0;
-			break;
-	}
-	return 1;
+	return (getNumberPressKey(2,1));
 }
 
 	// 2 trường hợp: 1: cập nhập bằng linklist, 2: cập nhật trực tiếp
@@ -54,10 +45,9 @@ bool deleteReaderInfToFile(FILE *fileReader){	//
 
 	return 1;
 }
-bool addNewReaderInfToFile(FILE *fileReader){ // doing here
-	int choice = 0;
+bool addNewReaderInfToFile(FILE *fileReader){ 
+
 	Readers	*reader = new Readers();
-	char *StrGetFrmUser = new char();
 	
 	if (fileReader == NULL)
 	{
@@ -67,10 +57,29 @@ bool addNewReaderInfToFile(FILE *fileReader){ // doing here
 	*reader = *getTheLastReader(fileReader);
 	if (reader == NULL)
 	{
-		
+		*reader = *setReaderInf((char*)"000000001");
 	}
 
-	return 1;
+	char *strID = new char();
+	strcpy(strID, reader->ID);
+	plusOneIntoAString(strID);
+	*reader = setReaderInf(strID);
+
+	if (findReaderWithNationID(fileReader, reader->NationID) == NULL)
+	{
+		printf("Doc gia nay da ton tai.\n");
+		system("pause");
+		return 0;
+	}
+
+	switch (askToUpdateReaderToFile()){
+		case 1:
+			addAnInfToFile(fileReader, reader);
+			break;
+		default:
+			return 0;
+			break;
+	}
 }
 
 void runReaderManagement(){
@@ -88,13 +97,13 @@ void runReaderManagement(){
 			case 1:
 				printfAllReader(pFile);
 				break;
-			case 2:
+			case 2: // printf("2. Them doc gia.\n");
 				
 				break;
-			case 3:
+			case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
 			
 				break;
-			case 4:
+			case 4: // printf("4. Xoa thong tin mot doc gia.\n");
 			
 				break;
 			case 5:
