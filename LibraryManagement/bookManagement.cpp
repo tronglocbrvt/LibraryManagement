@@ -7,13 +7,13 @@ char *getISBN()
 	char *idNa = new char();
 	do
 	{
-		printf("Nhap CMND (9 so hoac 12 so): ");
+		printf("Nhap ISBN (9 so hoac 12 so): ");
 		scanf("%s", idNa);
 		int temp = getchar();
 		
 		if (strlen(idNa) != 9 && strlen(idNa) != 12)
 		{
-			printf("CMND khong hop le. Vui long nhap lai.\n");
+			printf("ISBN khong hop le. Vui long nhap lai.\n");
 			continue;
 		}
 
@@ -23,7 +23,7 @@ char *getISBN()
 			if (!isNumber(idNa[i]))
 			{
 				flag = 0;
-				printf("CMND khong hop le. Vui long nhap lai.\n");
+				printf("ISBN khong hop le. Vui long nhap lai.\n");
 				break;
 			}
 		}
@@ -31,7 +31,7 @@ char *getISBN()
 	return idNa;
 }
 
-Books *findBookWithNationID(const FILE *&fileBook, char *&personID){	// Tìm kiếm đọc giả theo CMND
+Books *findBookWithNationID(const FILE *&fileBook, char *&personID){	// Tìm kiếm cuốn sách theo ISBN
 	Books *book = new Books();
 	long int currentPoiter = ftell(fileBook);
 	fseek(fileBook, 0, SEEK_SET);
@@ -54,7 +54,7 @@ Books *findBookWithNationID(const FILE *&fileBook, char *&personID){	// Tìm ki�
 	return book;
 }
 
-Books *findBookWithName(const FILE *&fileBook, char *&personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+Books *findBookWithName(const FILE *&fileBook, char *&personName){	// Tìm kiếm cuốn sách theo họ tên trả về danh sách
 	Books *book = new Books();
 	long int currentPoiter = ftell(fileBook);
 	fseek(fileBook, 0, SEEK_SET);
@@ -77,7 +77,7 @@ Books *findBookWithName(const FILE *&fileBook, char *&personName){	// Tìm kiế
 	return book;
 }
 
-bool findListBookWithName(const FILE *&fileBook, char *&personName, LLNodeBook *&lsBook){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+bool findListBookWithName(const FILE *&fileBook, char *&personName, LLNodeBook *&lsBook){	// Tìm kiếm cuốn sách theo họ tên trả về danh sách
 	Books *book = new Books();
 	long int currentPoiter = ftell(fileBook);
 	fseek(fileBook, 0, SEEK_SET);
@@ -101,20 +101,20 @@ bool findListBookWithName(const FILE *&fileBook, char *&personName, LLNodeBook *
 	return true;
 }
 
-Books *getTheLastBook(const FILE *&fileBook){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+Books *getTheLastBook(const FILE *&fileBook){ // Lấy thông tin cuốn sách cuối cùng trong file, trả về null nếu file rỗng.
 	long int current = ftell(fileBook);
 
 	Books *book = new Books();
 
 	fseek(fileBook, 0, SEEK_SET);
-	fread(book, sizeof(Books), 1, fileBook); // lấy độc giả đầu
+	fread(book, sizeof(Books), 1, fileBook); // lấy cuốn sách đầu
 	if (book == NULL)
 	{
 		return NULL;
 	}
 
 	fseek(fileBook, -sizeof(Books), SEEK_END);
-	fread(book, sizeof(Books), 1, fileBook); // lấy đọc giả cuối
+	fread(book, sizeof(Books), 1, fileBook); // lấy cuốn sách cuối
 
 	fseek(fileBook, current, SEEK_SET);
 
@@ -127,7 +127,7 @@ void printfBook(Books book){
 
 	printf("Ho ten day du:\t\t%s\n", book.Fullname);
 
-	printf("CMND:\t\t%s\n", book.NationID);
+	printf("ISBN:\t\t%s\n", book.NationID);
 
 	printf("Ngay sinh:\t\t");
 	printfDay(book.Birthday);
@@ -146,7 +146,7 @@ void printfBook(Books book){
 
 }
 
-bool printfAllBook(FILE *fileBook){	// đọc toàn bộ thông tin đọc giả từ file và in ra -> không đưa vào link list
+bool printfAllBook(FILE *fileBook){	// đọc toàn bộ thông tin cuốn sách từ file và in ra -> không đưa vào link list
 	Books *book = new Books();
 	if (fileBook == NULL || book == NULL)
 	{
@@ -161,7 +161,7 @@ bool printfAllBook(FILE *fileBook){	// đọc toàn bộ thông tin đọc giả
 	return 1;
 }
 
-bool printfAllBook(const LLNodeBook *ls){ // int ra thông tin đọc giả từ Link List khi đã có Link List
+bool printfAllBook(const LLNodeBook *ls){ // int ra thông tin cuốn sách từ Link List khi đã có Link List
 	NodeBook *pNow = new NodeBook();
 	if (ls == NULL || pNow == NULL)
 	{
@@ -179,7 +179,7 @@ bool printfAllBook(const LLNodeBook *ls){ // int ra thông tin đọc giả từ
 	return 1;
 }
 
-bool getAllBookToLL(const FILE *&fileBook, LLNodeBook *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
+bool getAllBookToLL(const FILE *&fileBook, LLNodeBook *&ls){	// đọc toàn bộ thông tin cuốn sách từ file nhưng không in ra -> đưa vào link list
 	Books *book = new Books();
 	long int currentPoiter = ftell(fileBook);
 	fseek(fileBook, 0, SEEK_SET);
@@ -200,7 +200,7 @@ bool getAllBookToLL(const FILE *&fileBook, LLNodeBook *&ls){	// đọc toàn b�
 Books *setBookInf(char *readerID){
 	Books *book;
 	int temp;
- 	// thêm mã đọc giả -- tự động
+ 	// thêm mã cuốn sách -- tự động
 	strcpy(book->ID, readerID);
 	// thêm họ và tên
 	printf("Nhap Ho va Ten: ");
@@ -236,7 +236,7 @@ Books *setBookInf(char *readerID){
 	return book;
 }
 
-bool addAnInfToFile(const FILE *fileBook, const Books *book){	// thêm thông tin đọc giả vào file
+bool addAnInfToFile(const FILE *fileBook, const Books *book){	// thêm thông tin cuốn sách vào file
 
 	if (fileBook == NULL || book == NULL)
 	{
@@ -261,7 +261,7 @@ bool editBookInf(Books *book){
 			gets(book->Fullname);
 			break;
 		case 2:
-			printf("Nhap moi CMND de sua:\n");
+			printf("Nhap moi ISBN de sua:\n");
 			strcpy(book->NationID, getISBN());
 			break;
 		case 3:
@@ -296,7 +296,7 @@ bool editBookInf(Books *book){
 	return true;
 }
 
-bool askToUpdateBookToFile(){	// cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không
+bool askToUpdateBookToFile(){	// cập nhật thông tin cuốn sách vào file - có hỏi có chắc chắn muốn cập nhật không
 	printf("Ban co chan muon cap nhat khong\n");
 	printf("1. Co\n");
 	printf("2. Khong\n");
@@ -304,7 +304,7 @@ bool askToUpdateBookToFile(){	// cập nhật thông tin đọc giả vào file 
 	return (getNumberPressKey(2,1));
 }
 
-bool addNewBookInfToFile(FILE *fileBook){  // thêm độc giả vào database
+bool addNewBookInfToFile(FILE *fileBook){  // thêm cuốn sách vào database
 
 	Books	*book = new Books();
 	
@@ -341,7 +341,7 @@ bool addNewBookInfToFile(FILE *fileBook){  // thêm độc giả vào database
 	}
 }
 
-bool viewInfABook(FILE *fileBook){ // Xem thông tin của một người cụ thể
+bool viewInfABook(FILE *fileBook){ // Xem thông tin của một cuốn sách cụ thể
 	int choice = 0;
 	Books	*book = new Books();
 	char *StrGetFrmUser = new char();
@@ -370,7 +370,7 @@ bool viewInfABook(FILE *fileBook){ // Xem thông tin của một người cụ t
 				flag = (lsBook->pHead == NULL ? true : false);
 				break;
 		}
-		if (flag == false) // tức -> không tìm thấy độc giả.
+		if (flag == false) // tức -> không tìm thấy cuốn sách.
 		{
 			printf("Doc gia nay khong ton tai\n");
 			return 0;
@@ -391,7 +391,7 @@ bool viewInfABook(FILE *fileBook){ // Xem thông tin của một người cụ t
 	return 1;
 }
 
-bool deleteBook(const FILE *&fileBook, const Books *&book){ // xoá một độc giả
+bool deleteBook(const FILE *&fileBook, const Books *&book){ // xoá một cuốn sách
 	FILE *fileBook = fopen("Release/Book/databaseBook.bin", "rb");
 	FILE *ftemp = fopen("Release/Book/databaseBookTemp.bin", "wb");
 
@@ -416,13 +416,13 @@ bool deleteBook(const FILE *&fileBook, const Books *&book){ // xoá một độc
 
 	return true;
 }
-bool editBook(Books *&book){ // sửa thông tin độc giả >> doing here 
+bool editBook(Books *&book){ // sửa thông tin cuốn sách >> doing here 
 	switch(getNumberPressKey(editInfBookMenu())){
 		case 1: // printf("1. Sua Ho va ten\n");
 			printf("Nhap Ho va Ten: ");
 			gets(book->Fullname);
 			break;
-		case 2: // printf("2. Doi CMND\n");
+		case 2: // printf("2. Doi ISBN\n");
 			strcpy(book->NationID, getISBN());
 			break;
 		case 3: // printf("3. Doi ngay sinh\n");
@@ -460,7 +460,7 @@ bool editBook(Books *&book){ // sửa thông tin độc giả >> doing here
 	//
 }
 
-bool editBookInfToFile(FILE *fileBook){	// chỉnh sửa thông tin đọc giả >> hàm khởi chaỵ
+bool editBookInfToFile(FILE *fileBook){	// chỉnh sửa thông tin cuốn sách >> hàm khởi chaỵ
 	Books	*book = InitNode();
 	LLNodeBook *&lsBook = Init();
 	
@@ -477,7 +477,7 @@ bool editBookInfToFile(FILE *fileBook){	// chỉnh sửa thông tin đọc giả
 		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
 
 		switch (choice){
-			case 1: // tìm kiếm theo CMND
+			case 1: // tìm kiếm theo ISBN
 				*book = *findBookWithID(fileBook, StrGetFrmUser);
 				if (book == NULL)
 				{
@@ -516,7 +516,7 @@ bool editBookInfToFile(FILE *fileBook){	// chỉnh sửa thông tin đọc giả
 
 }
 
-bool deleteBookInfToFile(FILE *fileBook){	// xoá thông tin một độc giả - hàm khởi chạy -- lọc >> doing here
+bool deleteBookInfToFile(FILE *fileBook){	// xoá thông tin một cuốn sách - hàm khởi chạy -- lọc >> doing here
 	Books	*book = InitNode();
 	LLNodeBook *&lsBook = Init();
 	
@@ -533,7 +533,7 @@ bool deleteBookInfToFile(FILE *fileBook){	// xoá thông tin một độc giả 
 		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
 
 		switch (choice){
-			case 1: // tìm kiếm theo CMND
+			case 1: // tìm kiếm theo ISBN
 				*book = *findBookWithID(fileBook, StrGetFrmUser);
 				if (book == NULL)
 				{
