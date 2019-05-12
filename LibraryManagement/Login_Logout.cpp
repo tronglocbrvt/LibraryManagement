@@ -68,6 +68,6 @@ int Login()
 
 	delete[] username;
 	delete[] password;
-	
+
 	return typeAccount;
 }

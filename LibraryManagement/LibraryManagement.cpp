@@ -7,6 +7,7 @@
 #include "changeProfile.h"
 #include "decentraliseUsers.h"
 #include "statusUser.h"
+#include "runUser.h"
 
 int main()
 {
@@ -44,7 +45,7 @@ int main()
 		system("pause");
 		bool continueSwit = true;
 		while (continueSwit){
-			printfMenu(); // ke vien khung ung dung
+			//printfMenu(); // ke vien khung ung dung
 			int choice = printLoginMenu();
 			switch (choice){ // add function doing here
 			case 0:
@@ -52,7 +53,8 @@ int main()
 				typeAccount = Logout();
 				exit(0);
 			case 1:
-				printf("taikhoan\n");
+				printUserMenu(typeAccount);
+				runMenuUser(typeAccount);
 				break;
 			case 2:
 				printf("nguoidoc\n");

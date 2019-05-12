@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_CHOICE  7
 #define _MAX_DAY_EXPIRES_ 365
-#define _F_GOI_TINH_(int sex) (sex == 1 ? (char*)"Nam" : (char*)"Nu")
+#define _F_GOI_TINH_(int sex (sex == 1 ? (char*)"Nam" : (char*)"Nu")
 
 #include <stdio.h>
 #include <tchar.h>

@@ -48,6 +48,12 @@
     <ClInclude Include="readerManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bookManagement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="runUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryManagement.cpp">
@@ -81,6 +87,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="readerManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bookManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="runUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

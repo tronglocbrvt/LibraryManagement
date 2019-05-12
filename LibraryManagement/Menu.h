@@ -9,10 +9,12 @@ int printLoginMenu();
 
 void printfMainMenu();
 
-void printfMenu();
+int printUserMenu(int typeAccount);
 
 int printfEditReaderInf();
 
 int printfMenuReaderManagement();
+
 int printfSubMenuReaderManagement();
+
 int editInfReaderMenu();

@@ -32,7 +32,7 @@ char *getNationalID()
 	return idNa;
 }
 
-Readers *findReaderWithNationID(const FILE *&fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
+Readers *findReaderWithNationID(FILE *fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
@@ -44,7 +44,7 @@ Readers *findReaderWithNationID(const FILE *&fileReader, char *&personID){	// T�
 		return NULL;
 	}
 	
-	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+	while (fread(reader, sizeof(reader), 1, fileReader) != NULL){
 		if (strcmp(reader->ID, personID) == 0)
 		{
 			break;
@@ -55,7 +55,7 @@ Readers *findReaderWithNationID(const FILE *&fileReader, char *&personID){	// T�
 	return reader;
 }
 
-Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+Readers *findReaderWithName(FILE *fileReader, char *&personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
@@ -67,7 +67,7 @@ Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm
 		return NULL;
 	}
 	
-	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+	while (fread(reader, sizeof(reader), 1, fileReader) != NULL){
 		if (strcmp(reader->Fullname, personName) == 0)
 		{
 			break;
@@ -78,7 +78,7 @@ Readers *findReaderWithName(const FILE *&fileReader, char *&personName){	// Tìm
 	return reader;
 }
 
-bool findListReaderWithName(const FILE *&fileReader, char *&personName, LLNodeReader *&lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+bool findListReaderWithName(FILE *fileReader, char *&personName, LLNodeReader *&lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
@@ -90,7 +90,7 @@ bool findListReaderWithName(const FILE *&fileReader, char *&personName, LLNodeRe
 		return false;
 	}
 	
-	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+	while (fread(reader, sizeof(reader), 1 ,fileReader) != NULL){
 		if (strcmp(reader->Fullname, personName) == 0)
 		{
 			// thêm vào danh sách
@@ -102,7 +102,7 @@ bool findListReaderWithName(const FILE *&fileReader, char *&personName, LLNodeRe
 	return true;
 }
 
-Readers *getTheLastReader(const FILE *&fileReader){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+Readers *getTheLastReader(FILE *fileReader){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
 	long int current = ftell(fileReader);
 
 	Readers *reader = new Readers();
@@ -154,7 +154,7 @@ bool printfAllReader(FILE *fileReader){	// đọc toàn bộ thông tin đọc g
 		return 0;
 	}
 	
-	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+	while (fread(reader, sizeof(reader), 1 ,fileReader) != NULL){
 		printfReader(*reader);
 	}
 	
@@ -180,7 +180,7 @@ bool printfAllReader(const LLNodeReader *ls){ // int ra thông tin đọc giả 
 	return 1;
 }
 
-bool getAllReaderToLL(const FILE *&fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
+bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
@@ -190,7 +190,7 @@ bool getAllReaderToLL(const FILE *&fileReader, LLNodeReader *&ls){	// đọc to�
 		return 0;
 	}
 	
-	while (fread(reader, sizeof(reader), 1 ,f) != NULL){
+	while (fread(reader, sizeof(reader), 1 ,fileReader) != NULL){
 		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
 	}
 	
@@ -208,7 +208,7 @@ Readers *setReaderInf(char *readerID){
 	gets(reader->Fullname);
 
 	printf("Nhap ngay thang nam sinh:\n");
-	*reader->Birthday = getDayFrmUser();
+	reader->Birthday = getDayFrmUser();
 
 	strcpy(reader->NationID, getNationalID());
 
@@ -237,7 +237,7 @@ Readers *setReaderInf(char *readerID){
 	return reader;
 }
 
-bool addAnInfToFile(const FILE *fileReader, const Readers *reader){	// thêm thông tin đọc giả vào file
+bool addAnInfToFile(FILE *fileReader, const Readers *reader){	// thêm thông tin đọc giả vào file
 
 	if (fileReader == NULL || reader == NULL)
 	{
@@ -249,7 +249,7 @@ bool addAnInfToFile(const FILE *fileReader, const Readers *reader){	// thêm th�
 
 	fwrite(reader, sizeof(Readers), 1, fileReader);
 
-	fseel(fileReader, currentPoiter, SEEK_SET);
+	fseek(fileReader, currentPoiter, SEEK_SET);
 
 	return 1;
 }
@@ -325,6 +325,7 @@ bool addNewReaderInfToFile(FILE *fileReader){  // thêm độc giả vào databa
 	plusOneIntoAString(strID);
 	*reader = setReaderInf(strID);
 
+		case 1:
 	if (findReaderWithNationID(fileReader, reader->NationID) == NULL)
 	{
 		printf("Doc gia nay da ton tai.\n");
@@ -333,7 +334,6 @@ bool addNewReaderInfToFile(FILE *fileReader){  // thêm độc giả vào databa
 	}
 
 	switch (askToUpdateReaderToFile()){
-		case 1:
 			addAnInfToFile(fileReader, reader);
 			break;
 		default:

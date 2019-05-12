@@ -87,6 +87,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="readerManagement.h" />
     <ClInclude Include="bookManagement.h" />
+    <ClInclude Include="runUser.h" />
     <ClInclude Include="statusUser.h" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="readerManagement.cpp" />
     <ClCompile Include="bookManagement.cpp" />
+    <ClCompile Include="runUser.cpp" />
     <ClCompile Include="statusUser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

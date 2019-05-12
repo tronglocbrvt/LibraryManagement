@@ -34,7 +34,7 @@ LLNodeReader *Init();
 NodeReader *InitNode(const Readers *data = new Readers());
 //======================================================
 	
-NodeReader *fAddAtTail(LLNodeReader *&ls, const Readers *&data); // Thêm vào cuối danh sách một struct >> Readers
+NodeReader *fAddAtTail(LLNodeReader *&ls, Readers *data); // Thêm vào cuối danh sách một struct >> Readers
 void printfLLNodeReader(const LLNodeReader *&lsReader);
 Readers *findReaderAtNumberic(const LLNodeReader *&lsReader, const int &numberic);
 

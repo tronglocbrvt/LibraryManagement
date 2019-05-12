@@ -46,6 +46,7 @@ int printLoginMenu(){
 
 }
 
+
 void printfMainMenu(){
 	printf("1. Quan ly tai khoan ca nhan.\n");
 	printf("2. Quan ly doc gia.\n");
@@ -55,13 +56,28 @@ void printfMainMenu(){
 	printf("6. Thong ke co ban.\n");
 	printf("7. Dang xuat.\n");
 	printf("0. Thoat\n");
+
 }
 
 
-void printfMenu(){
+int printUserMenu(int typeAccount)
+{
+	printf("1. Thay doi mat khau.\n");
+	printf("2. Cap nhat thong tin ca nhan.\n");
 
+	if (typeAccount == 1)
+	{
+		printf("3. Tao nguoi dung.\n");
+		printf("4. Phan quyen nguoi dung.\n");
+		printf("5. Chinh sua trang thai nguoi dung.\n");
+	}
 
-
+	printf("0. Quay ve.\n");
+	
+	if (typeAccount == 1)
+		return 5;
+	
+	return 2;
 }
 
 
