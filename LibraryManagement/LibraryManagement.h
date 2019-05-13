@@ -2,7 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_CHOICE  7
 #define _MAX_DAY_EXPIRES_ 365
-#define _F_GOI_TINH_(int sex (sex == 1 ? (char*)"Nam" : (char*)"Nu")
+#define _F_GOI_TINH_ int sex (sex == 1 ? (char*)"Nam" : (char*)"Nu")
 
 #include <stdio.h>
 #include <tchar.h>
@@ -71,7 +71,7 @@ struct Books
 	char Author[31]; // Tên tác giả tối đa 30 ký tự
 	char publishCompany[31]; // Tên nhà xuất bản tối đa 30 ký tự
 	int yearPublish; // Năm xuất bản
-	char Category; // Thể loại
+	char Category[21]; // Thể loại
 	long priceBook; // Giá sách (VNĐ)
 	int numBook; // Số lượng sách
 };
@@ -89,6 +89,7 @@ struct NodeReader
 	NodeReader *pNext;
 	NodeReader *pPrev;
 };
+
 struct LLNodeReader
 {
 	NodeReader *pHead;

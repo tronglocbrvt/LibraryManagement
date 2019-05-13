@@ -3,7 +3,7 @@
 #include "readerManagement.h"
 
 //Hàm kiểm tra số nhập từ bàn phím
-int getNumberPressKey(int MAX, int MIN = 0){
+int getNumberPressKey(int MAX, int MIN){
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
 	printf("Nhan so de chon: ");
@@ -15,7 +15,7 @@ int getNumberPressKey(int MAX, int MIN = 0){
 			// printf("ban chon: %c\n", );
 			// Terminates the loop 
 			// when escape is pressed 
-			if (ch >= MIN + '0' && ch <= int(max) + '0')
+			if (ch >= char(MIN + '0') && ch <= char(max + '0'))
 				break; 
 			if (ch == 27)
 			{
@@ -268,7 +268,7 @@ LLNodeReader *Init(){
 
 	return ls;
 }
-NodeReader *InitNode(const Readers *data = new Readers()){
+NodeReader *InitNode(Readers *data){
 	NodeReader *no = new NodeReader();
 	no->pNext = new NodeReader();
 	no->pPrev = new NodeReader();
@@ -276,7 +276,14 @@ NodeReader *InitNode(const Readers *data = new Readers()){
 
 	return no;
 }
+NodeReader *InitNode(){
+	NodeReader *no = new NodeReader();
+	no->pNext = new NodeReader();
+	no->pPrev = new NodeReader();
+	no->reader = new Readers();
 
+	return no;
+}
 //======================================================
 	
 NodeReader *fAddAtTail(LLNodeReader *&ls, Readers *data){ // Thêm vào cuối danh sách một struct >> Readers
@@ -300,15 +307,15 @@ NodeReader *fAddAtTail(LLNodeReader *&ls, Readers *data){ // Thêm vào cuối d
 
 	return no;
 }
-void printfLLNodeReader(const LLNodeReader *&lsReader){
+void printfLLNodeReader(LLNodeReader *lsReader){
 	NodeReader *pNow = InitNode();
 	pNow = lsReader->pHead;
 	while (pNow != NULL){
-		printfReader(pNow);
+		printfReader(*pNow->reader);
 		pNow = pNow->pNext;
 	}
 }
-Readers *findReaderAtNumberic(const LLNodeReader *&lsReader, const int &numberic){
+Readers *findReaderAtNumberic(LLNodeReader *lsReader, int numberic){
 	Readers *reader = new Readers();
 	NodeReader *pNow = InitNode();
 	

@@ -1,11 +1,9 @@
 #include "readerManagement.h"
-#include "commonFunction.h"
-#include "Menu.h"
 
 char *getNationalID()
 {
 	int flag = 0;
-	char *idNa = new char();
+	char *idNa = new char;
 	do
 	{
 		printf("Nhap CMND (9 so hoac 12 so): ");
@@ -29,10 +27,11 @@ char *getNationalID()
 			}
 		}
 	} while (flag == 0);
+
 	return idNa;
 }
 
-Readers *findReaderWithNationID(FILE *fileReader, char *&personID){	// Tìm kiếm đọc giả theo CMND
+Readers *findReaderWithNationID(FILE *fileReader, char *personID){	// Tìm kiếm đọc giả theo CMND
 	Readers *reader = new Readers();
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
@@ -80,6 +79,10 @@ Readers *findReaderWithName(FILE *fileReader, char *&personName){	// Tìm kiếm
 
 bool findListReaderWithName(FILE *fileReader, char *&personName, LLNodeReader *&lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 	Readers *reader = new Readers();
+
+	if (reader == NULL)
+		return false;
+
 	long int currentPoiter = ftell(fileReader);
 	fseek(fileReader, 0, SEEK_SET);
 
@@ -87,6 +90,7 @@ bool findListReaderWithName(FILE *fileReader, char *&personName, LLNodeReader *&
 
 	if (fileReader == NULL)
 	{
+		delete reader;
 		return false;
 	}
 	
@@ -99,6 +103,8 @@ bool findListReaderWithName(FILE *fileReader, char *&personName, LLNodeReader *&
 	}
 	
 	fseek(fileReader, currentPoiter, SEEK_SET);
+
+	delete reader;
 	return true;
 }
 
@@ -114,7 +120,7 @@ Readers *getTheLastReader(FILE *fileReader){ // Lấy thông tin đọc giả cu
 		return NULL;
 	}
 
-	fseek(fileReader, -sizeof(Readers), SEEK_END);
+	fseek(fileReader, (-sizeof(Readers)), SEEK_END);
 	fread(reader, sizeof(Readers), 1, fileReader); // lấy đọc giả cuối
 
 	fseek(fileReader, current, SEEK_SET);
@@ -256,7 +262,7 @@ bool addAnInfToFile(FILE *fileReader, const Readers *reader){	// thêm thông ti
 
 bool editReaderInf(Readers *reader){
 
-	switch(getNumberPressKey(printfEditReaderInf())){
+	switch(getNumberPressKey(printfEditReaderInf(), 0)){
 		case 1:
 			printf("Nhap Ho va Ten: ");
 			gets(reader->Fullname);
@@ -297,7 +303,7 @@ bool editReaderInf(Readers *reader){
 	return true;
 }
 
-bool askToUpdateReaderToFile(){	// cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không
+int askToUpdateReaderToFile(){	// cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không
 	printf("Ban co chan muon cap nhat khong\n");
 	printf("1. Co\n");
 	printf("2. Khong\n");
@@ -323,20 +329,19 @@ bool addNewReaderInfToFile(FILE *fileReader){  // thêm độc giả vào databa
 	char *strID = new char();
 	strcpy(strID, reader->ID);
 	plusOneIntoAString(strID);
-	*reader = setReaderInf(strID);
-
-		case 1:
-	if (findReaderWithNationID(fileReader, reader->NationID) == NULL)
-	{
-		printf("Doc gia nay da ton tai.\n");
-		system("pause");
-		return 0;
-	}
+	reader = setReaderInf(strID);
 
 	switch (askToUpdateReaderToFile()){
+	case 1:
+		if (findReaderWithNationID(fileReader, reader->NationID) == NULL)
+		{
+			printf("Doc gia nay da ton tai.\n");
+			system("pause");
+			return 0;
+		}
 			addAnInfToFile(fileReader, reader);
 			break;
-		default:
+	default:
 			return 0;
 			break;
 	}
@@ -345,6 +350,10 @@ bool addNewReaderInfToFile(FILE *fileReader){  // thêm độc giả vào databa
 bool viewInfAReader(FILE *fileReader){ // Xem thông tin của một người cụ thể
 	int choice = 0;
 	Readers	*reader = new Readers();
+
+	if (reader == NULL)
+		return false;
+
 	char *StrGetFrmUser = new char();
 
 	reader = NULL;
@@ -355,18 +364,18 @@ bool viewInfAReader(FILE *fileReader){ // Xem thông tin của một người c�
 	}
 
 	bool flag = false;
+	LLNodeReader *lsReader = Init();
 
 	do {
-		choice = getNumberPressKey(printfSubMenuReaderManagement());
+		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
 		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
 
 		switch (choice){
 			case 1:
-				*reader = *findReaderWithID(fileReader, StrGetFrmUser);
+				*reader = *findReaderWithName(fileReader, StrGetFrmUser);
 				flag = (reader == NULL ? true : false);
 				break;
 			case 2:
-				LLNodeReader *&lsReader = Init();
 				findListReaderWithName(fileReader, StrGetFrmUser, lsReader);
 				flag = (lsReader->pHead == NULL ? true : false);
 				break;
@@ -392,19 +401,21 @@ bool viewInfAReader(FILE *fileReader){ // Xem thông tin của một người c�
 	return 1;
 }
 
-bool deleteReader(const FILE *&fileReader, const Readers *&reader){ // xoá một độc giả
-	FILE *fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-	FILE *ftemp = fopen("Release/Reader/databaseReaderTemp.bin", "wb");
+bool deleteReader(FILE *fileReader, Readers *reader){ // xoá một độc giả
+	
+	fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+
+	FILE* ftemp = fopen("Release/Reader/databaseReaderTemp.bin", "wb");
 
 	if (fileReader == NULL || ftemp == NULL)
 		return false;
 
-	Readers *readerTemp = InitNode();
+	Readers *readerTemp = new Readers; 
 
-	while (fread(&readerTemp, sizeof(Readers), 1, fileReader) != NULL)
+	while (fread(readerTemp, sizeof(Readers), 1, fileReader) != NULL)
 	{
 		if (strcmp(reader->NationID, readerTemp->NationID) != 0)
-			fwrite(&readerTemp, sizeof(Readers), 1, ftemp);
+			fwrite(readerTemp, sizeof(Readers), 1, ftemp);
 		else
 			continue;
 	}
@@ -418,7 +429,7 @@ bool deleteReader(const FILE *&fileReader, const Readers *&reader){ // xoá mộ
 	return true;
 }
 bool editReader(Readers *&reader){ // sửa thông tin độc giả >> doing here 
-	switch(getNumberPressKey(editInfReaderMenu())){
+	switch(getNumberPressKey(editInfReaderMenu(), 0)){
 		case 1: // printf("1. Sua Ho va ten\n");
 			printf("Nhap Ho va Ten: ");
 			gets(reader->Fullname);
@@ -428,14 +439,14 @@ bool editReader(Readers *&reader){ // sửa thông tin độc giả >> doing her
 			break;
 		case 3: // printf("3. Doi ngay sinh\n");
 			printf("Nhap ngay thang nam sinh:\n");
-			*reader->Birthday = getDayFrmUser();
+			reader->Birthday = getDayFrmUser();
 			break;
 		case 4: // printf("4. Doi gioi tinh\n");
 			do
 			{
 				printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
 				scanf("%d", &reader->Sex);
-				temp = getchar();
+				int temp = getchar();
 
 				if (reader->Sex != 0 && reader->Sex != 1)
 					printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
@@ -458,12 +469,12 @@ bool editReader(Readers *&reader){ // sửa thông tin độc giả >> doing her
 		default: // printf("0. Quay ve\n");
 			break;
 	}
-	//
+	return 1;
 }
 
 bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc giả >> hàm khởi chaỵ
-	Readers	*reader = InitNode();
-	LLNodeReader *&lsReader = Init();
+	Readers	*reader = new Readers;
+	LLNodeReader *lsReader = Init();
 	
 	if (fileReader == NULL || getTheLastReader(fileReader) == NULL)
 	{
@@ -474,12 +485,12 @@ bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc g
 	char *StrGetFrmUser = new char();
 
 	do {
-		choice = getNumberPressKey(printfSubMenuReaderManagement());
+		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
 		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
 
 		switch (choice){
 			case 1: // tìm kiếm theo CMND
-				*reader = *findReaderWithID(fileReader, StrGetFrmUser);
+				*reader = *findReaderWithNationID(fileReader, StrGetFrmUser);
 				if (reader == NULL)
 				{
 					printf("Doc gia nay khong ton tai.\n");
@@ -502,12 +513,13 @@ bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc g
 		if (lsReader->pHead != NULL)
 		{
 			printfAllReader(lsReader);
-			readerTemp = findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: "))
+			readerTemp = findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: "));
 			printf("Da chon!\n");
 			system("pause");
 		}
 
-		if (askToUpdateReaderToFile() == true){
+		if (askToUpdateReaderToFile() == 1)
+		{
 			deleteReader(fileReader, reader);
 			addAnInfToFile(fileReader, readerTemp);
 		}
@@ -518,24 +530,19 @@ bool editReaderInfToFile(FILE *fileReader){	// chỉnh sửa thông tin đọc g
 }
 
 bool deleteReaderInfToFile(FILE *fileReader){	// xoá thông tin một độc giả - hàm khởi chạy -- lọc >> doing here
-	Readers	*reader = InitNode();
-	LLNodeReader *&lsReader = Init();
-	
-	if (fileReader == NULL || getTheLastReader(fileReader) == NULL)
-	{
-		return 0;
-	}
-
-	int choice = 0;
+	Readers	*reader = new Readers;
 	char *StrGetFrmUser = new char();
 
+	int choice = 0;
+
 	do {
-		choice = getNumberPressKey(printfSubMenuReaderManagement());
+		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
 		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
+		LLNodeReader *lsReader = Init();
 
 		switch (choice){
 			case 1: // tìm kiếm theo CMND
-				*reader = *findReaderWithID(fileReader, StrGetFrmUser);
+				*reader = *findReaderWithNationID(fileReader, StrGetFrmUser);
 				if (reader == NULL)
 				{
 					printf("Doc gia nay khong ton tai.\n");
@@ -553,7 +560,7 @@ bool deleteReaderInfToFile(FILE *fileReader){	// xoá thông tin một độc gi
 				}
 				break;
 		}
-		if (askToUpdateReaderToFile() == true){
+		if (askToUpdateReaderToFile() == 1){
 			if (reader != NULL)
 				{
 					deleteReader(fileReader, reader);
@@ -582,7 +589,7 @@ void runReaderManagement(){
 
 	int choice = 0;
 	do {
-		choice = getNumberPressKey(printfMenuReaderManagement());
+		choice = getNumberPressKey(printfMenuReaderManagement(), 0);
 		switch (choice){
 			case 1:
 				printfAllReader(fileReader);
@@ -605,5 +612,6 @@ void runReaderManagement(){
 	}while (choice != 0);
 
 }
+
 
 

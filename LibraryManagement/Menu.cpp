@@ -34,7 +34,7 @@ int printLoginMenu(){
 	{
 		system("cls");
 		printfMainMenu();
-		return getNumberPressKey(MAX_CHOICE);
+		return getNumberPressKey(MAX_CHOICE, 0);
 		// return value which user type which will be built in commonFunction.h
 
 	}

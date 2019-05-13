@@ -11,7 +11,7 @@ void runMenuUser(int typeAccount)
 {
 	int choice = 0;
 	do {
-		choice = getNumberPressKey(printUserMenu(typeAccount));
+		choice = getNumberPressKey(printUserMenu(typeAccount), 0);
 		switch (choice){
 		case 1: // Thay đổi Password
 			ChangePassword();
