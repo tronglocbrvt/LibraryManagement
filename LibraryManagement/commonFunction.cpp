@@ -118,7 +118,7 @@ int plusOneIntoAChar(char numch){
 		return 1;
 	}
 	else {
-		char(numch) += 1;
+		(numch) += 1;
 		return 0;
  	}
 }
@@ -140,6 +140,7 @@ bool plusOneIntoAString(char numStr[]){
 			return 1;
 		}
 	}
+	return 1;
 }
 
 Day getExpiredDay(Day orginDay){ 
