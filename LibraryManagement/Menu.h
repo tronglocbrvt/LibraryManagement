@@ -11,8 +11,6 @@ void printfMainMenu();
 
 int printUserMenu(int typeAccount);
 
-int printfEditReaderInf();
-
 int printfMenuReaderManagement();
 
 int printfSubMenuReaderManagement();

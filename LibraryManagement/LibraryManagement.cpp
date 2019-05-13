@@ -8,6 +8,7 @@
 #include "decentraliseUsers.h"
 #include "statusUser.h"
 #include "runUser.h"
+#include "readerManagement.h"
 
 int main()
 {
@@ -37,11 +38,8 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-		//getUser(typeAccount);
-		//ChangePassword();
-		//editProfile();
-		//decentraliseUser(typeAccount);
-		//changeStatusUser(typeAccount);
+		runReaderManagement();
+
 		system("pause");
 		bool continueSwit = true;
 		while (continueSwit){
@@ -53,7 +51,6 @@ int main()
 				typeAccount = Logout();
 				exit(0);
 			case 1:
-				printUserMenu(typeAccount);
 				runMenuUser(typeAccount);
 				break;
 			case 2:

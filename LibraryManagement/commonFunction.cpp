@@ -107,7 +107,7 @@ bool isPossibleDay(int Day, int Month, int Year)
 
 
 // cong 1 vao mot chuoi so -> dung de sinh ma so lien tuc
-int plusOneIntoAChar(char &numch){
+int plusOneIntoAChar(char numch){
 	if (numch < '0' && numch > '9')
 	{
 		return -1;
@@ -118,26 +118,28 @@ int plusOneIntoAChar(char &numch){
 		return 1;
 	}
 	else {
-		numch += 1;
+		char(numch) += 1;
 		return 0;
  	}
 }
-bool plusOneIntoAString(char* &numStr){
+bool plusOneIntoAString(char numStr[]){
 
-	int length = strlen(numStr) -1;
+	int length = strlen(numStr) - 1;
 	while (length >= 0){
-		switch(plusOneIntoAChar(numStr[length])){
-			case -1:
-				return false;
-				break;
-			case 0:
-				length = -1;
-				break;
+		if (numStr[length] < '0' && numStr[length] > '9')
+		{
+			return 1;
 		}
-		length--;
+		else if (numStr[length] == '9')
+		{
+			numStr[length] = '0';
+			length--;
+		}
+		else {
+			numStr[length] += 1;
+			return 1;
+		}
 	}
-
-	return true;
 }
 
 Day getExpiredDay(Day orginDay){ 
@@ -170,7 +172,7 @@ Day getToday(){
     timeinfo = localtime ( &rawtime );
 
 
-    fprintf(stdout, "[%d %d %d %d:%d:%d]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+    fprintf(stdout, "[%d / %d / %d / %d:%d:%d ]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
     Day days;
     days.Date 	= timeinfo->tm_mday;
