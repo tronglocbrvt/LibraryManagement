@@ -38,7 +38,7 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-		runReaderManagement();
+		//runReaderManagement();
 
 		system("pause");
 		bool continueSwit = true;

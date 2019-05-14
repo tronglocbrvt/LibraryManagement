@@ -83,14 +83,14 @@ void editProfile()
 			break;
 		case 2:
 			printf("Nhap lai ngay sinh moi:\n");
-			getBirthday(curUser);
+			getBirthday(curUser.Birthday);
 
 			edit = wantEdit();
 			if (edit == 0)
 				end = true;
 			break;
 		case 3:
-			getNationalID(curUser);
+			getNationalID(curUser.NationID);
 
 			edit = wantEdit();
 			if (edit == 0)
@@ -106,7 +106,7 @@ void editProfile()
 				end = true;
 			break;
 		case 5: 
-			getSex(curUser);
+			getSex(curUser.Sex);
 
 			edit = wantEdit();
 			if (edit == 0)

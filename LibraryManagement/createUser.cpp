@@ -29,149 +29,39 @@ bool checkUsername(char *Username)
 	return true;
 }
 
-// Hàm nhập Username
-void getUsername(Users &A)
-{
-	do
-	{
-		printf("Nhap Username (toi da 20 ky tu): ");
-		scanf("%s", &A.Username);
-		int temp = getchar();
-		if (!checkUsername(A.Username))
-			printf("Username da ton tai. Vui long nhap Username khac.\n");
-	} while (!checkUsername(A.Username));
-}
-
-// Hàm nhập Ngày sinh
-void getBirthday(Users &A)
-{
-	bool checkDay;
-	do
-	{
-		printf("Nhap ngay sinh: ");
-		scanf("%d", &A.Birthday.Date);
-		int temp = getchar();
-
-		printf("Nhap thang sinh: ");
-		scanf("%d", &A.Birthday.Month);
-		temp = getchar();
-
-		printf("Nhap nam sinh: ");
-		scanf("%d", &A.Birthday.Year);
-		temp = getchar();
-
-		checkDay = isPossibleDay(A.Birthday.Date, A.Birthday.Month, A.Birthday.Year);
-		if (!checkDay)
-			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
-	} while (checkDay == false);
-}
-
-// Hàm nhập CMND
-void getNationalID(Users &A)
-{
-	int flag = 0;
-	do
-	{
-		printf("Nhap CMND (9 so hoac 12 so): ");
-		scanf("%s", &A.NationID);
-		int temp = getchar();
-		int i;
-		if (strlen(A.NationID) != 9 && strlen(A.NationID) != 12)
-		{
-			printf("CMND khong hop le. Vui long nhap lai.\n");
-			continue;
-		}
-
-		flag = 1; 
-
-		for (int i = 0; i < strlen(A.NationID); i++)
-		{
-			if (!isNumber(A.NationID[i]))
-			{
-				flag = 0;
-				printf("CMND khong hop le. Vui long nhap lai.\n");
-				break;
-			}
-		}
-	} while (flag == 0);
-
-}
-
-// Hàm nhập giới tính
-void getSex(Users &A)
-{
-	do
-	{
-		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-		scanf("%d", &A.Sex);
-		int temp = getchar();
-
-		if (A.Sex != 0 && A.Sex != 1)
-			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
-	} while (A.Sex != 0 && A.Sex != 1);
-}
-
-// Hàm nhập tình trạng
-void getStatus(Users &A)
-{
-	do
-	{
-		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
-		scanf("%d", &A.Status);
-		int temp = getchar();
-
-		if (A.Status != 0 && A.Status != 1)
-			printf("Vui long nhap lai. Actived nhap 1, Blocked nhap 0.\n");
-	} while (A.Status != 0 && A.Status != 1);
-}
-
-// Hàm nhập phân quyền
-void getTypeAccount(Users &A)
-{
-	do
-	{
-		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
-		scanf("%d", &A.typeAccount);
-		int temp = getchar();
-
-		if (A.typeAccount != 2 && A.typeAccount != 3)
-			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
-	} while (A.typeAccount != 2 && A.typeAccount != 3);
-}
-
 // Nhập thông tin người dùng
 Users addUser()
 {
 	Users A;
-	int temp;
 
-	getUsername(A);
+	flushall();
+	getUsername(A.Username);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
 	scanf("%s", &A.Password);
-	temp = getchar();
+	flushall();
 
 	printf("Nhap Ho va Ten: ");
 	gets(A.Fullname);
 
-	getBirthday(A);
+	getBirthday(A.Birthday);
 
-	getNationalID(A);
+	getNationalID(A.NationID);
 
 	printf("Nhap dia chi: ");
 	gets(A.Address);
 
-	getSex(A);
+	getSex(A.Sex);
 
-	getStatus(A);
+	getStatus(A.Status);
 
 	getTypeAccount(A);
-
+	
 	return A;
 }
 
 // Ghi vào file thông tin người dùng
-void writeFile()
+void writeInfUsertoFile()
 {
 	Users A = addUser();
 
@@ -181,10 +71,6 @@ void writeFile()
 		return;
 
 	fwrite(&A, sizeof(Users), 1, f);
-	fclose(f);
-
-	fprintf(f, A.Username);
-
 	fclose(f);
 }
 
@@ -196,7 +82,7 @@ void getUser(int typeAccount)
 	   Ngược lại không được tạo tài khoản (vì tạo tài khoản duy nhất là quyền của admin.) */
 	if (typeAccount == 1) 
 	{
-		writeFile();
+		writeInfUsertoFile();
 		printf("Tao nguoi dung thanh cong!\n");
 	}
 	else

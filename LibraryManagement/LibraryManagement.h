@@ -85,7 +85,7 @@ struct BorrowBooks
 
 struct NodeReader
 {
-	Readers *reader;
+	Readers reader;
 	NodeReader *pNext;
 	NodeReader *pPrev;
 };
@@ -94,4 +94,5 @@ struct LLNodeReader
 {
 	NodeReader *pHead;
 	NodeReader *pTail;
+	int total;
 };
