@@ -1,16 +1,16 @@
-﻿#include "linkedListReaders.h"
+﻿#include "linkedListBooks.h"
 
 // << Hàm khởi tạo danh sách và node
-void Init(LLNodeReader &ls)
+void Init(LLNodeBook &ls)
 {
 	ls.pHead = NULL;
 	ls.pTail = NULL;
 }
 
 // Tạo 1 Node chứa data
-NodeReader *makeNode(Readers data){
-	NodeReader *no = new NodeReader;
-	no->reader = data;
+NodeBook *makeNode(Books data){
+	NodeBook *no = new NodeBook;
+	no->book = data;
 	no->pNext = NULL;
 	no->pPrev = NULL;
 
@@ -19,8 +19,8 @@ NodeReader *makeNode(Readers data){
 
 //======================================================
 
-NodeReader* addAtTail(LLNodeReader &ls, Readers data){ // Thêm vào cuối danh sách một struct >> Readers
-	NodeReader *no = makeNode(data);
+NodeBook* addAtTail(LLNodeBook &ls, Books data){ // Thêm vào cuối danh sách một struct >> Books
+	NodeBook *no = makeNode(data);
 	if (no == NULL)
 	{
 		return NULL;
@@ -41,14 +41,14 @@ NodeReader* addAtTail(LLNodeReader &ls, Readers data){ // Thêm vào cuối danh
 	return no;
 }
 
-//LLNodeReader getReaderData()
+//LLNodeBook getReaderData()
 //{
 //
 //}
 
-//Readers *findReaderAtNumberic(LLNodeReader *lsReader, int numberic){
-//	Readers *reader = new Readers();
-//	NodeReader *pNow = InitNode();
+//Books *findReaderAtNumberic(LLNodeBook *lsReader, int numberic){
+//	Books *reader = new Books();
+//	NodeBook *pNow = InitNode();
 //
 //	pNow = lsReader->pHead;
 //	while (pNow != NULL && numberic > 1){
@@ -59,12 +59,12 @@ NodeReader* addAtTail(LLNodeReader &ls, Readers data){ // Thêm vào cuối danh
 //	return pNow->reader;
 //}
 
-void freeLinkListReader(LLNodeReader &ls)
+void freeLinkListBook(LLNodeBook &ls)
 {
-	NodeReader *p = ls.pHead;
+	NodeBook *p = ls.pHead;
 	while (p != NULL)
 	{
-		NodeReader *q = p;
+		NodeBook *q = p;
 		p = p->pNext;
 		delete q;
 	}

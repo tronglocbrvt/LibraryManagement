@@ -4,10 +4,16 @@
 #include "Menu.h"
 
 Readers *findReaderWithNationID(char *personID);	// Tìm kiếm độc giả theo CMND
-//
+
+Readers *findReaderWithEmail(char *Email); // Tìm kiếm độc giả theo Email
+
+Readers *findReaderWithID(char *ID);	// Tìm kiếm độc giả theo ID
+
+bool findListReaderWithName(char *personName, LLNodeReader &lsReader); // Tìm kiếm đọc giả theo họ tên và thêm vào danh sách
+
+void viewAllReader(); // xem thông tin độc giả trong thư viện
+
 //Readers *findReaderWithName(char *&personName);	// Tìm kiếm đọc giả theo họ tên
-//
-//bool findListReaderWithName(char *&personName, LLNodeReader *&lsReader); // Tìm kiếm đọc giả theo họ tên và thêm vào danh sách
 //
 //Readers *getTheLastReader(); // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
 //
@@ -15,7 +21,7 @@ Readers *findReaderWithNationID(char *personID);	// Tìm kiếm độc giả the
 //
 //bool printfAllReader();	// đọc toàn bộ thông tin đọc giả từ file và in ra -> không đưa vào link list
 //
-//bool printfAllReader(const LLNodeReader *&ls); // in ra thông tin đọc giả từ Link List khi đã có Link List
+bool printReaderFromLL(LLNodeReader ls); // in ra thông tin độc giả từ Linked List
 //
 //bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls);	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
 //
@@ -47,4 +53,17 @@ int askToUpdateReaderToFile();
 
 bool writeInfReaderToFile();
 
+void viewInfAReader(Readers reader); // Xem thông tin của một người cụ thể
+
+void editReader(Readers &reader); 
+
+void editReaderToFile(); // chỉnh sửa thông tin độc giả qua mã độc giả
+
+void deleteReaderToFile(); // xóa thông tin độc giả qua mã độc giả 
+
+void searchNationID();
+
+void searchFullName();
+
 void runReaderManagement(); // khởi chạy quản lý đọc giả
+

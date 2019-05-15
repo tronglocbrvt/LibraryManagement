@@ -9,6 +9,7 @@
 #include "statusUser.h"
 #include "runUser.h"
 #include "readerManagement.h"
+#include "bookManagement.h"
 
 int main()
 {
@@ -38,7 +39,7 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-		//runReaderManagement();
+		runBookManagement();
 
 		system("pause");
 		bool continueSwit = true;

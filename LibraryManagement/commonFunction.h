@@ -21,6 +21,10 @@ void getStatus(bool &status);
 
 void getTypeAccount(Users &A);
 
+void getReaderID(char ID[]);
+
+int wantEdit();
+
 char *toStr(long n);
 
 Day getExpiredDay(Day orginDay);

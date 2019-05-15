@@ -86,18 +86,25 @@ int printfMenuReaderManagement(){
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");
 	printf("4. Xoa thong tin mot doc gia.\n");
-	printf("5. Xem thong tin mot doc gia.\n");
+	printf("5. Tim kiem doc gia qua CMND.\n");
+	printf("6. Tim kiem doc gia qua ho ten.\n");
 	printf("0. Quay ve\n");
 
-	return 5;
+	return 6;
 }
-int printfSubMenuReaderManagement(){
-	printf("1. Tim doc gia theo Ho va ten\n");
-	printf("2. Tim doc gia theo CMND\n");
+
+int printfMenuBookManagement(){
+	printf("1. Xem danh sach sach trong thu vien.\n");
+	printf("2. Them sach.\n");
+	printf("3. Chinh sua thong tin mot quyen sach.\n");
+	printf("4. Xoa thong tin mot quyen sach.\n");
+	printf("5. Tim kiem sach qua ISBN.\n");
+	printf("6. Tim kiem sach qua ten sach.\n");
 	printf("0. Quay ve\n");
 
-	return 2;
+	return 6;
 }
+
 int editInfReaderMenu(){
 	printf("1. Sua Ho va ten\n");
 	printf("2. Doi CMND\n");
@@ -106,6 +113,19 @@ int editInfReaderMenu(){
 	printf("5. Doi Email\n");
 	printf("6. Doi dia chi\n");
 	printf("7. Gia han the\n");
+	printf("0. Quay ve\n");
+
+	return 7;
+}
+
+int editInfBookMenu(){
+	printf("1. Sua ten sach\n");
+	printf("2. Sua ten tac gia\n");
+	printf("3. Sua ten nha xuat ban\n");
+	printf("4. Sua nam xuat ban\n");
+	printf("5. Sua the loai sach\n");
+	printf("6. Sua gia sach\n");
+	printf("7. Sua so luong sach\n");
 	printf("0. Quay ve\n");
 
 	return 7;

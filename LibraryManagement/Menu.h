@@ -13,6 +13,8 @@ int printUserMenu(int typeAccount);
 
 int printfMenuReaderManagement();
 
-int printfSubMenuReaderManagement();
+int printfMenuBookManagement();
 
 int editInfReaderMenu();
+
+int editInfBookMenu();

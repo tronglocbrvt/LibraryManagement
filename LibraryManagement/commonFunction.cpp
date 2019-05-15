@@ -110,8 +110,10 @@ void getUsername(char username[])
 {
 	do
 	{
+		flushall();
 		printf("Nhap Username (toi da 20 ky tu): ");
 		gets(username);
+		flushall();
 
 		if (!checkUsername(username))
 			printf("Username da ton tai. Vui long nhap Username khac.\n");
@@ -124,6 +126,7 @@ void getBirthday(Day &birthday)
 	bool checkDay;
 	do
 	{
+		flushall();
 		printf("Nhap ngay sinh: ");
 		scanf("%d", &birthday.Date);
 		flushall();
@@ -148,8 +151,10 @@ void getNationalID(char nationID[])
 	int flag = 0;
 	do
 	{
+		flushall();
 		printf("Nhap CMND (9 so hoac 12 so): ");
 		gets(nationID);
+		flushall();
 
 		int i;
 		if (strlen(nationID) != 9 && strlen(nationID) != 12)
@@ -178,6 +183,7 @@ void getSex(int &sex)
 {
 	do
 	{
+		flushall();
 		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
 		scanf("%d", &sex);
 		int temp = getchar();
@@ -192,6 +198,7 @@ void getStatus(bool &status)
 {
 	do
 	{
+		flushall();
 		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
 		scanf("%d", &status);
 		int temp = getchar();
@@ -206,6 +213,7 @@ void getTypeAccount(Users &A)
 {
 	do
 	{
+		flushall();
 		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
 		scanf("%d", &A.typeAccount);
 		int temp = getchar();
@@ -215,6 +223,54 @@ void getTypeAccount(Users &A)
 	} while (A.typeAccount != 2 && A.typeAccount != 3);
 }
 
+// Hàm nhập ID độc giả
+void getReaderID(char ID[])
+{
+	int flag = 0;
+	do
+	{
+		flushall();
+		printf("Nhap ma doc gia (8 so): ");
+		gets(ID);
+		flushall();
+
+		int i;
+		if (strlen(ID) != 8)
+		{
+			printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+			continue;
+		}
+
+		flag = 1;
+
+		for (int i = 0; i < strlen(ID); i++)
+		{
+			if (!isNumber(ID[i]))
+			{
+				flag = 0;
+				printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+				break;
+			}
+		}
+	} while (flag == 0);
+
+}
+// Hàm hỏi người dùng muốn chỉnh sửa nữa không?
+int wantEdit()
+{
+	int edit;
+	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
+	do
+	{
+		scanf("%d", &edit);
+		if (edit == 1)
+			return 1;
+		else if (edit == 0)
+			return 0;
+		else
+			printf("Vui long nhap 0 hoac 1\n");
+	} while (edit != 0 && edit != 1);
+}
 
 //Tạo chuỗi mã độc giả
 char *toStr(long n)

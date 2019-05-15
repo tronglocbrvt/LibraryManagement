@@ -18,30 +18,14 @@ void viewProfile()
 	printf("--------------------------------------------------------\n");
 	printf("Thong tin ca nhan cua Username %s:\n\n", curUser.Username);
 	printf("Ho va ten: %s\n", curUser.Fullname);
-	printf("Ngay sinh: %d/%d/%d\n", curUser.Birthday.Date, curUser.Birthday.Month, curUser.Birthday.Year);
+	printf("Ngay sinh: ");
+	printfDay(curUser.Birthday);
 	printf("CMND: %s\n", curUser.NationID);
 	printf("Dia chi: %s\n", curUser.Address);
-	printf("Gioi tinh (nam la 1, nu la 0): %d\n", curUser.Sex);
+	printf("Gioi tinh (nam la 1, nu la 0): %s\n", (curUser.Sex == 0 ? "Nu" : "Nam"));
 	printf("--------------------------------------------------------\n");
 
 	fclose(fCur);
-}
-
-// Hàm hỏi người dùng muốn chỉnh sửa nữa không?
-int wantEdit()
-{
-	int edit;
-	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
-	do
-	{
-		scanf("%d", &edit);
-		if (edit == 1)
-			return 1;
-		else if (edit == 0)
-			return 0;
-		else
-			printf("Vui long nhap 0 hoac 1\n");
-	} while (edit != 0 && edit != 1);
 }
 
 // Hàm chỉnh sửa thông tin cá nhân

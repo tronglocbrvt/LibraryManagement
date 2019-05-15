@@ -4,16 +4,14 @@
 //======================================================
 // << Hàm khởi tạo danh sách và node
 
-void Init(LLNodeReader &ls);
+void Init(LLNodeBook &ls);
 
-NodeReader *makeNode(Readers data);
+NodeBook *makeNode(Books data);
 //======================================================
 
-NodeReader* addAtTail(LLNodeReader &ls, Readers data); // Thêm vào cuối danh sách một struct >> Readers
+NodeBook* addAtTail(LLNodeBook &ls, Books data); // Thêm vào cuối danh sách một struct >> Books
 
-//Readers *findReaderAtNumberic(LLNodeReader *lsReader, int numberic);
-
-void freeLinkListReader(LLNodeReader &ls);
+void freeLinkListBook(LLNodeBook &ls);
 
 //=============================================================================================
 //=============================================================================================
