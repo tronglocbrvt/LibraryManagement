@@ -114,17 +114,3 @@ struct LLNodeBook
 	NodeBook *pTail;
 	int total;
 };
-
-struct NodeBorrowBook
-{
-	BorrowBooks borrowBook;
-	NodeBorrowBook *pNext;
-	NodeBorrowBook *pPrev;
-};
-
-struct LLNodeBorrowBook
-{
-	NodeBorrowBook *pHead;
-	NodeBorrowBook *pTail;
-	int total;
-};

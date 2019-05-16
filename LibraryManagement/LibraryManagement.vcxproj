@@ -85,7 +85,6 @@
     <ClInclude Include="functionsFile.h" />
     <ClInclude Include="LibraryManagement.h" />
     <ClInclude Include="linkedListBooks.h" />
-    <ClInclude Include="linkedListBorrowBook.h" />
     <ClInclude Include="linkedListReaders.h" />
     <ClInclude Include="Login_Logout.h" />
     <ClInclude Include="Menu.h" />
@@ -104,7 +103,6 @@
     <ClCompile Include="functionsFile.cpp" />
     <ClCompile Include="LibraryManagement.cpp" />
     <ClCompile Include="linkedListBooks.cpp" />
-    <ClCompile Include="linkedListBorrowBook.cpp" />
     <ClCompile Include="linkedListReaders.cpp" />
     <ClCompile Include="Login_Logout.cpp" />
     <ClCompile Include="Menu.cpp" />

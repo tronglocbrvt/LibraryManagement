@@ -2,7 +2,6 @@
 #include "commonFunction.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
-#include "linkedListBorrowBook.h"
 
 Day returnBookExpectDay(Day borrowBookDay)
 {
@@ -152,7 +151,6 @@ void borrowBook()
 			delete temp_book;
 			fclose(f);
 
-			//addAtTail(ls, *borrowBook); // Thêm vào danh sách liên kết
 			printf("Muon sach thanh cong.\n");
 
 			int borrow = wantBorrow();
@@ -171,7 +169,6 @@ void borrowBook()
 	borrowBookBill(temp_reader->ID, temp_reader->Fullname);
 
 	delete temp_reader;
-	//freeLinkListBorrowBook(ls);
 }
 
 void borrowBookBill(char *ID, char *Fullname)

@@ -63,9 +63,6 @@
     <ClInclude Include="borrowedBooks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linkedListBorrowBook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryManagement.cpp">
@@ -114,9 +111,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="borrowedBooks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linkedListBorrowBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
