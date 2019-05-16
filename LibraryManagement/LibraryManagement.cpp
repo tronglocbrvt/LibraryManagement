@@ -9,6 +9,7 @@
 #include "statusUser.h"
 #include "runUser.h"
 #include "readerManagement.h"
+#include "bookManagement.h"
 
 #include <iostream>
 using namespace std;
@@ -45,6 +46,11 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
+<<<<<<< HEAD
+=======
+		runBookManagement();
+
+>>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 		system("pause");
 		bool continueSwit = true;
 		while (continueSwit){
