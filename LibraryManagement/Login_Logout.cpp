@@ -34,10 +34,14 @@ int checkLogin(char *Username, char *Password)
 			}
 			else
 			{
+				fclose(fCur);
+				fclose(f);
 				return -1;
 			}
 		}
 	}
+	fclose(fCur);
+	fclose(f);
 	return 0;
 }
 
