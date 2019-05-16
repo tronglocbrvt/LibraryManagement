@@ -15,7 +15,7 @@ bool checkUsername(char *Username)
 	if (f == NULL)
 		return 0;
 
-	while (fread(&A,sizeof(Users), 1, f) != NULL)
+	while (fread(&A,sizeof(Users), 1, f) != 0)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
@@ -35,7 +35,7 @@ void getUsername(Users &A)
 	do
 	{
 		printf("Nhap Username (toi da 20 ky tu): ");
-		scanf("%s", &A.Username);
+		scanf("%s", A.Username);
 		int temp = getchar();
 		if (!checkUsername(A.Username))
 			printf("Username da ton tai. Vui long nhap Username khac.\n");
@@ -73,7 +73,7 @@ void getNationalID(Users &A)
 	do
 	{
 		printf("Nhap CMND (9 so hoac 12 so): ");
-		scanf("%s", &A.NationID);
+		scanf("%s", A.NationID);
 		int temp = getchar();
 		int i;
 		if (strlen(A.NationID) != 9 && strlen(A.NationID) != 12)
@@ -117,7 +117,9 @@ void getStatus(Users &A)
 	do
 	{
 		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
-		scanf("%d", &A.Status);
+		int status = 0;
+		scanf("%d", &status);
+		A.Status = (bool)status;
 		int temp = getchar();
 
 		if (A.Status != 0 && A.Status != 1)
@@ -148,7 +150,7 @@ Users addUser()
 	getUsername(A);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
-	scanf("%s", &A.Password);
+	scanf("%s", A.Password);
 	temp = getchar();
 
 	printf("Nhap Ho va Ten: ");
@@ -183,7 +185,7 @@ void writeFile()
 	fwrite(&A, sizeof(Users), 1, f);
 	fclose(f);
 
-	fprintf(f, A.Username);
+	fprintf(f, "%s", A.Username);
 
 	fclose(f);
 }
