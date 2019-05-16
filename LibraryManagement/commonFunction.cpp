@@ -8,7 +8,11 @@
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
 	}
-
+#else 
+	void textBgColor(int colorText, int colorBG) // cplusplus
+	{
+	
+	}
 #endif
 
 //Hàm kiểm tra số nhập từ bàn phím
@@ -38,7 +42,7 @@ int getNumberPressKey(int MAX, int MIN){
 
 	}
 	disable_raw_mode();
-	clearSTDIN();
+	// clearSTDIN();
 	return int(ch - '0');
 }
 
