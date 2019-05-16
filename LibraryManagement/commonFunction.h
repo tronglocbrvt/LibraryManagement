@@ -3,7 +3,8 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 	void textBgColor(int colorText, int colorBG);
-
+#else 
+	void textBgColor(int colorText, int colorBG);
 #endif
 
 int getNumberPressKey(int MAX, int MIN);
@@ -26,7 +27,7 @@ bool isNumber(char c);
 
 Day getDayFrmUser();
 
-void textBgColor(int colorText, int colorBG);
+// void textBgColor(int colorText, int colorBG);
 
 void printfDay(Day day);
 
