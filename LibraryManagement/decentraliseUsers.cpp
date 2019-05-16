@@ -11,7 +11,7 @@ void inforDecentraliseUser()
 	if (f == NULL)
 		return;
 
-	while (fread(&A, sizeof(Users), 1, f) != NULL)
+	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (A.typeAccount == 2)
 			printf("%s\t\t%s\n", A.Username, "Chuyen vien");
@@ -54,7 +54,7 @@ void decentraliseUser(int typeAccount)
 	if (f == NULL)
 		return;
 
-	while (fread(&A, sizeof(Users), 1, f) != NULL)
+	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
