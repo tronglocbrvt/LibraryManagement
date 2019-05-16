@@ -91,32 +91,8 @@ Books addBook()
 {
 	Books book;
 
-	int flag = 0;
-	do
-	{
-		flushall();
-		printf("Nhap ISBN: ");
-		gets(book.ISBN);
-
-		int i;
-		if (strlen(book.ISBN) != 13)
-		{
-			printf("ISBN phai co 13 chu so. Vui long nhap lai.\n");
-			continue;
-		}
-
-		flag = 1;
-
-		for (int i = 0; i < strlen(book.ISBN); i++)
-		{
-			if (!isNumber(book.ISBN[i]))
-			{
-				flag = 0;
-				printf("ISBN khong hop le. Vui long nhap lai.\n");
-				break;
-			}
-		}
-	} while (flag == 0);
+	flushall();
+	getISBN(book.ISBN);
 
 	flushall();
 	printf("Nhap ten sach: ");

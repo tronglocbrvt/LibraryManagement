@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "LibraryManagement.h"
 
 int getNumberPressKey(int MAX, int MIN);
@@ -13,17 +13,21 @@ void getUsername(char username[]);
 
 void getBirthday(Day &birthday);
 
-void getNationalID(char nationID[]);
+void getNationalID(char nationID[]); // Nhập CMND người dùng
 
-void getSex(int &sex);
+void getSex(int &sex); //  Nhập giới tính người dùng
 
-void getStatus(bool &status);
+void getStatus(bool &status); // Nhập trạng thái người dùng
 
-void getTypeAccount(Users &A);
+void getTypeAccount(Users &A); // Nhập phân quyền người dùng
 
-void getReaderID(char ID[]);
+void getReaderID(char ID[]); // Nhập mã đọc giả
+
+void getISBN(char *ISBN); // Nhập ISBN sách
 
 int wantEdit();
+
+int wantBorrow();
 
 char *toStr(long n);
 
@@ -32,8 +36,6 @@ Day getExpiredDay(Day orginDay);
 Day getToday();
 
 bool isNumber(char c);
-
-Day getDayFrmUser();
 
 void textBgColor(int colorText, int colorBG);
 

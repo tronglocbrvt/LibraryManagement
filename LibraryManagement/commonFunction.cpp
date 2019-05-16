@@ -255,6 +255,38 @@ void getReaderID(char ID[])
 	} while (flag == 0);
 
 }
+
+// Hàm nhập ISBN sách
+void getISBN(char *ISBN)
+{
+	int flag = 0;
+	do
+	{
+		flushall();
+		printf("Nhap ISBN: ");
+		gets(ISBN);
+
+		int i;
+		if (strlen(ISBN) != 13)
+		{
+			printf("ISBN phai co 13 chu so. Vui long nhap lai.\n");
+			continue;
+		}
+
+		flag = 1;
+
+		for (int i = 0; i < strlen(ISBN); i++)
+		{
+			if (!isNumber(ISBN[i]))
+			{
+				flag = 0;
+				printf("ISBN khong hop le. Vui long nhap lai.\n");
+				break;
+			}
+		}
+	} while (flag == 0);
+}
+
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
 int wantEdit()
 {
@@ -270,6 +302,23 @@ int wantEdit()
 		else
 			printf("Vui long nhap 0 hoac 1\n");
 	} while (edit != 0 && edit != 1);
+}
+
+// Hàm hỏi muốn mượn sách nữa không?
+int wantBorrow()
+{
+	int borrow;
+	printf("Doc gia nay con muon muon them sach nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
+	do
+	{
+		scanf("%d", &borrow);
+		if (borrow == 1)
+			return 1;
+		else if (borrow == 0)
+			return 0;
+		else
+			printf("Vui long nhap 0 hoac 1\n");
+	} while (borrow != 0 && borrow != 1);
 }
 
 //Tạo chuỗi mã độc giả
@@ -320,7 +369,7 @@ Day getToday(){
     timeinfo = localtime ( &rawtime );
 
 
-    fprintf(stdout, "[%d / %d / %d / %d:%d:%d ]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+    fprintf(stdout, "[%d/%d/%d %d:%d:%d]\n",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
     Day days;
     days.Date 	= timeinfo->tm_mday;
@@ -336,49 +385,6 @@ bool isNumber(char c)
 		return 1;
 	return 0;
 }
-
-Day getDayFrmUser(){
-	Day day;
-	do
-	{
-		printf("Nhap ngay: ");
-		scanf("%d", &day.Date);
-		int temp = getchar();
-
-		printf("Nhap thang: ");
-		scanf("%d", &day.Month);
-		temp = getchar();
-
-		printf("Nhap nam: ");
-		scanf("%d", &day.Year);
-		temp = getchar();
-
-		if (!isPossibleDay(day.Date, day.Month, day.Year))
-			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
-		else break;
-	} while (1);
-	return day;
-}
-
-//Chỉnh màu chữ và màu nền
-/*
-0 black
-1 blue
-2 green
-3 aqua
-4 red
-5 purple
-6 yellow
-7 white
-8 gray
-9 light blue
-10 light green
-11 light aqua
-12 light red
-13 light purple
-14 light yellow
-15 bright white
-*/
 
 void textBgColor(int colorText, int colorBG) // cplusplus
 {
@@ -397,6 +403,7 @@ char *getStringFrmUser(char *note){
 
 	return strGet;
 }
+
 int getNumber(char *note){
 	printf("%s\n", note);
 	int x = 0;

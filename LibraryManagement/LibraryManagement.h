@@ -78,9 +78,13 @@ struct Books
 
 struct BorrowBooks
 {
-	char ISBN[11]; // Mã sách gồm 10 số
+	char ID[9]; // Mã độc giả mượn sách
+	char Fullname[31]; // Tên độc giả
+	char ISBN[14]; // Mã sách gồm 13 số
+	char nameBook[51]; // Tên sách
+	int numBook; // Số lượng sách mượn
 	Day borrowBookDay; // Ngày mượn sách
-	Day returnBookDay; // Ngày trả sách thực tế
+	Day returnBookDay; // Ngày trả sách dự kiến
 };
 
 struct NodeReader
@@ -108,5 +112,19 @@ struct LLNodeBook
 {
 	NodeBook *pHead;
 	NodeBook *pTail;
+	int total;
+};
+
+struct NodeBorrowBook
+{
+	BorrowBooks borrowBook;
+	NodeBorrowBook *pNext;
+	NodeBorrowBook *pPrev;
+};
+
+struct LLNodeBorrowBook
+{
+	NodeBorrowBook *pHead;
+	NodeBorrowBook *pTail;
 	int total;
 };

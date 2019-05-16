@@ -10,13 +10,14 @@
 #include "runUser.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
+#include "borrowedBooks.h"
 
 int main()
 {
 	do
 	{
 		int typeAccount;
-		resizeConsole(700, 700);
+		resizeConsole(1500, 1500);
 		do
 		{
 			system("cls");
@@ -40,6 +41,7 @@ int main()
 		textBgColor(WHITE, BLACK);
 
 		runBookManagement();
+		borrowBook();
 
 		system("pause");
 		bool continueSwit = true;

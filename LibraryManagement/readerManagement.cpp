@@ -754,9 +754,9 @@ void searchNationID()
 {
 	Readers *reader = new Readers;
 
-	getNationalID(reader->ID);
+	getNationalID(reader->NationID);
 
-	reader = findReaderWithNationID(reader->ID);
+	reader = findReaderWithNationID(reader->NationID);
 	if (reader == NULL)
 	{
 		printf("Doc gia khong ton tai.\n");
