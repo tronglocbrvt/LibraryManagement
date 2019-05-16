@@ -1,6 +1,11 @@
 #pragma once
 #include "LibraryManagement.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+	void textBgColor(int colorText, int colorBG);
+
+#endif
+
 int getNumberPressKey(int MAX, int MIN);
 
 bool isLeapYear(int Year);
