@@ -11,7 +11,7 @@ void inforStatusUser()
 	if (f == NULL)
 		return;
 
-	while (fread(&A, sizeof(Users), 1, f) != NULL)
+	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (A.Status == 0)
 			printf("%s\t\t%s\n", A.Username, "Blocked");
@@ -54,7 +54,7 @@ void changeStatusUser(int typeAccount)
 	if (f == NULL)
 		return;
 
-	while (fread(&A, sizeof(Users), 1, f) != NULL)
+	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
