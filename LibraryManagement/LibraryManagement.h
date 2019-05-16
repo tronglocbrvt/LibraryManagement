@@ -4,12 +4,25 @@
 #define _MAX_DAY_EXPIRES_ 1462
 #define _F_GOI_TINH_ int sex (sex == 1 ? (char*)"Nam" : (char*)"Nu")
 
+#if defined(_WIN64) || defined(_WIN32)
+	#define cls "cls"
+	#include <tchar.h>
+	#include <conio.h>
+	#include <windows.h>
+	void clearSTDIN(){
+		flushall();
+	}
+#else 
+	#define cls "clear"
+	#include "conioLinux.h"
+	void clearSTDIN(){
+		tcflush(0, TCIFLUSH);
+	}
+#endif
+
 #include <stdio.h>
-#include <tchar.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 
 enum Color
 {
