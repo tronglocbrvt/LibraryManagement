@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //#include "bookManagement.h"
 //
 //
@@ -607,7 +607,7 @@
 //}
 //
 //
-=======
+
 #include "bookManagement.h"
 #include "commonFunction.h"
 #include "linkedListBooks.h"
@@ -623,7 +623,7 @@ Books *findBookWithISBN(char *ISBN)	// Tìm kiếm sách theo ISBN
 		return NULL;
 	}
 
-	while (fread(book, sizeof(Books), 1, fileBook) != NULL){
+	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		if (strcmp(book->ISBN, ISBN) == 0)
 		{
 			fclose(fileBook);
@@ -648,7 +648,7 @@ bool findListBookWithName(char *nameBook, LLNodeBook &lsBook){	// Tìm kiếm đ
 		return 0;
 	}
 
-	while (fread(book, sizeof(Books), 1, fileBook) != NULL){
+	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		if (strcmp(book->nameBook, nameBook) == 0)
 		{
 			// thêm vào danh sách
@@ -672,7 +672,7 @@ void viewAllBook()	// đọc toàn bộ thông tin độc giả từ file và in
 		return;
 	}
 
-	while (fread(book, sizeof(Books), 1, fileBook) != NULL){
+	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		viewInfABook(*book);
 	}
 
@@ -704,7 +704,7 @@ Books addBook()
 	int flag = 0;
 	do
 	{
-		flushall();
+		// flushall();
 		printf("Nhap ISBN: ");
 		gets(book.ISBN);
 
@@ -728,7 +728,7 @@ Books addBook()
 		}
 	} while (flag == 0);
 
-	flushall();
+	// flushall();
 	printf("Nhap ten sach: ");
 	gets(book.nameBook);
 
@@ -741,7 +741,7 @@ Books addBook()
 	printf("Nhap nam xuat ban: ");
 	scanf("%d", &book.yearPublish);
 
-	flushall();
+	// flushall();
 	printf("Nhap the loai: ");
 	gets(book.Category);
 
@@ -774,7 +774,9 @@ bool writeInfBookToFile() // thêm sách vào database
 		if (temp != NULL)
 		{
 			printf("ISBN nay da ton tai.\n");
-			Sleep(1000); // ngưng màn hình 1 giây cho người dùng đọc
+			// Sleep(1000); // ngưng màn hình 1 giây cho người dùng đọc
+			cout << "Enter to continue the program";
+			cin.ignore().get(); //Pause Command for Linux Terminal
 			delete temp;
 			return 0;
 		}
@@ -820,7 +822,7 @@ void editBook(Books &book){ // sửa thông tin sách
 	{
 		switch (getNumberPressKey(editInfBookMenu(), 0)){
 		case 1: // Sửa tên sách
-			flushall();
+			// flushall();
 			printf("Nhap ten sach moi: ");
 			gets(book.nameBook);
 			edit = wantEdit();
@@ -828,7 +830,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 2: // Sửa tên tác giả
-			flushall();
+			// flushall();
 			printf("Nhap ten tac gia moi: ");
 			gets(book.Author);
 			edit = wantEdit();
@@ -836,7 +838,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 3: // Sửa tên nhà xuất bản
-			flushall();
+			// flushall();
 			printf("Nhap ten nha xuat ban moi: ");
 			gets(book.publishCompany);
 			edit = wantEdit();
@@ -844,7 +846,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 4: // Sửa năm xuất bản
-			flushall();
+			// flushall();
 			printf("Nhap nam xuat ban moi: ");
 			scanf("%d", &book.yearPublish);
 			edit = wantEdit();
@@ -852,7 +854,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 5: // Sửa thể loại sách
-			flushall();
+			// flushall();
 			printf("Nhap the loai sach moi: ");
 			gets(book.Category);
 			edit = wantEdit();
@@ -860,7 +862,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 6: // Sửa giá sách
-			flushall();
+			// flushall();
 			printf("Nhap gia sach moi: ");
 			scanf("%ld", &book.priceBook);
 			edit = wantEdit();
@@ -868,7 +870,7 @@ void editBook(Books &book){ // sửa thông tin sách
 				end = true;
 			break;
 		case 7: // Sửa số lượng sách
-			flushall();
+			// flushall();
 			printf("Nhap so luong sach moi: ");
 			scanf("%d", &book.numBook);
 			edit = wantEdit();
@@ -894,7 +896,7 @@ void editBookToFile()
 	if (book == NULL)
 		return;
 
-	flushall();
+	// flushall();
 	printf("Nhap vao ISBN cua sach muon chinh sua: ");
 	gets(book->ISBN);
 
@@ -902,13 +904,15 @@ void editBookToFile()
 	if (book == NULL)
 	{
 		printf("Sach khong ton tai.\n");
-		Sleep(1000);
+		// Sleep(1000);
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
 		delete book;
 		return;
 	}
 
 	viewInfABook(*book);
-	while (fread(&temp, sizeof(Books), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Books), 1, fo) != 0)
 	{
 		if (strcmp(book->ISBN, temp.ISBN) != 0)
 			fwrite(&temp, sizeof(Books), 1, ftemp);
@@ -943,7 +947,7 @@ void deleteBookToFile()
 	if (book == NULL)
 		return;
 
-	flushall();
+	// flushall();
 	printf("Nhap vao ISBN cua sach muon chinh sua: ");
 	gets(book->ISBN);
 
@@ -951,12 +955,14 @@ void deleteBookToFile()
 	if (book == NULL)
 	{
 		printf("Sach khong ton tai.\n");
-		Sleep(1000);
+		// Sleep(1000);
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
 		delete book;
 		return;
 	}
 
-	while (fread(&temp, sizeof(Books), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Books), 1, fo) != 0)
 	{
 		if (strcmp(book->ISBN, temp.ISBN) != 0)
 			fwrite(&temp, sizeof(Books), 1, ftemp);
@@ -976,7 +982,7 @@ void searchISBN()
 {
 	Books *book = new Books;
 
-	flushall();
+	// flushall();
 	printf("Nhap vao ISBN: ");
 	gets(book->ISBN);
 
@@ -984,7 +990,9 @@ void searchISBN()
 	if (book == NULL)
 	{
 		printf("Sach khong ton tai.\n");
-		Sleep(1000);
+		// Sleep(1000);
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
 	}
 	else
 		viewInfABook(*book);
@@ -996,7 +1004,7 @@ void searchBookName()
 {
 	Books *book = new Books;
 
-	flushall();
+	// flushall();
 	printf("Nhap ten sach: ");
 	gets(book->nameBook);
 
@@ -1006,7 +1014,9 @@ void searchBookName()
 	if (!(findListBookWithName(book->nameBook, lsBook)))
 	{
 		printf("Sach khong ton tai.\n");
-		Sleep(1000);
+		// Sleep(1000);
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
 	}
 
 	else
@@ -1047,4 +1057,3 @@ void runBookManagement()
 	} while (choice != 0);
 
 }
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
