@@ -18,7 +18,7 @@ int main()
 		resizeConsole(700, 700);
 		do
 		{
-			system("cls");
+			system(cls);
 			typeAccount = Login(); // Đăng nhập, trả về 0 nếu thất bại, trả về 1 nếu là admin, trả về 2 là chuyên viên, trả về 3 là quản lý
 			if (typeAccount == 0)
 			{
