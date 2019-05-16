@@ -214,7 +214,9 @@ void getStatus(bool &status)
 	{
 		flushall();
 		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
-		scanf("%d", &status);
+		int sta = 0;
+		scanf("%d", &sta);
+		status = (bool)sta;
 		int temp = getchar();
 
 		if (status != 0 && status != 1)
@@ -270,21 +272,22 @@ void getReaderID(char ID[])
 
 }
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
-int wantEdit()
-{
-	int edit;
-	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
-	do
-	{
-		scanf("%d", &edit);
-		if (edit == 1)
-			return 1;
-		else if (edit == 0)
-			return 0;
-		else
-			printf("Vui long nhap 0 hoac 1\n");
-	} while (edit != 0 && edit != 1);
-}
+// int wantEdit()
+// {
+// 	int edit;
+// 	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
+// 	do
+// 	{
+// 		scanf("%d", &edit);
+// 		if (edit == 1)
+// 			return 1;
+// 		else if (edit == 0)
+// 			return 0;
+// 		else
+// 			printf("Vui long nhap 0 hoac 1\n");
+// 	} while (edit != 0 && edit != 1);
+// 	return 1;
+// }
 
 //Tạo chuỗi mã độc giả
 char *toStr(long n)
@@ -301,7 +304,9 @@ char *toStr(long n)
 	}
 	strcat(S, str);
 	S[8] = '\0';
-	return S;
+
+	char *returnS = (char*)S;
+	return returnS;
 }
 
 Day getExpiredDay(Day orginDay){ 
