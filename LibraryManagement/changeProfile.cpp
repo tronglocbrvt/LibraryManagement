@@ -28,7 +28,7 @@ void viewProfile()
 	fclose(fCur);
 }
 
-<<<<<<< HEAD
+
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
 int wantEdit()
 {
@@ -47,8 +47,6 @@ int wantEdit()
 	return edit;
 }
 
-=======
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 // Hàm chỉnh sửa thông tin cá nhân
 void editProfile()
 {
