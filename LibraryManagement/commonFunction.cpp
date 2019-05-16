@@ -1,4 +1,5 @@
 #include "commonFunction.h"
+#include "createUser.h"
 #include "time.h"
 #include "readerManagement.h"
 #include "conioLinux.h"
@@ -118,43 +119,189 @@ bool isPossibleDay(int Day, int Month, int Year)
 	return true;
 }
 
-
-
-// cong 1 vao mot chuoi so -> dung de sinh ma so lien tuc
-int plusOneIntoAChar(char numch){
-	if (numch < '0' && numch > '9')
+// Hàm nhập Username
+void getUsername(char username[])
+{
+	do
 	{
-		return -1;
-	}
-	else if (numch == '9')
-	{
-		numch = '0';
-		return 1;
-	}
-	else {
-		(numch) += 1;
-		return 0;
- 	}
+		flushall();
+		printf("Nhap Username (toi da 20 ky tu): ");
+		gets(username);
+		flushall();
+
+		if (!checkUsername(username))
+			printf("Username da ton tai. Vui long nhap Username khac.\n");
+	} while (!checkUsername(username));
 }
-bool plusOneIntoAString(char numStr[]){
 
-	int length = strlen(numStr) - 1;
-	while (length >= 0){
-		if (numStr[length] < '0' && numStr[length] > '9')
+// Hàm nhập Ngày sinh
+void getBirthday(Day &birthday)
+{
+	bool checkDay;
+	do
+	{
+		flushall();
+		printf("Nhap ngay sinh: ");
+		scanf("%d", &birthday.Date);
+		flushall();
+
+		printf("Nhap thang sinh: ");
+		scanf("%d", &birthday.Month);
+		flushall();
+
+		printf("Nhap nam sinh: ");
+		scanf("%d", &birthday.Year);
+		flushall();
+
+		checkDay = isPossibleDay(birthday.Date, birthday.Month, birthday.Year);
+		if (!checkDay)
+			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
+	} while (checkDay == false);
+}
+
+// Hàm nhập CMND
+void getNationalID(char nationID[])
+{
+	int flag = 0;
+	do
+	{
+		flushall();
+		printf("Nhap CMND (9 so hoac 12 so): ");
+		gets(nationID);
+		flushall();
+
+		int i;
+		if (strlen(nationID) != 9 && strlen(nationID) != 12)
 		{
-			return 1;
+			printf("CMND khong hop le. Vui long nhap lai.\n");
+			continue;
 		}
-		else if (numStr[length] == '9')
+
+		flag = 1;
+
+		for (int i = 0; i < strlen(nationID); i++)
 		{
-			numStr[length] = '0';
-			length--;
+			if (!isNumber(nationID[i]))
+			{
+				flag = 0;
+				printf("CMND khong hop le. Vui long nhap lai.\n");
+				break;
+			}
 		}
-		else {
-			numStr[length] += 1;
+	} while (flag == 0);
+
+}
+
+// Hàm nhập giới tính
+void getSex(int &sex)
+{
+	do
+	{
+		flushall();
+		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
+		scanf("%d", &sex);
+		int temp = getchar();
+
+		if (sex != 0 && sex != 1)
+			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
+	} while (sex != 0 && sex != 1);
+}
+
+// Hàm nhập tình trạng
+void getStatus(bool &status)
+{
+	do
+	{
+		flushall();
+		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
+		scanf("%d", &status);
+		int temp = getchar();
+
+		if (status != 0 && status != 1)
+			printf("Vui long nhap lai. Actived nhap 1, Blocked nhap 0.\n");
+	} while (status != 0 && status != 1);
+}
+
+// Hàm nhập phân quyền
+void getTypeAccount(Users &A)
+{
+	do
+	{
+		flushall();
+		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
+		scanf("%d", &A.typeAccount);
+		int temp = getchar();
+
+		if (A.typeAccount != 2 && A.typeAccount != 3)
+			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
+	} while (A.typeAccount != 2 && A.typeAccount != 3);
+}
+
+// Hàm nhập ID độc giả
+void getReaderID(char ID[])
+{
+	int flag = 0;
+	do
+	{
+		flushall();
+		printf("Nhap ma doc gia (8 so): ");
+		gets(ID);
+		flushall();
+
+		int i;
+		if (strlen(ID) != 8)
+		{
+			printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+			continue;
+		}
+
+		flag = 1;
+
+		for (int i = 0; i < strlen(ID); i++)
+		{
+			if (!isNumber(ID[i]))
+			{
+				flag = 0;
+				printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+				break;
+			}
+		}
+	} while (flag == 0);
+
+}
+// Hàm hỏi người dùng muốn chỉnh sửa nữa không?
+int wantEdit()
+{
+	int edit;
+	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
+	do
+	{
+		scanf("%d", &edit);
+		if (edit == 1)
 			return 1;
-		}
+		else if (edit == 0)
+			return 0;
+		else
+			printf("Vui long nhap 0 hoac 1\n");
+	} while (edit != 0 && edit != 1);
+}
+
+//Tạo chuỗi mã độc giả
+char *toStr(long n)
+{
+	char str[9];
+	sprintf(str, "%ld", n);
+	char S[9];
+	S[0] = '\0';
+	int count = 8 - strlen(str);
+	while (count > 0)
+	{
+		strcat(S, "0");
+		count--;
 	}
-	return 1;
+	strcat(S, str);
+	S[8] = '\0';
+	return S;
 }
 
 Day getExpiredDay(Day orginDay){ 
@@ -265,80 +412,4 @@ int getNumber(char *note){
 	scanf("%d", &x);
 	return x;
 }
-// --------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------
-// ------------------------------------Link List-----------------------------------------------
-// --------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------
 
-//======================================================
-// << Hàm khởi tạo danh sách và node
-LLNodeReader *Init(){
-	LLNodeReader *ls = new LLNodeReader();
-	ls->pHead = NULL;
-	ls->pTail = NULL;
-
-	return ls;
-}
-NodeReader *InitNode(Readers *data){
-	NodeReader *no = new NodeReader();
-	no->pNext = new NodeReader();
-	no->pPrev = new NodeReader();
-	*no->reader = *data;
-
-	return no;
-}
-NodeReader *InitNode(){
-	NodeReader *no = new NodeReader();
-	no->pNext = new NodeReader();
-	no->pPrev = new NodeReader();
-	no->reader = new Readers();
-
-	return no;
-}
-//======================================================
-	
-NodeReader *fAddAtTail(LLNodeReader *&ls, Readers *data){ // Thêm vào cuối danh sách một struct >> Readers
-	NodeReader *no = InitNode(data);
-	if (no == NULL)
-	{
-		return NULL;
-	}
-
-	// Tạo liên kết
-	no->pPrev = ls->pTail; 
-	no->pNext = NULL;
-	if (ls->pTail == NULL) // nếu danh sách rỗng
-	{
-		ls->pHead = no;
-	}
-	else {
-		ls->pTail->pNext = no;
-	}
-	ls->pTail = no;
-
-	return no;
-}
-void printfLLNodeReader(LLNodeReader *lsReader){
-	NodeReader *pNow = InitNode();
-	pNow = lsReader->pHead;
-	while (pNow != NULL){
-		printfReader(*pNow->reader);
-		pNow = pNow->pNext;
-	}
-}
-Readers *findReaderAtNumberic(LLNodeReader *lsReader, int numberic){
-	Readers *reader = new Readers();
-	NodeReader *pNow = InitNode();
-	
-	pNow = lsReader->pHead;
-	while(pNow != NULL && numberic > 1){
-		pNow = pNow->pNext;
-		numberic--;
-	}
-
-	return pNow->reader;
-}
-
-//=============================================================================================
-//=============================================================================================
