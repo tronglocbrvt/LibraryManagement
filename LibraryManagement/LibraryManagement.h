@@ -79,12 +79,12 @@ struct Readers // Cấu trúc thông tin độc giả
 
 struct Books
 {
-	char ISBN[11]; // Mã sách gồm 10 số
-	char nameBook[31]; // Tên sách tối đa 30 ký tự
-	char Author[31]; // Tên tác giả tối đa 30 ký tự
-	char publishCompany[31]; // Tên nhà xuất bản tối đa 30 ký tự
+	char ISBN[14]; // Mã sách gồm 13 số
+	char nameBook[51]; // Tên sách tối đa 50 ký tự
+	char Author[51]; // Tên tác giả tối đa 50 ký tự
+	char publishCompany[51]; // Tên nhà xuất bản tối đa 50 ký tự
 	int yearPublish; // Năm xuất bản
-	char Category[21]; // Thể loại
+	char Category[41]; // Thể loại
 	long priceBook; // Giá sách (VNĐ)
 	int numBook; // Số lượng sách
 };
@@ -98,7 +98,7 @@ struct BorrowBooks
 
 struct NodeReader
 {
-	Readers *reader;
+	Readers reader;
 	NodeReader *pNext;
 	NodeReader *pPrev;
 };
@@ -107,4 +107,19 @@ struct LLNodeReader
 {
 	NodeReader *pHead;
 	NodeReader *pTail;
+	int total;
+};
+
+struct NodeBook
+{
+	Books book;
+	NodeBook *pNext;
+	NodeBook *pPrev;
+};
+
+struct LLNodeBook
+{
+	NodeBook *pHead;
+	NodeBook *pTail;
+	int total;
 };
