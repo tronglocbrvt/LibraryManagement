@@ -4,6 +4,13 @@
 #define _MAX_DAY_EXPIRES_ 1462
 #define _F_GOI_TINH_ int sex (sex == 1 ? (char*)"Nam" : (char*)"Nu")
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <iostream>
+using namespace std;
+
 #if defined(_WIN64) || defined(_WIN32)
 	#define cls "cls"
 	#include <tchar.h>
@@ -18,11 +25,12 @@
 	// void clearSTDIN(){
 	// 	tcflush(0, TCIFLUSH);
 	// }
+	void flushall();
+	void Sleep(int time);
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+
 
 enum Color
 {
