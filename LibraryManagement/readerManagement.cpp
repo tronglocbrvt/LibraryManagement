@@ -2,6 +2,8 @@
 #include "commonFunction.h"
 #include "linkedListReaders.h"
 
+
+char* getNationalID();
 Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo CMND
 {
 	Readers *reader = new Readers;
@@ -13,8 +15,9 @@ Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo
 		return NULL;
 	}
 	
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
-		if (strcmp(reader->NationID, personID) == 0)
+	while (fread(reader, sizeof(reader), 1, fileReader) != 0){
+		if (strcmp(reader->ID, personID) == 0)
+
 		{
 			fclose(fileReader);
 			return reader;
@@ -36,7 +39,7 @@ Readers *findReaderWithEmail(char *Email)	// Tìm kiếm độc giả theo Email
 		return NULL;
 	}
 
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->Email, Email) == 0)
 		{
 			fclose(fileReader);
@@ -59,8 +62,10 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 		return NULL;
 	}
 
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->ID, ID) == 0)
+
 		{
 			fclose(fileReader);
 			return reader;
@@ -71,6 +76,10 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 	return NULL;
 }
 
+
+// Readers *getTheLastReader(){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+
+// 	Readers *reader = new Readers();
 void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ras
 {
 	Readers *reader = new Readers;
@@ -82,14 +91,14 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 		return;
 	}
 
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		viewInfAReader(*reader);
 	}
 
 	fclose(fileReader);
+
 	delete reader;
 }
-
 
 //Readers *findReaderWithName(char *personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 //	Readers *reader = new Readers;
@@ -131,12 +140,13 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 		return 0;
 	}
 
-	while (fread(reader, sizeof(Readers), 1 ,fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
 		if (strcmp(reader->Fullname, personName) == 0)
 		{
 			// thêm vào danh sách
 			addAtTail(lsReader, *reader);
 		}
+
 	}
 
 	delete reader;
@@ -495,23 +505,50 @@ Readers addReader()
 	long ID = 1;
 	fseek(f, 0L, SEEK_END);
 	long size = ftell(f);
-		if (size == 0)
+	if (size == 0)
+	{
+		ID = 1;
+	}
+	else
+	{
+		rewind(f);
+		while (fread(temp, sizeof(Readers), 1, f) != 0)
 		{
-			ID = 1;
+			ID++;
 		}
-		else
-		{
-			rewind(f);
-			while (fread(temp, sizeof(Readers), 1, f) != NULL)
-			{
-				ID++;
-			}
-		}
+	}
 
+// <<<<<<< HEAD
+// bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
+// 	Readers *reader = new Readers();
+// 	long int currentPoiter = ftell(fileReader);
+// 	fseek(fileReader, 0, SEEK_SET);
+
+// 	if (fileReader == NULL || reader == NULL)
+// 	{
+// 		return 0;
+// 	}
+	
+// 	while (fread(reader, sizeof(reader), 1 ,fileReader) != 0){
+// 		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
+// 	}
+	
+// 	fseek(fileReader, currentPoiter, SEEK_SET);
+// 	return 1;
+// }
+
+// Readers *setReaderInf(char ID[]){
+	
+// 	Readers *reader = new Readers;
+
+// 	if (reader == NULL)
+// 		return NULL;
+// =======
 	fclose(f);
 	delete temp;
 
 	strcpy(reader.ID, toStr(ID));
+
 
 	flushall();
 	printf("Nhap Ho va Ten: ");
@@ -657,7 +694,7 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 			if (edit == 0)
 				end = true;
 			break;
-		default: // printf("0. Quay ve\n");
+		default: 
 			return;
 		}
 	} while (end == false);
@@ -688,7 +725,7 @@ void editReaderToFile()
 	}
 
 	viewInfAReader(*reader);
-	while (fread(&temp, sizeof(Readers), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
@@ -723,6 +760,7 @@ void deleteReaderToFile()
 	if (reader == NULL)
 		return;
 
+
 	flushall();
 	getReaderID(reader->ID);
 	reader = findReaderWithID(reader->ID);
@@ -734,7 +772,7 @@ void deleteReaderToFile()
 		return;
 	}
 
-	while (fread(&temp, sizeof(Readers), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
@@ -797,7 +835,7 @@ void runReaderManagement()
 	int choice = 0;
 	do {
 		choice = getNumberPressKey(printfMenuReaderManagement(), 0);
-		system("cls");
+		system(cls);
 		switch (choice){
 		case 1: // xem danh sách độc giả trong thư viện
 			viewAllReader();

@@ -2,14 +2,27 @@
 #include "createUser.h"
 #include "time.h"
 #include "readerManagement.h"
+#include "conioLinux.h"
+
+#if defined(_WIN32) || defined(_WIN64)
+	void textBgColor(int colorText, int colorBG) // cplusplus
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
+	}
+#else 
+	void textBgColor(int colorText, int colorBG) // cplusplus
+	{
+	
+	}
+#endif
 
 //Hàm kiểm tra số nhập từ bàn phím
 int getNumberPressKey(int MAX, int MIN){
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
 	printf("Nhan so de chon: ");
-	
-	while (1) {
+	enable_raw_mode();
+	while (1) {		
 			if (kbhit()) {
 			ch = getch();
 			// Stores the pressed key in ch 
@@ -29,7 +42,8 @@ int getNumberPressKey(int MAX, int MIN){
 		}
 
 	}
-
+	disable_raw_mode();
+	// clearSTDIN();
 	return int(ch - '0');
 }
 
@@ -200,7 +214,9 @@ void getStatus(bool &status)
 	{
 		flushall();
 		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
-		scanf("%d", &status);
+		int sta = 0;
+		scanf("%d", &sta);
+		status = (bool)sta;
 		int temp = getchar();
 
 		if (status != 0 && status != 1)
@@ -288,21 +304,22 @@ void getISBN(char *ISBN)
 }
 
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
-int wantEdit()
-{
-	int edit;
-	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
-	do
-	{
-		scanf("%d", &edit);
-		if (edit == 1)
-			return 1;
-		else if (edit == 0)
-			return 0;
-		else
-			printf("Vui long nhap 0 hoac 1\n");
-	} while (edit != 0 && edit != 1);
-}
+// int wantEdit()
+// {
+// 	int edit;
+// 	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
+// 	do
+// 	{
+// 		scanf("%d", &edit);
+// 		if (edit == 1)
+// 			return 1;
+// 		else if (edit == 0)
+// 			return 0;
+// 		else
+// 			printf("Vui long nhap 0 hoac 1\n");
+// 	} while (edit != 0 && edit != 1);
+// 	return 1;
+// }
 
 // Hàm hỏi muốn mượn sách nữa không?
 int wantBorrow()
@@ -336,7 +353,9 @@ char *toStr(long n)
 	}
 	strcat(S, str);
 	S[8] = '\0';
-	return S;
+
+	char *returnS = (char*)S;
+	return returnS;
 }
 
 Day getExpiredDay(Day orginDay){ 
@@ -386,11 +405,57 @@ bool isNumber(char c)
 	return 0;
 }
 
+<<<<<<< HEAD
 void textBgColor(int colorText, int colorBG) // cplusplus
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
 }
 
+=======
+Day getDayFrmUser(){
+	Day day;
+	do
+	{
+		printf("Nhap ngay: ");
+		scanf("%d", &day.Date);
+		int temp = getchar();
+
+		printf("Nhap thang: ");
+		scanf("%d", &day.Month);
+		temp = getchar();
+
+		printf("Nhap nam: ");
+		scanf("%d", &day.Year);
+		temp = getchar();
+
+		if (!isPossibleDay(day.Date, day.Month, day.Year))
+			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
+		else break;
+	} while (1);
+	return day;
+}
+
+//Chỉnh màu chữ và màu nền
+/*
+0 black
+1 blue
+2 green
+3 aqua
+4 red
+5 purple
+6 yellow
+7 white
+8 gray
+9 light blue
+10 light green
+11 light aqua
+12 light red
+13 light purple
+14 light yellow
+15 bright white
+*/
+
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 void printfDay(Day day){
 	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
 }

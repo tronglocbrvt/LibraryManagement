@@ -92,6 +92,7 @@
     <ClInclude Include="bookManagement.h" />
     <ClInclude Include="runUser.h" />
     <ClInclude Include="statusUser.h" />
+    <ClInclude Include="conioLinux.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="borrowedBooks.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="bookManagement.cpp" />
     <ClCompile Include="runUser.cpp" />
     <ClCompile Include="statusUser.cpp" />
+    <ClCompile Include="conioLinux.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 #include "LibraryManagement.h"
 #include "commonFunction.h"
 #include "Menu.h"
+#include "linkedListBooks.h"
 
 Books *findBookWithISBN(char *ISBN);	// Tìm kiếm sách theo ISBN
 

@@ -1,6 +1,12 @@
 ﻿#pragma once
 #include "LibraryManagement.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+	void textBgColor(int colorText, int colorBG);
+#else 
+	void textBgColor(int colorText, int colorBG);
+#endif
+
 int getNumberPressKey(int MAX, int MIN);
 
 bool isLeapYear(int Year);
@@ -37,7 +43,13 @@ Day getToday();
 
 bool isNumber(char c);
 
+<<<<<<< HEAD
 void textBgColor(int colorText, int colorBG);
+=======
+Day getDayFrmUser();
+
+// void textBgColor(int colorText, int colorBG);
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 
 void printfDay(Day day);
 

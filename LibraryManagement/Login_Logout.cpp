@@ -20,7 +20,7 @@ int checkLogin(char *Username, char *Password)
 	if (f == NULL || fCur == NULL)
 		return 0;
 
-	while (fread(&A, sizeof(Users), 1, f) != NULL)
+	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 
 		if ((strcmp(A.Username, Username) == 0) && (strcmp(A.Password, Password) == 0))
@@ -34,10 +34,14 @@ int checkLogin(char *Username, char *Password)
 			}
 			else
 			{
+				fclose(fCur);
+				fclose(f);
 				return -1;
 			}
 		}
 	}
+	fclose(fCur);
+	fclose(f);
 	return 0;
 }
 

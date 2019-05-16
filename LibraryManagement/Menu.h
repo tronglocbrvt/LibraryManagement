@@ -1,10 +1,13 @@
 #pragma once
 #include "LibraryManagement.h"
 
-void resizeConsole(int width, int height);
-
-void gotoxy(int x, int y);
-
+#if defined(_WIN32) || defined(_WIN32)
+ void resizeConsole(int width, int height);
+ void gotoxy(int x, int y);
+#else 
+ void resizeConsole(int width, int height);
+ void gotoxy(int x, int y);
+#endif
 int printLoginMenu();
 
 void printfMainMenu();

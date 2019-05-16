@@ -12,6 +12,29 @@
 #include "bookManagement.h"
 #include "borrowedBooks.h"
 
+#if defined(_WIN64) || defined(_WIN32)
+	#define cls "cls"
+	#include <tchar.h>
+	#include <conio.h>
+	#include <windows.h>
+	// void clearSTDIN(){
+	// 	flushall();
+	// }
+#else 
+	#define cls "clear"
+	#include "conioLinux.h"
+	// void clearSTDIN(){
+	// 	tcflush(0, TCIFLUSH);
+	// }
+	void flushall(){
+
+	}
+	void Sleep(int time){
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
+	}
+#endif
+
 int main()
 {
 	do
@@ -20,19 +43,23 @@ int main()
 		resizeConsole(1500, 1500);
 		do
 		{
-			system("cls");
+			system(cls);
 			typeAccount = Login(); // Đăng nhập, trả về 0 nếu thất bại, trả về 1 nếu là admin, trả về 2 là chuyên viên, trả về 3 là quản lý
 			if (typeAccount == 0)
 			{
 				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
-				getch();
+				// getch();
+				cout << "Enter to exit the program";
+				cin.ignore().get(); //Pause Command for Linux Terminal
 			}
 			else if (typeAccount == -1)
 			{
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
-				getch();
+				// getch();
+				cout << "Enter to exit the program";
+				cin.ignore().get(); //Pause Command for Linux Terminal
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 
@@ -40,8 +67,11 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
+<<<<<<< HEAD
 		runBookManagement();
 		borrowBook();
+=======
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 
 		system("pause");
 		bool continueSwit = true;
@@ -57,10 +87,10 @@ int main()
 				runMenuUser(typeAccount);
 				break;
 			case 2:
-				printf("nguoidoc\n");
+				runReaderManagement();
 				break;
 			case 3:
-				printf("sach\n");
+				runBookManagement();
 				break;
 			case 4:
 				printf("pheiumuonsach\n");
