@@ -29,6 +29,7 @@ bool checkUsername(char *Username)
 	return true;
 }
 
+<<<<<<< HEAD
 // Hàm nhập Username
 void getUsername(Users &A)
 {
@@ -141,39 +142,46 @@ void getTypeAccount(Users &A)
 	} while (A.typeAccount != 2 && A.typeAccount != 3);
 }
 
+=======
+>>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 // Nhập thông tin người dùng
 Users addUser()
 {
 	Users A;
-	int temp;
 
-	getUsername(A);
+	flushall();
+	getUsername(A.Username);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
+<<<<<<< HEAD
 	scanf("%s", A.Password);
 	temp = getchar();
+=======
+	scanf("%s", &A.Password);
+	flushall();
+>>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 
 	printf("Nhap Ho va Ten: ");
 	gets(A.Fullname);
 
-	getBirthday(A);
+	getBirthday(A.Birthday);
 
-	getNationalID(A);
+	getNationalID(A.NationID);
 
 	printf("Nhap dia chi: ");
 	gets(A.Address);
 
-	getSex(A);
+	getSex(A.Sex);
 
-	getStatus(A);
+	getStatus(A.Status);
 
 	getTypeAccount(A);
-
+	
 	return A;
 }
 
 // Ghi vào file thông tin người dùng
-void writeFile()
+void writeInfUsertoFile()
 {
 	Users A = addUser();
 
@@ -184,10 +192,13 @@ void writeFile()
 
 	fwrite(&A, sizeof(Users), 1, f);
 	fclose(f);
+<<<<<<< HEAD
 
 	fprintf(f, "%s", A.Username);
 
 	fclose(f);
+=======
+>>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 }
 
 // Tạo người dùng
@@ -198,7 +209,7 @@ void getUser(int typeAccount)
 	   Ngược lại không được tạo tài khoản (vì tạo tài khoản duy nhất là quyền của admin.) */
 	if (typeAccount == 1) 
 	{
-		writeFile();
+		writeInfUsertoFile();
 		printf("Tao nguoi dung thanh cong!\n");
 	}
 	else
