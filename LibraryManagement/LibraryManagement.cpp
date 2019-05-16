@@ -10,6 +10,9 @@
 #include "runUser.h"
 #include "readerManagement.h"
 
+#include <iostream>
+using namespace std;
+
 int main()
 {
 	do
@@ -24,21 +27,23 @@ int main()
 			{
 				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
-				getch();
+				// getch();
+				cout << "Enter to exit the program";
+				cin.ignore().get(); //Pause Command for Linux Terminal
 			}
 			else if (typeAccount == -1)
 			{
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
-				getch();
+				// getch();
+				cout << "Enter to exit the program";
+				cin.ignore().get(); //Pause Command for Linux Terminal
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 
 		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
-
-		runReaderManagement();
 
 		system("pause");
 		bool continueSwit = true;
@@ -54,7 +59,7 @@ int main()
 				runMenuUser(typeAccount);
 				break;
 			case 2:
-				printf("nguoidoc\n");
+				runReaderManagement();
 				break;
 			case 3:
 				printf("sach\n");
