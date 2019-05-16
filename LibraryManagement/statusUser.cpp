@@ -1,6 +1,7 @@
 ﻿#include "statusUser.h"
 #include "createUser.h"
 #include "changePassword.h"
+#include "commonFunction.h"
 
 void inforStatusUser()
 {
@@ -58,7 +59,7 @@ void changeStatusUser(int typeAccount)
 	{
 		if (strcmp(A.Username, Username) == 0)
 		{
-			getStatus(A);
+			getStatus(A.Status);
 			break;
 		}
 	}
