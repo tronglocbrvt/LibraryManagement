@@ -2,12 +2,9 @@
 #include "commonFunction.h"
 #include "linkedListReaders.h"
 
-<<<<<<< HEAD
 
-char* getNationalID()
-=======
+char* getNationalID();
 Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo CMND
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 {
 	Readers *reader = new Readers;
 
@@ -18,13 +15,9 @@ Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo
 		return NULL;
 	}
 	
-<<<<<<< HEAD
 	while (fread(reader, sizeof(reader), 1, fileReader) != 0){
 		if (strcmp(reader->ID, personID) == 0)
-=======
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
-		if (strcmp(reader->NationID, personID) == 0)
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 		{
 			fclose(fileReader);
 			return reader;
@@ -45,15 +38,9 @@ Readers *findReaderWithEmail(char *Email)	// Tìm kiếm độc giả theo Email
 	{
 		return NULL;
 	}
-<<<<<<< HEAD
-	
-	while (fread(reader, sizeof(reader), 1, fileReader) != 0){
-		if (strcmp(reader->Fullname, personName) == 0)
-=======
 
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->Email, Email) == 0)
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 		{
 			fclose(fileReader);
 			return reader;
@@ -75,13 +62,10 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 		return NULL;
 	}
 
-<<<<<<< HEAD
-	while (fread(reader, sizeof(reader), 1 ,fileReader) != 0){
-		if (strcmp(reader->Fullname, personName) == 0)
-=======
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->ID, ID) == 0)
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 		{
 			fclose(fileReader);
 			return reader;
@@ -92,15 +76,13 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 	return NULL;
 }
 
-<<<<<<< HEAD
-Readers *getTheLastReader(){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
 
-	Readers *reader = new Readers();
-=======
+// Readers *getTheLastReader(){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
+
+// 	Readers *reader = new Readers();
 void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ras
 {
 	Readers *reader = new Readers;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 
 	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
 
@@ -109,32 +91,15 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 		return;
 	}
 
-<<<<<<< HEAD
-	rewind(fileReader);
-	while (fread(reader, sizeof(Readers), 1, fileReader) != 0)
-	{
-		
-=======
-	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		viewInfAReader(*reader);
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 	}
 
 	fclose(fileReader);
-<<<<<<< HEAD
-	return reader;
-=======
+
 	delete reader;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 }
 
-
-<<<<<<< HEAD
-	printf("Ngay het han:\t\t");
-	printfDay(reader.expireCard);
-
-}
-=======
 //Readers *findReaderWithName(char *personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 //	Readers *reader = new Readers;
 //	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
@@ -164,7 +129,6 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 
 bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 	Readers *reader = new Readers;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 
 	if (reader == NULL)
 		return 0;
@@ -175,19 +139,14 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	{
 		return 0;
 	}
-<<<<<<< HEAD
-	
-	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
-		printfReader(*reader);
-=======
 
-	while (fread(reader, sizeof(Readers), 1 ,fileReader) != NULL){
+	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
 		if (strcmp(reader->Fullname, personName) == 0)
 		{
 			// thêm vào danh sách
 			addAtTail(lsReader, *reader);
 		}
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 	}
 
 	delete reader;
@@ -546,77 +505,51 @@ Readers addReader()
 	long ID = 1;
 	fseek(f, 0L, SEEK_END);
 	long size = ftell(f);
-		if (size == 0)
-		{
-			ID = 1;
-		}
-		else
-		{
-			rewind(f);
-			while (fread(temp, sizeof(Readers), 1, f) != NULL)
-			{
-				ID++;
-			}
-		}
-
-<<<<<<< HEAD
-bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
-	Readers *reader = new Readers();
-	long int currentPoiter = ftell(fileReader);
-	fseek(fileReader, 0, SEEK_SET);
-
-	if (fileReader == NULL || reader == NULL)
+	if (size == 0)
 	{
-		return 0;
+		ID = 1;
 	}
-	
-	while (fread(reader, sizeof(reader), 1 ,fileReader) != 0){
-		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
+	else
+	{
+		rewind(f);
+		while (fread(temp, sizeof(Readers), 1, f) != 0)
+		{
+			ID++;
+		}
 	}
-	
-	fseek(fileReader, currentPoiter, SEEK_SET);
-	return 1;
-}
 
-Readers *setReaderInf(char ID[]){
-	
-	Readers *reader = new Readers;
+// <<<<<<< HEAD
+// bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
+// 	Readers *reader = new Readers();
+// 	long int currentPoiter = ftell(fileReader);
+// 	fseek(fileReader, 0, SEEK_SET);
 
-	if (reader == NULL)
-		return NULL;
-=======
+// 	if (fileReader == NULL || reader == NULL)
+// 	{
+// 		return 0;
+// 	}
+	
+// 	while (fread(reader, sizeof(reader), 1 ,fileReader) != 0){
+// 		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
+// 	}
+	
+// 	fseek(fileReader, currentPoiter, SEEK_SET);
+// 	return 1;
+// }
+
+// Readers *setReaderInf(char ID[]){
+	
+// 	Readers *reader = new Readers;
+
+// 	if (reader == NULL)
+// 		return NULL;
+// =======
 	fclose(f);
 	delete temp;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 
 	strcpy(reader.ID, toStr(ID));
 
-<<<<<<< HEAD
-	// thêm họ và tên
-	printf("Nhap Ho va Ten: ");
-	// clearSTDIN();
-	gets(reader->Fullname);
 
-	printf("Nhap ngay thang nam sinh:\n");
-	reader->Birthday = getDayFrmUser();
-
-	char *nationID = getNationalID();
-	strcpy(reader->NationID, nationID);
-
-	printf("Nhap dia chi: ");
-	gets(reader->Address);
-
-	do
-	{
-		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-		scanf("%d", &reader->Sex);
-		// clearSTDIN();
-
-		if (reader->Sex != 0 && reader->Sex != 1)
-			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
-		else break;
-	} while (1);
-=======
 	flushall();
 	printf("Nhap Ho va Ten: ");
 	gets(reader.Fullname);
@@ -629,7 +562,6 @@ Readers *setReaderInf(char ID[]){
 	gets(reader.Address);
 	reader.creatCard = getToday();
 	reader.expireCard = getExpiredDay(reader.creatCard);
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 
 	return reader;
 }
@@ -703,13 +635,9 @@ void viewInfAReader(Readers reader) // Xem thông tin của một người cụ 
 
 void editReader(Readers &reader){ // sửa thông tin độc giả
 
-<<<<<<< HEAD
-	while (fread(readerTemp, sizeof(Readers), 1, fileReader) != 0)
-=======
 	int edit;
 	bool end = false;
 	do
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 	{
 		switch (getNumberPressKey(editInfReaderMenu(), 0)){
 		case 1: // printf("1. Sua Ho va ten\n");
@@ -766,7 +694,7 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 			if (edit == 0)
 				end = true;
 			break;
-		default: // printf("0. Quay ve\n");
+		default: 
 			return;
 		}
 	} while (end == false);
@@ -797,7 +725,7 @@ void editReaderToFile()
 	}
 
 	viewInfAReader(*reader);
-	while (fread(&temp, sizeof(Readers), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
@@ -827,20 +755,11 @@ void deleteReaderToFile()
 	if (fo == NULL || ftemp == NULL)
 		return;
 
-<<<<<<< HEAD
-		if (askToUpdateReaderToFile() == 1)
-		{
-			deleteReader(reader);
-			addAnInfToFile(readerTemp);
-		}
-		system(cls);
-	}while (choice != 0);
-=======
 	Readers temp;
 	Readers *reader = new Readers;
 	if (reader == NULL)
 		return;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 
 	flushall();
 	getReaderID(reader->ID);
@@ -853,7 +772,7 @@ void deleteReaderToFile()
 		return;
 	}
 
-	while (fread(&temp, sizeof(Readers), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
@@ -884,46 +803,7 @@ void searchNationID()
 	else
 		viewInfAReader(*reader);
 
-<<<<<<< HEAD
-		switch (choice){
-			case 1: // tìm kiếm theo CMND
-				*reader = *findReaderWithNationID(StrGetFrmUser);
-				if (reader == NULL)
-				{
-					printf("Doc gia nay khong ton tai.\n");
-					system("pause");
-					continue;
-				}
-				break;
-			case 2: // tìm kiếm theo tên
-				findListReaderWithName(StrGetFrmUser, lsReader);
-				if (lsReader->pHead == NULL)
-				{
-					printf("Doc gia nay khong ton tai.\n");
-					system("pause");
-					continue;
-				}
-				break;
-		}
-		if (askToUpdateReaderToFile() == 1){
-			if (reader != NULL)
-				{
-					deleteReader(reader);
-				}
-				else if (lsReader->pHead != NULL)
-				{
-					printfAllReader(lsReader);
-					deleteReader(findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: ")));
-				}
-				else return 0;
-				
-		}
-		system(cls);
-	}while (choice != 0);
-	return 1;
-=======
 	delete reader;
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 }
 
 void searchFullName()
