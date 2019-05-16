@@ -1,14 +1,23 @@
 #include "commonFunction.h"
 #include "time.h"
 #include "readerManagement.h"
+#include "conioLinux.h"
+
+#if defined(_WIN32) || defined(_WIN64)
+	void textBgColor(int colorText, int colorBG) // cplusplus
+	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
+	}
+
+#endif
 
 //Hàm kiểm tra số nhập từ bàn phím
 int getNumberPressKey(int MAX, int MIN){
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
 	printf("Nhan so de chon: ");
-	
-	while (1) {
+	enable_raw_mode();
+	while (1) {		
 			if (kbhit()) {
 			ch = getch();
 			// Stores the pressed key in ch 
@@ -28,7 +37,8 @@ int getNumberPressKey(int MAX, int MIN){
 		}
 
 	}
-
+	disable_raw_mode();
+	clearSTDIN();
 	return int(ch - '0');
 }
 
@@ -232,11 +242,6 @@ Day getDayFrmUser(){
 14 light yellow
 15 bright white
 */
-
-void textBgColor(int colorText, int colorBG) // cplusplus
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
-}
 
 void printfDay(Day day){
 	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
