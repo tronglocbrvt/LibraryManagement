@@ -215,7 +215,7 @@ Readers *setReaderInf(char ID[]){
 
 	// thêm họ và tên
 	printf("Nhap Ho va Ten: ");
-	clearSTDIN();
+	// clearSTDIN();
 	gets(reader->Fullname);
 
 	printf("Nhap ngay thang nam sinh:\n");
@@ -231,7 +231,7 @@ Readers *setReaderInf(char ID[]){
 	{
 		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
 		scanf("%d", &reader->Sex);
-		clearSTDIN();
+		// clearSTDIN();
 
 		if (reader->Sex != 0 && reader->Sex != 1)
 			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
