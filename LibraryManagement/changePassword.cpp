@@ -12,7 +12,7 @@ void updateFile(Users curUser)
 
 	Users temp;
 
-	while (fread(&temp, sizeof(Users), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Users), 1, fo) != 0)
 	{
 		if (strcmp(curUser.Username, temp.Username) != 0)
 			fwrite(&temp, sizeof(Users), 1, ftemp);
