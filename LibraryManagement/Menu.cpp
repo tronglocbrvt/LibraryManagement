@@ -3,21 +3,33 @@
 
 //=================================================
 // on window
- void resizeConsole(int width, int height)
- {
- 	HWND console = GetConsoleWindow();
- 	RECT r;
- 	GetWindowRect(console, &r);
- 	MoveWindow(console, r.left, r.top, width, height, TRUE);
- }
- void gotoxy(int x, int y)
- {
-     static HANDLE h = NULL;  
-     if(!h)
-         h = GetStdHandle(STD_OUTPUT_HANDLE);
-     COORD c = { x, y };  
-     SetConsoleCursorPosition(h,c);
- }
+#if defined(_WIN32) || defined(_WIN64)
+	 void resizeConsole(int width, int height)
+	 {
+	 	HWND console = GetConsoleWindow();
+	 	RECT r;
+	 	GetWindowRect(console, &r);
+	 	MoveWindow(console, r.left, r.top, width, height, TRUE);
+	 }
+	 void gotoxy(int x, int y)
+	 {
+	     static HANDLE h = NULL;  
+	     if(!h)
+	         h = GetStdHandle(STD_OUTPUT_HANDLE);
+	     COORD c = { x, y };  
+	     SetConsoleCursorPosition(h,c);
+	 }
+#else
+	 void resizeConsole(int width, int height)
+	 {
+	 	
+	 }
+	 void gotoxy(int x, int y)
+	 {
+	     
+	 }
+#endif
+ 
 //=================================================
 
 
@@ -32,7 +44,7 @@ int printLoginMenu(){
 
 	if (checkUsername && checkPassword)
 	{
-		system("cls");
+		system(cls);
 		printfMainMenu();
 		return getNumberPressKey(MAX_CHOICE, 0);
 		// return value which user type which will be built in commonFunction.h
