@@ -11,8 +11,28 @@
 #include "readerManagement.h"
 #include "bookManagement.h"
 
-#include <iostream>
-using namespace std;
+#if defined(_WIN64) || defined(_WIN32)
+	#define cls "cls"
+	#include <tchar.h>
+	#include <conio.h>
+	#include <windows.h>
+	// void clearSTDIN(){
+	// 	flushall();
+	// }
+#else 
+	#define cls "clear"
+	#include "conioLinux.h"
+	// void clearSTDIN(){
+	// 	tcflush(0, TCIFLUSH);
+	// }
+	void flushall(){
+
+	}
+	void Sleep(int time){
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
+	}
+#endif
 
 int main()
 {
@@ -46,11 +66,7 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-<<<<<<< HEAD
-=======
-		runBookManagement();
 
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 		system("pause");
 		bool continueSwit = true;
 		while (continueSwit){
@@ -68,7 +84,7 @@ int main()
 				runReaderManagement();
 				break;
 			case 3:
-				printf("sach\n");
+				runBookManagement();
 				break;
 			case 4:
 				printf("pheiumuonsach\n");
