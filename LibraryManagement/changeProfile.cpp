@@ -30,7 +30,7 @@ void viewProfile()
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
 int wantEdit()
 {
-	int edit;
+	int edit = 0;
 	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
 	do
 	{
@@ -42,6 +42,7 @@ int wantEdit()
 		else
 			printf("Vui long nhap 0 hoac 1\n");
 	} while (edit != 0 && edit != 1);
+	return edit;
 }
 
 // Hàm chỉnh sửa thông tin cá nhân
