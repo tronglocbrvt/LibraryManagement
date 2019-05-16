@@ -29,7 +29,7 @@ bool checkUsername(char *Username)
 	return true;
 }
 
-<<<<<<< HEAD
+
 // Hàm nhập Username
 void getUsername(Users &A)
 {
@@ -129,21 +129,20 @@ void getStatus(Users &A)
 }
 
 // Hàm nhập phân quyền
-void getTypeAccount(Users &A)
-{
-	do
-	{
-		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
-		scanf("%d", &A.typeAccount);
-		int temp = getchar();
+// void getTypeAccount(Users &A)
+// {
+// 	do
+// 	{
+// 		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
+// 		scanf("%d", &A.typeAccount);
+// 		int temp = getchar();
 
-		if (A.typeAccount != 2 && A.typeAccount != 3)
-			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
-	} while (A.typeAccount != 2 && A.typeAccount != 3);
-}
+// 		if (A.typeAccount != 2 && A.typeAccount != 3)
+// 			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
+// 	} while (A.typeAccount != 2 && A.typeAccount != 3);
+// }
 
-=======
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 // Nhập thông tin người dùng
 Users addUser()
 {
@@ -153,13 +152,13 @@ Users addUser()
 	getUsername(A.Username);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
-<<<<<<< HEAD
+
 	scanf("%s", A.Password);
-	temp = getchar();
-=======
-	scanf("%s", &A.Password);
+	char temp = getchar();
+
+	scanf("%s", A.Password);
 	flushall();
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
+
 
 	printf("Nhap Ho va Ten: ");
 	gets(A.Fullname);
@@ -192,13 +191,8 @@ void writeInfUsertoFile()
 
 	fwrite(&A, sizeof(Users), 1, f);
 	fclose(f);
-<<<<<<< HEAD
 
 	fprintf(f, "%s", A.Username);
-
-	fclose(f);
-=======
->>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 }
 
 // Tạo người dùng
