@@ -18,15 +18,17 @@ void viewProfile()
 	printf("--------------------------------------------------------\n");
 	printf("Thong tin ca nhan cua Username %s:\n\n", curUser.Username);
 	printf("Ho va ten: %s\n", curUser.Fullname);
-	printf("Ngay sinh: %d/%d/%d\n", curUser.Birthday.Date, curUser.Birthday.Month, curUser.Birthday.Year);
+	printf("Ngay sinh: ");
+	printfDay(curUser.Birthday);
 	printf("CMND: %s\n", curUser.NationID);
 	printf("Dia chi: %s\n", curUser.Address);
-	printf("Gioi tinh (nam la 1, nu la 0): %d\n", curUser.Sex);
+	printf("Gioi tinh (nam la 1, nu la 0): %s\n", (curUser.Sex == 0 ? "Nu" : "Nam"));
 	printf("--------------------------------------------------------\n");
 
 	fclose(fCur);
 }
 
+<<<<<<< HEAD
 // Hàm hỏi người dùng muốn chỉnh sửa nữa không?
 int wantEdit()
 {
@@ -45,6 +47,8 @@ int wantEdit()
 	return edit;
 }
 
+=======
+>>>>>>> 6ce69f4f629c66c06ba86d08b7de0d318b0b5b96
 // Hàm chỉnh sửa thông tin cá nhân
 void editProfile()
 {
@@ -84,14 +88,14 @@ void editProfile()
 			break;
 		case 2:
 			printf("Nhap lai ngay sinh moi:\n");
-			getBirthday(curUser);
+			getBirthday(curUser.Birthday);
 
 			edit = wantEdit();
 			if (edit == 0)
 				end = true;
 			break;
 		case 3:
-			getNationalID(curUser);
+			getNationalID(curUser.NationID);
 
 			edit = wantEdit();
 			if (edit == 0)
@@ -107,7 +111,7 @@ void editProfile()
 				end = true;
 			break;
 		case 5: 
-			getSex(curUser);
+			getSex(curUser.Sex);
 
 			edit = wantEdit();
 			if (edit == 0)
