@@ -9,15 +9,15 @@
 	#include <tchar.h>
 	#include <conio.h>
 	#include <windows.h>
-	void clearSTDIN(){
-		flushall();
-	}
+	// void clearSTDIN(){
+	// 	flushall();
+	// }
 #else 
 	#define cls "clear"
 	#include "conioLinux.h"
-	void clearSTDIN(){
-		tcflush(0, TCIFLUSH);
-	}
+	// void clearSTDIN(){
+	// 	tcflush(0, TCIFLUSH);
+	// }
 #endif
 
 #include <stdio.h>
