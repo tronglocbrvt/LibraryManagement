@@ -510,7 +510,7 @@
 //			deleteBook(fileBook, book);
 //			addAnInfToFile(fileBook, bookTemp);
 //		}
-//		system("cls");
+//		system(cls);
 //	}while (choice != 0);
 //	return 1;
 //
@@ -565,7 +565,7 @@
 //				else return 0;
 //				
 //		}
-//		system("cls");
+//		system(cls);
 //	}while (choice != 0);
 //	return 1;
 //}
