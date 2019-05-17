@@ -13,9 +13,9 @@ int checkLogin(char *Username, char *Password)
 	// Kiểm tra Username và Password trong file Admin không?
 	Users A;
 
-	FILE *fCur = fopen("Release/Current/currentUser.bin", "wb");
+	FILE *fCur = fopen(_DIR_DATA_FOLDER_USER_CUR, "wb");
 
-	FILE *f = fopen("Release/Users/Users.bin", "rb");
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "rb");
 
 	if (f == NULL || fCur == NULL)
 		return 0;
@@ -48,7 +48,7 @@ int checkLogin(char *Username, char *Password)
 // Hàm đăng xuất
 int Logout()
 {
-	remove((char*)"Release/Current/currentUser.bin");
+	remove((char*)_DIR_DATA_FOLDER_USER_CUR);
 	return -1;
 }
 
