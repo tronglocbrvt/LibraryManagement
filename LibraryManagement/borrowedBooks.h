@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "LibraryManagement.h"
+#include "commonFunction.h"
+#include "readerManagement.h"
+#include "bookManagement.h"
 
 Day returnBookExpectDay(Day borrowBookDay); // trả về ngày trả sách dự kiến (7 ngày kể từ ngày mượn)
 
