@@ -126,7 +126,7 @@ void borrowBook()
 		if ((temp_book->numBook - numBorrow) >= 0)
 		{
 			temp_book->numBook = temp_book->numBook - numBorrow;
-			updateBookFile(*temp_book);
+			updateBookFile(*temp_book); // cập nhật file sách
 
 			// lưu các thông tin mượn sách
 			BorrowBooks *borrowBook = new BorrowBooks;
@@ -165,6 +165,8 @@ void borrowBook()
 
 	borrowBookBill(temp_reader->ID, temp_reader->Fullname);
 
+	Sleep(1000);
+
 	delete temp_reader;
 }
 
@@ -174,7 +176,7 @@ void borrowBookBill(char *ID, char *Fullname)
 	FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 	
 	system(cls);
-	printf("PHIEU MUON SACH\n\n");
+	printf("\t\t\tPHIEU MUON SACH\n\n");
 	printf("----------------------------------------------------------------------------------------------\n");
 	printf("|             Ma doc gia: %s                   Ho va ten: %s                                 |\n", ID, Fullname);
 	printf("---------------------------------------------------------------------------------------------|\n");
