@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "LibraryManagement.h"
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -19,17 +19,21 @@ void getUsername(char username[]);
 
 void getBirthday(Day &birthday);
 
-void getNationalID(char nationID[]);
+void getNationalID(char nationID[]); // Nhập CMND người dùng
 
-void getSex(int &sex);
+void getSex(int &sex); //  Nhập giới tính người dùng
 
-void getStatus(bool &status);
+void getStatus(bool &status); // Nhập trạng thái người dùng
 
-void getTypeAccount(Users &A);
+void getTypeAccount(Users &A); // Nhập phân quyền người dùng
 
-void getReaderID(char ID[]);
+void getReaderID(char ID[]); // Nhập mã đọc giả
+
+void getISBN(char *ISBN); // Nhập ISBN sách
 
 int wantEdit();
+
+int wantBorrow();
 
 char *toStr(long n);
 
@@ -39,9 +43,13 @@ Day getToday();
 
 bool isNumber(char c);
 
+<<<<<<< HEAD
+void textBgColor(int colorText, int colorBG);
+=======
 Day getDayFrmUser();
 
 // void textBgColor(int colorText, int colorBG);
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 
 void printfDay(Day day);
 
