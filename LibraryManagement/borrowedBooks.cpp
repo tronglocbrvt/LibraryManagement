@@ -56,7 +56,7 @@ void updateBookFile(Books book)
 
 	Books temp;
 
-	while (fread(&temp, sizeof(Books), 1, fo) != NULL)
+	while (fread(&temp, sizeof(Books), 1, fo) != 0)
 	{
 		if (strcmp(book.ISBN, temp.ISBN) != 0)
 			fwrite(&temp, sizeof(Books), 1, ftemp);
@@ -181,7 +181,7 @@ void borrowBookBill(char *ID, char *Fullname)
 	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
 	printf("----------------------------------------------------------------------------------------------\n");
 
-	while (fread(&borrowBook, sizeof(BorrowBooks), 1, f) != NULL)
+	while (fread(&borrowBook, sizeof(BorrowBooks), 1, f) != 0)
 	{
 		if (strcmp(borrowBook.ID, ID) == 0)
 		{
