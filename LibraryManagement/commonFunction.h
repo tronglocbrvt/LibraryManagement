@@ -48,3 +48,6 @@ void printfDay(Day day);
 char *getStringFrmUser(char *note);
 
 int getNumber(char *note);
+
+int plusOneIntoAChar(char &numch);
+bool plusOneIntoAString(char *numStr);
