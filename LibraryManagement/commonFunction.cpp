@@ -129,9 +129,12 @@ void getUsername(char username[])
 		gets(username);
 		flushall();
 
-		if (!checkUsername(username))
+		if (!checkUsername(username)){
 			printf("Username da ton tai. Vui long nhap Username khac.\n");
-	} while (!checkUsername(username));
+			continue;
+		}
+		else break;
+	} while (true);
 }
 
 // Hàm nhập Ngày sinh
@@ -271,23 +274,6 @@ void getReaderID(char ID[])
 	} while (flag == 0);
 
 }
-// Hàm hỏi người dùng muốn chỉnh sửa nữa không?
-// int wantEdit()
-// {
-// 	int edit;
-// 	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
-// 	do
-// 	{
-// 		scanf("%d", &edit);
-// 		if (edit == 1)
-// 			return 1;
-// 		else if (edit == 0)
-// 			return 0;
-// 		else
-// 			printf("Vui long nhap 0 hoac 1\n");
-// 	} while (edit != 0 && edit != 1);
-// 	return 1;
-// }
 
 //Tạo chuỗi mã độc giả
 char *toStr(long n)
@@ -339,7 +325,7 @@ Day getToday(){
     timeinfo = localtime ( &rawtime );
 
 
-    fprintf(stdout, "[%d / %d / %d / %d:%d:%d ]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+    // fprintf(stdout, "[%d / %d / %d / %d:%d:%d ]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
     Day days;
     days.Date 	= timeinfo->tm_mday;
@@ -400,7 +386,7 @@ Day getDayFrmUser(){
 */
 
 void printfDay(Day day){
-	printf("%d/ %d / %d\n", day.Date, day.Month, day.Year);
+	printf("%d / %d / %d\n", day.Date, day.Month, day.Year);
 }
 
 char *getStringFrmUser(char *note){
@@ -416,5 +402,39 @@ int getNumber(char *note){
 	int x = 0;
 	scanf("%d", &x);
 	return x;
+}
+
+
+int plusOneIntoAChar(char &numch){
+	if (numch < '0' && numch > '9')
+	{
+		return -1;
+	}
+	else if (numch == '9')
+	{
+		numch = '0';
+		return 1;
+	}
+	else {
+		numch += 1;
+		return 0;
+ 	}
+}
+bool plusOneIntoAString(char* numStr){
+
+	int length = strlen(numStr) -1;
+	while (length >= 0){
+		switch(plusOneIntoAChar(numStr[length])){
+			case -1:
+				return false;
+				break;
+			case 0:
+				length = -1;
+				break;
+		}
+		length--;
+	}
+
+	return true;
 }
 
