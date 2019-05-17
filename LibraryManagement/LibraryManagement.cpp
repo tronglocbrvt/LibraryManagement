@@ -10,6 +10,7 @@
 #include "runUser.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
+#include "borrowedBooks.h"
 
 #if defined(_WIN64) || defined(_WIN32)
 	#define cls "cls"
@@ -40,7 +41,7 @@ int main()
 	{
 		system(cls);
 		int typeAccount;
-		resizeConsole(700, 700);
+		resizeConsole(1500, 1500);
 		do
 		{
 			system(cls);
@@ -65,6 +66,11 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
+<<<<<<< HEAD
+		runBookManagement();
+		borrowBook();
+=======
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 
 		Sleep(1000);
 		bool continueSwit = true;
