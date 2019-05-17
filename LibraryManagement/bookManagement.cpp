@@ -89,6 +89,10 @@ Books addBook()
 {
 	Books book;
 
+<<<<<<< HEAD
+	flushall();
+	getISBN(book.ISBN);
+=======
 	int flag = 0;
 	do
 	{
@@ -113,6 +117,7 @@ Books addBook()
 			}
 		}
 	} while (flag == 0);
+>>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 
 	// getchar();
 	printf("Nhap ten sach: ");
