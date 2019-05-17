@@ -74,6 +74,7 @@ void printfMainMenu(){
 
 int printUserMenu(int typeAccount)
 {
+	system(cls);
 	printf("1. Thay doi mat khau.\n");
 	printf("2. Cap nhat thong tin ca nhan.\n");
 
@@ -94,6 +95,7 @@ int printUserMenu(int typeAccount)
 
 
 int printfMenuReaderManagement(){
+	system(cls);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");
@@ -106,6 +108,7 @@ int printfMenuReaderManagement(){
 }
 
 int printfMenuBookManagement(){
+	system(cls);
 	printf("1. Xem danh sach sach trong thu vien.\n");
 	printf("2. Them sach.\n");
 	printf("3. Chinh sua thong tin mot quyen sach.\n");
@@ -118,6 +121,7 @@ int printfMenuBookManagement(){
 }
 
 int editInfReaderMenu(){
+	system(cls);
 	printf("1. Sua Ho va ten\n");
 	printf("2. Doi CMND\n");
 	printf("3. Doi ngay sinh\n");
@@ -131,6 +135,7 @@ int editInfReaderMenu(){
 }
 
 int editInfBookMenu(){
+	system(cls);
 	printf("1. Sua ten sach\n");
 	printf("2. Sua ten tac gia\n");
 	printf("3. Sua ten nha xuat ban\n");
