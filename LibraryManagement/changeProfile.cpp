@@ -8,7 +8,7 @@ void viewProfile()
 {
 	Users curUser;
 
-	FILE *fCur = fopen("Release/Current/currentUser.bin", "rb");
+	FILE *fCur = fopen(_DIR_DATA_FOLDER_USER_CUR, "rb");
 
 	if (fCur == NULL)
 		return;
@@ -56,7 +56,7 @@ void editProfile()
 	int choice;
 	int temp;
 
-	FILE *fCur = fopen("Release/Current/currentUser.bin", "rb");
+	FILE *fCur = fopen(_DIR_DATA_FOLDER_USER_CUR, "rb");
 
 	if (fCur == NULL)
 		return;
@@ -124,7 +124,7 @@ void editProfile()
 
 	fclose(fCur);
 
-	FILE *fw = fopen("Release/Current/currentUser.bin", "wb"); // cập nhật lại thông tin trong file currentUser
+	FILE *fw = fopen(_DIR_DATA_FOLDER_USER_CUR, "wb"); // cập nhật lại thông tin trong file currentUser
 
 	if (fw == NULL)
 		return;
