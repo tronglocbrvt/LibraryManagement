@@ -1,5 +1,5 @@
 ﻿#include "LibraryManagement.h"
-#include "borrowedBooks.h"
+
 #include "commonFunction.h"
 #include "createUser.h"
 #include "Login_Logout.h"
@@ -11,7 +11,7 @@
 #include "runUser.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
-
+#include "borrowedBooks.h"
 
 #if defined(_WIN64) || defined(_WIN32)
 	
@@ -64,7 +64,6 @@ int main()
 			case 0:
 				continueSwit = false;
 				typeAccount = Logout();
-				// exit(0);
 				return 0;
 			case 1:
 				runMenuUser(typeAccount);
