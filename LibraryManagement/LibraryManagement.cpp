@@ -38,6 +38,7 @@ int main()
 {
 	do
 	{
+		system(cls);
 		int typeAccount;
 		resizeConsole(700, 700);
 		do
@@ -49,34 +50,32 @@ int main()
 				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
 				// getch();
-				cout << "Enter to exit the program";
-				cin.ignore().get(); //Pause Command for Linux Terminal
+				Sleep(1);
 			}
 			else if (typeAccount == -1)
 			{
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
 				// getch();
-				cout << "Enter to exit the program";
-				cin.ignore().get(); //Pause Command for Linux Terminal
+				Sleep(1);
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
-
+		typeAccount = 1;
 		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
 
-		system("pause");
+		Sleep(1000);
 		bool continueSwit = true;
 		while (continueSwit){
-			//printfMenu(); // ke vien khung ung dung
 			int choice = printLoginMenu();
 			switch (choice){ // add function doing here
 			case 0:
 				continueSwit = false;
 				typeAccount = Logout();
-				exit(0);
+				// exit(0);
+				return 0;
 			case 1:
 				runMenuUser(typeAccount);
 				break;
