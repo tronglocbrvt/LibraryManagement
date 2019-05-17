@@ -19,6 +19,8 @@
 	#define _DIR_DATA_FOLDER_BOOK "Release/Book/databaseBook.bin"
 	#define _DIR_DATA_FOLDER_BOOK_TEMP "Release/Book/bookTemp.bin" 
 
+	#define _DIR_DATA_FOLDER_BOOK_BORROW "Release/BorrowBook/databaseBorrowBook.bin"
+
 #else
 
 	#define _DIR_DATA_FOLDER_READER "Documents/Github/LibraryManagement/LibraryManagement/Release/Reader/databaseReader.bin"
@@ -30,6 +32,9 @@
 
 	#define _DIR_DATA_FOLDER_BOOK "Documents/Github/LibraryManagement/LibraryManagement/Release/Book/databaseBook.bin"
 	#define _DIR_DATA_FOLDER_BOOK_TEMP "Documents/Github/LibraryManagement/LibraryManagement/Release/Book/bookTemp.bin"
+
+	#define _DIR_DATA_FOLDER_BOOK_BORROW "Documents/Github/LibraryManagement/LibraryManagement/Release/BorrowBook/databaseBorrowBook.bin"
+
 #endif
 
 // #define _NAME_FILE_VIEW "CurAccount.txt"
