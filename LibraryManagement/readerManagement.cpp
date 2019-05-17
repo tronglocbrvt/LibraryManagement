@@ -1,6 +1,7 @@
 #include "readerManagement.h"
 #include "commonFunction.h"
 #include "linkedListReaders.h"
+#include "functionsFile.h"
 
 
 char* getNationalID();
@@ -8,16 +9,10 @@ Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo
 {
 	Readers *reader = new Readers;
 
-	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 	
-	if (fileReader == NULL)
-	{
-		return NULL;
-	}
-	
-	while (fread(reader, sizeof(reader), 1, fileReader) != 0){
-		if (strcmp(reader->ID, personID) == 0)
-
+	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
+		if (strcmp(reader->NationID, personID) == 0)
 		{
 			fclose(fileReader);
 			return reader;
@@ -32,7 +27,7 @@ Readers *findReaderWithEmail(char *Email)	// Tìm kiếm độc giả theo Email
 {
 	Readers *reader = new Readers;
 
-	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
 	if (fileReader == NULL)
 	{
@@ -55,7 +50,7 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 {
 	Readers *reader = new Readers;
 
-	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
 	if (fileReader == NULL)
 	{
@@ -76,15 +71,11 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 	return NULL;
 }
 
-
-// Readers *getTheLastReader(){ // Lấy thông tin đọc giả cuối cùng trong file, trả về null nếu file rỗng.
-
-// 	Readers *reader = new Readers();
 void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ras
 {
 	Readers *reader = new Readers;
 
-	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
 	if (fileReader == NULL || reader == NULL)
 	{
@@ -94,38 +85,11 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		viewInfAReader(*reader);
 	}
-
+	Sleep(1000);
 	fclose(fileReader);
 
 	delete reader;
 }
-
-//Readers *findReaderWithName(char *personName){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
-//	Readers *reader = new Readers;
-//	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-//
-//	if (reader == NULL || fileReader == NULL)
-//	{
-//		return NULL;
-//	}
-//
-//	long int currentPoiter = ftell(fileReader);
-//	fseek(fileReader, 0, SEEK_SET);
-//
-//	reader = NULL;
-//
-//	while (fread(reader, sizeof(Readers), 1, fileReader) != NULL){
-//		if (strcmp(reader->Fullname, personName) == 0)
-//		{
-//			break;
-//		}
-//	}
-//	
-//	fseek(fileReader, currentPoiter, SEEK_SET);
-//	fclose(fileReader);
-//
-//	return reader;
-//}
 
 bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
 	Readers *reader = new Readers;
@@ -133,7 +97,7 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	if (reader == NULL)
 		return 0;
 
-	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
+	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
 	if (fileReader == NULL)
 	{
@@ -173,341 +137,22 @@ bool printReaderFromLL(LLNodeReader ls){ // in ra thông tin độc giả từ L
 
 	return 1;
 }
-//
-//bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
-//	Readers *reader = new Readers();
-//	long int currentPoiter = ftell(fileReader);
-//	fseek(fileReader, 0, SEEK_SET);
-//
-//	if (fileReader == NULL || reader == NULL)
-//	{
-//		return 0;
-//	}
-//	
-//	while (fread(reader, sizeof(reader), 1 ,fileReader) != NULL){
-//		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
-//	}
-//	
-//	fseek(fileReader, currentPoiter, SEEK_SET);
-//	return 1;
-//}
-//
-//Readers *setReaderInf(char ID[]){
-//	
-//	Readers *reader = new Readers;
-//
-//	if (reader == NULL)
-//		return NULL;
-//
-//	strcpy(reader->ID, ID);
-//
-//	// thêm họ và tên
-//	printf("Nhap Ho va Ten: ");
-//	flushall();
-//	gets(reader->Fullname);
-//
-//	printf("Nhap ngay thang nam sinh:\n");
-//	reader->Birthday = getDayFrmUser();
-//
-//	char *nationID = getNationalID();
-//	strcpy(reader->NationID, nationID);
-//
-//	printf("Nhap dia chi: ");
-//	gets(reader->Address);
-//
-//	do
-//	{
-//		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-//		scanf("%d", &reader->Sex);
-//		flushall();
-//
-//		if (reader->Sex != 0 && reader->Sex != 1)
-//			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
-//		else break;
-//	} while (1);
-//
-//	printf("Nhap dia chi email / thu dien tu: ");
-//	gets(reader->Email);
-//	
-//	// ngày lập thẻ -- lấy ngày tạo tài khoản : hôm nay
-//	reader->creatCard = getToday();
-//	// ngày hết hạn là ngày tối đa được lập của thẻ, ngày tối đa là một hằng số
-//	reader->expireCard = getExpiredDay(reader->creatCard);
-//	//
-//	return reader;
-//}
-//
-//bool addAnInfToFile(const Readers *reader){	// thêm thông tin đọc giả vào file
-//
-//	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "ab");
-//
-//	if (fileReader == NULL)
-//	{
-//		return 0;
-//	}
-//
-//	fwrite(reader, sizeof(Readers), 1, fileReader);
-//	fclose(fileReader);
-//
-//	return 1;
-//}
-//
-//bool editReaderInf(Readers *reader){
-//
-//	switch (getNumberPressKey(editInfReaderMenu(), 0)){
-//		case 1:
-//			printf("Nhap Ho va Ten: ");
-//			gets(reader->Fullname);
-//			break;
-//		case 2:
-//			printf("Nhap moi CMND de sua:\n");
-//			strcpy(reader->NationID, getNationalID());
-//			break;
-//		case 3:
-//			printf("Nhap ngay thang nam sinh:\n");
-//			reader->Birthday = getDayFrmUser();
-//			break;
-//		case 4:
-//			do
-//			{
-//				printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-//				scanf("%d", &reader->Sex);
-//				int temp = getchar();
-//
-//				if (reader->Sex != 0 && reader->Sex != 1)
-//					printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
-//				else break;
-//			} while (1);
-//			break;
-//		case 5:
-//			printf("Nhap dia chi email / thu dien tu: ");
-//			gets(reader->Email);
-//			break;
-//		case 6:
-//			printf("Nhap dia chi: ");
-//			gets(reader->Address);
-//			break;
-//		case 7:
-//			reader->expireCard = getExpiredDay(getToday());
-//			break;
-//
-//	}
-//	return true;
-//}
-//
-
-
-//
-//bool viewInfAReader(){ // Xem thông tin của một người cụ thể
-//	int choice = 0;
-//	Readers	*reader = new Readers();
-//
-//	if (reader == NULL)
-//		return false;
-//
-//	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-//
-//	if (fileReader == NULL)
-//	{
-//		return 0;
-//	}
-//
-//	char *StrGetFrmUser = new char();
-//
-//	reader = NULL;
-//
-//	bool flag = false;
-//	LLNodeReader *lsReader = Init();
-//
-//	do {
-//		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
-//		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
-//
-//		switch (choice){
-//			case 1:
-//				*reader = *findReaderWithName(fileReader, StrGetFrmUser);
-//				flag = (reader == NULL ? true : false);
-//				break;
-//			case 2:
-//				findListReaderWithName(StrGetFrmUser, lsReader);
-//				flag = (lsReader->pHead == NULL ? true : false);
-//				break;
-//		}
-//		if (flag == false) // tức -> không tìm thấy độc giả.
-//		{
-//			printf("Doc gia nay khong ton tai\n");
-//			return 0;
-//		}
-//
-//		if (reader != NULL)
-//		{
-//			printfReader(*reader);	
-//		}
-//
-//		if (lsReader->pHead != NULL)
-//		{
-//			printfLLNodeReader(lsReader);	
-//		}
-//		
-//	}while (choice != 0);
-//
-//	return 1;
-//}
-//
-//bool deleteReader(Readers *reader){ // xoá một độc giả
-//	
-//	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-//
-//	FILE* ftemp = fopen("Release/Reader/databaseReaderTemp.bin", "wb");
-//
-//	if (fileReader == NULL || ftemp == NULL)
-//		return false;
-//
-//	Readers *readerTemp = new Readers; 
-//
-//	while (fread(readerTemp, sizeof(Readers), 1, fileReader) != NULL)
-//	{
-//		if (strcmp(reader->NationID, readerTemp->NationID) != 0)
-//			fwrite(readerTemp, sizeof(Readers), 1, ftemp);
-//		else
-//			continue;
-//	}
-//
-//	fclose(fileReader);
-//	fclose(ftemp);
-//
-//	remove((char*)"Release/Reader/databaseReader.bin");
-//	rename((char*)"Release/Reader/databaseReaderTemp.bin", (char*)"Release/Reader/databaseReader.bin");
-//
-//	return true;
-//}
-//
-
-//bool editReaderInfToFile(){	// chỉnh sửa thông tin đọc giả >> hàm khởi chaỵ
-//	Readers	*reader = new Readers;
-//	LLNodeReader *lsReader = Init();
-//	if (reader == NULL || lsReader == NULL)
-//		return 0;
-//
-//	FILE* fileReader = fopen("Release/Reader/databaseReader.bin", "rb");
-//	if (fileReader == NULL)
-//	{
-//		return 0;
-//	}
-//
-//	int choice = 0;
-//	char *StrGetFrmUser = new char();
-//
-//	do {
-//		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
-//		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
-//
-//		switch (choice){
-//			case 1: // tìm kiếm theo CMND
-//				*reader = *findReaderWithNationID(StrGetFrmUser);
-//				if (reader == NULL)
-//				{
-//					printf("Doc gia nay khong ton tai.\n");
-//					system("pause");
-//					continue;
-//				}
-//				break;
-//			case 2: // tìm kiếm theo tên
-//				findListReaderWithName(StrGetFrmUser, lsReader);
-//				if (lsReader->pHead == NULL)
-//				{
-//					printf("Doc gia nay khong ton tai.\n");
-//					system("pause");
-//					continue;
-//				}
-//				break;
-//		}
-//
-//		Readers *readerTemp = new Readers();
-//		if (lsReader->pHead != NULL)
-//		{
-//			printfAllReader(lsReader);
-//			readerTemp = findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: "));
-//			printf("Da chon!\n");
-//			system("pause");
-//		}
-//
-//		if (askToUpdateReaderToFile() == 1)
-//		{
-//			deleteReader(reader);
-//			addAnInfToFile(readerTemp);
-//		}
-//		system("cls");
-//	}while (choice != 0);
-//
-//	fclose(fileReader);
-//	return 1;
-//
-//}
-//
-//bool deleteReaderInfToFile(){	// xoá thông tin một độc giả - hàm khởi chạy -- lọc >> doing here
-//	Readers	*reader = new Readers;
-//	char *StrGetFrmUser = new char();
-//
-//	int choice = 0;
-//
-//	do {
-//		choice = getNumberPressKey(printfSubMenuReaderManagement(), 0);
-//		strcpy(StrGetFrmUser, getStringFrmUser((char*)"Nhap thong tin tim kiem"));
-//		LLNodeReader *lsReader = Init();
-//
-//		switch (choice){
-//			case 1: // tìm kiếm theo CMND
-//				*reader = *findReaderWithNationID(StrGetFrmUser);
-//				if (reader == NULL)
-//				{
-//					printf("Doc gia nay khong ton tai.\n");
-//					system("pause");
-//					continue;
-//				}
-//				break;
-//			case 2: // tìm kiếm theo tên
-//				findListReaderWithName(StrGetFrmUser, lsReader);
-//				if (lsReader->pHead == NULL)
-//				{
-//					printf("Doc gia nay khong ton tai.\n");
-//					system("pause");
-//					continue;
-//				}
-//				break;
-//		}
-//		if (askToUpdateReaderToFile() == 1){
-//			if (reader != NULL)
-//				{
-//					deleteReader(reader);
-//				}
-//				else if (lsReader->pHead != NULL)
-//				{
-//					printfAllReader(lsReader);
-//					deleteReader(findReaderAtNumberic(lsReader, getNumber((char*)"Chon 1 doc gia: ")));
-//				}
-//				else return 0;
-//				
-//		}
-//		system("cls");
-//	}while (choice != 0);
-//	return 1;
-//}
-//
-//
-
 
 Readers addReader()
 {
 	Readers reader;
 	Readers *temp = new Readers;
-	FILE *f = fopen("Release/Reader/databaseReader.bin", "rb");
-	long ID = 1;
+	FILE *f = fopen(_DIR_DATA_FOLDER_READER, "rb");
+
+	long ID = 1l;
 	fseek(f, 0L, SEEK_END);
 	long size = ftell(f);
+
+	char *strID = new char(9);
 	if (size == 0)
 	{
-		ID = 1;
+		// ID = 1;
+		strcpy(strID, (char*)"00000001");
 	}
 	else
 	{
@@ -518,38 +163,20 @@ Readers addReader()
 		}
 	}
 
-// <<<<<<< HEAD
-// bool getAllReaderToLL(FILE *fileReader, LLNodeReader *&ls){	// đọc toàn bộ thông tin đọc giả từ file nhưng không in ra -> đưa vào link list
-// 	Readers *reader = new Readers();
-// 	long int currentPoiter = ftell(fileReader);
-// 	fseek(fileReader, 0, SEEK_SET);
-
-// 	if (fileReader == NULL || reader == NULL)
-// 	{
-// 		return 0;
-// 	}
-	
-// 	while (fread(reader, sizeof(reader), 1 ,fileReader) != 0){
-// 		fAddAtTail(ls, reader); // cập nhật vào cuối danh sách
-// 	}
-	
-// 	fseek(fileReader, currentPoiter, SEEK_SET);
-// 	return 1;
-// }
-
-// Readers *setReaderInf(char ID[]){
-	
-// 	Readers *reader = new Readers;
-
-// 	if (reader == NULL)
-// 		return NULL;
-// =======
 	fclose(f);
+
+	// strcpy(reader.ID, toStr(ID));
+	if ((strcmp(strID, (char*)"00000001")))
+	{
+		strcpy(strID, temp->ID);
+		plusOneIntoAString(strID);
+	}
 	delete temp;
+	strID[8] = '\0';
+	strcpy(reader.ID, strID);
+	delete strID;
 
-	strcpy(reader.ID, toStr(ID));
-
-
+	printf("ID:\t%s\n", reader.ID);
 	flushall();
 	printf("Nhap Ho va Ten: ");
 	gets(reader.Fullname);
@@ -562,7 +189,6 @@ Readers addReader()
 	gets(reader.Address);
 	reader.creatCard = getToday();
 	reader.expireCard = getExpiredDay(reader.creatCard);
-
 	return reader;
 }
 
@@ -578,7 +204,6 @@ int askToUpdateReaderToFile() // cập nhật thông tin đọc giả vào file 
 bool writeInfReaderToFile() // thêm độc giả vào database
 {
 	Readers	reader = addReader();
-	
 	Readers *temp1 = findReaderWithNationID(reader.NationID);
 	Readers *temp2 = findReaderWithEmail(reader.Email);
 
@@ -594,7 +219,7 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 		}
 		else
 		{
-			FILE *f = fopen("Release/Reader/databaseReader.bin", "ab");
+			FILE *f = fopen(_DIR_DATA_FOLDER_READER, "ab");
 
 			if (f == NULL)
 				return 0;
@@ -618,12 +243,13 @@ void viewInfAReader(Readers reader) // Xem thông tin của một người cụ 
 {
 
 	printf("--------------------------------------------------------\n");
-	printf("Thong tin cua ma doc gia: %s\n", reader.ID);
+	printf("\tThong Tin Doc Gia\n");
+	printf("Ma doc gia: %s\n", reader.ID);
 	printf("Ho va ten: %s\n", reader.Fullname);
 	printf("CMND: %s\n", reader.NationID);
 	printf("Ngay sinh: ");
 	printfDay(reader.Birthday);
-	printf("Gioi tinh (nam la 1, nu la 0): %s\n", (reader.Sex == 0 ? "Nu" : "Nam"));
+	printf("Gioi tinh: %s\n", (reader.Sex == 0 ? "Nu" : "Nam"));
 	printf("Email: %s\n", reader.Email);
 	printf("Dia chi: %s\n", reader.Address);
 	printf("Ngay lap the: ");
@@ -634,7 +260,7 @@ void viewInfAReader(Readers reader) // Xem thông tin của một người cụ 
 }
 
 void editReader(Readers &reader){ // sửa thông tin độc giả
-
+	system(cls);
 	int edit;
 	bool end = false;
 	do
@@ -702,8 +328,8 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 
 void editReaderToFile()
 {
-	FILE *fo = fopen("Release/Reader/databaseReader.bin", "rb");
-	FILE *ftemp = fopen("Release/Reader/readerTemp.bin", "wb");
+	FILE *fo = fopen(_DIR_DATA_FOLDER_READER, "rb");
+	FILE *ftemp = fopen(_DIR_DATA_FOLDER_READER_TEMP, "wb");
 
 	if (fo == NULL || ftemp == NULL)
 		return;
@@ -725,6 +351,8 @@ void editReaderToFile()
 	}
 
 	viewInfAReader(*reader);
+	Sleep(1000);
+	// chỉnh sửa chọn lọc
 	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
@@ -742,15 +370,15 @@ void editReaderToFile()
 	fclose(fo);
 	fclose(ftemp);
 	delete reader;
-	remove((char*)"Release/Reader/databaseReader.bin");
-	rename((char*)"Release/Reader/readerTemp.bin", (char*)"Release/Reader/databaseReader.bin");
+	remove((char*)_DIR_DATA_FOLDER_READER);
+	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
 }
 
 void deleteReaderToFile()
 {
 
-	FILE *fo = fopen("Release/Reader/databaseReader.bin", "rb");
-	FILE *ftemp = fopen("Release/Reader/readerTemp.bin", "wb");
+	FILE *fo = fopen(_DIR_DATA_FOLDER_READER, "rb");
+	FILE *ftemp = fopen(_DIR_DATA_FOLDER_READER_TEMP, "wb");
 
 	if (fo == NULL || ftemp == NULL)
 		return;
@@ -772,6 +400,21 @@ void deleteReaderToFile()
 		return;
 	}
 
+	printf("Thong tin doc gia chuan bi xoa: \n");
+	viewInfAReader(*reader);
+	printf("Ban co chac chan muon xoa? \n- 1. Dong y \n- 0. Huy\n");
+	switch (getNumberPressKey(1, 0)){
+		case 1:
+			break;
+		default:
+			fclose(fo);
+			fclose(ftemp);
+			delete reader;
+			remove((char*)_DIR_DATA_FOLDER_READER_TEMP);
+			return;
+	}
+
+
 	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
 		if (strcmp(reader->ID, temp.ID) != 0)
@@ -784,8 +427,9 @@ void deleteReaderToFile()
 	fclose(fo);
 	fclose(ftemp);
 	delete reader;
-	remove((char*)"Release/Reader/databaseReader.bin");
-	rename((char*)"Release/Reader/readerTemp.bin", (char*)"Release/Reader/databaseReader.bin");
+	remove((char*)_DIR_DATA_FOLDER_READER);
+	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
+	Sleep(1000);
 }
 
 void searchNationID()
@@ -793,17 +437,16 @@ void searchNationID()
 	Readers *reader = new Readers;
 
 	getNationalID(reader->ID);
-
 	reader = findReaderWithNationID(reader->ID);
 	if (reader == NULL)
 	{
 		printf("Doc gia khong ton tai.\n");
-		Sleep(1000);
 	}
 	else
 		viewInfAReader(*reader);
 
 	delete reader;
+	Sleep(1000);
 }
 
 void searchFullName()
@@ -828,6 +471,7 @@ void searchFullName()
 
 	freeLinkListReader(lsReader);
 	delete reader;
+	Sleep(1000);
 }
 
 void runReaderManagement()
@@ -847,7 +491,7 @@ void runReaderManagement()
 			editReaderToFile();
 			break;
 		case 4: // printf("4. Xoa thong tin mot doc gia.\n");
-			deleteReaderToFile();
+			deleteReaderToFile();//<<<<<
 			break;
 		case 5: // Tìm kiếm độc giả qua CMND
 			searchNationID();
@@ -858,6 +502,7 @@ void runReaderManagement()
 		default:
 			break;
 		}
+		// Sleep(1);
 	} while (choice != 0);
 
 }
