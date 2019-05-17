@@ -4,8 +4,8 @@
 void updateFile(Users curUser)
 {
 
-	FILE *fo = fopen("Release/Users/Users.bin", "rb");
-	FILE *ftemp = fopen("Release/Users/userTemp.bin", "wb");
+	FILE *fo = fopen(_DIR_DATA_FOLDER_USER, "rb");
+	FILE *ftemp = fopen(_DIR_DATA_FOLDER_USER_TEMP, "wb");
 
 	if (fo == NULL || ftemp == NULL)
 		return;
@@ -23,8 +23,8 @@ void updateFile(Users curUser)
 
 	fclose(fo);
 	fclose(ftemp);
-	remove((char*)"Release/Users/Users.bin");
-	rename((char*)"Release/Users/userTemp.bin", (char*)"Release/Users/Users.bin");
+	remove((char*)_DIR_DATA_FOLDER_USER);
+	rename((char*)_DIR_DATA_FOLDER_USER_TEMP, (char*)_DIR_DATA_FOLDER_USER);
 
 }
 
@@ -36,7 +36,7 @@ void ChangePassword()
 	char *newPassword1 = new char[16];
 	char *newPassword2 = new char[16];
 
-	FILE *f = fopen("Release/Current/currentUser.bin", "rb"); // mở File chứa thông tin tài khoản đang đăng nhập
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER_CUR, "rb"); // mở File chứa thông tin tài khoản đang đăng nhập
 
 	if (f == NULL)
 		return; 
@@ -68,7 +68,7 @@ void ChangePassword()
 	strcpy(curUser.Password, newPassword1);
 	fclose(f);
 
-	FILE *fw = fopen("Release/Current/currentUser.bin", "wb");
+	FILE *fw = fopen(_DIR_DATA_FOLDER_USER_CUR, "wb");
 
 	if (fw == NULL)
 		return;
