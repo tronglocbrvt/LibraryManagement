@@ -1,7 +1,5 @@
 ﻿#include "borrowedBooks.h"
-#include "commonFunction.h"
-#include "readerManagement.h"
-#include "bookManagement.h"
+
 
 Day returnBookExpectDay(Day borrowBookDay)
 {
@@ -50,8 +48,8 @@ bool possibleReader(Day expiredDay)
 
 void updateBookFile(Books book)
 {
-	FILE *fo = fopen("Release/Book/databaseBook.bin", "rb");
-	FILE *ftemp = fopen("Release/Book/tempBook.bin", "wb");
+	FILE *fo = fopen(_DIR_DATA_FOLDER_BOOK, "rb");
+	FILE *ftemp = fopen(_DIR_DATA_FOLDER_BOOK_TEMP, "wb");
 
 	if (fo == NULL || ftemp == NULL)
 		return;
@@ -68,8 +66,8 @@ void updateBookFile(Books book)
 	
 	fclose(fo);
 	fclose(ftemp);
-	remove((char*)"Release/Book/databaseBook.bin");
-	rename((char*)"Release/Book/tempBook.bin", (char*)"Release/Book/databaseBook.bin");
+	remove((char*)_DIR_DATA_FOLDER_BOOK);
+	rename((char*)_DIR_DATA_FOLDER_BOOK_TEMP, (char*)_DIR_DATA_FOLDER_BOOK);
 }
 
 void borrowBook()
@@ -91,7 +89,6 @@ void borrowBook()
 		}
 
 		flag_reader = 1;
-
 		if (!possibleReader(temp_reader->expireCard))
 		{
 			flag_reader = 0;
@@ -110,10 +107,10 @@ void borrowBook()
 		{
 			Books book;
 			getISBN(book.ISBN);
+
 			temp_book = findBookWithISBN(book.ISBN);
 
 			flag_book = 1;
-
 			if (temp_book == NULL)
 			{
 				flag_book = 0;
@@ -143,7 +140,7 @@ void borrowBook()
 			borrowBook->returnBookDay = returnBookExpectDay(borrowBook->borrowBookDay);
 
 
-			FILE *f = fopen("Release/BorrowBook/databaseBorrowBook.bin", "ab");
+			FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
 
 			fwrite(borrowBook, sizeof(BorrowBooks), 1, f);
 
@@ -174,12 +171,12 @@ void borrowBook()
 void borrowBookBill(char *ID, char *Fullname)
 {
 	BorrowBooks borrowBook;
-	FILE *f = fopen("Release/BorrowBook/databaseBorrowBook.bin", "rb");
+	FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 	
-	system("cls");
+	system(cls);
 	printf("PHIEU MUON SACH\n\n");
 	printf("----------------------------------------------------------------------------------------------\n");
-	printf("             Ma doc gia: %s                   Ho va ten: %s                                 \n", ID, Fullname);
+	printf("|             Ma doc gia: %s                   Ho va ten: %s                                 |\n", ID, Fullname);
 	printf("---------------------------------------------------------------------------------------------|\n");
 	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
 	printf("----------------------------------------------------------------------------------------------\n");
