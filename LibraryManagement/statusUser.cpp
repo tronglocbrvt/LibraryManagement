@@ -7,7 +7,7 @@ void inforStatusUser()
 {
 	Users A;
 
-	FILE *f = fopen("Release/Users/Users.bin", "rb");
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "rb");
 	
 	if (f == NULL)
 		return;
@@ -50,7 +50,7 @@ void changeStatusUser(int typeAccount)
 	} while (strcmp(Username, "admin") == 0 || flag == 1);
 
 	Users A;
-	FILE *f = fopen("Release/Users/Users.bin", "rb");
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "rb");
 	
 	if (f == NULL)
 		return;
