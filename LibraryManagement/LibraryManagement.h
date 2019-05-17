@@ -29,6 +29,7 @@ using namespace std;
 	void Sleep(int time);
 #endif
 
+#include "functionsFile.h"
 
 
 
