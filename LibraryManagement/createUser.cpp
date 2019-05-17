@@ -10,7 +10,7 @@ bool checkUsername(char *Username)
 		return false;
 
 	Users A;
-	FILE *f = fopen("Release/Users/Users.bin", "rb");
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "rb");
 
 	if (f == NULL)
 		return 0;
@@ -152,19 +152,15 @@ Users addUser()
 	getUsername(A.Username);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
-
 	scanf("%s", A.Password);
-	char temp = getchar();
-
-	scanf("%s", A.Password);
-	flushall();
-
-
+	
+	getchar();
 	printf("Nhap Ho va Ten: ");
 	gets(A.Fullname);
 
 	getBirthday(A.Birthday);
 
+	getchar();
 	getNationalID(A.NationID);
 
 	printf("Nhap dia chi: ");
@@ -184,15 +180,15 @@ void writeInfUsertoFile()
 {
 	Users A = addUser();
 
-	FILE *f = fopen("Release/Users/Users.bin", "ab");
+	Sleep(1000);
+
+	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "ab");
 
 	if (f == NULL)
 		return;
 
 	fwrite(&A, sizeof(Users), 1, f);
 	fclose(f);
-
-	fprintf(f, "%s", A.Username);
 }
 
 // Tạo người dùng
