@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="borrowedBooks.h" />
     <ClInclude Include="changePassword.h" />
     <ClInclude Include="changeProfile.h" />
     <ClInclude Include="commonFunction.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="conioLinux.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="borrowedBooks.cpp" />
     <ClCompile Include="changePassword.cpp" />
     <ClCompile Include="changeProfile.cpp" />
     <ClCompile Include="commonFunction.cpp" />
