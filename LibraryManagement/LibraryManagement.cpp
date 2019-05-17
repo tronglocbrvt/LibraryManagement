@@ -1,4 +1,5 @@
 ﻿#include "LibraryManagement.h"
+#include "borrowedBooks.h"
 #include "commonFunction.h"
 #include "createUser.h"
 #include "Login_Logout.h"
@@ -10,22 +11,11 @@
 #include "runUser.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
-#include "borrowedBooks.h"
+
 
 #if defined(_WIN64) || defined(_WIN32)
-	#define cls "cls"
-	#include <tchar.h>
-	#include <conio.h>
-	#include <windows.h>
-	// void clearSTDIN(){
-	// 	flushall();
-	// }
+	
 #else 
-	#define cls "clear"
-	#include "conioLinux.h"
-	// void clearSTDIN(){
-	// 	tcflush(0, TCIFLUSH);
-	// }
 	void flushall(){
 
 	}
@@ -66,12 +56,6 @@ int main()
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-<<<<<<< HEAD
-		runBookManagement();
-		borrowBook();
-=======
->>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
-
 		Sleep(1000);
 		bool continueSwit = true;
 		while (continueSwit){
@@ -92,7 +76,7 @@ int main()
 				runBookManagement();
 				break;
 			case 4:
-				printf("pheiumuonsach\n");
+				borrowBook();
 				break;
 			case 5:
 				printf("phieutrasach\n");
