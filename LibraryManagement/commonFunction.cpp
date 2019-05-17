@@ -274,8 +274,6 @@ void getReaderID(char ID[])
 	} while (flag == 0);
 
 }
-<<<<<<< HEAD
-=======
 
 // Hàm nhập ISBN sách
 void getISBN(char *ISBN)
@@ -308,25 +306,6 @@ void getISBN(char *ISBN)
 	} while (flag == 0);
 }
 
-// Hàm hỏi người dùng muốn chỉnh sửa nữa không?
-// int wantEdit()
-// {
-// 	int edit;
-// 	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
-// 	do
-// 	{
-// 		scanf("%d", &edit);
-// 		if (edit == 1)
-// 			return 1;
-// 		else if (edit == 0)
-// 			return 0;
-// 		else
-// 			printf("Vui long nhap 0 hoac 1\n");
-// 	} while (edit != 0 && edit != 1);
-// 	return 1;
-// }
->>>>>>> 9674edfc3c178b9aa7bd1d5edd42cb5c18f94148
-
 // Hàm hỏi muốn mượn sách nữa không?
 int wantBorrow()
 {
@@ -342,6 +321,7 @@ int wantBorrow()
 		else
 			printf("Vui long nhap 0 hoac 1\n");
 	} while (borrow != 0 && borrow != 1);
+	return 1;
 }
 
 //Tạo chuỗi mã độc giả
@@ -393,12 +373,7 @@ Day getToday(){
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
-
-<<<<<<< HEAD
-    // fprintf(stdout, "[%d / %d / %d / %d:%d:%d ]",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-=======
-    fprintf(stdout, "[%d/%d/%d %d:%d:%d]\n",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
->>>>>>> 9674edfc3c178b9aa7bd1d5edd42cb5c18f94148
+    // fprintf(stdout, "[%d / %d / %d %d:%d:%d]\n",timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
     Day days;
     days.Date 	= timeinfo->tm_mday;
@@ -415,13 +390,6 @@ bool isNumber(char c)
 	return 0;
 }
 
-<<<<<<< HEAD
-void textBgColor(int colorText, int colorBG) // cplusplus
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (colorBG << 4) | colorText);
-}
-
-=======
 Day getDayFrmUser(){
 	Day day;
 	do
@@ -465,7 +433,6 @@ Day getDayFrmUser(){
 15 bright white
 */
 
->>>>>>> 982b91d5e8e54275cfd7950cb6571fd2c0dd1b13
 void printfDay(Day day){
 	printf("%d / %d / %d\n", day.Date, day.Month, day.Year);
 }
