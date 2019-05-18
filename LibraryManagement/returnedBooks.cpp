@@ -1,10 +1,9 @@
-﻿#include "borrowedBooks.h"
+﻿#include "returnedBooks.h"
 
-
-Day returnBookExpectDay(Day borrowBookDay)
+Day returnBookExpectDay(Day returnBookDay)
 {
 	Day plusDay;
-	plusDay = borrowBookDay;
+	plusDay = returnBookDay;
 	plusDay.Date += 7; // Mượn tối đa 7 ngày
 
 	while (!isPossibleDay(plusDay.Date, plusDay.Month, plusDay.Year)){
@@ -70,10 +69,9 @@ void updateBookFile(Books book)
 	rename((char*)_DIR_DATA_FOLDER_BOOK_TEMP, (char*)_DIR_DATA_FOLDER_BOOK);
 }
 
-void borrowBook()
+void returnBook()
 {
 	// Nhập mã độc giả
-	int flag_reader = 1;
 	Readers *temp_reader = new Readers;
 	do
 	{
@@ -84,24 +82,16 @@ void borrowBook()
 
 		if (temp_reader == NULL)
 		{
-			flag_reader = 0;
 			printf("Doc gia khong ton tai.\n");
 		}
+		else break;
 
-		flag_reader = 1;
-		if (!possibleReader(temp_reader->expireCard))
-		{
-			flag_reader = 0;
-			printf("The doc gia het han su dung. Vui long gia han.\n");
-		}
-
-	} while (flag_reader == 0);
+	} while(true);
 
 	// Nhập ISBN sách cần mượn
 	int end = 0;
 	do
 	{
-		int flag_book = 1;
 		Books *temp_book = new Books;
 		do
 		{
@@ -110,69 +100,60 @@ void borrowBook()
 
 			temp_book = findBookWithISBN(book.ISBN);
 
-			flag_book = 1;
 			if (temp_book == NULL)
 			{
-				flag_book = 0;
 				printf("Sach khong ton tai.\n");
 			}
+			else break;
 
-		} while (flag_book == 0);
+		} while (true);
 
-		int numBorrow;
-		printf("Nhap so luong muon: ");
-		scanf("%d", &numBorrow);
-
-		if ((temp_book->numBook - numBorrow) >= 0)
+		int numReturn = 0;
+		printf("Nhap so luong cuon sach tra: ");
+		scanf("%d", &numReturn);
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		if ((temp_book->numBook - numReturn) >= 0)
 		{
-			temp_book->numBook = temp_book->numBook - numBorrow;
+			temp_book->numBook = temp_book->numBook - numReturn;
 			updateBookFile(*temp_book); // cập nhật file sách
-
-			// lưu các thông tin mượn sách
-			BorrowBooks *borrowBook = new BorrowBooks;
-
-			strcpy(borrowBook->ID, temp_reader->ID);
-			strcpy(borrowBook->Fullname, temp_reader->Fullname);
-			strcpy(borrowBook->ISBN, temp_book->ISBN);
-			strcpy(borrowBook->nameBook, temp_book->nameBook);
-			borrowBook->numBook = numBorrow;
-			borrowBook->borrowBookDay = getToday();
-			borrowBook->returnBookDay = returnBookExpectDay(borrowBook->borrowBookDay);
 
 
 			FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
 
-			fwrite(borrowBook, sizeof(BorrowBooks), 1, f);
+			fwrite(returnBook, sizeof(ReturnBooks), 1, f);
 
-			delete borrowBook;
+			delete returnBook;
 			delete temp_book;
 			fclose(f);
 
 			printf("Muon sach thanh cong.\n");
 
-			int borrow = wantBorrow();
-			if (borrow == 0)
+			int returnBook = wantReturn();
+			if (returnBook == 0)
 				end = 1;
 		}
 		else
 		{
 			printf("So luong sach trong thu vien khong du so luong.\n");
-			int borrow = wantBorrow();
-			if (borrow == 0)
+			int returnBook = wantReturn();
+			if (returnBook == 0)
 				end = 1;
 		}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	} while (end == 0);
 
-	borrowBookBill(temp_reader->ID, temp_reader->Fullname);
+	returnBookBill(temp_reader->ID, temp_reader->Fullname);
 
 	Sleep(1000);
 
 	delete temp_reader;
 }
 
-void borrowBookBill(char *ID, char *Fullname)
+void returnBookBill(char *ID, char *Fullname)
 {
-	BorrowBooks borrowBook;
+	BorrowBooks returnBook;
 	FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 	
 	system(cls);
@@ -183,13 +164,13 @@ void borrowBookBill(char *ID, char *Fullname)
 	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
 	printf("----------------------------------------------------------------------------------------------\n");
 
-	while (fread(&borrowBook, sizeof(BorrowBooks), 1, f) != 0)
+	while (fread(&returnBook, sizeof(BorrowBooks), 1, f) != 0)
 	{
-		if (strcmp(borrowBook.ID, ID) == 0)
+		if (strcmp(returnBook.ID, ID) == 0)
 		{
 			printf("|%13s|%41s|    %2d    | %2d/%2d/%4d | %2d/%2d/%4d |\n",
-				borrowBook.ISBN, borrowBook.nameBook, borrowBook.numBook, borrowBook.borrowBookDay.Date, borrowBook.borrowBookDay.Month, borrowBook.borrowBookDay.Year,
-				borrowBook.returnBookDay.Date, borrowBook.returnBookDay.Month, borrowBook.returnBookDay.Year);
+				returnBook.ISBN, returnBook.nameBook, returnBook.numBook, returnBook.returnBookDay.Date, returnBook.returnBookDay.Month, returnBook.returnBookDay.Year,
+				returnBook.returnBookDay.Date, returnBook.returnBookDay.Month, returnBook.returnBookDay.Year);
 			printf("----------------------------------------------------------------------------------------------\n");
 		}
 	}
