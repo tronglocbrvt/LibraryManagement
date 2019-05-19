@@ -21,3 +21,5 @@ int printfMenuBookManagement();
 int editInfReaderMenu();
 
 int editInfBookMenu();
+
+int askYesNoQuestion(char *note);
