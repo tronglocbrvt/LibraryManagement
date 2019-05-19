@@ -178,7 +178,7 @@ void borrowBookBill(char *ID, char *Fullname)
 	system(cls);
 	printf("\t\t\tPHIEU MUON SACH\n\n");
 	printf("----------------------------------------------------------------------------------------------\n");
-	printf("|             Ma doc gia: %s                   Ho va ten: %s                                 |\n", ID, Fullname);
+	printf("|             Ma doc gia: %8s           Ho va ten: %31s  |\n", ID, Fullname);
 	printf("---------------------------------------------------------------------------------------------|\n");
 	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
 	printf("----------------------------------------------------------------------------------------------\n");
