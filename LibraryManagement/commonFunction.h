@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "LibraryManagement.h"
 
+#define _SO_TIEN_PHAT 5000
+#define _SO_PHAN_TRAM_PHAT_KHI_MAT 2
+#define _SO_LUONG_CHU_SO_TIEN_MAT 18
+
 #if defined(_WIN32) || defined(_WIN64)
 	void textBgColor(int colorText, int colorBG);
 #else 
@@ -53,3 +57,9 @@ int getNumber(char *note);
 
 int plusOneIntoAChar(char &numch);
 bool plusOneIntoAString(char *numStr);
+
+int toDays(Day dayt); // kể từ năm 2000
+
+int operator-(Day d1, Day d2);
+bool operator==(Day d1, Day d2);
+char *intMoneyToStringMoney(long moneyPayement);
