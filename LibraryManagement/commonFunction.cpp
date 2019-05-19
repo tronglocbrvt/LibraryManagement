@@ -523,6 +523,9 @@ int operator-(Day d1, Day d2){
 bool operator==(Day d1, Day d2){
   return (d1 - d2 == 0);
 }
+bool operator==(BorrowBooks borBook1, BorrowBooks borBook2){
+	return (borBook1.ID == borBook1.ID && borBook1.ISBN == borBook2.ISBN && borBook1.borrowBookDay == borBook2.borrowBookDay);
+}
 
 char *intMoneyToStringMoney(long moneyPayement){
 
