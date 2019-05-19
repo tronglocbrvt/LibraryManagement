@@ -70,6 +70,21 @@ void updateBookFile(Books book)
 	rename((char*)_DIR_DATA_FOLDER_BOOK_TEMP, (char*)_DIR_DATA_FOLDER_BOOK);
 }
 
+bool checkBookIsBorrowed(BorrowBooks borBook){
+	FILE *fileBB = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+
+	BorrowBooks borrowBook;
+	while(fread(&borrowBook, sizeof(BorrowBooks), 1, fileBB) != 0){
+		if (borrowBook == borBook)
+		{
+			return true;
+		}
+	}
+
+	fclose(fileBB);
+	return false;
+}
+
 void borrowBook()
 {
 	// Nhập mã độc giả
@@ -128,7 +143,7 @@ void borrowBook()
 			temp_book->numBook = temp_book->numBook - numBorrow;
 			updateBookFile(*temp_book); // cập nhật file sách
 
-			// lưu các thông tin mượn sách
+			// lưu các thông tin mượn sách -> lưu thông tin
 			BorrowBooks *borrowBook = new BorrowBooks;
 
 			strcpy(borrowBook->ID, temp_reader->ID);
@@ -140,9 +155,31 @@ void borrowBook()
 			borrowBook->returnBookDay = returnBookExpectDay(borrowBook->borrowBookDay);
 
 
-			FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
+			FILE *f;
 
-			fwrite(borrowBook, sizeof(BorrowBooks), 1, f);
+			if (!checkBookIsBorrowed(*borrowBook))
+			{
+				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
+				fwrite(borrowBook, sizeof(BorrowBooks), 1, f);	
+			}
+			else
+			{
+				BorrowBooks borrowBookTemp;
+				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+				FILE *fileTemp = fopen(_DIR_DATA_FOLDER_BOOK_BORROW_TEMP, "wb");
+
+				while(fread(&borrowBookTemp, sizeof(BorrowBooks), 1, fileTemp)){
+					if (borrowBookTemp == *borrowBook)
+					{
+						borrowBookTemp.numBook += borrowBook->numBook;
+					}
+					fwrite(&borrowBookTemp, sizeof(BorrowBooks), 1, fileTemp);
+				}
+				fclose(fileTemp);
+				remove((char*)_DIR_DATA_FOLDER_BOOK_BORROW);
+				rename((char*)_DIR_DATA_FOLDER_BOOK_BORROW_TEMP, (char*)_DIR_DATA_FOLDER_BOOK_BORROW);
+
+			}
 
 			delete borrowBook;
 			delete temp_book;
