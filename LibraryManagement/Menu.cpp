@@ -147,3 +147,12 @@ int editInfBookMenu(){
 
 	return 7;
 }
+
+int askYesNoQuestion(char *note){
+	system(cls);
+	printf("%s?\n", note);
+	printf("1. Co\n");
+	printf("2. Khong\n");
+
+	return 2;
+}
