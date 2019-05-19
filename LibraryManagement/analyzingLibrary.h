@@ -4,4 +4,8 @@
 #include "Menu.h"
 
 
-void runningAnalyzing();
+
+void runningAnalyzingForAdmin();
+void runningAnalyzingForExpert();
+void runningAnalyzingForManager();
+void runningAnalyzing(int typeAccount);
