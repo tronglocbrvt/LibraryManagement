@@ -24,24 +24,6 @@
     <ClInclude Include="commonFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Login_Logout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="createUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="changePassword.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="changeProfile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="decentraliseUsers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="statusUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="functionsFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,9 +33,6 @@
     <ClInclude Include="bookManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="runUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="linkedListReaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -61,6 +40,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="borrowedBooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conioLinux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="returnedBooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedListBorrowBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="userManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,24 +65,6 @@
     <ClCompile Include="commonFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login_Logout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="createUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="changePassword.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="changeProfile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="decentraliseUsers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="statusUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="functionsFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -101,9 +74,6 @@
     <ClCompile Include="bookManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="runUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="linkedListReaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,6 +81,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="borrowedBooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conioLinux.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="returnedBooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linkedListBorrowBook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="userManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -77,41 +77,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="borrowedBooks.h" />
-    <ClInclude Include="changePassword.h" />
-    <ClInclude Include="changeProfile.h" />
     <ClInclude Include="commonFunction.h" />
-    <ClInclude Include="createUser.h" />
-    <ClInclude Include="decentraliseUsers.h" />
     <ClInclude Include="functionsFile.h" />
     <ClInclude Include="LibraryManagement.h" />
     <ClInclude Include="linkedListBooks.h" />
+    <ClInclude Include="linkedListBorrowBook.h" />
     <ClInclude Include="linkedListReaders.h" />
-    <ClInclude Include="Login_Logout.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="readerManagement.h" />
     <ClInclude Include="bookManagement.h" />
-    <ClInclude Include="runUser.h" />
-    <ClInclude Include="statusUser.h" />
+    <ClInclude Include="returnedBooks.h" />
     <ClInclude Include="conioLinux.h" />
+    <ClInclude Include="userManagement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="borrowedBooks.cpp" />
-    <ClCompile Include="changePassword.cpp" />
-    <ClCompile Include="changeProfile.cpp" />
     <ClCompile Include="commonFunction.cpp" />
-    <ClCompile Include="createUser.cpp" />
-    <ClCompile Include="decentraliseUsers.cpp" />
     <ClCompile Include="functionsFile.cpp" />
     <ClCompile Include="LibraryManagement.cpp" />
     <ClCompile Include="linkedListBooks.cpp" />
+    <ClCompile Include="linkedListBorrowBook.cpp" />
     <ClCompile Include="linkedListReaders.cpp" />
-    <ClCompile Include="Login_Logout.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="readerManagement.cpp" />
     <ClCompile Include="bookManagement.cpp" />
-    <ClCompile Include="runUser.cpp" />
-    <ClCompile Include="statusUser.cpp" />
+    <ClCompile Include="returnedBooks.cpp" />
     <ClCompile Include="conioLinux.cpp" />
+    <ClCompile Include="userManagement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

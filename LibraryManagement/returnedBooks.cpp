@@ -70,7 +70,7 @@
 // }
 
 bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB){	// Tìm kiếm đọc giả theo id trả về danh sách
-	BorrowBooks *infBor = new BorrowBooks();
+	BorrowBooks *infBor = new BorrowBooks;
 
 	if (infBor == NULL)
 		return false;
@@ -109,18 +109,18 @@ void askToPrintListBorBook(LLNodeBorrowBook llBorBook){
 void returnBook()
 {
 	printf("\n");
-	char *idReader = new char(9);
+	char *idReader = new char[9];
 	getReaderID(idReader);
 
 	LLNodeBorrowBook llBorBook;
 	Init(llBorBook); // khởi tạo danh sách
 
-	char *nameReader = new char(31);
+	char *nameReader = new char[31];
 	for (int i = 0; i < 31; ++i)
 	{
 		nameReader[i] = '\0';
 	}
-	char *nameBook = new char(51);
+	char *nameBook = new char[51];
 	for (int i = 0; i < 51; ++i)
 	{
 		nameBook[i] = '\0';
@@ -140,7 +140,7 @@ void returnBook()
 	strcpy(nameReader, llBorBook.pHead->brBook.Fullname);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	char *isbnBook = new char(14);
+	char *isbnBook = new char[14];
 	switch(getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1)){
 		case 1: // có mất sách
 			printf("\n");
@@ -173,10 +173,10 @@ void returnBook()
 
 	Sleep(1000);
 
-	delete idReader;
-	delete nameReader;
-	delete nameBook;
-	delete isbnBook;
+	delete[] idReader;
+	delete[] nameReader;
+	delete[] nameBook;
+	delete[] isbnBook;
 
 
 }

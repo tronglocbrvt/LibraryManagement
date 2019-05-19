@@ -1,19 +1,14 @@
 ﻿#include "LibraryManagement.h"
 
 #include "commonFunction.h"
-#include "createUser.h"
-#include "Login_Logout.h"
 #include "Menu.h"
-#include "changePassword.h"
-#include "changeProfile.h"
-#include "decentraliseUsers.h"
-#include "statusUser.h"
-#include "runUser.h"
+#include "userManagement.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
 #include "borrowedBooks.h"
 #include "linkedListBorrowBook.h"
 #include "returnedBooks.h"
+
 
 #if defined(_WIN64) || defined(_WIN32)
 	
