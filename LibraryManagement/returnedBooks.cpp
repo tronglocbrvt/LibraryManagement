@@ -109,6 +109,34 @@ void returnBook()
 			printReaderFromLL(llBorBook);
 			printf("Chon sach da mat <Nhap ISBN>: ");
 			getISBN(isbnBook);
+			transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
+			if (llBorBook.pHead == NULL)
+			{
+				printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
+				Sleep(1000);
+				return;
+			}
+			askToPrintListBorBook(llBorBook);
+
+			strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
+			numBor = llBorBook.total;
+			do {
+				printf("Nhap so luong sach muon tra: ");
+				scanf("%d", &numRet);
+				if (numRet > llBorBook.total)
+				{
+					printf("So luong sach tra nhieu hon so luong sach da muon!\n");
+					continue;
+				}
+				else 
+				{
+					returnNumberBorrwedBook(isbnBook, numRet);
+					break;
+				}
+			}while(true);
+
+			moneyPayement = _SO_PHAN_TRAM_PHAT_KHI_MAT * updateReturnBookToList(llBorBook, numRet);
+			updateReturnBookToFile(llBorBook);
 			break;
 		default: // không bị mất sách
 			printf("\n");
@@ -140,9 +168,7 @@ void returnBook()
 				}
 			}while(true);
 
-
-
-			moneyPayement = updateReturnBookToList(llBorBook, numRet);
+			moneyPayement = _SO_TIEN_PHAT * updateReturnBookToList(llBorBook, numRet);
 			updateReturnBookToFile(llBorBook);
 			break;
 	}
