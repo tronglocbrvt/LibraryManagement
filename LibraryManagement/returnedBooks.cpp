@@ -59,9 +59,9 @@ bool returnNumberBorrwedBook(char *isbnBook, int numRet){ // trả lại kho s�
 		fwrite(&book, sizeof(Books), 1, fileBookTemp);
 	}
 
-	fclose(fo);
-	fclose(ftemp);
-	delete book;
+	fclose(fileBook);
+	fclose(fileBookTemp);
+
 	remove((char*)_DIR_DATA_FOLDER_BOOK);
 	rename((char*)_DIR_DATA_FOLDER_BOOK_TEMP, (char*)_DIR_DATA_FOLDER_BOOK);
 
@@ -103,75 +103,59 @@ void returnBook()
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	char *isbnBook = new char(14);
+	Books *book = new Books;
+	int moneyRate = 0;
 	switch(getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1)){
 		case 1: // có mất sách
+			book = findBookWithISBN(isbnBook);
+			moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT * book->priceBook;
 			printf("\n");
 			printReaderFromLL(llBorBook);
 			printf("Chon sach da mat <Nhap ISBN>: ");
-			getISBN(isbnBook);
-			transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
-			if (llBorBook.pHead == NULL)
-			{
-				printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
-				Sleep(1000);
-				return;
-			}
-			askToPrintListBorBook(llBorBook);
-
-			strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
-			numBor = llBorBook.total;
-			do {
-				printf("Nhap so luong sach muon tra: ");
-				scanf("%d", &numRet);
-				if (numRet > llBorBook.total)
-				{
-					printf("So luong sach tra nhieu hon so luong sach da muon!\n");
-					continue;
-				}
-				else 
-				{
-					returnNumberBorrwedBook(isbnBook, numRet);
-					break;
-				}
-			}while(true);
-
-			moneyPayement = _SO_PHAN_TRAM_PHAT_KHI_MAT * updateReturnBookToList(llBorBook, numRet);
-			updateReturnBookToFile(llBorBook);
+			
 			break;
 		default: // không bị mất sách
+			moneyRate = _SO_TIEN_PHAT;
 			printf("\n");
 			askToPrintListBorBook(llBorBook);
-			getISBN(isbnBook);
-			transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
-			if (llBorBook.pHead == NULL)
-			{
-				printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
-				Sleep(1000);
-				return;
-			}
-			askToPrintListBorBook(llBorBook);
 
-			strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
-			numBor = llBorBook.total;
-			do {
-				printf("Nhap so luong sach muon tra: ");
-				scanf("%d", &numRet);
-				if (numRet > llBorBook.total)
-				{
-					printf("So luong sach tra nhieu hon so luong sach da muon!\n");
-					continue;
-				}
-				else 
-				{
-					returnNumberBorrwedBook(isbnBook, numRet);
-					break;
-				}
-			}while(true);
-
-			moneyPayement = _SO_TIEN_PHAT * updateReturnBookToList(llBorBook, numRet);
-			updateReturnBookToFile(llBorBook);
 			break;
 	}
+
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	getISBN(isbnBook);
+	transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
+	if (llBorBook.pHead == NULL)
+	{
+		printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
+		Sleep(1000);
+		return;
+	}
+	askToPrintListBorBook(llBorBook);
+
+	strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
+	numBor = llBorBook.total;
+	do {
+		printf("Nhap so luong sach muon tra: ");
+		scanf("%d", &numRet);
+		if (numRet > llBorBook.total)
+		{
+			printf("So luong sach tra nhieu hon so luong sach da muon!\n");
+			continue;
+		}
+		else 
+		{
+			returnNumberBorrwedBook(isbnBook, numRet);
+			break;
+		}
+	}while(true);
+	moneyPayement = moneyRate * updateReturnBookToList(llBorBook, numRet);
+	updateReturnBookToFile(llBorBook);
+
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 	returnBookBill(nameReader, nameBook, numBor, numRet, moneyPayement);
 
@@ -181,6 +165,7 @@ void returnBook()
 	delete nameReader;
 	delete nameBook;
 	delete isbnBook;
+	delete book;
 
 
 }
