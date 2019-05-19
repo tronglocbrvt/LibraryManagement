@@ -20,6 +20,7 @@
 	#define _DIR_DATA_FOLDER_BOOK_TEMP "Release/Book/bookTemp.bin" 
 
 	#define _DIR_DATA_FOLDER_BOOK_BORROW "Release/BorrowBook/databaseBorrowBook.bin"
+	#define _DIR_DATA_FOLDER_BOOK_BORROW_TEMP "Release/BorrowBook/databaseBorrowBookTemp.bin"
 
 #else
 
@@ -34,6 +35,7 @@
 	#define _DIR_DATA_FOLDER_BOOK_TEMP "Documents/Github/LibraryManagement/LibraryManagement/Release/Book/bookTemp.bin"
 
 	#define _DIR_DATA_FOLDER_BOOK_BORROW "Documents/Github/LibraryManagement/LibraryManagement/Release/BorrowBook/databaseBorrowBook.bin"
+	#define _DIR_DATA_FOLDER_BOOK_BORROW_TEMP "Documents/Github/LibraryManagement/LibraryManagement/Release/BorrowBook/databaseBorrowBookTemp.bin"
 
 #endif
 
