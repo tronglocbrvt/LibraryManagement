@@ -71,18 +71,18 @@ bool returnNumberBorrwedBook(char *isbnBook, int numRet){ // trả lại kho s�
 void returnBook()
 {
 	printf("\n");
-	char *idReader = new char(9);
+	char *idReader = new char[9];
 	getReaderID(idReader);
 
 	LLNodeBorrowBook llBorBook;
 	Init(llBorBook); // khởi tạo danh sách
 
-	char *nameReader = new char(31);
+	char *nameReader = new char[31];
 	for (int i = 0; i < 31; ++i)
 	{
 		nameReader[i] = '\0';
 	}
-	char *nameBook = new char(51);
+	char *nameBook = new char[51];
 	for (int i = 0; i < 51; ++i)
 	{
 		nameBook[i] = '\0';
@@ -102,7 +102,7 @@ void returnBook()
 	strcpy(nameReader, llBorBook.pHead->brBook.Fullname);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	char *isbnBook = new char(14);
+	char *isbnBook = new char[14];
 	Books *book = new Books;
 	int moneyRate = 0;
 	switch(getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1)){
@@ -161,10 +161,10 @@ void returnBook()
 
 	Sleep(1000);
 
-	delete idReader;
-	delete nameReader;
-	delete nameBook;
-	delete isbnBook;
+	delete[] idReader;
+	delete[] nameReader;
+	delete[] nameBook;
+	delete[] isbnBook;
 	delete book;
 
 
