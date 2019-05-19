@@ -12,6 +12,8 @@
 #include "readerManagement.h"
 #include "bookManagement.h"
 #include "borrowedBooks.h"
+#include "linkedListBorrowBook.h"
+#include "returnedBooks.h"
 
 #if defined(_WIN64) || defined(_WIN32)
 	
@@ -78,13 +80,12 @@ int main()
 				borrowBook();
 				break;
 			case 5:
-				printf("phieutrasach\n");
+				returnBook();
 				break;
 			case 6:
 				printf("thongke\n");
 				break;
 			case 7:
-				printf("Dang xuat\n");
 				continueSwit = false;
 				typeAccount = Logout();
 				break;
