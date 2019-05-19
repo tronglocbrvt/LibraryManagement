@@ -70,14 +70,6 @@ void viewInfAReader(BorrowBooks brBook) // Xem thông tin của một người c
 	printf("So sach da muon:\t%d\n", brBook.numBook);
 	printf("Da muon vao ngay:\t");
 	printfDay(brBook.borrowBookDay);	
-
-	// char ID[9]; // Mã độc giả mượn sách
-	// char Fullname[31]; // Tên độc giả
-	// char ISBN[14]; // Mã sách gồm 13 số
-	// char nameBook[51]; // Tên sách
-	// int numBook; // Số lượng sách mượn
-	// Day borrowBookDay; // Ngày mượn sách
-	// Day returnBookDay; // Ngày trả sách dự kiến
 	printf("--------------------------------------------------------\n");
 }
 bool printReaderFromLL(LLNodeBorrowBook llBorBook){ // in ra thông tin mượn sách từ Linked List
@@ -183,7 +175,7 @@ long updateReturnBookToList(LLNodeBorrowBook &llBorBook, int numReturn){ // cậ
 			numReturn -= pNow->brBook.numBook;
 		}
 		int disDay = today - pNow->brBook.returnBookDay;
-		moneyPayement += (disDay > 0) * (disDay) * (_SO_TIEN_PHAT);
+		moneyPayement += (disDay > 0) * (disDay);
 		pNow = pNow->pNext;
 	}
 
@@ -206,12 +198,10 @@ bool deleteNodeReturnInFile(BorrowBooks BorBook){ // cập nhật lại file v�
 			if (BorBook.numBook != 0) // nếu chưa trả hết
 			{
 				fwrite(&BorBook, sizeof(BorrowBooks), 1, ftemp);
-				printf("1.  Name: %s  --- Book: %s  --- Count:  %d\n", BorBookTemp.Fullname, BorBookTemp.nameBook, BorBookTemp.numBook);
 			}
 			continue;
 		}
 		fwrite(&BorBookTemp, sizeof(BorrowBooks), 1, ftemp);
-		printf("2.  Name: %s  --- Book: %s  --- Count:  %d\n", BorBookTemp.Fullname, BorBookTemp.nameBook, BorBookTemp.numBook);
 	}
 	printf(">>>>>\n");
 

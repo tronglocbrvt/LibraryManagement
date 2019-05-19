@@ -15,5 +15,7 @@ bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB);	// T�
 
 void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, long moneyPayement);
 
+bool returnNumberBorrwedBook(char *isbnBook, int numRet); // trả lại kho số sách đã mượn trước đó
+
 void returnBook();
 

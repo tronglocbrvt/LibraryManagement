@@ -31,7 +31,9 @@ using namespace std;
 
 #include "functionsFile.h"
 
-
+#define _SO_TIEN_PHAT 5000
+#define _SO_PHAN_TRAM_PHAT_KHI_MAT 2
+#define _SO_LUONG_CHU_SO_TIEN_MAT 18
 
 enum Color
 {

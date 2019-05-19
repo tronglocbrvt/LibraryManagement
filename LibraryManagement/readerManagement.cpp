@@ -148,7 +148,7 @@ Readers addReader()
 	fseek(f, 0L, SEEK_END);
 	long size = ftell(f);
 
-	char *strID = new char(9);
+	char *strID = new char[9];
 	if (size == 0)
 	{
 		// ID = 1;
@@ -174,7 +174,7 @@ Readers addReader()
 	delete temp;
 	strID[8] = '\0';
 	strcpy(reader.ID, strID);
-	delete strID;
+	delete[] strID;
 
 	printf("ID:\t%s\n", reader.ID);
 	flushall();
