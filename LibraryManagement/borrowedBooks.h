@@ -14,3 +14,5 @@ void borrowBookBill(char *ID, char *Fullname);
 
 void borrowBook();
 
+bool checkBookIsBorrowed(BorrowBooks borBook);
+
