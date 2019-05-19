@@ -8,6 +8,32 @@
 // printf("5. Thống kê số sách đang được mượn.\n");
 // printf("6. Thống kê danh sách độc giả bị trễ hạn.\n");
 
-void runningAnalyzing(){
 
+
+
+
+
+
+void runningAnalyzingForAdmin(){
+
+}
+void runningAnalyzingForExpert(){
+	
+}
+void runningAnalyzingForManager(){
+	
+}
+
+void runningAnalyzing(int typeAccount){
+	switch(typeAccount){
+		case 1: // admin
+			runningAnalyzingForAdmin();
+			break;
+		case 2: // chuyên viên
+			runningAnalyzingForExpert();
+			break;
+		default: // quản lý
+			runningAnalyzingForManager();
+			break;
+	}
 }
