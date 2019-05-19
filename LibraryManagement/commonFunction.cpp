@@ -486,4 +486,70 @@ bool plusOneIntoAString(char* numStr){
 
 	return true;
 }
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// struct Day
+// {
+// 	int Date; 
+// 	int Month;
+// 	int Year;
+// };
+int toDays(Day dayt){ // kể từ năm 2000
+  int numDay = 0;
+
+  for (int i = 2000; i < dayt.Year; ++i)
+  {
+    if (isLeapYear(i))
+    {
+      numDay += 366;
+    }
+    else numDay += 365;
+  }
+
+  for (int i = 1; i < dayt.Month; ++i)
+  {
+    numDay += numDaysOfMonth(i, dayt.Year);
+  }
+
+  numDay += dayt.Date;
+
+  return numDay;
+}
+int operator-(Day d1, Day d2){
+  int dayt1 = toDays(d1);
+  int dayt2 = toDays(d2);
+
+  return dayt1 - dayt2;
+}
+bool operator==(Day d1, Day d2){
+  return (d1 - d2 == 0);
+}
+
+char *intMoneyToStringMoney(long moneyPayement){
+
+    char *zeroStr = new char(_SO_LUONG_CHU_SO_TIEN_MAT);
+    for (int i = 0; i < _SO_LUONG_CHU_SO_TIEN_MAT; ++i)
+	{
+		zeroStr[i] = '\0';
+	}
+
+	sprintf(zeroStr, "%ld", moneyPayement);
+
+	char *pch;
+	while ((moneyPayement / 1000) > 0){
+		pch = strchr(zeroStr, ',');
+		if (pch != NULL)
+		{
+			memmove(pch -3 +1, pch -3, strlen(zeroStr) - (pch - zeroStr ) +3);
+			*(pch -3) = ',';
+		}
+		else
+		{
+			memmove(zeroStr +strlen(zeroStr) -2, zeroStr +strlen(zeroStr) -3, 3);
+			*(zeroStr +strlen(zeroStr) -4) = ',';
+		}
+		moneyPayement /= 1000;
+	}
+
+	return zeroStr;
+}
 
