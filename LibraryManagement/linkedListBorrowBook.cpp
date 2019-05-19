@@ -175,7 +175,7 @@ long updateReturnBookToList(LLNodeBorrowBook &llBorBook, int numReturn){ // cậ
 			numReturn -= pNow->brBook.numBook;
 		}
 		int disDay = today - pNow->brBook.returnBookDay;
-		moneyPayement += (disDay > 0) * (disDay) * (_SO_TIEN_PHAT);
+		moneyPayement += (disDay > 0) * (disDay);
 		pNow = pNow->pNext;
 	}
 
