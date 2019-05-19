@@ -3,14 +3,17 @@
 #include "commonFunction.h"
 #include "readerManagement.h"
 #include "bookManagement.h"
+#include "linkedListBorrowBook.h"
 
-Day returnBookExpectDay(Day returnBookDay); // trả về ngày trả sách dự kiến (7 ngày kể từ ngày mượn)
+// Day returnBookExpectDay(Day returnBookDay); // trả về ngày trả sách dự kiến (7 ngày kể từ ngày mượn)
 
-bool possibleReader(Day expiredDay); // Thẻ độc giả còn hạn hay không? - 1 còn hạn; 0 là hết hạn
+// bool possibleReader(Day expiredDay); // Thẻ độc giả còn hạn hay không? - 1 còn hạn; 0 là hết hạn
 
-void updateBookFile(Books book);
+// void updateBookFile(Books book);
 
-void returnBookBill(char *ID, char *Fullname);
+bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB);	// Tìm kiếm đọc giả theo id trả về danh sách
+
+void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, long moneyPayement);
 
 void returnBook();
 
