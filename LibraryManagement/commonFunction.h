@@ -58,4 +58,5 @@ int toDays(Day dayt); // kể từ năm 2000
 
 int operator-(Day d1, Day d2);
 bool operator==(Day d1, Day d2);
+bool operator==(BorrowBooks borBook1, BorrowBooks borBook2);
 char *intMoneyToStringMoney(long moneyPayement);
