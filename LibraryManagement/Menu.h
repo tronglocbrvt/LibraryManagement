@@ -14,9 +14,13 @@ void printfMainMenu();
 
 int printUserMenu(int typeAccount);
 
-int printfMenuReaderManagement();
+int printfMenuReaderManagementForAdmin();
+int printfMenuReaderManagementForExpert();
+int printfMenuReaderManagementForManager();
 
-int printfMenuBookManagement();
+int printfMenuBookManagementForAdmin();
+int printfMenuBookManagementForExpert();
+int printfMenuBookManagementForManager();
 
 int editInfReaderMenu();
 

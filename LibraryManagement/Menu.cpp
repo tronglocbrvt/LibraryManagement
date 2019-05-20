@@ -29,10 +29,9 @@
 	     
 	 }
 #endif
- 
-//=================================================
 
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 int printLoginMenu(){
 	 printf("*******************************************\n");
@@ -57,7 +56,8 @@ int printLoginMenu(){
 	}
 
 }
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 void printfMainMenu(){
 	printf("1. Quan ly tai khoan ca nhan.\n");
@@ -70,7 +70,8 @@ void printfMainMenu(){
 	printf("0. Thoat\n");
 
 }
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 int printUserMenu(int typeAccount)
 {
@@ -93,8 +94,9 @@ int printUserMenu(int typeAccount)
 	return 2;
 }
 
-
-int printfMenuReaderManagement(){
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+int printfMenuReaderManagementForAdmin(){
 	system(cls);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
@@ -106,20 +108,30 @@ int printfMenuReaderManagement(){
 
 	return 6;
 }
-
-int printfMenuBookManagement(){
+int printfMenuReaderManagementForExpert(){
 	system(cls);
-	printf("1. Xem danh sach sach trong thu vien.\n");
-	printf("2. Them sach.\n");
-	printf("3. Chinh sua thong tin mot quyen sach.\n");
-	printf("4. Xoa thong tin mot quyen sach.\n");
-	printf("5. Tim kiem sach qua ISBN.\n");
-	printf("6. Tim kiem sach qua ten sach.\n");
+	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	printf("2. Them doc gia.\n");
+	printf("3. Chinh sua thong tin mot doc gia.\n");
+	// printf("4. Xoa thong tin mot doc gia.\n");
+	printf("4. Tim kiem doc gia qua CMND.\n");
+	printf("5. Tim kiem doc gia qua ho ten.\n");
+	printf("0. Quay ve\n");
+
+	return 5;
+}
+int printfMenuReaderManagementForManager(){
+	system(cls);
+	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	printf("2. Them doc gia.\n");
+	printf("3. Chinh sua thong tin mot doc gia.\n");
+	printf("4. Xoa thong tin mot doc gia.\n");
+	printf("5. Tim kiem doc gia qua CMND.\n");
+	printf("6. Tim kiem doc gia qua ho ten.\n");
 	printf("0. Quay ve\n");
 
 	return 6;
 }
-
 int editInfReaderMenu(){
 	system(cls);
 	printf("1. Sua Ho va ten\n");
@@ -133,7 +145,44 @@ int editInfReaderMenu(){
 
 	return 7;
 }
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+int printfMenuBookManagementForAdmin(){
+	system(cls);
+	printf("1. Xem danh sach sach trong thu vien.\n");
+	printf("2. Them sach.\n");
+	printf("3. Chinh sua thong tin mot quyen sach.\n");
+	printf("4. Xoa thong tin mot quyen sach.\n");
+	printf("5. Tim kiem sach qua ISBN.\n");
+	printf("6. Tim kiem sach qua ten sach.\n");
+	printf("0. Quay ve\n");
 
+	return 6;
+}
+int printfMenuBookManagementForExpert(){
+	system(cls);
+	// printf("1. Xem danh sach sach trong thu vien.\n");
+	// printf("2. Them sach.\n");
+	// printf("3. Chinh sua thong tin mot quyen sach.\n");
+	// printf("4. Xoa thong tin mot quyen sach.\n");
+	printf("1. Tim kiem sach qua ISBN.\n");
+	printf("2. Tim kiem sach qua ten sach.\n");
+	printf("0. Quay ve\n");
+
+	return 2;
+}
+int printfMenuBookManagementForManager(){
+	system(cls);
+	printf("1. Xem danh sach sach trong thu vien.\n");
+	printf("2. Them sach.\n");
+	printf("3. Chinh sua thong tin mot quyen sach.\n");
+	printf("4. Xoa thong tin mot quyen sach.\n");
+	printf("5. Tim kiem sach qua ISBN.\n");
+	printf("6. Tim kiem sach qua ten sach.\n");
+	printf("0. Quay ve\n");
+
+	return 6;
+}
 int editInfBookMenu(){
 	system(cls);
 	printf("1. Sua ten sach\n");
@@ -147,7 +196,8 @@ int editInfBookMenu(){
 
 	return 7;
 }
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 int askYesNoQuestion(char *note){
 	system(cls);
 	printf("%s?\n", note);
@@ -156,7 +206,8 @@ int askYesNoQuestion(char *note){
 
 	return 2;
 }
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 int analyzingMenuForAdmin(){
 	system(cls);
 	printf("1. Thống kê số lượng sách trong thư viện.\n");

@@ -30,5 +30,8 @@ void searchISBN();
 
 void searchBookName();
 
-void runBookManagement(); // khởi chạy quản lý sách
+void runBookManagementForAdmin();
+void runBookManagementForExpert();
+void runBookManagementForManager();
+void runBookManagement(int typeAccount); // khởi chạy quản lý sách
 

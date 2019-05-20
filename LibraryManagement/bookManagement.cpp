@@ -420,12 +420,10 @@ void searchBookName()
 	freeLinkListBook(lsBook);
 	delete book;
 }
-
-void runBookManagement()
-{
+void runBookManagementForAdmin(){
 	int choice = 0;
 	do {
-		choice = getNumberPressKey(printfMenuBookManagement(), 0);
+		choice = getNumberPressKey(printfMenuBookManagementForAdmin(), 0);
 		system(cls);
 		switch (choice){
 		case 1: // xem danh sách sách trong thư viện
@@ -450,5 +448,76 @@ void runBookManagement()
 			break;
 		}
 	} while (choice != 0);
-
+}
+void runBookManagementForExpert(){
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(printfMenuBookManagementForExpert(), 0);
+		system(cls);
+		switch (choice){
+		// case 1: // xem danh sách sách trong thư viện
+		// 	viewAllBook();
+		// 	break;
+		// case 2: // Thêm sách
+		// 	writeInfBookToFile();
+		// 	break;
+		// case 3: // Chỉnh sửa thông tin một quyển sách
+		// 	editBookToFile();
+		// 	break;
+		// case 4: // Xóa thông tin 1 quyển sách
+		// 	deleteBookToFile();
+		// 	break;
+		case 1: // Tìm kiếm sách qua ISBN
+			searchISBN();
+			break;
+		case 2: // Tìm kiếm sách qua tên sách.
+			searchBookName();
+			break;
+		default:
+			break;
+		}
+	} while (choice != 0);
+}
+void runBookManagementForManager(){
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(printfMenuBookManagementForManager(), 0);
+		system(cls);
+		switch (choice){
+		case 1: // xem danh sách sách trong thư viện
+			viewAllBook();
+			break;
+		case 2: // Thêm sách
+			writeInfBookToFile();
+			break;
+		case 3: // Chỉnh sửa thông tin một quyển sách
+			editBookToFile();
+			break;
+		case 4: // Xóa thông tin 1 quyển sách
+			deleteBookToFile();
+			break;
+		case 5: // Tìm kiếm sách qua ISBN
+			searchISBN();
+			break;
+		case 6: // Tìm kiếm sách qua tên sách.
+			searchBookName();
+			break;
+		default:
+			break;
+		}
+	} while (choice != 0);
+}
+void runBookManagement(int typeAccount)
+{
+	switch(typeAccount){
+		case 1:
+			runBookManagementForAdmin();
+			break;
+		case 2:
+			runBookManagementForExpert();
+			break;
+		default:
+			runBookManagementForManager();
+			break;
+	}
 }

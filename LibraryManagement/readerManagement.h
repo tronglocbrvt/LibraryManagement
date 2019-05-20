@@ -33,5 +33,5 @@ void searchNationID();
 
 void searchFullName();
 
-void runReaderManagement(); // khởi chạy quản lý đọc giả
+void runReaderManagement(int typeAccount); // khởi chạy quản lý đọc giả
 

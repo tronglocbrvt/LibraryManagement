@@ -475,11 +475,10 @@ void searchFullName()
 	Sleep(1000);
 }
 
-void runReaderManagement()
-{
+void runReaderManagementForAdmin(){
 	int choice = 0;
 	do {
-		choice = getNumberPressKey(printfMenuReaderManagement(), 0);
+		choice = getNumberPressKey(printfMenuReaderManagementForAdmin(), 0);
 		system(cls);
 		switch (choice){
 		case 1: // xem danh sách độc giả trong thư viện
@@ -505,5 +504,79 @@ void runReaderManagement()
 		}
 		// Sleep(1);
 	} while (choice != 0);
+}
+void runReaderManagementForExpert(){
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(printfMenuReaderManagementForExpert(), 0);
+		system(cls);
+		switch (choice){
+		case 1: // xem danh sách độc giả trong thư viện
+			viewAllReader();
+			break;
+		case 2: // printf("2. Them doc gia.\n");
+			writeInfReaderToFile();
+			break;
+		case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
+			editReaderToFile();
+			break;
+		// case 4: // printf("4. Xoa thong tin mot doc gia.\n");
+		// 	deleteReaderToFile();//<<<<<
+		// 	break;
+		case 4: // Tìm kiếm độc giả qua CMND
+			searchNationID();
+			break;
+		case 5: // Tìm kiếm độc giả qua họ tên
+			searchFullName();
+			break;
+		default:
+			break;
+		}
+		// Sleep(1);
+	} while (choice != 0);
+}
+void runReaderManagementManager(){
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(printfMenuReaderManagementForManager(), 0);
+		system(cls);
+		switch (choice){
+		case 1: // xem danh sách độc giả trong thư viện
+			viewAllReader();
+			break;
+		case 2: // printf("2. Them doc gia.\n");
+			writeInfReaderToFile();
+			break;
+		case 3: // printf("3. Chinh sua thong tin mot doc gia.\n");
+			editReaderToFile();
+			break;
+		case 4: // printf("4. Xoa thong tin mot doc gia.\n");
+			deleteReaderToFile();//<<<<<
+			break;
+		case 5: // Tìm kiếm độc giả qua CMND
+			searchNationID();
+			break;
+		case 6: // Tìm kiếm độc giả qua họ tên
+			searchFullName();
+			break;
+		default:
+			break;
+		}
+		// Sleep(1);
+	} while (choice != 0);
+}
+void runReaderManagement(int typeAccount)
+{
+	switch(typeAccount){
+		case 1:
+			runReaderManagementForAdmin();
+			break;
+		case 2:
+			runReaderManagementForExpert();
+			break;
+		default:
+			runReaderManagementManager();
+			break;
+	}
 
 }
