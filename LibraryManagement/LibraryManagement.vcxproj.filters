@@ -54,6 +54,12 @@
     <ClInclude Include="userManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="analyzingLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedListCategoryBooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraryManagement.cpp">
@@ -93,6 +99,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="userManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="analyzingLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linkedListCategoryBooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

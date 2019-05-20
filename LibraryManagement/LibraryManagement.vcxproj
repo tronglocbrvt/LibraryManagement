@@ -76,12 +76,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="analyzingLibrary.h" />
     <ClInclude Include="borrowedBooks.h" />
     <ClInclude Include="commonFunction.h" />
     <ClInclude Include="functionsFile.h" />
     <ClInclude Include="LibraryManagement.h" />
     <ClInclude Include="linkedListBooks.h" />
     <ClInclude Include="linkedListBorrowBook.h" />
+    <ClInclude Include="linkedListCategoryBooks.h" />
     <ClInclude Include="linkedListReaders.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="readerManagement.h" />
@@ -91,12 +93,14 @@
     <ClInclude Include="userManagement.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="analyzingLibrary.cpp" />
     <ClCompile Include="borrowedBooks.cpp" />
     <ClCompile Include="commonFunction.cpp" />
     <ClCompile Include="functionsFile.cpp" />
     <ClCompile Include="LibraryManagement.cpp" />
     <ClCompile Include="linkedListBooks.cpp" />
     <ClCompile Include="linkedListBorrowBook.cpp" />
+    <ClCompile Include="linkedListCategoryBooks.cpp" />
     <ClCompile Include="linkedListReaders.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="readerManagement.cpp" />

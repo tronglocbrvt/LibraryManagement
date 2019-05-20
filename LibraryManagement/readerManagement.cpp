@@ -85,10 +85,11 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		viewInfAReader(*reader);
 	}
-	Sleep(1000);
+
 	fclose(fileReader);
 
 	delete reader;
+	system("pause");
 }
 
 bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách

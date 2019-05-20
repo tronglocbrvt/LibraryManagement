@@ -3,10 +3,10 @@
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
-	NodeBook *pNow;
+	NodeBook *pNow = lsbook.pHead;
 	char *stringMoneyPayement = new char[19];
 	stringMoneyPayement[18] = '\0';
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -14,7 +14,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 			printf("||                   >>DANH SACH SACH TRONG THU VIEN<<                            ||\n");
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			pNow = lsbook.pHead;
+			
 			while(pNow != NULL){
 				stringMoneyPayement = intMoneyToStringMoney(pNow->book.priceBook);
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
@@ -28,7 +28,6 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete pNow;
 			delete[] stringMoneyPayement;
 			return true;
 		default:
@@ -388,22 +387,22 @@ void runningAnalyzingForAdmin(){
 		choice = getNumberPressKey(analyzingMenuForAdmin(), 0);
 		system(cls);
 		switch (choice){
-			case 1: // Thống kê số lượng sách trong thư viện v
+			case 1: // Thống kê số lượng sách trong thư viện
 				analyzingBook();
 				break;
 			case 2: // Thống kê số lượng sách theo thể loại
 				analyzingCatoBook();
 				break;
-			case 3: // Thống kê số lượng độc giả v
+			case 3: // Thống kê số lượng độc giả
 				analyzingReader();
 				break;
-			case 4: // Thống kê số lượng độc giả theo giới tính v
+			case 4: // Thống kê số lượng độc giả theo giới tính
 				analyzingSexReader();
 				break;
-			case 5: // Thống kê số sách đang được mượn v
+			case 5: // Thống kê số sách đang được mượn
 				analyzingBorrowingBook();
 				break;
-			case 6: // Thống kê danh sách độc giả bị trễ hạn v
+			case 6: // Thống kê danh sách độc giả bị trễ hạn
 				analyzingOverdueReader();
 				break;
 			default:
@@ -418,22 +417,22 @@ void runningAnalyzingForExpert(){
 		choice = getNumberPressKey(analyzingMenuForExpert(), 0);
 		system(cls);
 		switch (choice){
-			// case 1: // Thống kê số lượng sách trong thư viện v
+			// case 1: // Thống kê số lượng sách trong thư viện
 			// 	analyzingBook();
 			// 	break;
 			// case 2: // Thống kê số lượng sách theo thể loại
 			// 	analyzingCatoBook();
 			// 	break;
-			// case 3: // Thống kê số lượng độc giả v
+			// case 3: // Thống kê số lượng độc giả
 			// 	analyzingReader();
 			// 	break;
-			// case 4: // Thống kê số lượng độc giả theo giới tính v
+			// case 4: // Thống kê số lượng độc giả theo giới tính
 			// 	analyzingSexReader();
 			// 	break;
-			case 1: // Thống kê số sách đang được mượn v
+			case 1: // Thống kê số sách đang được mượn
 				analyzingBorrowingBook();
 				break;
-			case 2: // Thống kê danh sách độc giả bị trễ hạn v
+			case 2: // Thống kê danh sách độc giả bị trễ hạn
 				analyzingOverdueReader();
 				break;
 			default:
@@ -448,24 +447,24 @@ void runningAnalyzingForManager(){
 		choice = getNumberPressKey(analyzingMenuManager(), 0);
 		system(cls);
 		switch (choice){
-			case 1: // Thống kê số lượng sách trong thư viện v
+			case 1: // Thống kê số lượng sách trong thư viện
 				analyzingBook();
 				break;
 			case 2: // Thống kê số lượng sách theo thể loại
 				analyzingCatoBook();
 				break;
-			case 3: // Thống kê số lượng độc giả v
+			case 3: // Thống kê số lượng độc giả
 				analyzingReader();
 				break;
-			case 4: // Thống kê số lượng độc giả theo giới tính v
+			case 4: // Thống kê số lượng độc giả theo giới tính
 				analyzingSexReader();
 				break;
-			case 5: // Thống kê số sách đang được mượn v
-				analyzingBorrowingBook();
-				break;
-			case 6: // Thống kê danh sách độc giả bị trễ hạn v
-				analyzingOverdueReader();
-				break;
+			//case 5: // Thống kê số sách đang được mượn
+			//	analyzingBorrowingBook();
+			//	break;
+			//case 6: // Thống kê danh sách độc giả bị trễ hạn
+			//	analyzingOverdueReader();
+			//	break;
 			default:
 				break;
 		}

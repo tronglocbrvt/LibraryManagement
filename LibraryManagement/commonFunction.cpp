@@ -17,7 +17,8 @@
 #endif
 
 //Hàm kiểm tra số nhập từ bàn phím
-int getNumberPressKey(int MAX, int MIN){
+int getNumberPressKey(int MAX, int MIN)
+{
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
 	printf("Nhan so de chon: ");
@@ -25,11 +26,13 @@ int getNumberPressKey(int MAX, int MIN){
 	while (1) {		
 			if (kbhit()) {
 			ch = getch();
+			printf("%c\n", ch);
+			break;
 			// Stores the pressed key in ch 
 			// printf("ban chon: %c\n", );
 			// Terminates the loop 
 			// when escape is pressed 
-			if (ch >= char(MIN + '0') && ch <= char(max + '0'))
+			/*if (ch >= char(MIN + '0') && ch <= char(max + '0'))
 				break; 
 			if (ch == 27)
 			{
@@ -38,7 +41,7 @@ int getNumberPressKey(int MAX, int MIN){
 			if (ch == '`')
 			{
 				return -2;
-			}
+			}*/
 		}
 
 	}

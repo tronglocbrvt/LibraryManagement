@@ -60,13 +60,28 @@ int printLoginMenu(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 void printfMainMenu(){
+	textBgColor(BLUE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                            >> QUAN LY THU VIEN <<                              ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
+	gotoxy(30, 6);
 	printf("1. Quan ly tai khoan ca nhan.\n");
+	gotoxy(30, 7);
 	printf("2. Quan ly doc gia.\n");
+	gotoxy(30, 8);
 	printf("3. Quan ly sach.\n");
+	gotoxy(30, 9);
 	printf("4. Lap phieu muon sach.\n");
+	gotoxy(30, 10);
 	printf("5. Lap phieu tra sach.\n");
+	gotoxy(30, 11);
 	printf("6. Thong ke co ban.\n");
+	gotoxy(30, 12);
 	printf("7. Dang xuat.\n");
+	gotoxy(30, 13);
 	printf("0. Thoat\n");
 
 }
@@ -76,17 +91,34 @@ void printfMainMenu(){
 int printUserMenu(int typeAccount)
 {
 	system(cls);
+	textBgColor(BLUE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                      >> QUAN LY TAI KHOAN CA NHAN <<                           ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
+	gotoxy(25, 6);
 	printf("1. Thay doi mat khau.\n");
+	gotoxy(25, 7);
 	printf("2. Cap nhat thong tin ca nhan.\n");
 
 	if (typeAccount == 1)
 	{
+		gotoxy(25, 8);
 		printf("3. Tao nguoi dung.\n");
+		gotoxy(25, 9);
 		printf("4. Phan quyen nguoi dung.\n");
+		gotoxy(25, 10);
 		printf("5. Chinh sua trang thai nguoi dung.\n");
+		gotoxy(25, 11);
+		printf("0. Quay ve.\n");
 	}
-
-	printf("0. Quay ve.\n");
+	else
+	{
+		gotoxy(25, 8);
+		printf("0. Quay ve.\n");
+	}
 	
 	if (typeAccount == 1)
 		return 5;
@@ -210,48 +242,31 @@ int askYesNoQuestion(char *note){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 int analyzingMenuForAdmin(){
 	system(cls);
-	printf("1. Thống kê số lượng sách trong thư viện.\n");
-	printf("2. Thống kê số lượng sách theo thể loại.\n");
-	printf("3. Thống kê số lượng độc giả.\n");
-	printf("4. Thống kê số lượng độc giả theo giới tính.\n");
-	printf("5. Thống kê số sách đang được mượn.\n");
-	printf("6. Thống kê danh sách độc giả bị trễ hạn.\n");
+	printf("1. Thong ke so luong sach trong thu vien.\n");
+	printf("2. Thong ke so luong sach theo the loai.\n");
+	printf("3. Thong ke so luong doc gia.\n");
+	printf("4. Thong ke so luong doc gia theo gioi tinh.\n");
+	printf("5. Thong ke so luong sach dang duoc muon.\n");
+	printf("6. Thong ke danh sach doc gia bi tre han.\n");
 	printf("0. Quay ve.\n");
 
 	return 6;
 }
 int analyzingMenuForExpert(){
 	system(cls);
-	printf("1. Thống kê số sách đang được mượn.\n");
-	printf("2. Thống kê danh sách độc giả bị trễ hạn.\n");
+	printf("1. Thong ke so luong sach dang duoc muon.\n");
+	printf("2. Thong ke danh sach doc gia bi tre han.\n");
 	printf("0. Quay ve.\n");
 
 	return 2;
 }
 int analyzingMenuManager(){
 	system(cls);
-	printf("1. Thống kê số lượng sách trong thư viện.\n");
-	printf("2. Thống kê số lượng sách theo thể loại.\n");
-	printf("3. Thống kê số lượng độc giả.\n");
-	printf("4. Thống kê số lượng độc giả theo giới tính.\n");
-	printf("5. Thống kê số sách đang được mượn.\n");
-	printf("6. Thống kê danh sách độc giả bị trễ hạn.\n");
+	printf("1. Thong ke so luong sach trong thu vien.\n");
+	printf("2. Thong ke so luong sach theo the loai.\n");
+	printf("3. Thong ke so luong doc gia.\n");
+	printf("4. Thong ke so luong doc gia theo gioi tinh.\n");
 	printf("0. Quay ve.\n");
 
-	return 6;
+	return 4;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

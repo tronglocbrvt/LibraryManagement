@@ -1,5 +1,4 @@
 ﻿#include "LibraryManagement.h"
-
 #include "commonFunction.h"
 #include "Menu.h"
 #include "userManagement.h"
@@ -29,7 +28,7 @@ int main()
 	{
 		system(cls);
 		int typeAccount;
-		resizeConsole(1500, 1500);
+		resizeConsole(1200, 1200);
 		do
 		{
 			system(cls);
@@ -37,9 +36,9 @@ int main()
 			if (typeAccount == 0)
 			{
 				textBgColor(RED, BLACK);
-				printf("Dang nhap that bai. Vui long nhan phim bat ky thu lai!\n");
+				printf("Dang nhap that bai. Vui long thu lai!\n");
 				// getch();
-				Sleep(1);
+				Sleep(1000);
 			}
 			else if (typeAccount == -1)
 			{

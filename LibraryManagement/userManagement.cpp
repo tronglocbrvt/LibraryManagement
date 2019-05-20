@@ -104,120 +104,6 @@ bool checkUsername(char *Username)
 	return true;
 }
 
-
-// Hàm nhập Username
-void getUsername(Users &A)
-{
-	do
-	{
-		printf("Nhap Username (toi da 20 ky tu): ");
-		scanf("%s", A.Username);
-		int temp = getchar();
-		if (!checkUsername(A.Username))
-			printf("Username da ton tai. Vui long nhap Username khac.\n");
-	} while (!checkUsername(A.Username));
-}
-
-// Hàm nhập Ngày sinh
-void getBirthday(Users &A)
-{
-	bool checkDay;
-	do
-	{
-		printf("Nhap ngay sinh: ");
-		scanf("%d", &A.Birthday.Date);
-		int temp = getchar();
-
-		printf("Nhap thang sinh: ");
-		scanf("%d", &A.Birthday.Month);
-		temp = getchar();
-
-		printf("Nhap nam sinh: ");
-		scanf("%d", &A.Birthday.Year);
-		temp = getchar();
-
-		checkDay = isPossibleDay(A.Birthday.Date, A.Birthday.Month, A.Birthday.Year);
-		if (!checkDay)
-			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
-	} while (checkDay == false);
-}
-
-// Hàm nhập CMND
-void getNationalID(Users &A)
-{
-	int flag = 0;
-	do
-	{
-		printf("Nhap CMND (9 so hoac 12 so): ");
-		scanf("%s", A.NationID);
-		int temp = getchar();
-		int i;
-		if (strlen(A.NationID) != 9 && strlen(A.NationID) != 12)
-		{
-			printf("CMND khong hop le. Vui long nhap lai.\n");
-			continue;
-		}
-
-		flag = 1;
-
-		for (int i = 0; i < strlen(A.NationID); i++)
-		{
-			if (!isNumber(A.NationID[i]))
-			{
-				flag = 0;
-				printf("CMND khong hop le. Vui long nhap lai.\n");
-				break;
-			}
-		}
-	} while (flag == 0);
-
-}
-
-// Hàm nhập giới tính
-void getSex(Users &A)
-{
-	do
-	{
-		printf("Nhap gioi tinh (Nam nhap 1; Nu nhap 0): ");
-		scanf("%d", &A.Sex);
-		int temp = getchar();
-
-		if (A.Sex != 0 && A.Sex != 1)
-			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
-	} while (A.Sex != 0 && A.Sex != 1);
-}
-
-// Hàm nhập tình trạng
-void getStatus(Users &A)
-{
-	do
-	{
-		printf("Nhap tinh trang (Actived nhap 1; Blocked nhap 0): ");
-		int status = 0;
-		scanf("%d", &status);
-		A.Status = (bool)status;
-		int temp = getchar();
-
-		if (A.Status != 0 && A.Status != 1)
-			printf("Vui long nhap lai. Actived nhap 1, Blocked nhap 0.\n");
-	} while (A.Status != 0 && A.Status != 1);
-}
-
-// Hàm nhập phân quyền
-// void getTypeAccount(Users &A)
-// {
-// 	do
-// 	{
-// 		printf("Nhap phan quyen (Chuyen vien nhap 2; quan ly nhap 3): ");
-// 		scanf("%d", &A.typeAccount);
-// 		int temp = getchar();
-
-// 		if (A.typeAccount != 2 && A.typeAccount != 3)
-// 			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
-// 	} while (A.typeAccount != 2 && A.typeAccount != 3);
-// }
-
-
 // Nhập thông tin người dùng
 Users addUser()
 {
@@ -321,12 +207,21 @@ void ChangePassword()
 
 	FILE *f = fopen(_DIR_DATA_FOLDER_USER_CUR, "rb"); // mở File chứa thông tin tài khoản đang đăng nhập
 
-	if (f == NULL)
+	if (f == NULL )
 		return;
 
 	fread(&curUser, sizeof(Users), 1, f);
 	do
 	{
+		system(cls);
+		textBgColor(PURPLE, LIGHTAQUA);
+		printf("------------------------------------------------------------------------------------\n");
+		printf("|----------------------------------------------------------------------------------|\n");
+		printf("||                          >> THAY DOI MAT KHAU <<                               ||\n");
+		printf("|----------------------------------------------------------------------------------|\n");
+		printf("------------------------------------------------------------------------------------\n");
+
+		textBgColor(WHITE, BLACK);
 		printf("Moi ban nhap mat khau cu: ");
 		scanf("%s", oldPassword);
 
@@ -338,12 +233,16 @@ void ChangePassword()
 
 		if (strcmp(oldPassword, curUser.Password) != 0) // Mật khẩu không khớp với mật khẩu đã tạo
 		{
+			textBgColor(RED, BLACK);
 			printf("Ban da nhap sai mat khau cu.\n");
+			Sleep(500);
 		}
 
 		if (strcmp(newPassword1, newPassword2) != 0) // Mật khẩu xác nhận không khớp với mật khẩu vừa nhập
 		{
+			textBgColor(RED, BLACK);
 			printf("Mat khau xac nhan khong khop.\n");
+			Sleep(500);
 		}
 
 	} while (strcmp(oldPassword, curUser.Password) != 0 || strcmp(newPassword1, newPassword2) != 0);
@@ -361,7 +260,10 @@ void ChangePassword()
 
 	updateFile(curUser);
 
+	textBgColor(RED, BLACK);
 	printf("Ban da doi mat khau thanh cong!\n");
+	textBgColor(WHITE, BLACK);
+	Sleep(1000);
 
 	delete[] oldPassword;
 	delete[] newPassword1;
@@ -381,8 +283,16 @@ void viewProfile()
 
 	fread(&curUser, sizeof(Users), 1, fCur);
 
-	printf("--------------------------------------------------------\n");
+	system(cls);
+	textBgColor(PURPLE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                       >> CAP NHAT THONG TIN CA NHAN <<                         ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
 	printf("Thong tin ca nhan cua Username %s:\n\n", curUser.Username);
+	printf("--------------------------------------------------------\n");
 	printf("Ho va ten: %s\n", curUser.Fullname);
 	printf("Ngay sinh: ");
 	printfDay(curUser.Birthday);
@@ -399,16 +309,20 @@ void viewProfile()
 int wantEdit()
 {
 	int edit = 0;
-	printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
 	do
 	{
+		textBgColor(YELLOW, BLACK);
+		printf("Ban con muon chinh sua nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
 		scanf("%d", &edit);
 		if (edit == 1)
 			return 1;
 		else if (edit == 0)
 			return 0;
 		else
-			printf("Vui long nhap 0 hoac 1\n");
+		{
+			textBgColor(RED, BLACK);
+			printf("Vui long nhap 0 hoac 1.\n");
+		}
 	} while (edit != 0 && edit != 1);
 	return edit;
 }
@@ -434,11 +348,11 @@ void editProfile()
 
 	do
 	{
-		printf("Nhap so de chinh sua thong tin tuong ung: \n");
 		printf("1. Ho va ten \t 2. Ngay sinh \t 3. CMND \t 4. Dia chi \t 5. Gioi tinh\n");
-		scanf("%d", &choice);
+		/*printf("Nhap so de chinh sua thong tin tuong ung: ");
+		scanf("%d", &choice);*/
 
-		switch (choice)
+		switch (choice = getNumberPressKey(5,0))
 		{
 		case 1:
 			printf("Nhap ho va ten moi: ");
@@ -499,8 +413,13 @@ void editProfile()
 	fclose(fw);
 
 	updateFile(curUser);
-
+	textBgColor(RED, BLACK);
+	printf("Ban da thay doi thong tin thanh cong!\n");
+	Sleep(1000);
 	viewProfile();
+	textBgColor(YELLOW, BLACK);
+	printf("Nhan phim bat ky de quay lai Menu Quan Ly Tai Khoa Ca Nhan...");
+	getch();
 }
 
 void inforDecentraliseUser()

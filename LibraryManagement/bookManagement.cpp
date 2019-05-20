@@ -92,7 +92,7 @@ Books addBook()
 	int flag = 0;
 	do
 	{
-		// getchar();
+		flushall();
 		printf("Nhap ISBN < 13 chu so >: ");
 		gets(book.ISBN);
 
@@ -112,6 +112,8 @@ Books addBook()
 				break;
 			}
 		}
+
+
 	} while (flag == 0);
 
 	// getchar();
@@ -187,7 +189,7 @@ bool writeInfBookToFile() // thêm sách vào database
 void viewInfABook(Books book) // Xem thông tin của sách
 {
 	printf("--------------------------------------------------------\n");
-	printf("\tThong Tin Sach O Thu Vien\n");
+	printf("\tThong Tin Sach Trong Thu Vien\n");
 	printf("Ma ISBN: %s\n", book.ISBN);
 	printf("Ten sach: %s\n", book.nameBook);
 	printf("Ten tac gia: %s\n", book.Author);
@@ -282,7 +284,7 @@ void editBookToFile()
 	if (book == NULL)
 		return;
 
-	// flushall();
+	flushall();
 	printf("Nhap vao ISBN cua sach muon chinh sua: ");
 	gets(book->ISBN);
 
@@ -296,7 +298,7 @@ void editBookToFile()
 	}
 
 	viewInfABook(*book);
-	Sleep(1000);
+	system("pause");
 	while (fread(&temp, sizeof(Books), 1, fo) != 0)
 	{
 		if (strcmp(book->ISBN, temp.ISBN) != 0)
@@ -380,7 +382,7 @@ void searchISBN()
 {
 	Books *book = new Books;
 
-	// getchar();
+	flushall();
 	printf("Nhap vao ISBN: ");
 	gets(book->ISBN);
 
@@ -400,7 +402,7 @@ void searchBookName()
 {
 	Books *book = new Books;
 
-	// flushall();
+	flushall();
 	printf("Nhap ten sach: ");
 	gets(book->nameBook);
 
@@ -420,6 +422,7 @@ void searchBookName()
 	freeLinkListBook(lsBook);
 	delete book;
 }
+
 void runBookManagementForAdmin(){
 	int choice = 0;
 	do {
