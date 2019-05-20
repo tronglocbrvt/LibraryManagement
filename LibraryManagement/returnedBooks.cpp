@@ -104,11 +104,12 @@ void returnBook()
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	char *isbnBook = new char[14];
 	Books *book = new Books;
-	int moneyRate = 0;
-	switch(getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1)){
+	int moneyRate = 1;
+	int choice = getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1);
+	switch(choice){
 		case 1: // có mất sách
-			book = findBookWithISBN(isbnBook);
-			moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT * book->priceBook;
+			// book = findBookWithISBN(isbnBook);
+			moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT;
 			printf("\n");
 			printReaderFromLL(llBorBook);
 			printf("Chon sach da mat <Nhap ISBN>: ");
@@ -151,7 +152,14 @@ void returnBook()
 			break;
 		}
 	}while(true);
-	moneyPayement = moneyRate * updateReturnBookToList(llBorBook, numRet);
+
+	if (choice == 1) // co mat sach
+	{
+		book = findBookWithISBN(isbnBook);
+		moneyPayement = book->priceBook * numRet * moneyRate;
+		updateReturnBookToList(llBorBook, numRet);
+	}
+	else moneyPayement = moneyRate * updateReturnBookToList(llBorBook, numRet);
 	updateReturnBookToFile(llBorBook);
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
