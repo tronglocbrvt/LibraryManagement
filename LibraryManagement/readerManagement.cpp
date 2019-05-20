@@ -347,6 +347,8 @@ void editReaderToFile()
 	{
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
+		fclose(fo);
+		fclose(ftemp);
 		delete reader;
 		return;
 	}
@@ -398,6 +400,8 @@ void deleteReaderToFile()
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
 		delete reader;
+		fclose(fo);
+		fclose(ftemp);
 		return;
 	}
 
