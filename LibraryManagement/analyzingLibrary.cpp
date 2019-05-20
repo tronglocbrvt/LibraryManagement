@@ -4,20 +4,38 @@
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	NodeBook *pNow;
+	char *stringMoneyPayement = new char[19];
+	stringMoneyPayement[18] = '\0';
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                   >>DANH SACH SACH TRONG THU VIEN<<                            ||\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsbook.pHead;
 			while(pNow != NULL){
-				viewInfABook(pNow->book);
+				stringMoneyPayement = intMoneyToStringMoney(pNow->book.priceBook);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
+				printf("|^   ISBN:  %-14s  Ten Sach:  %-43sv|\n", pNow->book.ISBN, pNow->book.nameBook);
+				printf("|^   Ten tac gia:           %-51s   v|\n", pNow->book.Author);
+				printf("|^   The loai:              %-51s   v|\n", pNow->book.Category);
+				printf("|^   Nha xuat ban:  %-40sNam xuat ban:  %4d   v|\n", pNow->book.publishCompany, pNow->book.yearPublish);
+				printf("|^   So luong sach hien co:  %6d   |  Gia tien:  %18s VND        v|\n", pNow->book.numBook, stringMoneyPayement);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				pNow = pNow->pNext;
 			}
-			
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			delete pNow;
+			delete[] stringMoneyPayement;
 			return true;
 		default:
+			delete[] stringMoneyPayement;
 			return false;
 	}
+	delete[] stringMoneyPayement;
 	return true;
 }
 void analyzingBook(){
@@ -36,8 +54,11 @@ void analyzingBook(){
 	}
 
 	printf("So luong sach trong thu vien hien co la:\t%d\n", lsbook.total);
-	Sleep(1000);
-	askToPrintAllBook(lsbook);
+	if (lsbook.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllBook(lsbook);
+	}
 	Sleep(1000);
 	freeLinkListBook(lsbook);
 	
@@ -46,7 +67,7 @@ void analyzingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	NodeCategory *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -56,10 +77,10 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsCate.pHead;
 			while(pNow != NULL){
-				printf("|\t%-41s\t:\t%6d\t\t|\n", pNow->Category, pNow->numBookPerCategory);
+				printf("|\t%-41s\t|\t%6d\t\t   |\n", pNow->Category, pNow->numBookPerCategory);
 				pNow = pNow->pNext;
+				printf("|----------------------------------------------------------------------------------|\n");
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
 			
 			delete pNow;
@@ -89,8 +110,11 @@ void analyzingCatoBook(){
 	}
 
 	printf("Cac the loai trong thu vien hien co la %d The loai.\n", lsCate.total);
-	Sleep(1000);
-	askToPrintAllCato(lsCate);
+	if (lsCate.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllCato(lsCate);
+	}
 	Sleep(1000);
 	freeLinkListBook(lsCate);
 }
@@ -101,12 +125,25 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                          >>DANH SACH DOC GIA<<                                 ||\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsreader.pHead;
 			while(pNow != NULL){
-				viewInfAReader(pNow->reader);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+				printf("|^   ID:\t%-63s   v|\n", pNow->reader.ID);
+				printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", pNow->reader.Fullname, pNow->reader.NationID);
+				printf("|^   Ngay sinh:\t\t%2d . %2d . %4d\t|  \tGioi tinh:\t%-15s   v|\n", pNow->reader.Birthday.Date, pNow->reader.Birthday.Month, pNow->reader.Birthday.Year, (pNow->reader.Sex == 1 ? (char*)"Nam" : (char*)"Nu"));
+				printf("|^   Email:\t%-63s   v|\n", pNow->reader.Email);
+				printf("|^   Dia chi:\t%-63s   v|\n", pNow->reader.Address);
+				printf("|^   Ngay lap the:\t%2d . %2d . %4d  |\tNgay het han:\t%2d . %2d . %4d    v|\n", pNow->reader.creatCard.Date, pNow->reader.creatCard.Month, pNow->reader.creatCard.Year, pNow->reader.expireCard.Date, pNow->reader.expireCard.Month, pNow->reader.expireCard.Year);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			delete pNow;
 			return true;
 		default:
@@ -131,8 +168,11 @@ void analyzingReader(){
 	}
 
 	printf("So luong doc gia dang dang ky voi Thu vien la:\t%d\n", lsreader.total);
-	Sleep(1000);
-	askToPrintAllReader(lsreader);
+	if (lsreader.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllReader(lsreader);
+	}
 	Sleep(1000);
 	freeLinkListReader(lsreader);
 }
@@ -143,21 +183,46 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
-			printf("Danh sach doc gia nam:\n");
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                  >>DANH SACH DOC GIA THEO GIOI TINH<<                          ||\n");
+			printf("|----------------------------------NAM---------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsMaleReader.pHead;
 			while(pNow != NULL){
-				viewInfAReader(pNow->reader);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+				printf("|^   ID:\t%-63s   v|\n", pNow->reader.ID);
+				printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", pNow->reader.Fullname, pNow->reader.NationID);
+				printf("|^   Ngay sinh:\t\t%2d . %2d . %4d\t|  \tGioi tinh:\t%-15s   v|\n", pNow->reader.Birthday.Date, pNow->reader.Birthday.Month, pNow->reader.Birthday.Year, (pNow->reader.Sex == 1 ? (char*)"Nam" : (char*)"Nu"));
+				printf("|^   Email:\t%-63s   v|\n", pNow->reader.Email);
+				printf("|^   Dia chi:\t%-63s   v|\n", pNow->reader.Address);
+				printf("|^   Ngay lap the:\t%2d . %2d . %4d  |\tNgay het han:\t%2d . %2d . %4d    v|\n", pNow->reader.creatCard.Date, pNow->reader.creatCard.Month, pNow->reader.creatCard.Year, pNow->reader.expireCard.Date, pNow->reader.expireCard.Month, pNow->reader.expireCard.Year);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			Sleep(3000);
 			system(cls);
-			printf("Danh sach doc gia nu\n");
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                  >>DANH SACH DOC GIA THEO GIOI TINH<<                          ||\n");
+			printf("|-----------------------------------NU---------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsFemaleReader.pHead;
 			while(pNow != NULL){
-				viewInfAReader(pNow->reader);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+				printf("|^   ID:\t%-63s   v|\n", pNow->reader.ID);
+				printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", pNow->reader.Fullname, pNow->reader.NationID);
+				printf("|^   Ngay sinh:\t\t%2d . %2d . %4d\t|  \tGioi tinh:\t%-15s   v|\n", pNow->reader.Birthday.Date, pNow->reader.Birthday.Month, pNow->reader.Birthday.Year, (pNow->reader.Sex == 1 ? (char*)"Nam" : (char*)"Nu"));
+				printf("|^   Email:\t%-63s   v|\n", pNow->reader.Email);
+				printf("|^   Dia chi:\t%-63s   v|\n", pNow->reader.Address);
+				printf("|^   Ngay lap the:\t%2d . %2d . %4d  |\tNgay het han:\t%2d . %2d . %4d    v|\n", pNow->reader.creatCard.Date, pNow->reader.creatCard.Month, pNow->reader.creatCard.Year, pNow->reader.expireCard.Date, pNow->reader.expireCard.Month, pNow->reader.expireCard.Year);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			delete pNow;
 			return true;
 		default:
@@ -191,8 +256,11 @@ void analyzingSexReader(){
 	}
 
 	printf("Thu vien co %d doc gia nam va co %d doc gia nu.\n", lsMaleReader.total, lsFemaleReader.total);
-	Sleep(1000);
-	askToPrintAllSexReader(lsMaleReader, lsFemaleReader);
+	if (lsMaleReader.total != 0 || lsFemaleReader.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllSexReader(lsMaleReader, lsFemaleReader);
+	}
 	Sleep(1000);
 	freeLinkListReader(lsMaleReader);
 	freeLinkListReader(lsFemaleReader);
@@ -204,12 +272,23 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                   >>DANH SACH CAC SACH DA DUOC MUON<<                          ||\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
-				viewInfAReader(pNow->brBook);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+				printf("|^   ID:     %-14s |   Ten doc gia:\t%-31s   v|\n", pNow->brBook.ID, pNow->brBook.Fullname);
+				printf("|^   ISBN:   %-14s |   Ten cuon sach:\t%-31s   v|\n", pNow->brBook.ISBN, pNow->brBook.nameBook);
+				printf("|^   So luong sach da muon:\t\t\t%-30d    v|\n", pNow->brBook.numBook);
+				printf("|^   Ngay muon sach:\t%2d . %2d . %4d   |   Ngay tra sach:\t%2d . %2d . %4d    v|\n", pNow->brBook.borrowBookDay.Date, pNow->brBook.borrowBookDay.Month, pNow->brBook.borrowBookDay.Year, pNow->brBook.returnBookDay.Date, pNow->brBook.returnBookDay.Month, pNow->brBook.returnBookDay.Year);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			delete pNow;
 			return true;
 		default:
@@ -234,8 +313,11 @@ void analyzingBorrowingBook(){
 	}
 
 	printf("So luong sach ma doc gia dang muon trong thu vien hien co la:\t%d\n", lsBorBook.total);
-	Sleep(1000);
-	askToPrintAllBorrowingBook(lsBorBook);
+	if (lsBorBook.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllBorrowingBook(lsBorBook);
+	}
 	Sleep(1000);
 	freeLinkListBorrowBook(lsBorBook);
 }
@@ -246,12 +328,23 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                     >>DANH SACH TRE HAN TRA SACH<<                             ||\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
-				viewInfAReader(pNow->brBook);
+				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+				printf("|^   ID:     %-14s |   Ten doc gia:\t%-31s   v|\n", pNow->brBook.ID, pNow->brBook.Fullname);
+				printf("|^   ISBN:   %-14s |   Ten cuon sach:\t%-31s   v|\n", pNow->brBook.ISBN, pNow->brBook.nameBook);
+				printf("|^   So luong sach da muon:\t\t\t%-30d    v|\n", pNow->brBook.numBook);
+				printf("|^   Ngay muon sach:\t%2d . %2d . %4d   |   Ngay tra sach:\t%2d . %2d . %4d    v|\n", pNow->brBook.borrowBookDay.Date, pNow->brBook.borrowBookDay.Month, pNow->brBook.borrowBookDay.Year, pNow->brBook.returnBookDay.Date, pNow->brBook.returnBookDay.Month, pNow->brBook.returnBookDay.Year);
+				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
 			delete pNow;
 			return true;
 		default:
@@ -279,8 +372,11 @@ void analyzingOverdueReader(){
 		}
 	}
 	printf("So luong doc gia trong thu vien dang bi tre han tra sach:\t%d\n", lsBorBook.total);
-	Sleep(1000);
-	askToPrintAllOverdueReader(lsBorBook);
+	if (lsBorBook.total != 0)
+	{
+		Sleep(1000);
+		askToPrintAllOverdueReader(lsBorBook);
+	}
 	Sleep(1000);
 	freeLinkListBorrowBook(lsBorBook);
 }
@@ -289,38 +385,92 @@ void analyzingOverdueReader(){
 void runningAnalyzingForAdmin(){
 	int choice = 0;
 	do {
-		choice = getNumberPressKey(analyzingMenu(), 0);
+		choice = getNumberPressKey(analyzingMenuForAdmin(), 0);
 		system(cls);
 		switch (choice){
-		case 1: // Thống kê số lượng sách trong thư viện v
-			analyzingBook();
-			break;
-		case 2: // Thống kê số lượng sách theo thể loại
-			analyzingCatoBook();
-			break;
-		case 3: // Thống kê số lượng độc giả v
-			analyzingReader();
-			break;
-		case 4: // Thống kê số lượng độc giả theo giới tính v
-			analyzingSexReader();
-			break;
-		case 5: // Thống kê số sách đang được mượn v
-			analyzingBorrowingBook();
-			break;
-		case 6: // Thống kê danh sách độc giả bị trễ hạn v
-			analyzingOverdueReader();
-			break;
-		default:
-			break;
+			case 1: // Thống kê số lượng sách trong thư viện v
+				analyzingBook();
+				break;
+			case 2: // Thống kê số lượng sách theo thể loại
+				analyzingCatoBook();
+				break;
+			case 3: // Thống kê số lượng độc giả v
+				analyzingReader();
+				break;
+			case 4: // Thống kê số lượng độc giả theo giới tính v
+				analyzingSexReader();
+				break;
+			case 5: // Thống kê số sách đang được mượn v
+				analyzingBorrowingBook();
+				break;
+			case 6: // Thống kê danh sách độc giả bị trễ hạn v
+				analyzingOverdueReader();
+				break;
+			default:
+				break;
 		}
 		// Sleep(1000);
 	} while (choice != 0);
 }
 void runningAnalyzingForExpert(){
-	
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(analyzingMenuForExpert(), 0);
+		system(cls);
+		switch (choice){
+			// case 1: // Thống kê số lượng sách trong thư viện v
+			// 	analyzingBook();
+			// 	break;
+			// case 2: // Thống kê số lượng sách theo thể loại
+			// 	analyzingCatoBook();
+			// 	break;
+			// case 3: // Thống kê số lượng độc giả v
+			// 	analyzingReader();
+			// 	break;
+			// case 4: // Thống kê số lượng độc giả theo giới tính v
+			// 	analyzingSexReader();
+			// 	break;
+			case 1: // Thống kê số sách đang được mượn v
+				analyzingBorrowingBook();
+				break;
+			case 2: // Thống kê danh sách độc giả bị trễ hạn v
+				analyzingOverdueReader();
+				break;
+			default:
+				break;
+		}
+		// Sleep(1000);
+	} while (choice != 0);
 }
 void runningAnalyzingForManager(){
-	
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(analyzingMenuManager(), 0);
+		system(cls);
+		switch (choice){
+			case 1: // Thống kê số lượng sách trong thư viện v
+				analyzingBook();
+				break;
+			case 2: // Thống kê số lượng sách theo thể loại
+				analyzingCatoBook();
+				break;
+			case 3: // Thống kê số lượng độc giả v
+				analyzingReader();
+				break;
+			case 4: // Thống kê số lượng độc giả theo giới tính v
+				analyzingSexReader();
+				break;
+			case 5: // Thống kê số sách đang được mượn v
+				analyzingBorrowingBook();
+				break;
+			case 6: // Thống kê danh sách độc giả bị trễ hạn v
+				analyzingOverdueReader();
+				break;
+			default:
+				break;
+		}
+		// Sleep(1000);
+	} while (choice != 0);
 }
 
 void runningAnalyzing(int typeAccount){

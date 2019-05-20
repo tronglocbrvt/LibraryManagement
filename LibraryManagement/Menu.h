@@ -24,4 +24,6 @@ int editInfBookMenu();
 
 int askYesNoQuestion(char *note);
 
-int analyzingMenu();
+int analyzingMenuForAdmin();
+int analyzingMenuForExpert();
+int analyzingMenuManager();
