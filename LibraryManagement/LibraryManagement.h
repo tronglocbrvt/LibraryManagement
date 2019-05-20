@@ -138,3 +138,18 @@ struct LLNodeBook
 	NodeBook *pTail;
 	int total;
 };
+
+struct NodeCategory
+{
+	char Category[41];
+	int numBookPerCategory;
+	NodeBook *pNext;
+	NodeBook *pPrev;
+};
+
+struct LLNodeCategory
+{
+	NodeBook *pHead;
+	NodeBook *pTail;
+	int total;
+};

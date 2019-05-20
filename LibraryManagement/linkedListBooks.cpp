@@ -5,6 +5,7 @@ void Init(LLNodeBook &ls)
 {
 	ls.pHead = NULL;
 	ls.pTail = NULL;
+	ls.total = 0;
 }
 
 // Tạo 1 Node chứa data
@@ -37,6 +38,7 @@ NodeBook* addAtTail(LLNodeBook &ls, Books data){ // Thêm vào cuối danh sách
 		ls.pTail->pNext = no;
 	}
 	ls.pTail = no;
+	ls.total += data.numBook;
 
 	return no;
 }

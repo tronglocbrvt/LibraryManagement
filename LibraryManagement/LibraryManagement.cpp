@@ -8,6 +8,7 @@
 #include "borrowedBooks.h"
 #include "linkedListBorrowBook.h"
 #include "returnedBooks.h"
+#include "analyzingLibrary.h"
 
 
 #if defined(_WIN64) || defined(_WIN32)
@@ -48,7 +49,6 @@ int main()
 				Sleep(1);
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
-		typeAccount = 1;
 		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
@@ -57,7 +57,7 @@ int main()
 		bool continueSwit = true;
 		while (continueSwit){
 			int choice = printLoginMenu();
-			switch (choice){ // add function doing here
+			switch (choice){
 			case 0:
 				continueSwit = false;
 				typeAccount = Logout();
@@ -78,7 +78,7 @@ int main()
 				returnBook();
 				break;
 			case 6:
-				printf("thongke\n");
+				runningAnalyzing(typeAccount);
 				break;
 			case 7:
 				continueSwit = false;

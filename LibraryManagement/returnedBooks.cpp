@@ -103,11 +103,8 @@ void returnBook()
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	char *isbnBook = new char[14];
-<<<<<<< HEAD
-=======
 	Books *book = new Books;
 	int moneyRate = 0;
->>>>>>> 56074f89fd46b603ba28da1fd9a86c2ce9523a85
 	switch(getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1)){
 		case 1: // có mất sách
 			book = findBookWithISBN(isbnBook);
@@ -168,10 +165,7 @@ void returnBook()
 	delete[] nameReader;
 	delete[] nameBook;
 	delete[] isbnBook;
-<<<<<<< HEAD
-=======
 	delete book;
->>>>>>> 56074f89fd46b603ba28da1fd9a86c2ce9523a85
 
 
 }

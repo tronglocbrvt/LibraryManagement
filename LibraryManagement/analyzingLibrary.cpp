@@ -1,21 +1,254 @@
 #include "analyzingLibrary.h"
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
+	NodeBook *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
+		case 1:
+			pNow = lsbook.pHead;
+			while(pNow != NULL){
+				viewInfABook(pNow->book);
+				pNow = pNow->pNext;
+			}
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+	return true;
+}
+void analyzingBook(){
+	FILE *fileBook = fopen(_DIR_DATA_FOLDER_BOOK, "rb");
+	if (fileBook == NULL)
+	{
+		return;
+	}
 
-// printf("1. Thống kê số lượng sách trong thư viện.\n");
-// printf("2. Thống kê số lượng sách theo thể loại.\n");
-// printf("3. Thống kê số lượng độc giả.\n");
-// printf("4. Thống kê số lượng độc giả theo giới tính.\n");
-// printf("5. Thống kê số sách đang được mượn.\n");
-// printf("6. Thống kê danh sách độc giả bị trễ hạn.\n");
+	LLNodeBook lsbook;
+	Init(lsbook);
 
+	Books book;
+	while (fread(&book, sizeof(Books), 1, fileBook) != 0){
+		addAtTail(lsbook, book);
+	}
 
-
-
-
-
-
-void runningAnalyzingForAdmin(){
+	printf("So luong sach trong thu vien hien co la:\t%d\n", lsbook.total);
+	Sleep(1000);
+	askToPrintAllBook(lsbook);
+	Sleep(1000);
+	freeLinkListBook(lsbook);
 	
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllCato(){ // ll catogory
+	return true;
+}
+void analyzingCatoBook(){
+
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
+	NodeReader *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
+		case 1:
+			pNow = lsreader.pHead;
+			while(pNow != NULL){
+				viewInfAReader(pNow->reader);
+				pNow = pNow->pNext;
+			}
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+
+	return true;
+}
+void analyzingReader(){
+	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
+	if (fileReader == NULL)
+	{
+		return;
+	}
+
+	LLNodeReader lsreader;
+	Init(lsreader);
+
+	Readers reader;
+	while (fread(&reader, sizeof(Readers), 1, fileReader) != 0){
+		addAtTail(lsreader, reader);
+	}
+
+	printf("So luong doc gia dang dang ky voi Thu vien la:\t%d\n", lsreader.total);
+	Sleep(1000);
+	askToPrintAllReader(lsreader);
+	Sleep(1000);
+	freeLinkListReader(lsreader);
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleReader){ // 2 ll sex
+	NodeReader *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
+		case 1:
+			printf("Danh sach doc gia nam:\n");
+			pNow = lsMaleReader.pHead;
+			while(pNow != NULL){
+				viewInfAReader(pNow->reader);
+				pNow = pNow->pNext;
+			}
+			printf("Danh sach doc gia nu\n");
+			pNow = lsMaleReader.pHead;
+			while(pNow != NULL){
+				viewInfAReader(pNow->reader);
+				pNow = pNow->pNext;
+			}
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+
+	return true;
+}
+void analyzingSexReader(){
+	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
+	if (fileReader == NULL)
+	{
+		return;
+	}
+
+	LLNodeReader lsMaleReader;
+	LLNodeReader lsFemaleReader;
+	Init(lsMaleReader);
+	Init(lsFemaleReader);
+
+	Readers reader;
+	while (fread(&reader, sizeof(Readers), 1, fileReader) != 0){
+		if (reader.Sex == 1)
+		{
+			addAtTail(lsMaleReader, reader);	
+		}
+		else
+		{
+			addAtTail(lsFemaleReader, reader);	
+		}
+	}
+
+	printf("Thu vien co %d doc gia nam va co %d doc gia nu.\n", lsMaleReader.total, lsFemaleReader.total);
+	Sleep(1000);
+	askToPrintAllSexReader(lsMaleReader, lsFemaleReader);
+	Sleep(1000);
+	freeLinkListReader(lsMaleReader);
+	freeLinkListReader(lsFemaleReader);
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
+	NodeBorrowBook *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
+		case 1:
+			pNow = lsBorBook.pHead;
+			while(pNow != NULL){
+				viewInfAReader(pNow->brBook);
+				pNow = pNow->pNext;
+			}
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+
+	return true;
+}
+void analyzingBorrowingBook(){
+	FILE *fileBorBook = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+	if (fileBorBook == NULL)
+	{
+		return;
+	}
+
+	LLNodeBorrowBook lsBorBook;
+	Init(lsBorBook);
+
+	BorrowBooks borBook;
+	while (fread(&borBook, sizeof(BorrowBooks), 1, fileBorBook) != 0){
+		addAtTail(lsBorBook, borBook);
+	}
+
+	printf("So luong sach trong thu vien hien co la:\t%d\n", lsBorBook.total);
+	Sleep(1000);
+	askToPrintAllBorrowingBook(lsBorBook);
+	Sleep(1000);
+	freeLinkListBorrowBook(lsBorBook);
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
+	return true;
+}
+void analyzingOverdueReader(){
+	FILE *fileBorBook = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+	if (fileBorBook == NULL)
+	{
+		return;
+	}
+
+	LLNodeBorrowBook lsBorBook;
+	Init(lsBorBook);
+
+	BorrowBooks borBook;
+	Day today = getToday();
+	while (fread(&borBook, sizeof(BorrowBooks), 1, fileBorBook) != 0){
+		if (today - borBook.returnBookDay < 0)
+		{
+			addAtTail(lsBorBook, borBook);
+		}
+	}
+	printf("So luong doc gia trong thu vien dang bi tre han tra sach:\t%d\n", lsBorBook.total);
+	Sleep(1000);
+	askToPrintAllOverdueReader(lsBorBook);
+	Sleep(1000);
+	freeLinkListBorrowBook(lsBorBook);
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+void runningAnalyzingForAdmin(){
+	int choice = 0;
+	do {
+		choice = getNumberPressKey(analyzingMenu(), 0);
+		system(cls);
+		switch (choice){
+		case 1: // Thống kê số lượng sách trong thư viện v
+			analyzingBook();
+			break;
+		case 2: // Thống kê số lượng sách theo thể loại
+			analyzingCatoBook();
+			break;
+		case 3: // Thống kê số lượng độc giả v
+			analyzingReader();
+			break;
+		case 4: // Thống kê số lượng độc giả theo giới tính v
+			analyzingSexReader();
+			break;
+		case 5: // Thống kê số sách đang được mượn v
+			analyzingBorrowingBook();
+			break;
+		case 6: // Thống kê danh sách độc giả bị trễ hạn
+			analyzingOverdueReader();
+			break;
+		default:
+			break;
+		}
+		// Sleep(1000);
+	} while (choice != 0);
 }
 void runningAnalyzingForExpert(){
 	
@@ -36,4 +269,5 @@ void runningAnalyzing(int typeAccount){
 			runningAnalyzingForManager();
 			break;
 	}
+
 }
