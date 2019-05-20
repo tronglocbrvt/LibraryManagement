@@ -5,7 +5,7 @@ void Init(LLNodeReader &ls)
 {
 	ls.pHead = NULL;
 	ls.pTail = NULL;
-	ls.toal = 0;
+	ls.total = 0;
 }
 
 // Tạo 1 Node chứa data

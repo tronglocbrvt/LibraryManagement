@@ -6,6 +6,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	NodeBook *pNow;
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
 		case 1:
+			system(cls);
 			pNow = lsbook.pHead;
 			while(pNow != NULL){
 				viewInfABook(pNow->book);
@@ -47,6 +48,7 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	NodeCategory *pNow;
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
 		case 1:
+			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("||                         >>DANH SACH THE LOAI<<                                 ||\n");
@@ -54,7 +56,7 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 			printf("------------------------------------------------------------------------------------\n");
 			pNow = lsCate.pHead;
 			while(pNow != NULL){
-				printf("|\t%-41s\t:\t%d\t|\n", pNow->Category, pNow->numBookPerCategory);
+				printf("|\t%-41s\t:\t%6d\t\t|\n", pNow->Category, pNow->numBookPerCategory);
 				pNow = pNow->pNext;
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
@@ -98,6 +100,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	NodeReader *pNow;
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
 		case 1:
+			system(cls);
 			pNow = lsreader.pHead;
 			while(pNow != NULL){
 				viewInfAReader(pNow->reader);
@@ -139,14 +142,17 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 	NodeReader *pNow;
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
 		case 1:
+			system(cls);
 			printf("Danh sach doc gia nam:\n");
 			pNow = lsMaleReader.pHead;
 			while(pNow != NULL){
 				viewInfAReader(pNow->reader);
 				pNow = pNow->pNext;
 			}
+			Sleep(3000);
+			system(cls);
 			printf("Danh sach doc gia nu\n");
-			pNow = lsMaleReader.pHead;
+			pNow = lsFemaleReader.pHead;
 			while(pNow != NULL){
 				viewInfAReader(pNow->reader);
 				pNow = pNow->pNext;
@@ -197,6 +203,7 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	NodeBorrowBook *pNow;
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
 		case 1:
+			system(cls);
 			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
 				viewInfAReader(pNow->brBook);
@@ -226,7 +233,7 @@ void analyzingBorrowingBook(){
 		addAtTail(lsBorBook, borBook);
 	}
 
-	printf("So luong sach trong thu vien hien co la:\t%d\n", lsBorBook.total);
+	printf("So luong sach ma doc gia dang muon trong thu vien hien co la:\t%d\n", lsBorBook.total);
 	Sleep(1000);
 	askToPrintAllBorrowingBook(lsBorBook);
 	Sleep(1000);
@@ -235,6 +242,22 @@ void analyzingBorrowingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
+	NodeBorrowBook *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong"), 1)){
+		case 1:
+			system(cls);
+			pNow = lsBorBook.pHead;
+			while(pNow != NULL){
+				viewInfAReader(pNow->brBook);
+				pNow = pNow->pNext;
+			}
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+
 	return true;
 }
 void analyzingOverdueReader(){
@@ -250,7 +273,7 @@ void analyzingOverdueReader(){
 	BorrowBooks borBook;
 	Day today = getToday();
 	while (fread(&borBook, sizeof(BorrowBooks), 1, fileBorBook) != 0){
-		if (today - borBook.returnBookDay < 0)
+		if (today - borBook.returnBookDay > 0)
 		{
 			addAtTail(lsBorBook, borBook);
 		}
