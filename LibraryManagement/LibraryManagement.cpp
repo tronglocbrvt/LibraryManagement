@@ -66,10 +66,10 @@ int main()
 				runMenuUser(typeAccount);
 				break;
 			case 2:
-				runReaderManagement();
+				runReaderManagement(typeAccount);
 				break;
 			case 3:
-				runBookManagement();
+				runBookManagement(typeAccount);
 				break;
 			case 4:
 				borrowBook();
