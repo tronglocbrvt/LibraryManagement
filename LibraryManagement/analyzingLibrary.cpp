@@ -43,11 +43,54 @@ void analyzingBook(){
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool askToPrintAllCato(){ // ll catogory
+bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
+	NodeCategory *pNow;
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
+		case 1:
+			printf("------------------------------------------------------------------------------------\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("||                         >>DANH SACH THE LOAI<<                                 ||\n");
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
+			pNow = lsCate.pHead;
+			while(pNow != NULL){
+				printf("|\t%-41s\t:\t%d\t|\n", pNow->Category, pNow->numBookPerCategory);
+				pNow = pNow->pNext;
+			}
+			printf("|----------------------------------------------------------------------------------|\n");
+			printf("------------------------------------------------------------------------------------\n");
+			
+			delete pNow;
+			return true;
+		default:
+			return false;
+	}
+
 	return true;
 }
 void analyzingCatoBook(){
+	FILE *fileBook = fopen(_DIR_DATA_FOLDER_BOOK, "rb");
+	if (fileBook == NULL)
+	{
+		return;
+	}
 
+	LLNodeCategory lsCate;
+	Init(lsCate);
+
+	Books book;
+	while (fread(&book, sizeof(Books), 1, fileBook) != 0){
+		if (!addBooksToExistCategory(lsCate, book.Category, book.numBook)) // đã thêm vào danh sách nhưng thể loại đó chưa được lưu vào danh sách
+		{
+			addAtTail(lsCate, book.Category, book.numBook);
+		}
+	}
+
+	printf("Cac the loai trong thu vien hien co la %d The loai.\n", lsCate.total);
+	Sleep(1000);
+	askToPrintAllCato(lsCate);
+	Sleep(1000);
+	freeLinkListBook(lsCate);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -241,7 +284,7 @@ void runningAnalyzingForAdmin(){
 		case 5: // Thống kê số sách đang được mượn v
 			analyzingBorrowingBook();
 			break;
-		case 6: // Thống kê danh sách độc giả bị trễ hạn
+		case 6: // Thống kê danh sách độc giả bị trễ hạn v
 			analyzingOverdueReader();
 			break;
 		default:

@@ -1,7 +1,7 @@
-#include "linkedListBooks.h"
+#include "linkedListCategoryBooks.h"
 
 // << Hàm khởi tạo danh sách và node
-void Init(LLNodeBook &ls)
+void Init(LLNodeCategory &ls)
 {
 	ls.pHead = NULL;
 	ls.pTail = NULL;
@@ -9,9 +9,10 @@ void Init(LLNodeBook &ls)
 }
 
 // Tạo 1 Node chứa data
-NodeBook *makeNode(Books data){
-	NodeBook *no = new NodeBook;
-	no->book = data;
+NodeCategory *makeNode(char* Category, int numBookPerCategory){
+	NodeCategory *no = new NodeCategory;
+	strcpy(no->Category, Category);
+	no->numBookPerCategory = numBookPerCategory;
 	no->pNext = NULL;
 	no->pPrev = NULL;
 
@@ -20,8 +21,8 @@ NodeBook *makeNode(Books data){
 
 //======================================================
 
-NodeBook* addAtTail(LLNodeBook &ls, Books data){ // Thêm vào cuối danh sách một struct >> Books
-	NodeBook *no = makeNode(data);
+NodeCategory* addAtTail(LLNodeCategory &ls, char *Category, int numBookPerCategory){ // Thêm vào cuối danh sách một struct >> Books
+	NodeCategory *no = makeNode(Category, numBookPerCategory);
 	if (no == NULL)
 	{
 		return NULL;
@@ -43,32 +44,14 @@ NodeBook* addAtTail(LLNodeBook &ls, Books data){ // Thêm vào cuối danh sách
 	return no;
 }
 
-//LLNodeBook getReaderData()
-//{
-//
-//}
-
-//Books *findReaderAtNumberic(LLNodeBook *lsReader, int numberic){
-//	Books *reader = new Books();
-//	NodeBook *pNow = InitNode();
-//
-//	pNow = lsReader->pHead;
-//	while (pNow != NULL && numberic > 1){
-//		pNow = pNow->pNext;
-//		numberic--;
-//	}
-//
-//	return pNow->reader;
-//}
-
-void freeLinkListBook(LLNodeBook &ls)
+void freeLinkListBook(LLNodeCategory &ls)
 {
-	NodeBook *p = ls.pHead;
-	while (p != NULL)
+	NodeCategory *pNow = ls.pHead;
+	while (pNow != NULL)
 	{
-		NodeBook *q = p;
-		p = p->pNext;
-		delete q;
+		NodeCategory *pDel = pNow;
+		pNow = pNow->pNext;
+		delete pDel;
 	}
 	ls.pHead = NULL;
 	ls.pTail = NULL;
@@ -76,3 +59,20 @@ void freeLinkListBook(LLNodeBook &ls)
 
 //=============================================================================================
 //=============================================================================================
+
+bool addBooksToExistCategory(LLNodeCategory &ls, char *Category, int numBookPerCategory){
+	NodeCategory *pNow = ls.pHead;
+	while (pNow != NULL)
+	{
+		if (strcmp(pNow->Category, Category) == 0)
+		{
+			pNow->numBookPerCategory += numBookPerCategory;
+			delete pNow;
+			return true;
+		}
+
+		pNow = pNow->pNext;
+	}
+	delete pNow;
+	return false;
+}

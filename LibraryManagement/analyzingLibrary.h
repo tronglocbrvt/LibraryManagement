@@ -7,7 +7,7 @@
 #include "readerManagement.h"
 #include "linkedListReaders.h"
 #include "linkedListBorrowBook.h"
-
+#include "linkedListCategoryBooks.h"
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -16,7 +16,7 @@ bool askToPrintAllBook(LLNodeBook lsbook);
 void analyzingBook();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool askToPrintAllCato();
+bool askToPrintAllCato(LLNodeCategory lsCate);
 void analyzingCatoBook();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

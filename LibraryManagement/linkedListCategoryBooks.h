@@ -1,18 +1,34 @@
 #pragma once
 #include "LibraryManagement.h"
 
+
+struct NodeCategory
+{
+	char Category[41];
+	int numBookPerCategory;
+	NodeCategory *pNext;
+	NodeCategory *pPrev;
+};
+
+struct LLNodeCategory
+{
+	NodeCategory *pHead;
+	NodeCategory *pTail;
+	int total;
+};
 //======================================================
 // << Hàm khởi tạo danh sách và node
 
-void Init(LLNodeBook &ls);
+void Init(LLNodeCategory &ls);
 
-NodeBook *makeNode(Books data);
+NodeCategory *makeNode(char *Category, int numBookPerCategory);
 //======================================================
 
-NodeBook* addAtTail(LLNodeBook &ls, Books data); // Thêm vào cuối danh sách một struct >> Books
+NodeCategory* addAtTail(LLNodeCategory &ls, char *Category, int numBookPerCategory); // Thêm vào cuối danh sách một struct >> Books
 
-void freeLinkListBook(LLNodeBook &ls);
+void freeLinkListBook(LLNodeCategory &ls);
 
 //=============================================================================================
 //=============================================================================================
 
+bool addBooksToExistCategory(LLNodeCategory &ls, char *Category, int numBookPerCategory);
