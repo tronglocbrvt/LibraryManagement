@@ -4,8 +4,8 @@
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	NodeBook *pNow = lsbook.pHead;
-	char *stringMoneyPayement = new char[19];
-	stringMoneyPayement[18] = '\0';
+	char *stringMoneyPayement;
+	//stringMoneyPayement[18] = '\0';
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
@@ -28,13 +28,11 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete[] stringMoneyPayement;
+			
 			return true;
 		default:
-			delete[] stringMoneyPayement;
 			return false;
 	}
-	delete[] stringMoneyPayement;
 	return true;
 }
 void analyzingBook(){

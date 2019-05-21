@@ -167,7 +167,7 @@ void returnBook()
 
 	returnBookBill(nameReader, nameBook, numBor, numRet, moneyPayement);
 
-	Sleep(1000);
+	stopSceen();
 
 	delete[] idReader;
 	delete[] nameReader;
@@ -202,6 +202,5 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 	printf("|                                                                                  |\n");
 	printf("------------------------------------------------------------------------------------\n");
 
-	// delete stringMoneyPayement;
 }
 
