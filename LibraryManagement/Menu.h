@@ -31,6 +31,7 @@ int editInfBookMenu();
 
 int askYesNoQuestion(char *note);
 
+void showTitleAnalyzing();
 int analyzingMenuForAdmin();
 int analyzingMenuForExpert();
 int analyzingMenuManager();

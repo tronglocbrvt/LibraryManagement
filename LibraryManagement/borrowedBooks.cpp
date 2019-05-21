@@ -162,6 +162,7 @@ void borrowBook()
 			{
 				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
 				fwrite(borrowBook, sizeof(BorrowBooks), 1, f);	
+				// printf("A hu a hu\n");
 			}
 			else
 			{
@@ -169,7 +170,7 @@ void borrowBook()
 				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 				FILE *fileTemp = fopen(_DIR_DATA_FOLDER_BOOK_BORROW_TEMP, "wb");
 
-				while(fread(&borrowBookTemp, sizeof(BorrowBooks), 1, fileTemp)){
+				while(fread(&borrowBookTemp, sizeof(BorrowBooks), 1, f)){
 					if (borrowBookTemp == *borrowBook)
 					{
 						borrowBookTemp.numBook += borrowBook->numBook;

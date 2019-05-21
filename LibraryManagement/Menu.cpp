@@ -292,6 +292,7 @@ void showTitleAnalyzing(){
 }
 int analyzingMenuForAdmin(){
 	system(cls);
+	showTitleAnalyzing();
 	printf("1. Thong ke so luong sach trong thu vien.\n");
 	printf("2. Thong ke so luong sach theo the loai.\n");
 	printf("3. Thong ke so luong doc gia.\n");
@@ -304,6 +305,7 @@ int analyzingMenuForAdmin(){
 }
 int analyzingMenuForExpert(){
 	system(cls);
+	showTitleAnalyzing();
 	printf("1. Thong ke so luong sach dang duoc muon.\n");
 	printf("2. Thong ke danh sach doc gia bi tre han.\n");
 	printf("0. Quay ve.\n");
@@ -312,6 +314,7 @@ int analyzingMenuForExpert(){
 }
 int analyzingMenuManager(){
 	system(cls);
+	showTitleAnalyzing();
 	printf("1. Thong ke so luong sach trong thu vien.\n");
 	printf("2. Thong ke so luong sach theo the loai.\n");
 	printf("3. Thong ke so luong doc gia.\n");
