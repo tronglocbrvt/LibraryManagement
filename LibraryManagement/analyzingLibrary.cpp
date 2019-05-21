@@ -82,7 +82,7 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 			}
 			printf("------------------------------------------------------------------------------------\n");
 			
-			delete pNow;
+			// delete pNow;
 			return true;
 		default:
 			return false;
@@ -143,7 +143,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete pNow;
+			// delete pNow;
 			return true;
 		default:
 			return false;
@@ -222,7 +222,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete pNow;
+			// delete pNow;
 			return true;
 		default:
 			return false;
@@ -288,7 +288,7 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete pNow;
+			// delete pNow;
 			return true;
 		default:
 			return false;
@@ -344,7 +344,7 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			delete pNow;
+			// delete pNow;
 			return true;
 		default:
 			return false;
