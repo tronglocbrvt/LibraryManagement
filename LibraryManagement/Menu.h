@@ -31,3 +31,7 @@ int askYesNoQuestion(char *note);
 int analyzingMenuForAdmin();
 int analyzingMenuForExpert();
 int analyzingMenuManager();
+
+
+void showTitleHeader();
+void showFooter();
