@@ -69,7 +69,24 @@ int Login()
 	char *password = new char[17];
 	if (password == NULL)
 		return -1;
-	scanf("%s", password);
+	
+	char ch = ' ';
+	int index = 0;
+	while (1){
+		if (kbhit())
+		{
+			ch = getch();
+			if (ch != 10 && ch != 13)
+			{
+				printf("*");
+				*(password + index++) = ch;
+			}
+			else
+				break;
+		}
+	}
+	*(password + index) = '\0';
+	printf("\n");
 
 	int typeAccount = checkLogin(username, password);
 

@@ -331,7 +331,6 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 				end = true;
 			break;
 		default: 
-			runReaderManagement;
 			return;
 		}
 	} while (end == false);
