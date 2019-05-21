@@ -1,15 +1,15 @@
 #include "readerManagement.h"
 #include "commonFunction.h"
 #include "linkedListReaders.h"
-#include "functionsFile.h"
 
-
-char* getNationalID();
 Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo CMND
 {
 	Readers *reader = new Readers;
 
 	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
+
+	if (reader == NULL || fileReader == NULL)
+		return NULL;
 	
 	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->NationID, personID) == 0)
@@ -20,6 +20,7 @@ Readers *findReaderWithNationID(char *personID)	// Tìm kiếm độc giả theo
 	}
 
 	fclose(fileReader);
+	delete reader;
 	return NULL;
 }
 
@@ -29,7 +30,7 @@ Readers *findReaderWithEmail(char *Email)	// Tìm kiếm độc giả theo Email
 
 	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
-	if (fileReader == NULL)
+	if (reader == NULL || fileReader == NULL)
 	{
 		return NULL;
 	}
@@ -43,6 +44,7 @@ Readers *findReaderWithEmail(char *Email)	// Tìm kiếm độc giả theo Email
 	}
 
 	fclose(fileReader);
+	delete reader;
 	return NULL;
 }
 
@@ -52,11 +54,10 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 
 	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
-	if (fileReader == NULL)
+	if (reader == NULL || fileReader == NULL)
 	{
 		return NULL;
 	}
-
 
 	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		if (strcmp(reader->ID, ID) == 0)
@@ -68,10 +69,11 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 	}
 
 	fclose(fileReader);
+	delete reader;
 	return NULL;
 }
 
-void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ras
+void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ra
 {
 	Readers *reader = new Readers;
 
@@ -89,10 +91,10 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 	fclose(fileReader);
 
 	delete reader;
-	system("pause");
+	stopSceen();
 }
 
-bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm kiếm độc giả theo họ tên
 	Readers *reader = new Readers;
 
 	if (reader == NULL)
@@ -108,7 +110,7 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
 		if (strcmp(reader->Fullname, personName) == 0)
 		{
-			// thêm vào danh sách
+			// thêm vào cuối danh sách
 			addAtTail(lsReader, *reader);
 		}
 
@@ -116,30 +118,29 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 
 	delete reader;
 	fclose(fileReader);
-	return true;
+	return 1;
 }
 
-
 bool printReaderFromLL(LLNodeReader ls){ // in ra thông tin độc giả từ Linked List
-	NodeReader *pNow = new NodeReader;
+	NodeReader *pNow = ls.pHead;
 	if (pNow == NULL)
 	{
 		return 0;
 	}
 
-	pNow = ls.pHead;
-
 	int index = 0;
+
 	while(pNow != NULL){
 		printf("\nDoc gia thu %d:\n", ++index);
 		viewInfAReader(pNow->reader);
 		pNow = pNow->pNext;
 	}
 
+	freeLinkListReader(ls);
 	return 1;
 }
 
-Readers addReader()
+Readers addReader() // Thêm độc giả
 {
 	Readers reader;
 	Readers *temp = new Readers;
@@ -153,14 +154,14 @@ Readers addReader()
 	if (size == 0)
 	{
 		// ID = 1;
-		strcpy(strID, (char*)"00000001");
+		strcpy(strID, (char*)"00000001"); // nếu chưa có độc giả nào thì tự động khởi tạo là 1
 	}
 	else
 	{
 		rewind(f);
 		while (fread(temp, sizeof(Readers), 1, f) != 0)
 		{
-			ID++;
+			ID++; // nếu đã có độc giả thì tự động cộng thêm 1 
 		}
 	}
 
@@ -170,13 +171,15 @@ Readers addReader()
 	if ((strcmp(strID, (char*)"00000001")))
 	{
 		strcpy(strID, temp->ID);
-		plusOneIntoAString(strID);
+		plusOneIntoAString(strID); 
 	}
+
 	delete temp;
 	strID[8] = '\0';
 	strcpy(reader.ID, strID);
 	delete[] strID;
 
+	//Nhập thông tin độc giả
 	printf("ID:\t%s\n", reader.ID);
 	flushall();
 	printf("Nhap Ho va Ten: ");
@@ -195,9 +198,11 @@ Readers addReader()
 
 int askToUpdateReaderToFile() // cập nhật thông tin đọc giả vào file - có hỏi có chắc chắn muốn cập nhật không?
 {	
-	printf("Ban co chan muon cap nhat khong\n");
+	textBgColor(PURPLE, BLACK);
+	printf("Ban co chan muon cap nhat khong?\n");
 	printf("1. Co\n");
 	printf("2. Khong\n");
+	textBgColor(WHITE, BLACK);
 
 	return (getNumberPressKey(2, 1));
 }
@@ -212,6 +217,7 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 	case 1:
 		if (temp1 != NULL || temp2 != NULL)
 		{
+			textBgColor(RED, BLACK);
 			printf("Doc gia nay da ton tai do trung CMND/Email voi doc gia khac.\n");
 			Sleep(1000); // ngưng màn hình 1 giây cho người dùng đọc
 			delete temp1;
@@ -227,7 +233,9 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 
 			fwrite(&reader, sizeof(Readers), 1, f);
 			fclose(f);
+			textBgColor(RED, BLACK);
 			printf("Them doc gia thanh cong.\n");
+			Sleep(1000);
 			delete temp1;
 			delete temp2;
 			break;
@@ -240,9 +248,9 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 	return 1;
 }
 
-void viewInfAReader(Readers reader) // Xem thông tin của một người cụ thể
+void viewInfAReader(Readers reader) // Xem thông tin của một độc giả cụ thể
 {
-
+	textBgColor(WHITE, BLACK);
 	printf("--------------------------------------------------------\n");
 	printf("\tThong Tin Doc Gia\n");
 	printf("Ma doc gia: %s\n", reader.ID);
@@ -266,6 +274,7 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 	bool end = false;
 	do
 	{
+		textBgColor(WHITE, BLACK);
 		switch (getNumberPressKey(editInfReaderMenu(), 0)){
 		case 1: // printf("1. Sua Ho va ten\n");
 			flushall();
@@ -327,7 +336,7 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 	} while (end == false);
 }
 
-void editReaderToFile()
+void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 {
 	FILE *fo = fopen(_DIR_DATA_FOLDER_READER, "rb");
 	FILE *ftemp = fopen(_DIR_DATA_FOLDER_READER_TEMP, "wb");
@@ -345,6 +354,7 @@ void editReaderToFile()
 	reader = findReaderWithID(reader->ID);
 	if (reader == NULL)
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
 		fclose(fo);
@@ -354,7 +364,10 @@ void editReaderToFile()
 	}
 
 	viewInfAReader(*reader);
-	stopSceen();
+	textBgColor(YELLOW, BLACK);
+	printf("Nhan 1 phim bat ky de tiep tuc chinh sua...");
+	textBgColor(WHITE, BLACK);
+	getch();
 	// chỉnh sửa chọn lọc
 	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
@@ -375,9 +388,11 @@ void editReaderToFile()
 	delete reader;
 	remove((char*)_DIR_DATA_FOLDER_READER);
 	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
+
+	stopSceen();
 }
 
-void deleteReaderToFile()
+void deleteReaderToFile() // Xóa độc giả trong file
 {
 
 	FILE *fo = fopen(_DIR_DATA_FOLDER_READER, "rb");
@@ -391,12 +406,12 @@ void deleteReaderToFile()
 	if (reader == NULL)
 		return;
 
-
 	flushall();
 	getReaderID(reader->ID);
 	reader = findReaderWithID(reader->ID);
 	if (reader == NULL)
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
 		delete reader;
@@ -405,9 +420,13 @@ void deleteReaderToFile()
 		return;
 	}
 
+	textBgColor(PURPLE, BLACK);
 	printf("Thong tin doc gia chuan bi xoa: \n");
 	viewInfAReader(*reader);
+
+	textBgColor(PURPLE, BLACK);
 	printf("Ban co chac chan muon xoa? \n- 1. Dong y \n- 0. Huy\n");
+	textBgColor(WHITE, BLACK);
 	switch (getNumberPressKey(1, 0)){
 		case 1:
 			break;
@@ -437,7 +456,7 @@ void deleteReaderToFile()
 	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
 }
 
-void searchNationID()
+void searchNationID() // Tìm kiếm qua CMND
 {
 	Readers *reader = new Readers;
 
@@ -446,6 +465,7 @@ void searchNationID()
 
 	if (reader == NULL)
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
 	}
@@ -458,7 +478,7 @@ void searchNationID()
 	
 }
 
-void searchFullName()
+void searchFullName() // Tìm kiếm qua họ tên
 {
 	Readers *reader = new Readers;
 
@@ -471,6 +491,7 @@ void searchFullName()
 
 	if (!(findListReaderWithName(reader->Fullname, lsReader)))
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
 	}
@@ -513,6 +534,7 @@ void runReaderManagementForAdmin(){
 		// Sleep(1);
 	} while (choice != 0);
 }
+
 void runReaderManagementForExpert(){
 	int choice = 0;
 	do {
@@ -543,6 +565,7 @@ void runReaderManagementForExpert(){
 		// Sleep(1);
 	} while (choice != 0);
 }
+
 void runReaderManagementManager(){
 	int choice = 0;
 	do {
@@ -573,6 +596,7 @@ void runReaderManagementManager(){
 		// Sleep(1);
 	} while (choice != 0);
 }
+
 void runReaderManagement(int typeAccount)
 {
 	switch(typeAccount){

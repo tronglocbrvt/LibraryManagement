@@ -14,12 +14,18 @@ void printfMainMenu();
 
 int printUserMenu(int typeAccount);
 
+// void drawRectangle(int positionX, int positionY, int width, int height, int color);
+
 int printfMenuReaderManagementForAdmin();
+
 int printfMenuReaderManagementForExpert();
+
 int printfMenuReaderManagementForManager();
 
 int printfMenuBookManagementForAdmin();
+
 int printfMenuBookManagementForExpert();
+
 int printfMenuBookManagementForManager();
 
 int editInfReaderMenu();
@@ -29,9 +35,15 @@ int editInfBookMenu();
 int askYesNoQuestion(char *note);
 
 int analyzingMenuForAdmin();
+
 int analyzingMenuForExpert();
+
 int analyzingMenuManager();
 
 
 void showTitleHeader();
 void showFooter();
+
+
+int analyzingMenuManager();
+
