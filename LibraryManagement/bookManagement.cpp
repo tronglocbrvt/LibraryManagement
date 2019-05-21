@@ -189,12 +189,13 @@ bool writeInfBookToFile() // thêm sách vào database
 
 void viewInfABook(Books book) // Xem thông tin của sách
 {
+	char *stringMoneyPayement = intMoneyToStringMoney(book.priceBook);
 	printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
-	printf("|^   ISBN:  %-14s  Ten Sach:  %-43sv|\n", pNow->book.ISBN, pNow->book.nameBook);
-	printf("|^   Ten tac gia:           %-51s   v|\n", pNow->book.Author);
-	printf("|^   The loai:              %-51s   v|\n", pNow->book.Category);
-	printf("|^   Nha xuat ban:  %-40sNam xuat ban:  %4d   v|\n", pNow->book.publishCompany, pNow->book.yearPublish);
-	printf("|^   So luong sach hien co:  %6d   |  Gia tien:  %18s VND        v|\n", pNow->book.numBook, stringMoneyPayement);
+	printf("|^   ISBN:  %-14s  Ten Sach:  %-43sv|\n", book.ISBN, book.nameBook);
+	printf("|^   Ten tac gia:           %-51s   v|\n", book.Author);
+	printf("|^   The loai:              %-51s   v|\n", book.Category);
+	printf("|^   Nha xuat ban:  %-40sNam xuat ban:  %4d   v|\n", book.publishCompany, book.yearPublish);
+	printf("|^   So luong sach hien co:  %6d   |  Gia tien:  %18s VND        v|\n", book.numBook, stringMoneyPayement);
 	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 
 			
