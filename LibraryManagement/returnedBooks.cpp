@@ -202,6 +202,6 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 	printf("|                                                                                  |\n");
 	printf("------------------------------------------------------------------------------------\n");
 
-	delete stringMoneyPayement;
+	// delete stringMoneyPayement;
 }
 
