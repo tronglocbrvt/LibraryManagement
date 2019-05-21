@@ -61,11 +61,7 @@ int printLoginMenu(){
 
 void printfMainMenu(){
 	textBgColor(BLUE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                            >> QUAN LY THU VIEN <<                              ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
+	showTitleHeader();
 	textBgColor(WHITE, BLACK);
 	gotoxy(30, 6);
 	printf("1. Quan ly tai khoan ca nhan.\n");
@@ -87,10 +83,7 @@ void printfMainMenu(){
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-int printUserMenu(int typeAccount)
-{
-	system(cls);
+void showTitleUser(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
@@ -98,6 +91,11 @@ int printUserMenu(int typeAccount)
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
+}
+int printUserMenu(int typeAccount)
+{
+	system(cls);
+	showTitleUser();
 	gotoxy(25, 6);
 	printf("1. Thay doi mat khau.\n");
 	gotoxy(25, 7);
@@ -144,10 +142,7 @@ int printUserMenu(int typeAccount)
 //		}
 //	}
 //}
-
-int printfMenuReaderManagementForAdmin(){
-	system(cls);
-	//drawRectangle(30, 16, 30, 4, BLUE);
+void showTitleReader(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
@@ -155,6 +150,11 @@ int printfMenuReaderManagementForAdmin(){
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
+}
+int printfMenuReaderManagementForAdmin(){
+	system(cls);
+	//drawRectangle(30, 16, 30, 4, BLUE);
+	showTitleReader();
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");
@@ -167,6 +167,7 @@ int printfMenuReaderManagementForAdmin(){
 }
 int printfMenuReaderManagementForExpert(){
 	system(cls);
+	showTitleReader();
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");
@@ -179,6 +180,7 @@ int printfMenuReaderManagementForExpert(){
 }
 int printfMenuReaderManagementForManager(){
 	system(cls);
+	showTitleReader();
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");
@@ -191,6 +193,7 @@ int printfMenuReaderManagementForManager(){
 }
 int editInfReaderMenu(){
 	system(cls);
+	showTitleReader();
 	printf("1. Sua Ho va ten\n");
 	printf("2. Doi CMND\n");
 	printf("3. Doi ngay sinh\n");
@@ -204,8 +207,18 @@ int editInfReaderMenu(){
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+void showTitleBook(){
+	textBgColor(BLUE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                             >> QUAN LY SACH <<                                 ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
+}
 int printfMenuBookManagementForAdmin(){
 	system(cls);
+	showTitleBook();
 	printf("1. Xem danh sach sach trong thu vien.\n");
 	printf("2. Them sach.\n");
 	printf("3. Chinh sua thong tin mot quyen sach.\n");
@@ -218,6 +231,7 @@ int printfMenuBookManagementForAdmin(){
 }
 int printfMenuBookManagementForExpert(){
 	system(cls);
+	showTitleBook();
 	// printf("1. Xem danh sach sach trong thu vien.\n");
 	// printf("2. Them sach.\n");
 	// printf("3. Chinh sua thong tin mot quyen sach.\n");
@@ -230,6 +244,7 @@ int printfMenuBookManagementForExpert(){
 }
 int printfMenuBookManagementForManager(){
 	system(cls);
+	showTitleBook();
 	printf("1. Xem danh sach sach trong thu vien.\n");
 	printf("2. Them sach.\n");
 	printf("3. Chinh sua thong tin mot quyen sach.\n");
@@ -242,6 +257,7 @@ int printfMenuBookManagementForManager(){
 }
 int editInfBookMenu(){
 	system(cls);
+	showTitleBook();
 	printf("1. Sua ten sach\n");
 	printf("2. Sua ten tac gia\n");
 	printf("3. Sua ten nha xuat ban\n");
@@ -298,12 +314,13 @@ int analyzingMenuManager(){
 
 
 void showTitleHeader(){
+	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("||                          >>QUAN LY THU VIEN<<                                  ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
-			
+	textBgColor(WHITE, BLACK);	
 }
 void showFooter(){
 	printf("|----------------------------------------------------------------------------------|\n");

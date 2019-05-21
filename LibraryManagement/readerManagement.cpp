@@ -382,6 +382,8 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 	textBgColor(RED, BLACK);
 	printf("Chinh sua thanh cong.\n");
 	textBgColor(WHITE, BLACK);
+	Sleep(1500);
+	system(cls);
 	viewInfAReader(*reader);
 	fclose(fo);
 	fclose(ftemp);
