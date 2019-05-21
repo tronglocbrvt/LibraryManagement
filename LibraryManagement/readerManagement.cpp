@@ -268,14 +268,17 @@ void viewInfAReader(Readers reader) // Xem thông tin của một độc giả c
 	printf("--------------------------------------------------------\n");
 }
 
-void editReader(Readers &reader){ // sửa thông tin độc giả
+bool editReader(Readers &reader){ // sửa thông tin độc giả
 	system(cls);
 	int edit;
 	bool end = false;
+	int choice = 0;
 	do
 	{
 		textBgColor(WHITE, BLACK);
 		switch (getNumberPressKey(editInfReaderMenu(), 0)){
+		case 0: 
+			return 0;
 		case 1: // printf("1. Sua Ho va ten\n");
 			flushall();
 			printf("Nhap Ho va Ten: ");
@@ -330,10 +333,11 @@ void editReader(Readers &reader){ // sửa thông tin độc giả
 			if (edit == 0)
 				end = true;
 			break;
-		default: 
-			return;
+		default:
+			break;
 		}
 	} while (end == false);
+	return 1;
 }
 
 void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
@@ -375,21 +379,24 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
 		else
 		{
-			editReader(*reader);
-			fwrite(reader, sizeof(Readers), 1, ftemp);
+			if (editReader(*reader))
+			{
+				fwrite(reader, sizeof(Readers), 1, ftemp);
+				textBgColor(RED, BLACK);
+				printf("Chinh sua thanh cong.\n");
+				textBgColor(WHITE, BLACK);
+				viewInfAReader(*reader);
+				stopSceen();
+			}
+			else
+				fwrite(reader, sizeof(Readers), 1, ftemp);
 		}
 	}
-	textBgColor(RED, BLACK);
-	printf("Chinh sua thanh cong.\n");
-	textBgColor(WHITE, BLACK);
-	viewInfAReader(*reader);
 	fclose(fo);
 	fclose(ftemp);
 	delete reader;
 	remove((char*)_DIR_DATA_FOLDER_READER);
 	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
-
-	stopSceen();
 }
 
 void deleteReaderToFile() // Xóa độc giả trong file

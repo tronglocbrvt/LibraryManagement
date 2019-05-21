@@ -23,7 +23,7 @@ bool writeInfReaderToFile();
 
 void viewInfAReader(Readers reader); // Xem thông tin của một người cụ thể
 
-void editReader(Readers &reader); 
+bool editReader(Readers &reader); 
 
 void editReaderToFile(); // chỉnh sửa thông tin độc giả qua mã độc giả
 
