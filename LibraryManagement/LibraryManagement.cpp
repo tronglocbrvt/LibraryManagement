@@ -11,12 +11,18 @@
 
 
 #if defined(_WIN64) || defined(_WIN32)
-	
+	void stopSceen(){
+		system("pause");
+	}
 #else 
 	void flushall(){
 
 	}
 	void Sleep(int time){
+		cout << "Enter to continue the program";
+		cin.ignore().get(); //Pause Command for Linux Terminal
+	}
+	void stopSceen(){
 		cout << "Enter to continue the program";
 		cin.ignore().get(); //Pause Command for Linux Terminal
 	}

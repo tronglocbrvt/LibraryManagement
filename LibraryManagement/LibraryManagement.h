@@ -27,6 +27,7 @@ using namespace std;
 	// }
 	void flushall();
 	void Sleep(int time);
+
 #endif
 
 #include "functionsFile.h"
@@ -35,6 +36,7 @@ using namespace std;
 #define _SO_PHAN_TRAM_PHAT_KHI_MAT 2
 #define _SO_LUONG_CHU_SO_TIEN_MAT 18
 
+void stopSceen();
 enum Color
 {
 	BLACK,
