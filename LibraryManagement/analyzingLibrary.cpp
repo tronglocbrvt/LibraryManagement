@@ -111,10 +111,10 @@ void analyzingCatoBook(){
 	printf("Cac the loai trong thu vien hien co la %d The loai.\n", lsCate.total);
 	if (lsCate.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllCato(lsCate);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListBook(lsCate);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -169,10 +169,10 @@ void analyzingReader(){
 	printf("So luong doc gia dang dang ky voi Thu vien la:\t%d\n", lsreader.total);
 	if (lsreader.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllReader(lsreader);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListReader(lsreader);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -201,7 +201,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 			}
 			printf("|----------------------------------------------------------------------------------|\n");
 			printf("------------------------------------------------------------------------------------\n");
-			Sleep(3000);
+			stopSceen();
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
 			printf("|----------------------------------------------------------------------------------|\n");
@@ -257,10 +257,10 @@ void analyzingSexReader(){
 	printf("Thu vien co %d doc gia nam va co %d doc gia nu.\n", lsMaleReader.total, lsFemaleReader.total);
 	if (lsMaleReader.total != 0 || lsFemaleReader.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllSexReader(lsMaleReader, lsFemaleReader);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListReader(lsMaleReader);
 	freeLinkListReader(lsFemaleReader);
 }
@@ -314,10 +314,10 @@ void analyzingBorrowingBook(){
 	printf("So luong sach ma doc gia dang muon trong thu vien hien co la:\t%d\n", lsBorBook.total);
 	if (lsBorBook.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllBorrowingBook(lsBorBook);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListBorrowBook(lsBorBook);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -373,10 +373,10 @@ void analyzingOverdueReader(){
 	printf("So luong doc gia trong thu vien dang bi tre han tra sach:\t%d\n", lsBorBook.total);
 	if (lsBorBook.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllOverdueReader(lsBorBook);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListBorrowBook(lsBorBook);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
