@@ -46,21 +46,21 @@ int main()
 				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long thu lai!\n");
 				// getch();
-				Sleep(1000);
+				Sleep(1500);
 			}
 			else if (typeAccount == -1)
 			{
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
 				// getch();
-				Sleep(1000);
+				Sleep(1500);
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-		Sleep(1000);
+		Sleep(1500);
 		bool continueSwit = true;
 		while (continueSwit){
 			int choice = printLoginMenu();
