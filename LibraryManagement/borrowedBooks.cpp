@@ -87,6 +87,7 @@ bool checkBookIsBorrowed(BorrowBooks borBook){
 
 void borrowBook()
 {
+	system(cls);
 	// Nhập mã độc giả
 	int flag_reader = 1;
 	Readers *temp_reader = new Readers;
@@ -216,7 +217,11 @@ void borrowBookBill(char *ID, char *Fullname)
 	system(cls);
 	printf("\t\t\tPHIEU MUON SACH\n\n");
 	printf("----------------------------------------------------------------------------------------------\n");
-	printf("|             Ma doc gia: %8s           Ho va ten: %31s  |\n", ID, Fullname);
+	printf("|--------------------------------------------------------------------------------------------|\n");
+	printf("||                                >> PHIEU MUON SACH <<                                     ||\n");
+	printf("|--------------------------------------------------------------------------------------------|\n");
+	printf("----------------------------------------------------------------------------------------------\n");
+	printf("|             Ma doc gia: %8s           Ho va ten: %-35s  |\n", ID, Fullname);
 	printf("---------------------------------------------------------------------------------------------|\n");
 	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
 	printf("----------------------------------------------------------------------------------------------\n");

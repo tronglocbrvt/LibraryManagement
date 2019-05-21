@@ -13,7 +13,7 @@ int printLoginMenu();
 void printfMainMenu();
 
 
-void showTitleUser()
+void showTitleUser();
 int printUserMenu(int typeAccount);
 
 // void drawRectangle(int positionX, int positionY, int width, int height, int color);
@@ -41,3 +41,5 @@ void showFooter();
 
 int analyzingMenuManager();
 
+void showTitleBorrow();
+void showTitleReturn();

@@ -70,7 +70,7 @@ bool returnNumberBorrwedBook(char *isbnBook, int numRet){ // trả lại kho s�
 
 void returnBook()
 {
-	printf("\n");
+	system(cls);
 	char *idReader = new char[9];
 	getReaderID(idReader);
 
