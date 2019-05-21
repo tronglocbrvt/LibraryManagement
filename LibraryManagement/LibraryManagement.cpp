@@ -12,7 +12,8 @@
 
 #if defined(_WIN64) || defined(_WIN32)
 	void stopSceen(){
-		printf("Nhan phim bat ky de quay lai.\n");
+		textBgColor(YELLOW, BLACK);
+		printf("Nhan phim bat ky de quay lai...");
 		getch();
 	}
 #else 

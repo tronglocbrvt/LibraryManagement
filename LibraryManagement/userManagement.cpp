@@ -2,15 +2,9 @@
 #include "commonFunction.h"
 #include "Menu.h"
 
-/* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
-1: Admin
-2: Chuyên viên
-3: Quản lý
-Hàm đăng nhập thất bại trả về 0
-*/
+//  Kiểm tra Username và Password có trong database hay không?
 int checkLogin(char *Username, char *Password)
 {
-	// Kiểm tra Username và Password trong file Admin không?
 	Users A;
 
 	FILE *fCur = fopen(_DIR_DATA_FOLDER_USER_CUR, "wb");
@@ -52,7 +46,12 @@ int Logout()
 	return -1;
 }
 
-//Hàm đăng nhập
+/* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
+1: Admin
+2: Chuyên viên
+3: Quản lý
+Hàm đăng nhập thất bại trả về 0
+*/
 int Login()
 {
 	gotoxy(30, 1);
@@ -62,10 +61,14 @@ int Login()
 	textBgColor(WHITE, BLACK);
 	printf("Nhap ten tai khoan: ");
 	char *username = new char[21];
+	if (username == NULL)
+		return -1;
 	scanf("%s", username);
 
 	printf("Nhap mat khau: ");
 	char *password = new char[17];
+	if (password == NULL)
+		return -1;
 	scanf("%s", password);
 
 	int typeAccount = checkLogin(username, password);
@@ -95,13 +98,13 @@ bool checkUsername(char *Username)
 		if (strcmp(A.Username, Username) == 0)
 		{
 			fclose(f);
-			return false;
+			return 0;
 		}
 	}
 
 	fclose(f);
 
-	return true;
+	return 1;
 }
 
 // Nhập thông tin người dùng
@@ -109,29 +112,27 @@ Users addUser()
 {
 	Users A;
 
-	flushall();
 	getUsername(A.Username);
 
 	printf("Nhap Password (toi da 16 ky tu): ");
 	scanf("%s", A.Password);
 
-	getchar();
+	flushall();
 	printf("Nhap Ho va Ten: ");
 	gets(A.Fullname);
 
-	getBirthday(A.Birthday);
+	getBirthday(A.Birthday); // Nhập ngày sinh
 
-	getchar();
-	getNationalID(A.NationID);
+	getNationalID(A.NationID); // Nhập CMND
 
 	printf("Nhap dia chi: ");
 	gets(A.Address);
 
-	getSex(A.Sex);
+	getSex(A.Sex); // Nhập giới tính
 
-	getStatus(A.Status);
+	getStatus(A.Status); // Nhập tình trạng
 
-	getTypeAccount(A);
+	getTypeAccount(A); // Nhập loại người dùng
 
 	return A;
 }
@@ -140,8 +141,6 @@ Users addUser()
 void writeInfUsertoFile()
 {
 	Users A = addUser();
-
-	Sleep(1000);
 
 	FILE *f = fopen(_DIR_DATA_FOLDER_USER, "ab");
 
@@ -161,11 +160,15 @@ void getUser(int typeAccount)
 	if (typeAccount == 1)
 	{
 		writeInfUsertoFile();
+		textBgColor(RED, BLACK);
 		printf("Tao nguoi dung thanh cong!\n");
+		Sleep(1000);
 	}
 	else
 	{
+		textBgColor(RED, BLACK);
 		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
+		Sleep(1000);
 	}
 }
 
@@ -198,7 +201,7 @@ void updateFile(Users curUser)
 }
 
 // Hàm đổi mật khẩu
-void ChangePassword()
+void changePassword()
 {
 	Users curUser;
 	char *oldPassword = new char[16];
@@ -207,7 +210,7 @@ void ChangePassword()
 
 	FILE *f = fopen(_DIR_DATA_FOLDER_USER_CUR, "rb"); // mở File chứa thông tin tài khoản đang đăng nhập
 
-	if (f == NULL )
+	if (oldPassword == NULL || newPassword1 == NULL || newPassword2 == NULL || f == NULL)
 		return;
 
 	fread(&curUser, sizeof(Users), 1, f);
@@ -290,8 +293,9 @@ void viewProfile()
 	printf("||                       >> CAP NHAT THONG TIN CA NHAN <<                         ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(BLUE, BLACK);
+	printf("Thong tin ca nhan cua Username: %s:\n", curUser.Username);
 	textBgColor(WHITE, BLACK);
-	printf("Thong tin ca nhan cua Username %s:\n\n", curUser.Username);
 	printf("--------------------------------------------------------\n");
 	printf("Ho va ten: %s\n", curUser.Fullname);
 	printf("Ngay sinh: ");
@@ -348,10 +352,9 @@ void editProfile()
 
 	do
 	{
+		textBgColor(WHITE, BLACK);
 		printf("1. Ho va ten \t 2. Ngay sinh \t 3. CMND \t 4. Dia chi \t 5. Gioi tinh\n");
-		/*printf("Nhap so de chinh sua thong tin tuong ung: ");
-		scanf("%d", &choice);*/
-
+		
 		switch (choice = getNumberPressKey(5,0))
 		{
 		case 1:
@@ -417,11 +420,10 @@ void editProfile()
 	printf("Ban da thay doi thong tin thanh cong!\n");
 	Sleep(1000);
 	viewProfile();
-	textBgColor(YELLOW, BLACK);
-	printf("Nhan phim bat ky de quay lai Menu Quan Ly Tai Khoa Ca Nhan...");
-	getch();
+	stopSceen();
 }
 
+// Hàm in thông tin quyền người dùng
 void inforDecentraliseUser()
 {
 	Users A;
@@ -430,6 +432,9 @@ void inforDecentraliseUser()
 
 	if (f == NULL)
 		return;
+	textBgColor(BLUE, BLACK);
+	printf("Danh sach Username va quyen hien tai la:\n");
+	textBgColor(WHITE, BLACK);
 
 	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
@@ -442,30 +447,43 @@ void inforDecentraliseUser()
 	fclose(f);
 }
 
+// Phân quyền người dùng
 void decentraliseUser(int typeAccount)
 {
 	if (typeAccount != 1)
 	{
+		textBgColor(RED, BLACK);
 		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
+		Sleep(1000);
 		return;
 	}
 
-	inforDecentraliseUser();
+	inforDecentraliseUser(); // In thông tin quyền người dùng
 
 	char *Username = new char[21];
+	if (Username == NULL)
+		return;
 	int flag;
 
 	do
 	{
-		int temp = getchar();
+		textBgColor(WHITE, BLACK);
 		printf("Nhap Username ban muon phan quyen: ");
 		scanf("%s", Username);
 
 		flag = checkUsername(Username); // flag = 0: tìm thấy Username; flag = 1: không tìm thấy Username.
 		if (flag == 1)
+		{
+			textBgColor(RED, BLACK);
 			printf("Khong tim thay Username ban da nhap. Vui long thu lai.\n");
+			Sleep(1000);
+		}
 		if (strcmp(Username, "admin") == 0)
+		{
+			textBgColor(RED, BLACK);
 			printf("Ban khong the phan quyen cho admin.\n");
+			Sleep(1000);
+		}
 	} while (strcmp(Username, "admin") == 0 || flag == 1);
 
 	Users A;
@@ -487,13 +505,16 @@ void decentraliseUser(int typeAccount)
 
 	updateFile(A);
 
+	textBgColor(RED, BLACK);
 	printf("Ban da phan quyen thanh cong!\n");
+	Sleep(1000);
 
-	inforDecentraliseUser();
-
+	inforDecentraliseUser(); // In thông tin quyền người dùng sau khi phân quyền
+	stopSceen();
 	delete[] Username;
 }
 
+// Xem thông tin trạng thái người dùng
 void inforStatusUser()
 {
 	Users A;
@@ -502,42 +523,62 @@ void inforStatusUser()
 
 	if (f == NULL)
 		return;
+	textBgColor(BLUE, BLACK);
+	printf("Danh sach Username va trang thai hien tai la:\n");
+	textBgColor(WHITE, BLACK);
 
 	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (A.Status == 0)
+		{
 			printf("%s\t\t%s\n", A.Username, "Blocked");
+		}
 		else if (A.Status == 1)
+		{
 			printf("%s\t\t%s\n", A.Username, "Actived");
+		}
 	}
 
 	fclose(f);
 }
 
+// Chỉnh sửa trạng thái người dùng
 void changeStatusUser(int typeAccount)
 {
 	if (typeAccount != 1)
 	{
+		textBgColor(RED, BLACK);
 		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
+		Sleep(1000);
 		return;
 	}
 
-	inforStatusUser();
+	inforStatusUser(); //in thông tin trạng thái người dùng
 
 	char *Username = new char[21];
+	if (Username == NULL)
+		return;
 	int flag;
 
 	do
 	{
-		int temp = getchar();
-		printf("Nhap Username ban muon phan quyen: ");
+		textBgColor(WHITE, BLACK);
+		printf("Nhap Username ban muon thay doi trang thai: ");
 		scanf("%s", Username);
 
 		flag = checkUsername(Username); // flag = 0: tìm thấy Username; flag = 1: không tìm thấy Username.
 		if (flag == 1)
+		{
+			textBgColor(RED, BLACK);
 			printf("Khong tim thay Username ban da nhap. Vui long thu lai.\n");
+			Sleep(1000);
+		}
 		if (strcmp(Username, "admin") == 0)
-			printf("Ban khong the phan quyen cho admin.\n");
+		{
+			textBgColor(RED, BLACK);
+			printf("Ban khong the thay doi trang thai cho admin.\n");
+			Sleep(1000);
+		}
 	} while (strcmp(Username, "admin") == 0 || flag == 1);
 
 	Users A;
@@ -559,13 +600,17 @@ void changeStatusUser(int typeAccount)
 
 	updateFile(A);
 
+	textBgColor(RED, BLACK);
 	printf("Ban da cap nhat trang thai thanh cong!\n");
-
-	inforStatusUser();
+	Sleep(1000);
+	 
+	inforStatusUser(); // in lại thông tin trạng thái người dùng sau khi chỉnh sửa
+	stopSceen();
 
 	delete[] Username;
 }
 
+// Chạy chức năng 1 - Quản lý người dùng
 void runMenuUser(int typeAccount)
 {
 	int choice = 0;
@@ -573,7 +618,7 @@ void runMenuUser(int typeAccount)
 		choice = getNumberPressKey(printUserMenu(typeAccount), 0);
 		switch (choice){
 		case 1: // Thay đổi Password
-			ChangePassword();
+			changePassword();
 			break;
 		case 2: // Cập nhật thông tin
 			editProfile();
