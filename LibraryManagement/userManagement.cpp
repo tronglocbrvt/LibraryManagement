@@ -70,23 +70,25 @@ int Login()
 	if (password == NULL)
 		return -1;
 	
-	char ch = ' ';
-	int index = 0;
-	while (1){
-		if (kbhit())
-		{
-			ch = getch();
-			if (ch != 10 && ch != 13)
-			{
-				printf("*");
-				*(password + index++) = ch;
-			}
-			else
-				break;
-		}
-	}
-	*(password + index) = '\0';
-	printf("\n");
+	// char ch = ' ';
+	// int index = 0;
+	// while (1){
+	// 	if (kbhit())
+	// 	{
+	// 		ch = getch();
+	// 		if (ch != 10 && ch != 13)
+	// 		{
+	// 			printf("*");
+	// 			*(password + index++) = ch;
+	// 		}
+	// 		else
+	// 			break;
+	// 	}
+	// }
+	// *(password + index) = '\0';
+	// printf("\n");
+
+	scanf("%s", password);
 
 	int typeAccount = checkLogin(username, password);
 

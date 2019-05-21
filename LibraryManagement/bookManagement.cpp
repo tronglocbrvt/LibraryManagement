@@ -59,10 +59,11 @@ void viewAllBook()	// đọc toàn bộ thông tin độc giả từ file và in
 	{	
 		return;
 	}
-
+	showTitleHeader();
 	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		viewInfABook(*book);
 	}
+	showFooter();
 	stopSceen();
 	fclose(fileBook);
 	delete book;
@@ -188,17 +189,16 @@ bool writeInfBookToFile() // thêm sách vào database
 
 void viewInfABook(Books book) // Xem thông tin của sách
 {
-	printf("--------------------------------------------------------\n");
-	printf("\tThong Tin Sach Trong Thu Vien\n");
-	printf("Ma ISBN: %s\n", book.ISBN);
-	printf("Ten sach: %s\n", book.nameBook);
-	printf("Ten tac gia: %s\n", book.Author);
-	printf("Nha xuat ban: %s\n", book.publishCompany);
-	printf("Nam xuat ban: %d\n", book.yearPublish);
-	printf("The loai sach: %s\n", book.Category);
-	printf("Gia 1 quyen sach: %ld\n", book.priceBook);
-	printf("So luong sach: %d\n", book.numBook);
-	printf("--------------------------------------------------------\n");
+	char *stringMoneyPayement = intMoneyToStringMoney(book.priceBook);
+	printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
+	printf("|^   ISBN:  %-14s  Ten Sach:  %-43sv|\n", book.ISBN, book.nameBook);
+	printf("|^   Ten tac gia:           %-51s   v|\n", book.Author);
+	printf("|^   The loai:              %-51s   v|\n", book.Category);
+	printf("|^   Nha xuat ban:  %-40sNam xuat ban:  %4d   v|\n", book.publishCompany, book.yearPublish);
+	printf("|^   So luong sach hien co:  %6d   |  Gia tien:  %18s VND        v|\n", book.numBook, stringMoneyPayement);
+	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+
+			
 }
 
 void editBook(Books &book){ // sửa thông tin sách
