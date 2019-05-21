@@ -12,7 +12,8 @@
 
 #if defined(_WIN64) || defined(_WIN32)
 	void stopSceen(){
-		system("pause");
+		printf("Nhan phim bat ky de quay lai.\n");
+		getch();
 	}
 #else 
 	void flushall(){
@@ -51,7 +52,7 @@ int main()
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
 				// getch();
-				Sleep(1);
+				Sleep(1000);
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 		textBgColor(RED, BLACK);

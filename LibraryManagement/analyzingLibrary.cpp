@@ -55,10 +55,10 @@ void analyzingBook(){
 	printf("So luong sach trong thu vien hien co la:\t%d\n", lsbook.total);
 	if (lsbook.total != 0)
 	{
-		Sleep(1000);
+		stopSceen();
 		askToPrintAllBook(lsbook);
 	}
-	Sleep(1000);
+	stopSceen();
 	freeLinkListBook(lsbook);
 	
 }
