@@ -186,7 +186,7 @@ void borrowBook()
 			fclose(f);
 
 			printf("Muon sach thanh cong.\n");
-
+			Sleep(1000);
 			int borrow = wantBorrow();
 			if (borrow == 0)
 				end = 1;
@@ -194,6 +194,7 @@ void borrowBook()
 		else
 		{
 			printf("So luong sach trong thu vien khong du so luong.\n");
+			Sleep(1000);
 			int borrow = wantBorrow();
 			if (borrow == 0)
 				end = 1;
@@ -202,7 +203,7 @@ void borrowBook()
 
 	borrowBookBill(temp_reader->ID, temp_reader->Fullname);
 
-	Sleep(1000);
+	stopSceen();
 
 	delete temp_reader;
 }
