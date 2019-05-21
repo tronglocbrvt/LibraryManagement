@@ -63,7 +63,7 @@ void viewAllBook()	// đọc toàn bộ thông tin độc giả từ file và in
 	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		viewInfABook(*book);
 	}
-	Sleep(1000);
+	stopSceen();
 	fclose(fileBook);
 	delete book;
 }
@@ -375,7 +375,7 @@ void deleteBookToFile()
 	delete book;
 	remove((char*)_DIR_DATA_FOLDER_BOOK);
 	rename((char*)_DIR_DATA_FOLDER_BOOK_TEMP, (char*)_DIR_DATA_FOLDER_BOOK);
-	Sleep(1000);
+	stopSceen();
 }
 
 void searchISBN()
@@ -390,11 +390,14 @@ void searchISBN()
 	if (book == NULL)
 	{
 		printf("Sach khong ton tai.\n");
+		Sleep(1000);
 	}
 	else
+	{
 		viewInfABook(*book);
+		stopSceen();
+	}
 
-	Sleep(1000);
 	delete book;
 }
 
@@ -412,12 +415,14 @@ void searchBookName()
 	if (!(findListBookWithName(book->nameBook, lsBook)))
 	{
 		printf("Sach khong ton tai.\n");
+		Sleep(1000);
 	}
 
 	else
+	{
 		printBookFromLL(lsBook);
-
-	Sleep(1000);
+		stopSceen();
+	}
 
 	freeLinkListBook(lsBook);
 	delete book;
