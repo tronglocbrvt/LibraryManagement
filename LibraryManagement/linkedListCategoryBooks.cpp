@@ -67,12 +67,12 @@ bool addBooksToExistCategory(LLNodeCategory &ls, char *Category, int numBookPerC
 		if (strcmp(pNow->Category, Category) == 0)
 		{
 			pNow->numBookPerCategory += numBookPerCategory;
-			delete pNow;
+			// delete pNow;
 			return true;
 		}
 
 		pNow = pNow->pNext;
 	}
-	delete pNow;
+	// delete pNow;
 	return false;
 }
