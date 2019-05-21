@@ -457,12 +457,12 @@ void runningAnalyzingForManager(){
 			case 4: // Thống kê số lượng độc giả theo giới tính
 				analyzingSexReader();
 				break;
-			//case 5: // Thống kê số sách đang được mượn
-			//	analyzingBorrowingBook();
-			//	break;
-			//case 6: // Thống kê danh sách độc giả bị trễ hạn
-			//	analyzingOverdueReader();
-			//	break;
+			case 5: // Thống kê số sách đang được mượn
+				analyzingBorrowingBook();
+				break;
+			case 6: // Thống kê danh sách độc giả bị trễ hạn
+				analyzingOverdueReader();
+				break;
 			default:
 				break;
 		}
