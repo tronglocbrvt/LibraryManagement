@@ -354,7 +354,7 @@ void editReaderToFile()
 	}
 
 	viewInfAReader(*reader);
-	Sleep(1000);
+	stopSceen();
 	// chỉnh sửa chọn lọc
 	while (fread(&temp, sizeof(Readers), 1, fo) != 0)
 	{
@@ -427,6 +427,7 @@ void deleteReaderToFile()
 	}
 	textBgColor(RED, BLACK);
 	printf("Xoa thanh cong.\n");
+	Sleep(1000);
 	textBgColor(WHITE, BLACK);
 	
 	fclose(fo);
@@ -434,7 +435,6 @@ void deleteReaderToFile()
 	delete reader;
 	remove((char*)_DIR_DATA_FOLDER_READER);
 	rename((char*)_DIR_DATA_FOLDER_READER_TEMP, (char*)_DIR_DATA_FOLDER_READER);
-	Sleep(1000);
 }
 
 void searchNationID()
@@ -447,12 +447,15 @@ void searchNationID()
 	if (reader == NULL)
 	{
 		printf("Doc gia khong ton tai.\n");
+		Sleep(1000);
 	}
 	else
+	{
 		viewInfAReader(*reader);
-
+		stopSceen();
+	}
 	delete reader;
-	Sleep(1000);
+	
 }
 
 void searchFullName()
@@ -477,7 +480,7 @@ void searchFullName()
 
 	freeLinkListReader(lsReader);
 	delete reader;
-	Sleep(1000);
+	stopSceen();
 }
 
 void runReaderManagementForAdmin(){

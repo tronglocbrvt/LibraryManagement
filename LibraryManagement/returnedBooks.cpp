@@ -167,7 +167,7 @@ void returnBook()
 
 	returnBookBill(nameReader, nameBook, numBor, numRet, moneyPayement);
 
-	Sleep(1000);
+	stopSceen();
 
 	delete[] idReader;
 	delete[] nameReader;
