@@ -94,7 +94,7 @@ int printUserMenu(int typeAccount)
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                      >> QUAN LY TAI KHOAN CA NHAN <<                           ||\n");
+	printf("||                          >> QUAN LY NGUOI DUNG <<                              ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
@@ -128,8 +128,33 @@ int printUserMenu(int typeAccount)
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//void drawRectangle(int positionX, int positionY, int width, int height, int color)
+//{
+//	textBgColor(0, color);
+//	gotoxy(positionX, positionY);
+//	for (int y = 0; y < height; y++)
+//	{
+//		for (int x = 0; x < width; x++)
+//		{
+//			if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
+//			{
+//				gotoxy(positionX + x, positionY + y);
+//				printf("%c", '*');
+//			}
+//		}
+//	}
+//}
+
 int printfMenuReaderManagementForAdmin(){
 	system(cls);
+	//drawRectangle(30, 16, 30, 4, BLUE);
+	textBgColor(BLUE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                            >> QUAN LY DOC GIA <<                               ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
 	printf("2. Them doc gia.\n");
 	printf("3. Chinh sua thong tin mot doc gia.\n");

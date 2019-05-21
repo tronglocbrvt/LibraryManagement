@@ -293,7 +293,7 @@ void viewProfile()
 	printf("||                       >> CAP NHAT THONG TIN CA NHAN <<                         ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(BLUE, BLACK);
+	textBgColor(PURPLE, BLACK);
 	printf("Thong tin ca nhan cua Username: %s:\n", curUser.Username);
 	textBgColor(WHITE, BLACK);
 	printf("--------------------------------------------------------\n");
