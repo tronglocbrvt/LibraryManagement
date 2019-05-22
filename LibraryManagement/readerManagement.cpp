@@ -213,7 +213,7 @@ int askToUpdateReaderToFile() // cập nhật thông tin đọc giả vào file 
 bool writeInfReaderToFile() // thêm độc giả vào database
 {
 	system(cls);
-	showTitleAddNew();
+	showTitleAddNewReader();
 
 	Readers	reader = addReader();
 	Readers *temp1 = findReaderWithNationID(reader.NationID);
@@ -223,6 +223,8 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 	case 1:
 		if (temp1 != NULL || temp2 != NULL)
 		{
+			system(cls);
+			showTitleAddNewReader();
 			textBgColor(RED, BLACK);
 			printf("Doc gia nay da ton tai do trung CMND/Email voi doc gia khac.\n");
 			Sleep(1000); // ngưng màn hình 1 giây cho người dùng đọc
@@ -239,6 +241,8 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 
 			fwrite(&reader, sizeof(Readers), 1, f);
 			fclose(f);
+			system(cls);
+			showTitleAddNewReader();
 			textBgColor(RED, BLACK);
 			printf("Them doc gia thanh cong.\n");
 			Sleep(1000);
@@ -370,6 +374,8 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 	reader = findReaderWithID(reader->ID);
 	if (reader == NULL)
 	{
+		system(cls);
+		showTitleEditReader();
 		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
@@ -390,6 +396,8 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 			if (editReader(*reader))
 			{
 				fwrite(reader, sizeof(Readers), 1, ftemp);
+				system(cls);
+				showTitleEditReader();
 				textBgColor(RED, BLACK);
 				printf("Chinh sua thanh cong.\n");
 				Sleep(1000);
@@ -431,6 +439,8 @@ void deleteReaderToFile() // Xóa độc giả trong file
 	reader = findReaderWithID(reader->ID);
 	if (reader == NULL)
 	{
+		system(cls);
+		showTitleDeleteReader();
 		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
@@ -464,6 +474,8 @@ void deleteReaderToFile() // Xóa độc giả trong file
 		if (strcmp(reader->ID, temp.ID) != 0)
 			fwrite(&temp, sizeof(Readers), 1, ftemp);
 	}
+	system(cls);
+	showTitleDeleteReader();
 	textBgColor(RED, BLACK);
 	printf("Xoa thanh cong.\n");
 	Sleep(1000);
@@ -483,13 +495,15 @@ void searchNationID() // Tìm kiếm qua CMND
 		return; 
 
 	system(cls);
-	showTitleFindReaderNationId();
+	showTitleFindReaderByNationId();
 
 	getNationalID(reader->ID);
 	reader = findReaderWithNationID(reader->ID);
 
 	if (reader == NULL)
 	{
+		system(cls);
+		showTitleFindReaderByNationId();
 		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);
@@ -522,6 +536,8 @@ void searchFullName() // Tìm kiếm qua họ tên
 
 	if (!(findListReaderWithName(reader->Fullname, lsReader)))
 	{
+		system(cls);
+		showTitleFindReaderByName();
 		textBgColor(RED, BLACK);
 		printf("Doc gia khong ton tai.\n");
 		Sleep(1000);

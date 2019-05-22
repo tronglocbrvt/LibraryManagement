@@ -154,6 +154,7 @@ int askToUpdateBookToFile() // cập nhật thông tin sách vào file - hỏi c
 
 bool writeInfBookToFile() // thêm sách vào database
 {
+	system(cls);
 	showTitleAddNewBook();
 	Books book = addBook();
 
@@ -163,6 +164,8 @@ bool writeInfBookToFile() // thêm sách vào database
 		case 1:
 			if (temp != NULL)
 			{
+				system(cls);
+				showTitleAddNewBook();
 				printf("ISBN nay da ton tai.\n");
 				Sleep(1000); // ngưng màn hình 1 giây cho người dùng đọc
 				delete temp;
@@ -177,6 +180,8 @@ bool writeInfBookToFile() // thêm sách vào database
 
 				fwrite(&book, sizeof(Books), 1, f);
 				fclose(f);
+				system(cls);
+				showTitleAddNewBook();
 				printf("Them thong tin sach thanh cong.\n");
 				Sleep(1000);
 				delete temp;
@@ -286,6 +291,7 @@ void editBookToFile()
 	if (book == NULL)
 		return;
 
+	system(cls);
 	showTitleEditBook();
 	flushall();
 	printf("Nhap vao ISBN cua sach muon chinh sua: ");
@@ -294,6 +300,8 @@ void editBookToFile()
 	book = findBookWithISBN(book->ISBN);
 	if (book == NULL)
 	{
+		system(cls);
+		showTitleEditBook();
 		printf("Sach khong ton tai.\n");
 		Sleep(1000);
 		delete book;
@@ -304,6 +312,7 @@ void editBookToFile()
 	showTitleEditBook();
 	viewInfABook(*book);
 	system("pause");
+
 	while (fread(&temp, sizeof(Books), 1, fo) != 0)
 	{
 		if (strcmp(book->ISBN, temp.ISBN) != 0)
@@ -316,6 +325,8 @@ void editBookToFile()
 			fwrite(book, sizeof(Books), 1, ftemp);
 		}
 	}
+	system(cls);
+	showTitleEditBook();
 	textBgColor(RED, BLACK);
 	printf("Chinh sua thanh cong.\n");
 	textBgColor(WHITE, BLACK);
@@ -350,6 +361,8 @@ void deleteBookToFile()
 	book = findBookWithISBN(book->ISBN);
 	if (book == NULL)
 	{
+		system(cls);
+		showTitleDeleteBook();
 		printf("Sach khong ton tai.\n");
 		Sleep(1000);
 		delete book;
@@ -377,6 +390,8 @@ void deleteBookToFile()
 		if (strcmp(book->ISBN, temp.ISBN) != 0)
 			fwrite(&temp, sizeof(Books), 1, ftemp);
 	}
+	system(cls);
+	showTitleDeleteBook();
 	textBgColor(RED, BLACK);
 	printf("Xoa thanh cong.\n");
 	textBgColor(WHITE, BLACK);
@@ -402,6 +417,8 @@ void searchISBN()
 	book = findBookWithISBN(book->ISBN);
 	if (book == NULL)
 	{
+		system(cls);
+		showTitleFindBookByISBN();
 		printf("Sach khong ton tai.\n");
 		Sleep(1000);
 	}
@@ -431,6 +448,8 @@ void searchBookName()
 
 	if (!(findListBookWithName(book->nameBook, lsBook)))
 	{
+		system(cls);
+		showTitleFindBookByName();
 		printf("Sach khong ton tai.\n");
 		Sleep(1000);
 	}

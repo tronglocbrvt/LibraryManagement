@@ -19,6 +19,6 @@ g++ analyzingLibrary.cpp bookManagement.cpp borrowedBooks.cpp commonFunction.cpp
 kẻ bảng xem thông tin:.....v
 title.... v
 kiểm tra logic hàm thống kê v
-tạo dữ liệu mượn sách từ ngày 15/5
+tạo dữ liệu mượn sách từ ngày 15/5 x
 
 
