@@ -372,7 +372,7 @@ void editProfile()
 	do
 	{
 		textBgColor(WHITE, BLACK);
-		printf("1. Ho va ten \t 2. Ngay sinh \t 3. CMND \t 4. Dia chi \t 5. Gioi tinh\n");
+		printf("1. Ho va ten    2. Ngay sinh    3. CMND    4. Dia chi    5. Gioi tinh    0. Quay ve");
 		
 		switch (choice = getNumberPressKey(5,0))
 		{
@@ -418,8 +418,12 @@ void editProfile()
 				end = true;
 			temp = getchar();
 			break;
+		case 0:
+			fclose(fCur);
+			return;
+			break;
 		default:
-			printf("Vui long nhap tu 1 den 5.\n");
+			printf("Vui long nhap tu 0 den 5.\n");
 			break;
 		}
 	} while (end == false);
