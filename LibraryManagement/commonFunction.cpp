@@ -21,7 +21,7 @@ int getNumberPressKey(int MAX, int MIN)
 {
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
-	printf("Nhan so de chon: ");
+	printf("Nhan so de chon chuc nang: ");
 	enable_raw_mode();
 	while (1) {		
 			if (kbhit()) {

@@ -50,7 +50,7 @@ void analyzingBook(){
 		addAtTail(lsbook, book);
 	}
 
-	printf("So luong sach trong thu vien hien co la:\t%d\n", lsbook.total);
+	printf("So luong sach trong thu vien hien co la: %d\n", lsbook.total);
 	if (lsbook.total != 0)
 	{
 		stopSceen();
@@ -64,7 +64,7 @@ void analyzingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	NodeCategory *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -119,7 +119,7 @@ void analyzingCatoBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -164,7 +164,7 @@ void analyzingReader(){
 		addAtTail(lsreader, reader);
 	}
 
-	printf("So luong doc gia dang dang ky voi Thu vien la:\t%d\n", lsreader.total);
+	printf("So luong doc gia dang dang ky voi Thu vien la: %d\n", lsreader.total);
 	if (lsreader.total != 0)
 	{
 		stopSceen();
@@ -177,7 +177,7 @@ void analyzingReader(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleReader){ // 2 ll sex
 	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -266,7 +266,7 @@ void analyzingSexReader(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");
@@ -322,7 +322,7 @@ void analyzingBorrowingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
 			printf("------------------------------------------------------------------------------------\n");

@@ -36,7 +36,7 @@ int main()
 	{
 		system(cls);
 		int typeAccount;
-		resizeConsole(1200, 1200);
+		resizeConsole(707, 707);
 		do
 		{
 			system(cls);
@@ -46,21 +46,21 @@ int main()
 				textBgColor(RED, BLACK);
 				printf("Dang nhap that bai. Vui long thu lai!\n");
 				// getch();
-				Sleep(1500);
+				Sleep(1000);
 			}
 			else if (typeAccount == -1)
 			{
 				textBgColor(RED, BLACK);
 				printf("Xin loi! Tai khoan cua ban dang o trang thai Blocked.\n");
 				// getch();
-				Sleep(1500);
+				Sleep(1000);
 			}
 		} while (typeAccount == 0 || typeAccount == -1);
 		textBgColor(RED, BLACK);
 		printf("Dang nhap thanh cong!\n");
 		textBgColor(WHITE, BLACK);
 
-		Sleep(1500);
+		Sleep(1000);
 		bool continueSwit = true;
 		while (continueSwit){
 			int choice = printLoginMenu();

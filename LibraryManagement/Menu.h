@@ -8,6 +8,7 @@
  void resizeConsole(int width, int height);
  void gotoxy(int x, int y);
 #endif
+
 int printLoginMenu();
 
 void printfMainMenu();

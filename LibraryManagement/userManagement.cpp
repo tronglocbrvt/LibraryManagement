@@ -129,6 +129,15 @@ bool checkUsername(char *Username)
 // Nhập thông tin người dùng
 Users addUser()
 {
+	system(cls);
+	textBgColor(PURPLE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                            >> TAO NGUOI DUNG <<                                ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
+
 	Users A;
 
 	getUsername(A.Username);
@@ -171,24 +180,13 @@ void writeInfUsertoFile()
 }
 
 // Tạo người dùng
-void getUser(int typeAccount)
+void getUser()
 {
-	/* Kiểm tra xem tài khoản đăng nhập hiện tại có phải là admin hay không?
-	Nếu là admin thì thực hiện chức năng.
-	Ngược lại không được tạo tài khoản (vì tạo tài khoản duy nhất là quyền của admin.) */
-	if (typeAccount == 1)
-	{
-		writeInfUsertoFile();
-		textBgColor(RED, BLACK);
-		printf("Tao nguoi dung thanh cong!\n");
-		Sleep(1000);
-	}
-	else
-	{
-		textBgColor(RED, BLACK);
-		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
-		Sleep(1000);
-	}
+	/* ghi vào file người dùng mới */
+	writeInfUsertoFile();
+	textBgColor(RED, BLACK);
+	printf("Tao nguoi dung thanh cong!\n");
+	Sleep(1000);
 }
 
 // Hàm Update file
@@ -451,6 +449,15 @@ void inforDecentraliseUser()
 
 	if (f == NULL)
 		return;
+
+	system(cls);
+	textBgColor(PURPLE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                         >> PHAN QUYEN NGUOI DUNG <<                            ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	
 	textBgColor(BLUE, BLACK);
 	printf("Danh sach Username va quyen hien tai la:\n");
 	textBgColor(WHITE, BLACK);
@@ -467,16 +474,8 @@ void inforDecentraliseUser()
 }
 
 // Phân quyền người dùng
-void decentraliseUser(int typeAccount)
+void decentraliseUser()
 {
-	if (typeAccount != 1)
-	{
-		textBgColor(RED, BLACK);
-		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
-		Sleep(1000);
-		return;
-	}
-
 	inforDecentraliseUser(); // In thông tin quyền người dùng
 
 	char *Username = new char[21];
@@ -542,6 +541,15 @@ void inforStatusUser()
 
 	if (f == NULL)
 		return;
+
+	system(cls);
+	textBgColor(PURPLE, LIGHTAQUA);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                     >> CHINH SUA TRANG THAI NGUOI DUNG <<                      ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+
 	textBgColor(BLUE, BLACK);
 	printf("Danh sach Username va trang thai hien tai la:\n");
 	textBgColor(WHITE, BLACK);
@@ -562,16 +570,8 @@ void inforStatusUser()
 }
 
 // Chỉnh sửa trạng thái người dùng
-void changeStatusUser(int typeAccount)
+void changeStatusUser()
 {
-	if (typeAccount != 1)
-	{
-		textBgColor(RED, BLACK);
-		printf("Xin loi! Quyen nay chi danh cho Admin.\n");
-		Sleep(1000);
-		return;
-	}
-
 	inforStatusUser(); //in thông tin trạng thái người dùng
 
 	char *Username = new char[21];
@@ -642,14 +642,17 @@ void runMenuUser(int typeAccount)
 		case 2: // Cập nhật thông tin
 			editProfile();
 			break;
-		case 3: // Tạo người dùng dành cho admin
-			getUser(typeAccount);
+		case 3: // Tạo người dùng 
+			if (typeAccount == 1)
+			getUser();
 			break;
 		case 4: // Phân quyền người dùng
-			decentraliseUser(typeAccount);
+			if (typeAccount == 1)
+			decentraliseUser();
 			break;
 		case 5: // Chỉnh sửa trạng thái người dùng
-			changeStatusUser(typeAccount);
+			if (typeAccount == 1)
+			changeStatusUser();
 			break;
 		default:
 			break;

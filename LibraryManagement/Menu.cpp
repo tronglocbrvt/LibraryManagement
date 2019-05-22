@@ -63,21 +63,21 @@ void printfMainMenu(){
 	textBgColor(BLUE, LIGHTAQUA);
 	showTitleHeader();
 	textBgColor(WHITE, BLACK);
-	gotoxy(30, 6);
-	printf("1. Quan ly tai khoan ca nhan.\n");
-	gotoxy(30, 7);
+	gotoxy(25, 6);
+	printf("1. Quan ly nguoi dung.\n");
+	gotoxy(25, 7);
 	printf("2. Quan ly doc gia.\n");
-	gotoxy(30, 8);
+	gotoxy(25, 8);
 	printf("3. Quan ly sach.\n");
-	gotoxy(30, 9);
+	gotoxy(25, 9);
 	printf("4. Lap phieu muon sach.\n");
-	gotoxy(30, 10);
+	gotoxy(25, 10);
 	printf("5. Lap phieu tra sach.\n");
-	gotoxy(30, 11);
+	gotoxy(25, 11);
 	printf("6. Thong ke co ban.\n");
-	gotoxy(30, 12);
+	gotoxy(25, 12);
 	printf("7. Dang xuat.\n");
-	gotoxy(30, 13);
+	gotoxy(25, 13);
 	printf("0. Thoat\n");
 
 }
@@ -92,6 +92,7 @@ void showTitleUser(){
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
 }
+
 int printUserMenu(int typeAccount)
 {
 	system(cls);
@@ -111,17 +112,14 @@ int printUserMenu(int typeAccount)
 		printf("5. Chinh sua trang thai nguoi dung.\n");
 		gotoxy(25, 11);
 		printf("0. Quay ve.\n");
+		return 5;
 	}
 	else
 	{
 		gotoxy(25, 8);
 		printf("0. Quay ve.\n");
+		return 2;
 	}
-	
-	if (typeAccount == 1)
-		return 5;
-	
-	return 2;
 }
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -151,49 +149,71 @@ void showTitleReader(){
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
 }
+
 int printfMenuReaderManagementForAdmin(){
 	system(cls);
 	//drawRectangle(30, 16, 30, 4, BLUE);
 	showTitleReader();
+	gotoxy(25, 6);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Them doc gia.\n");
+	gotoxy(25, 8);
 	printf("3. Chinh sua thong tin mot doc gia.\n");
+	gotoxy(25, 9);
 	printf("4. Xoa thong tin mot doc gia.\n");
+	gotoxy(25, 10);
 	printf("5. Tim kiem doc gia qua CMND.\n");
+	gotoxy(25, 11);
 	printf("6. Tim kiem doc gia qua ho ten.\n");
+	gotoxy(25, 12);
 	printf("0. Quay ve\n");
 
 	return 6;
 }
+
 int printfMenuReaderManagementForExpert(){
 	system(cls);
 	showTitleReader();
+	gotoxy(25, 6);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Them doc gia.\n");
+	gotoxy(25, 8);
 	printf("3. Chinh sua thong tin mot doc gia.\n");
-	// printf("4. Xoa thong tin mot doc gia.\n");
+	gotoxy(25, 9);
 	printf("4. Tim kiem doc gia qua CMND.\n");
+	gotoxy(25, 10);
 	printf("5. Tim kiem doc gia qua ho ten.\n");
+	gotoxy(25, 11);
 	printf("0. Quay ve\n");
 
 	return 5;
 }
+
 int printfMenuReaderManagementForManager(){
 	system(cls);
 	showTitleReader();
+	gotoxy(25, 6);
 	printf("1. Xem danh sach doc gia trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Them doc gia.\n");
+	gotoxy(25, 8);
 	printf("3. Chinh sua thong tin mot doc gia.\n");
+	gotoxy(25, 9);
 	printf("4. Xoa thong tin mot doc gia.\n");
+	gotoxy(25, 10);
 	printf("5. Tim kiem doc gia qua CMND.\n");
+	gotoxy(25, 11);
 	printf("6. Tim kiem doc gia qua ho ten.\n");
+	gotoxy(25, 12);
 	printf("0. Quay ve\n");
 
 	return 6;
 }
+
 int editInfReaderMenu(){
-	system(cls);
-	showTitleReader();
+	textBgColor(WHITE, BLACK);
 	printf("1. Sua Ho va ten\n");
 	printf("2. Doi CMND\n");
 	printf("3. Doi ngay sinh\n");
@@ -216,48 +236,63 @@ void showTitleBook(){
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);
 }
+
 int printfMenuBookManagementForAdmin(){
 	system(cls);
 	showTitleBook();
+	gotoxy(25, 6);
 	printf("1. Xem danh sach sach trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Them sach.\n");
+	gotoxy(25, 8);
 	printf("3. Chinh sua thong tin mot quyen sach.\n");
+	gotoxy(25, 9);
 	printf("4. Xoa thong tin mot quyen sach.\n");
+	gotoxy(25, 10);
 	printf("5. Tim kiem sach qua ISBN.\n");
+	gotoxy(25, 11);
 	printf("6. Tim kiem sach qua ten sach.\n");
+	gotoxy(25, 12);
 	printf("0. Quay ve\n");
 
 	return 6;
 }
+
 int printfMenuBookManagementForExpert(){
 	system(cls);
 	showTitleBook();
-	// printf("1. Xem danh sach sach trong thu vien.\n");
-	// printf("2. Them sach.\n");
-	// printf("3. Chinh sua thong tin mot quyen sach.\n");
-	// printf("4. Xoa thong tin mot quyen sach.\n");
+	gotoxy(25, 6);
 	printf("1. Tim kiem sach qua ISBN.\n");
+	gotoxy(25, 7);
 	printf("2. Tim kiem sach qua ten sach.\n");
+	gotoxy(25, 8);
 	printf("0. Quay ve\n");
 
 	return 2;
 }
+
 int printfMenuBookManagementForManager(){
 	system(cls);
 	showTitleBook();
+	gotoxy(25, 6);
 	printf("1. Xem danh sach sach trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Them sach.\n");
+	gotoxy(25, 8);
 	printf("3. Chinh sua thong tin mot quyen sach.\n");
+	gotoxy(25, 9);
 	printf("4. Xoa thong tin mot quyen sach.\n");
+	gotoxy(25, 10);
 	printf("5. Tim kiem sach qua ISBN.\n");
+	gotoxy(25, 11);
 	printf("6. Tim kiem sach qua ten sach.\n");
+	gotoxy(25, 12);
 	printf("0. Quay ve\n");
 
 	return 6;
 }
+
 int editInfBookMenu(){
-	system(cls);
-	showTitleBook();
 	printf("1. Sua ten sach\n");
 	printf("2. Sua ten tac gia\n");
 	printf("3. Sua ten nha xuat ban\n");
@@ -271,6 +306,7 @@ int editInfBookMenu(){
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 int askYesNoQuestion(char *note){
 	system(cls);
 	printf("%s?\n", note);
@@ -285,75 +321,93 @@ void showTitleAnalyzing(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                             >> THONG KE <<                                     ||\n");
+	printf("||                                >> THONG KE <<                                  ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);	
 }
+
 int analyzingMenuForAdmin(){
 	system(cls);
 	showTitleAnalyzing();
+	gotoxy(25, 6);
 	printf("1. Thong ke so luong sach trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Thong ke so luong sach theo the loai.\n");
+	gotoxy(25, 8);
 	printf("3. Thong ke so luong doc gia.\n");
+	gotoxy(25, 9);
 	printf("4. Thong ke so luong doc gia theo gioi tinh.\n");
+	gotoxy(25, 10);
 	printf("5. Thong ke so luong sach dang duoc muon.\n");
+	gotoxy(25, 11);
 	printf("6. Thong ke danh sach doc gia bi tre han.\n");
+	gotoxy(25, 12);
 	printf("0. Quay ve.\n");
 
 	return 6;
 }
+
 int analyzingMenuForExpert(){
 	system(cls);
 	showTitleAnalyzing();
+	gotoxy(25, 6);
 	printf("1. Thong ke so luong sach dang duoc muon.\n");
+	gotoxy(25, 7);
 	printf("2. Thong ke danh sach doc gia bi tre han.\n");
+	gotoxy(25, 8);
 	printf("0. Quay ve.\n");
 
 	return 2;
 }
+
 int analyzingMenuManager(){
 	system(cls);
 	showTitleAnalyzing();
+	gotoxy(25, 6);
 	printf("1. Thong ke so luong sach trong thu vien.\n");
+	gotoxy(25, 7);
 	printf("2. Thong ke so luong sach theo the loai.\n");
+	gotoxy(25, 8);
 	printf("3. Thong ke so luong doc gia.\n");
+	gotoxy(25, 9);
 	printf("4. Thong ke so luong doc gia theo gioi tinh.\n");
+	gotoxy(25, 10);
 	printf("0. Quay ve.\n");
 
 	return 4;
 }
 
-
 void showTitleHeader(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                          >>QUAN LY THU VIEN<<                                  ||\n");
+	printf("||                           >> QUAN LY THU VIEN <<                               ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);	
 }
+
 void showFooter(){
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 }
 
-
 void showTitleBorrow(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                        >>LAP PHIEU MUON SACH<<                                 ||\n");
+	printf("||                           >>LAP PHIEU MUON SACH<<                              ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);	
 }
+
 void showTitleReturn(){
 	textBgColor(BLUE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                         >>LAP PHIEU TRA SACH<<                                 ||\n");
+	printf("||                            >>LAP PHIEU TRA SACH<<                              ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	textBgColor(WHITE, BLACK);	
