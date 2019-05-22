@@ -130,13 +130,7 @@ bool checkUsername(char *Username)
 Users addUser()
 {
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                            >> TAO NGUOI DUNG <<                                ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleCreatUser();
 
 	Users A;
 
@@ -234,14 +228,7 @@ void changePassword()
 	do
 	{
 		system(cls);
-		textBgColor(PURPLE, LIGHTAQUA);
-		printf("------------------------------------------------------------------------------------\n");
-		printf("|----------------------------------------------------------------------------------|\n");
-		printf("||                          >> THAY DOI MAT KHAU <<                               ||\n");
-		printf("|----------------------------------------------------------------------------------|\n");
-		printf("------------------------------------------------------------------------------------\n");
-
-		textBgColor(WHITE, BLACK);
+		showTitleChangePassUser();
 		printf("Moi ban nhap mat khau cu: ");
 		scanf("%s", oldPassword);
 
@@ -304,23 +291,24 @@ void viewProfile()
 	fread(&curUser, sizeof(Users), 1, fCur);
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
+	showTitleAfterEditUser();
+	printf("||                       >> %-21s                          ||\n", curUser.Username);
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                       >> CAP NHAT THONG TIN CA NHAN <<                         ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(PURPLE, BLACK);
-	printf("Thong tin ca nhan cua Username: %s:\n", curUser.Username);
 	textBgColor(WHITE, BLACK);
+	// printf("--------------------------------------------------------\n");
+	// printf("Ho va ten: %s\n", curUser.Fullname);
+	// printf("Ngay sinh: ");
+	// printfDay(curUser.Birthday);
+	// printf("CMND: %s\n", curUser.NationID);
+	// printf("Dia chi: %s\n", curUser.Address);
+	// printf("Gioi tinh (nam la 1, nu la 0): %s\n", (curUser.Sex == 0 ? "Nu" : "Nam"));
 	printf("--------------------------------------------------------\n");
-	printf("Ho va ten: %s\n", curUser.Fullname);
-	printf("Ngay sinh: ");
-	printfDay(curUser.Birthday);
-	printf("CMND: %s\n", curUser.NationID);
-	printf("Dia chi: %s\n", curUser.Address);
-	printf("Gioi tinh (nam la 1, nu la 0): %s\n", (curUser.Sex == 0 ? "Nu" : "Nam"));
-	printf("--------------------------------------------------------\n");
+	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+	printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", curUser.Fullname, curUser.NationID);
+	printf("|^   Ngay sinh:\t\t%2d . %2d . %4d\t|  \tGioi tinh:\t%-15s   v|\n", curUser.Birthday.Date, curUser.Birthday.Month, curUser.Birthday.Year, (curUser.Sex == 1 ? (char*)"Nam" : (char*)"Nu"));
+	printf("|^   Dia chi:\t%-63s   v|\n", curUser.Address);
+	printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
+	showFooter();
 
 	fclose(fCur);
 }
@@ -455,14 +443,7 @@ void inforDecentraliseUser()
 		return;
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                         >> PHAN QUYEN NGUOI DUNG <<                            ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	
-	textBgColor(BLUE, BLACK);
+	showTitleDecentraliseUser();
 	printf("Danh sach Username va quyen hien tai la:\n");
 	textBgColor(WHITE, BLACK);
 
@@ -547,14 +528,7 @@ void inforStatusUser()
 		return;
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                     >> CHINH SUA TRANG THAI NGUOI DUNG <<                      ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-
-	textBgColor(BLUE, BLACK);
+	showTitleStatusUser();
 	printf("Danh sach Username va trang thai hien tai la:\n");
 	textBgColor(WHITE, BLACK);
 

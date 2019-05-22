@@ -59,7 +59,7 @@ void viewAllBook()	// đọc toàn bộ thông tin độc giả từ file và in
 	{	
 		return;
 	}
-	showTitleHeader();
+	showTitleViewBook();
 	while (fread(book, sizeof(Books), 1, fileBook) != 0){
 		viewInfABook(*book);
 	}
@@ -154,6 +154,7 @@ int askToUpdateBookToFile() // cập nhật thông tin sách vào file - hỏi c
 
 bool writeInfBookToFile() // thêm sách vào database
 {
+	showTitleAddNewBook();
 	Books book = addBook();
 
 	Books *temp = findBookWithISBN(book.ISBN);
@@ -177,6 +178,7 @@ bool writeInfBookToFile() // thêm sách vào database
 				fwrite(&book, sizeof(Books), 1, f);
 				fclose(f);
 				printf("Them thong tin sach thanh cong.\n");
+				Sleep(1000);
 				delete temp;
 				break;
 			}
@@ -284,6 +286,7 @@ void editBookToFile()
 	if (book == NULL)
 		return;
 
+	showTitleEditBook();
 	flushall();
 	printf("Nhap vao ISBN cua sach muon chinh sua: ");
 	gets(book->ISBN);
@@ -297,6 +300,8 @@ void editBookToFile()
 		return;
 	}
 
+	system(cls);
+	showTitleEditBook();
 	viewInfABook(*book);
 	system("pause");
 	while (fread(&temp, sizeof(Books), 1, fo) != 0)
@@ -305,6 +310,8 @@ void editBookToFile()
 			fwrite(&temp, sizeof(Books), 1, ftemp);
 		else
 		{
+			system(cls);
+			showTitleEditBook();
 			editBook(*book);
 			fwrite(book, sizeof(Books), 1, ftemp);
 		}
@@ -334,6 +341,8 @@ void deleteBookToFile()
 	if (book == NULL)
 		return;
 
+	system(cls);
+	showTitleDeleteBook();
 	// flushall();
 	printf("Nhap vao ISBN cua sach muon xoa: ");
 	gets(book->ISBN);
@@ -347,6 +356,8 @@ void deleteBookToFile()
 		return;
 	}
 
+	system(cls);
+	showTitleDeleteBook();
 	printf("Thong tin cuon sach chuan bi xoa: \n");
 	viewInfABook(*book);
 	printf("Ban co chac chan muon xoa? \n- 1. Dong y \n- 0. Huy\n");
@@ -382,6 +393,8 @@ void searchISBN()
 {
 	Books *book = new Books;
 
+	system(cls);
+	showTitleFindBookByISBN();
 	flushall();
 	printf("Nhap vao ISBN: ");
 	gets(book->ISBN);
@@ -394,6 +407,8 @@ void searchISBN()
 	}
 	else
 	{
+		system(cls);
+		showTitleFindBookByISBN();
 		viewInfABook(*book);
 		stopSceen();
 	}
@@ -405,6 +420,8 @@ void searchBookName()
 {
 	Books *book = new Books;
 
+	system(cls);
+	showTitleFindBookByName();
 	flushall();
 	printf("Nhap ten sach: ");
 	gets(book->nameBook);
@@ -420,6 +437,8 @@ void searchBookName()
 
 	else
 	{
+		system(cls);
+		showTitleFindBookByName();
 		printBookFromLL(lsBook);
 		stopSceen();
 	}

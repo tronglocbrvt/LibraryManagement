@@ -55,7 +55,7 @@ void showTitleMaleReader();
 void showTitleFemaleReader();
 void showTitleListBorrowing();
 
-//>>>>>>>>>>>>>>>>>>>>>>>> hàm chức năng reader
+//>>>>>>>>>>>>>>>>>>>>>>>> title chức năng reader
 void showTitleViewReader();
 void showTitleAddNewReader();
 void showTitleEditReader();
@@ -63,3 +63,19 @@ void showTitleAfterEditReader();
 void showTitleDeleteReader();
 void showTitleFindReaderByNationId();
 void showTitleFindReaderByName();
+
+//>>>>>>>>>>>>>>>>>>>>>>>> title chức năng user
+void showTitleCreatUser();
+void showTitleDecentraliseUser();
+void showTitleChangePassUser();
+void showTitleStatusUser();
+void showTitleAfterEditUser();
+
+//>>>>>>>>>>>>>>>>>>>>>>>> title chức năng book
+void showTitleViewBook();
+void showTitleAddNewBook();
+void showTitleEditBook();
+void showTitleAfterEditBook();
+void showTitleDeleteBook();
+void showTitleFindBookByISBN();
+void showTitleFindBookByName();
