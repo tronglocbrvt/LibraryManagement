@@ -45,3 +45,21 @@ int analyzingMenuManager();
 
 void showTitleBorrow();
 void showTitleReturn();
+
+//>>>>>>>>>>>>>>>>>>>>>>>>. sub meunu title
+void showTitleOverdue();
+void showTitleListBook();
+void showTitleCategory();
+void showTitleListReader();
+void showTitleMaleReader();
+void showTitleFemaleReader();
+void showTitleListBorrowing();
+
+//>>>>>>>>>>>>>>>>>>>>>>>> hàm chức năng reader
+void showTitleViewReader();
+void showTitleAddNewReader();
+void showTitleEditReader();
+void showTitleAfterEditReader();
+void showTitleDeleteReader();
+void showTitleFindReaderByNationId();
+void showTitleFindReaderByName();

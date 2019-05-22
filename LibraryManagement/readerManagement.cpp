@@ -85,13 +85,7 @@ void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và 
 	}
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                          >> XEM THONG TIN DOC GIA <<                           ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleViewReader();
 
 	while (fread(reader, sizeof(Readers), 1, fileReader) != 0){
 		viewInfAReader(*reader);
@@ -219,13 +213,7 @@ int askToUpdateReaderToFile() // cập nhật thông tin đọc giả vào file 
 bool writeInfReaderToFile() // thêm độc giả vào database
 {
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                              >> THEM DOC GIA <<                                ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleAddNew();
 
 	Readers	reader = addReader();
 	Readers *temp1 = findReaderWithNationID(reader.NationID);
@@ -269,21 +257,29 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 void viewInfAReader(Readers reader) // Xem thông tin của một độc giả cụ thể
 {
 	textBgColor(WHITE, BLACK);
-	printf("--------------------------------------------------------\n");
-	printf("\tThong Tin Doc Gia\n");
-	printf("Ma doc gia: %s\n", reader.ID);
-	printf("Ho va ten: %s\n", reader.Fullname);
-	printf("CMND: %s\n", reader.NationID);
-	printf("Ngay sinh: ");
-	printfDay(reader.Birthday);
-	printf("Gioi tinh: %s\n", (reader.Sex == 0 ? "Nu" : "Nam"));
-	printf("Email: %s\n", reader.Email);
-	printf("Dia chi: %s\n", reader.Address);
-	printf("Ngay lap the: ");
-	printfDay(reader.creatCard);
-	printf("Ngay het han: ");
-	printfDay(reader.expireCard);	
-	printf("--------------------------------------------------------\n");
+	// printf("--------------------------------------------------------\n");
+	// printf("\tThong Tin Doc Gia\n");
+	// printf("Ma doc gia: %s\n", reader.ID);
+	// printf("Ho va ten: %s\n", reader.Fullname);
+	// printf("CMND: %s\n", reader.NationID);
+	// printf("Ngay sinh: ");
+	// printfDay(reader.Birthday);
+	// printf("Gioi tinh: %s\n", (reader.Sex == 0 ? "Nu" : "Nam"));
+	// printf("Email: %s\n", reader.Email);
+	// printf("Dia chi: %s\n", reader.Address);
+	// printf("Ngay lap the: ");
+	// printfDay(reader.creatCard);
+	// printf("Ngay het han: ");
+	// printfDay(reader.expireCard);	
+	// printf("--------------------------------------------------------\n");
+	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
+	printf("|^   ID:\t%-63s   v|\n", reader.ID);
+	printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", reader.Fullname, reader.NationID);
+	printf("|^   Ngay sinh:\t\t%2d . %2d . %4d\t|  \tGioi tinh:\t%-15s   v|\n", reader.Birthday.Date, reader.Birthday.Month, reader.Birthday.Year, (reader.Sex == 1 ? (char*)"Nam" : (char*)"Nu"));
+	printf("|^   Email:\t%-63s   v|\n", reader.Email);
+	printf("|^   Dia chi:\t%-63s   v|\n", reader.Address);
+	printf("|^   Ngay lap the:\t%2d . %2d . %4d  |\tNgay het han:\t%2d . %2d . %4d    v|\n", reader.creatCard.Date, reader.creatCard.Month, reader.creatCard.Year, reader.expireCard.Date, reader.expireCard.Month, reader.expireCard.Year);
+	printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 }
 
 bool editReader(Readers &reader){ // sửa thông tin độc giả
@@ -367,13 +363,7 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 	if (reader == NULL)
 		return;
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                       >> CHINH SUA THONG TIN DOC GIA <<                        ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleEditReader();
 
 	flushall();
 	getReaderID(reader->ID);
@@ -404,13 +394,7 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 				printf("Chinh sua thanh cong.\n");
 				Sleep(1000);
 				system(cls);
-				textBgColor(PURPLE, LIGHTAQUA);
-				printf("------------------------------------------------------------------------------------\n");
-				printf("|----------------------------------------------------------------------------------|\n");
-				printf("||                     >> THONG TIN DOC GIA SAU CHINH SUA <<                      ||\n");
-				printf("|----------------------------------------------------------------------------------|\n");
-				printf("------------------------------------------------------------------------------------\n");
-				textBgColor(WHITE, BLACK);
+				showTitleAfterEditReader();
 				viewInfAReader(*reader);
 			}
 			else
@@ -440,13 +424,7 @@ void deleteReaderToFile() // Xóa độc giả trong file
 		return;
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                               >> XOA DOC GIA <<                                ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleDeleteReader();
 
 	flushall();
 	getReaderID(reader->ID);
@@ -505,13 +483,7 @@ void searchNationID() // Tìm kiếm qua CMND
 		return; 
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                        >> TIM KIEM DOC GIA QUA CMND <<                         ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleFindReaderNationId();
 
 	getNationalID(reader->ID);
 	reader = findReaderWithNationID(reader->ID);
@@ -539,13 +511,7 @@ void searchFullName() // Tìm kiếm qua họ tên
 		return;
 
 	system(cls);
-	textBgColor(PURPLE, LIGHTAQUA);
-	printf("------------------------------------------------------------------------------------\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                       >> TIM KIEM DOC GIA QUA HO TEN <<                        ||\n");
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("------------------------------------------------------------------------------------\n");
-	textBgColor(WHITE, BLACK);
+	showTitleFindReaderByName();
 
 	flushall();
 	printf("Nhap ho va ten: ");

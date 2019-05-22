@@ -118,7 +118,7 @@ void returnBook()
 		default: // không bị mất sách
 			moneyRate = _SO_TIEN_PHAT;
 			printf("\n");
-			askToPrintListBorBook(llBorBook);
+			// askToPrintListBorBook(llBorBook);
 
 			break;
 	}

@@ -9,11 +9,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                   >>DANH SACH SACH TRONG THU VIEN<<                            ||\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleListBook();
 			
 			while(pNow != NULL){
 				stringMoneyPayement = intMoneyToStringMoney(pNow->book.priceBook);
@@ -26,8 +22,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			
 			return true;
 		default:
@@ -67,18 +62,14 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                         >>DANH SACH THE LOAI<<                                 ||\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleCategory();
 			pNow = lsCate.pHead;
 			while(pNow != NULL){
 				printf("|\t%-41s\t|\t%6d\t\t   |\n", pNow->Category, pNow->numBookPerCategory);
 				pNow = pNow->pNext;
 				printf("|----------------------------------------------------------------------------------|\n");
 			}
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			
 			// delete pNow;
 			return true;
@@ -122,11 +113,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                          >>DANH SACH DOC GIA<<                                 ||\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleListReader();
 			pNow = lsreader.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
@@ -139,8 +126,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			// delete pNow;
 			return true;
 		default:
@@ -180,11 +166,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                  >>DANH SACH DOC GIA THEO GIOI TINH<<                          ||\n");
-			printf("|----------------------------------NAM---------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleMaleReader();
 			pNow = lsMaleReader.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
@@ -197,15 +179,10 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			stopSceen();
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                  >>DANH SACH DOC GIA THEO GIOI TINH<<                          ||\n");
-			printf("|-----------------------------------NU---------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleFemaleReader();
 			pNow = lsFemaleReader.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
@@ -218,8 +195,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			// delete pNow;
 			return true;
 		default:
@@ -269,11 +245,7 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                   >>DANH SACH CAC SACH DA DUOC MUON<<                          ||\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleListBorrowing();
 			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
@@ -284,8 +256,7 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			// delete pNow;
 			return true;
 		default:
@@ -325,11 +296,7 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong?"), 1)){
 		case 1:
 			system(cls);
-			printf("------------------------------------------------------------------------------------\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("||                     >>DANH SACH TRE HAN TRA SACH<<                             ||\n");
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showTitleOverdue();
 			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
@@ -340,8 +307,7 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			printf("|----------------------------------------------------------------------------------|\n");
-			printf("------------------------------------------------------------------------------------\n");
+			showFooter();
 			// delete pNow;
 			return true;
 		default:
