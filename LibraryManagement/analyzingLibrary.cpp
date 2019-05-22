@@ -6,7 +6,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	NodeBook *pNow = lsbook.pHead;
 	char *stringMoneyPayement;
 	//stringMoneyPayement[18] = '\0';
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleListBook();
@@ -59,7 +59,7 @@ void analyzingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	NodeCategory *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleCategory();
@@ -110,7 +110,7 @@ void analyzingCatoBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleListReader();
@@ -163,7 +163,7 @@ void analyzingReader(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleReader){ // 2 ll sex
 	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleMaleReader();
@@ -242,7 +242,7 @@ void analyzingSexReader(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleListBorrowing();
@@ -293,7 +293,7 @@ void analyzingBorrowingBook(){
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong"), 1)){
 		case 1:
 			system(cls);
 			showTitleOverdue();
