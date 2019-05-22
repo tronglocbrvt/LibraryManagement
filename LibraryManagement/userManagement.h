@@ -19,7 +19,7 @@ Users addUser(); // Nhập các thông tin về User
 
 void writeInfUsertoFile(); // Ghi thông tin User vào file.
 
-void getUser(int typeAccount); // Tạo User
+void getUser(); // Tạo User
 
 //=============================================================================================
 //=============================================================================================
@@ -40,14 +40,14 @@ void editProfile(); // Chỉnh sửa thông tin cá nhân
 // CHỨC NĂNG PHÂN QUYỀN NGƯỜI DÙNG
 void inforDecentraliseUser();
 
-void decentraliseUser(int typeAccount);
+void decentraliseUser();
 
 //=============================================================================================
 //=============================================================================================
 // CHỨC NĂNG CHỈNH SỬA TRẠNG THÁI NGƯỜI DÙNG: ACTIVATED / BLOCKED
 void inforStatusUser();
 
-void changeStatusUser(int typeAccount);
+void changeStatusUser();
 
 //=============================================================================================
 //=============================================================================================
