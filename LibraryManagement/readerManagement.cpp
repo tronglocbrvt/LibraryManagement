@@ -544,7 +544,12 @@ void searchFullName() // Tìm kiếm qua họ tên
 	}
 
 	else
+	{
+		system(cls);
+		showTitleFindReaderByName();
 		printReaderFromLL(lsReader);
+		stopSceen();
+	}
 
 	freeLinkListReader(lsReader);
 	delete reader;

@@ -439,6 +439,7 @@ void searchBookName()
 
 	system(cls);
 	showTitleFindBookByName();
+	
 	flushall();
 	printf("Nhap ten sach: ");
 	gets(book->nameBook);
