@@ -45,15 +45,17 @@ NodeReader* addAtTail(LLNodeReader &ls, Readers data){ // Thêm vào cuối danh
 
 void freeLinkListReader(LLNodeReader &ls)
 {
-	NodeReader *p = ls.pHead;
-	while (p != NULL)
+	NodeReader *pNow = ls.pHead;
+	NodeReader *pNowT;
+	while (pNow != NULL)
 	{
-		NodeReader *q = p;
-		p = p->pNext;
-		delete q;
+		pNowT = pNow;
+		pNow = pNow->pNext;
+		delete pNowT;
 	}
 	ls.pHead = NULL;
 	ls.pTail = NULL;
+
 }
 
 //=============================================================================================
