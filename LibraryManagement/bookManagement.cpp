@@ -23,7 +23,7 @@ Books *findBookWithISBN(char *ISBN)	// Tìm kiếm sách theo ISBN
 	return NULL;
 }
 
-bool findListBookWithName(char *nameBook, LLNodeBook &lsBook){	// Tìm kiếm đọc giả theo họ tên trả về danh sách
+bool findListBookWithName(char *nameBook, LLNodeBook &lsBook){	// Tìm kiếm sách theo tên sách
 	Books *book = new Books;
 
 	if (book == NULL)
@@ -46,7 +46,7 @@ bool findListBookWithName(char *nameBook, LLNodeBook &lsBook){	// Tìm kiếm đ
 
 	delete book;
 	fclose(fileBook);
-	return true;
+	return 1;
 }
 
 void viewAllBook()	// đọc toàn bộ thông tin độc giả từ file và in ra
@@ -436,10 +436,12 @@ void searchISBN()
 void searchBookName()
 {
 	Books *book = new Books;
+	if (book == NULL)
+		return;
 
 	system(cls);
 	showTitleFindBookByName();
-	
+
 	flushall();
 	printf("Nhap ten sach: ");
 	gets(book->nameBook);
@@ -451,6 +453,7 @@ void searchBookName()
 	{
 		system(cls);
 		showTitleFindBookByName();
+		textBgColor(RED, BLACK);
 		printf("Sach khong ton tai.\n");
 		Sleep(1000);
 	}

@@ -43,24 +43,6 @@ NodeReader* addAtTail(LLNodeReader &ls, Readers data){ // Thêm vào cuối danh
 	return no;
 }
 
-//LLNodeReader getReaderData()
-//{
-//
-//}
-
-//Readers *findReaderAtNumberic(LLNodeReader *lsReader, int numberic){
-//	Readers *reader = new Readers();
-//	NodeReader *pNow = InitNode();
-//
-//	pNow = lsReader->pHead;
-//	while (pNow != NULL && numberic > 1){
-//		pNow = pNow->pNext;
-//		numberic--;
-//	}
-//
-//	return pNow->reader;
-//}
-
 void freeLinkListReader(LLNodeReader &ls)
 {
 	NodeReader *p = ls.pHead;

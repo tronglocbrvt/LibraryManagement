@@ -111,7 +111,7 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	}
 
 	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
-		if (strcmp(reader->Fullname, personName) == 0)
+		if (strcmpi(reader->Fullname, personName) == 0)
 		{
 			// thêm vào cuối danh sách
 			addAtTail(lsReader, *reader);
@@ -261,21 +261,7 @@ bool writeInfReaderToFile() // thêm độc giả vào database
 void viewInfAReader(Readers reader) // Xem thông tin của một độc giả cụ thể
 {
 	textBgColor(WHITE, BLACK);
-	// printf("--------------------------------------------------------\n");
-	// printf("\tThong Tin Doc Gia\n");
-	// printf("Ma doc gia: %s\n", reader.ID);
-	// printf("Ho va ten: %s\n", reader.Fullname);
-	// printf("CMND: %s\n", reader.NationID);
-	// printf("Ngay sinh: ");
-	// printfDay(reader.Birthday);
-	// printf("Gioi tinh: %s\n", (reader.Sex == 0 ? "Nu" : "Nam"));
-	// printf("Email: %s\n", reader.Email);
-	// printf("Dia chi: %s\n", reader.Address);
-	// printf("Ngay lap the: ");
-	// printfDay(reader.creatCard);
-	// printf("Ngay het han: ");
-	// printfDay(reader.expireCard);	
-	// printf("--------------------------------------------------------\n");
+	
 	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 	printf("|^   ID:\t%-63s   v|\n", reader.ID);
 	printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", reader.Fullname, reader.NationID);
@@ -342,7 +328,9 @@ bool editReader(Readers &reader){ // sửa thông tin độc giả
 			flushall();
 			printf("Gia han the toi ngay: ");
 			reader.expireCard = getExpiredDay(getToday());
+			textBgColor(BLUE, BLACK);
 			printfDay(reader.expireCard);
+			textBgColor(WHITE, BLACK);
 			edit = wantEdit();
 			if (edit == 0)
 				end = true;
@@ -396,20 +384,18 @@ void editReaderToFile() // Chỉnh sửa thông tin độc giả trong file
 			if (editReader(*reader))
 			{
 				fwrite(reader, sizeof(Readers), 1, ftemp);
-				system(cls);
-				showTitleEditReader();
 				textBgColor(RED, BLACK);
 				printf("Chinh sua thanh cong.\n");
 				Sleep(1000);
 				system(cls);
 				showTitleAfterEditReader();
 				viewInfAReader(*reader);
+				stopSceen();
 			}
 			else
 				fwrite(reader, sizeof(Readers), 1, ftemp);
 		}
 	}
-	Sleep(1000);
 	fclose(fo);
 	fclose(ftemp);
 	delete reader;
@@ -553,7 +539,6 @@ void searchFullName() // Tìm kiếm qua họ tên
 
 	freeLinkListReader(lsReader);
 	delete reader;
-	stopSceen();
 }
 
 void runReaderManagementForAdmin(){
