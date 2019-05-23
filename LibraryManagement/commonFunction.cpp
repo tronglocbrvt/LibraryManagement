@@ -313,16 +313,21 @@ void getISBN(char *ISBN)
 int wantBorrow()
 {
 	int borrow;
-	printf("Doc gia nay con muon muon them sach nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
 	do
 	{
+		textBgColor(YELLOW, BLACK);
+		printf("Doc gia nay con muon muon them sach nua khong? Nhap 0 (Khong), Nhap 1 (Co): ");
 		scanf("%d", &borrow);
 		if (borrow == 1)
 			return 1;
 		else if (borrow == 0)
 			return 0;
 		else
+		{
+			textBgColor(RED, BLACK);
 			printf("Vui long nhap 0 hoac 1\n");
+			Sleep(1000);
+		}
 	} while (borrow != 0 && borrow != 1);
 	return 1;
 }

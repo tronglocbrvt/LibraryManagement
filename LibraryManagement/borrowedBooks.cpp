@@ -72,25 +72,32 @@ void updateBookFile(Books book)
 
 bool checkBookIsBorrowed(BorrowBooks borBook){
 	FILE *fileBB = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+	if (fileBB == NULL)
+		return 0;
 
 	BorrowBooks borrowBook;
 	while(fread(&borrowBook, sizeof(BorrowBooks), 1, fileBB) != 0){
 		if (borrowBook == borBook)
 		{
-			return true;
+			fclose(fileBB);
+			return 1;
 		}
 	}
 
 	fclose(fileBB);
-	return false;
+	return 0;
 }
 
 void borrowBook()
 {
 	system(cls);
+	showTitleBorrow();
 	// Nhập mã độc giả
 	int flag_reader = 1;
+
 	Readers *temp_reader = new Readers;
+	if (temp_reader == NULL)
+		return;
 	do
 	{
 		Readers reader;
@@ -101,14 +108,20 @@ void borrowBook()
 		if (temp_reader == NULL)
 		{
 			flag_reader = 0;
+			textBgColor(RED, BLACK);
 			printf("Doc gia khong ton tai.\n");
+			Sleep(1000);
+			return;
 		}
 
 		flag_reader = 1;
+
 		if (!possibleReader(temp_reader->expireCard))
 		{
 			flag_reader = 0;
+			textBgColor(RED, BLACK);
 			printf("The doc gia het han su dung. Vui long gia han.\n");
+			Sleep(1000);
 		}
 
 	} while (flag_reader == 0);
@@ -119,9 +132,13 @@ void borrowBook()
 	{
 		int flag_book = 1;
 		Books *temp_book = new Books;
+
+		if (temp_book == NULL)
+			return;
 		do
 		{
 			Books book;
+			textBgColor(WHITE, BLACK);
 			getISBN(book.ISBN);
 
 			temp_book = findBookWithISBN(book.ISBN);
@@ -130,12 +147,14 @@ void borrowBook()
 			if (temp_book == NULL)
 			{
 				flag_book = 0;
+				textBgColor(RED, BLACK);
 				printf("Sach khong ton tai.\n");
 			}
 
 		} while (flag_book == 0);
 
 		int numBorrow;
+		textBgColor(WHITE, BLACK);
 		printf("Nhap so luong muon: ");
 		scanf("%d", &numBorrow);
 
@@ -146,6 +165,8 @@ void borrowBook()
 
 			// lưu các thông tin mượn sách -> lưu thông tin
 			BorrowBooks *borrowBook = new BorrowBooks;
+			if (borrowBook == NULL)
+				return; 
 
 			strcpy(borrowBook->ID, temp_reader->ID);
 			strcpy(borrowBook->Fullname, temp_reader->Fullname);
@@ -155,20 +176,23 @@ void borrowBook()
 			borrowBook->borrowBookDay = getToday();
 			borrowBook->returnBookDay = returnBookExpectDay(borrowBook->borrowBookDay);
 
-
 			FILE *f;
 
 			if (!checkBookIsBorrowed(*borrowBook))
 			{
 				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "ab");
-				fwrite(borrowBook, sizeof(BorrowBooks), 1, f);	
-				// printf("A hu a hu\n");
+				if (f == NULL)
+					return;
+				fwrite(borrowBook, sizeof(BorrowBooks), 1, f);
+				fclose(f);
 			}
 			else
 			{
 				BorrowBooks borrowBookTemp;
 				f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 				FILE *fileTemp = fopen(_DIR_DATA_FOLDER_BOOK_BORROW_TEMP, "wb");
+				if (f == NULL || fileTemp == NULL)
+					return;
 
 				while(fread(&borrowBookTemp, sizeof(BorrowBooks), 1, f)){
 					if (borrowBookTemp == *borrowBook)
@@ -178,6 +202,7 @@ void borrowBook()
 					fwrite(&borrowBookTemp, sizeof(BorrowBooks), 1, fileTemp);
 				}
 				fclose(fileTemp);
+				fclose(f);
 				remove((char*)_DIR_DATA_FOLDER_BOOK_BORROW);
 				rename((char*)_DIR_DATA_FOLDER_BOOK_BORROW_TEMP, (char*)_DIR_DATA_FOLDER_BOOK_BORROW);
 
@@ -185,8 +210,8 @@ void borrowBook()
 
 			delete borrowBook;
 			delete temp_book;
-			fclose(f);
 
+			textBgColor(RED, BLACK);
 			printf("Muon sach thanh cong.\n");
 			Sleep(1000);
 			int borrow = wantBorrow();
@@ -195,6 +220,7 @@ void borrowBook()
 		}
 		else
 		{
+			textBgColor(RED, BLACK);
 			printf("So luong sach trong thu vien khong du so luong.\n");
 			Sleep(1000);
 			int borrow = wantBorrow();
@@ -214,27 +240,29 @@ void borrowBookBill(char *ID, char *Fullname)
 {
 	BorrowBooks borrowBook;
 	FILE *f = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
+	if (f == NULL)
+		return;
 	
 	system(cls);
-	printf("\t\t\tPHIEU MUON SACH\n\n");
-	printf("----------------------------------------------------------------------------------------------\n");
-	printf("|--------------------------------------------------------------------------------------------|\n");
-	printf("||                                >> PHIEU MUON SACH <<                                     ||\n");
-	printf("|--------------------------------------------------------------------------------------------|\n");
-	printf("----------------------------------------------------------------------------------------------\n");
-	printf("|             Ma doc gia: %8s           Ho va ten: %-35s  |\n", ID, Fullname);
-	printf("---------------------------------------------------------------------------------------------|\n");
-	printf("|    ISBN     |                Ten sach                 | So luong | Ngay muon  |  Ngay tra  |\n");
-	printf("----------------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("||                           >> PHIEU MUON SACH <<                                ||\n");
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("------------------------------------------------------------------------------------\n");
+	printf("|        Ma doc gia: %8s          Ho va ten: %-31s  |\n", ID, Fullname);
+	printf("|----------------------------------------------------------------------------------|\n");
+	printf("|    ISBN     |           Ten sach            | So luong | Ngay muon  |  Ngay tra  |\n");
+	printf("------------------------------------------------------------------------------------\n");
 
 	while (fread(&borrowBook, sizeof(BorrowBooks), 1, f) != 0)
 	{
 		if (strcmp(borrowBook.ID, ID) == 0)
 		{
-			printf("|%13s|%41s|    %2d    | %2d/%2d/%4d | %2d/%2d/%4d |\n",
+			printf("|%13s|%31s|    %2d    | %2d/%2d/%4d | %2d/%2d/%4d |\n",
 				borrowBook.ISBN, borrowBook.nameBook, borrowBook.numBook, borrowBook.borrowBookDay.Date, borrowBook.borrowBookDay.Month, borrowBook.borrowBookDay.Year,
 				borrowBook.returnBookDay.Date, borrowBook.returnBookDay.Month, borrowBook.returnBookDay.Year);
-			printf("----------------------------------------------------------------------------------------------\n");
+			printf("------------------------------------------------------------------------------------\n");
 		}
 	}
 	

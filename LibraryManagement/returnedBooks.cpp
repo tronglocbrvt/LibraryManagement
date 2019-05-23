@@ -1,6 +1,6 @@
 ﻿#include "returnedBooks.h"
 
-bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB){	// Tìm kiếm đọc giả theo id trả về danh sách
+bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB){	// Tìm kiếm độc giả mượn theo id trả về danh sách
 	BorrowBooks *infBor = new BorrowBooks;
 
 	if (infBor == NULL)
@@ -28,7 +28,7 @@ bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB){	// T�
 }
 
 void askToPrintListBorBook(LLNodeBorrowBook llBorBook){
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon in ra danh sach sach muon khong"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon in ra danh sach sach muon khong?"), 1)){
 		case 1:
 			printReaderFromLL(llBorBook);
 			break;
@@ -71,18 +71,25 @@ bool returnNumberBorrwedBook(char *isbnBook, int numRet){ // trả lại kho s�
 void returnBook()
 {
 	system(cls);
+	showTitleReturn();
 	char *idReader = new char[9];
+	if (idReader == NULL)
+		return;
 	getReaderID(idReader);
 
 	LLNodeBorrowBook llBorBook;
 	Init(llBorBook); // khởi tạo danh sách
 
 	char *nameReader = new char[31];
+	if (nameReader == NULL)
+		return;
 	for (int i = 0; i < 31; ++i)
 	{
 		nameReader[i] = '\0';
 	}
 	char *nameBook = new char[51];
+	if (nameBook == NULL)
+		return;
 	for (int i = 0; i < 51; ++i)
 	{
 		nameBook[i] = '\0';
@@ -95,16 +102,25 @@ void returnBook()
 	findListBorrowedWithIDPerson(idReader, llBorBook);
 	if (llBorBook.pHead == NULL)
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia nay khong ton tai hoac khong muon sach!\n");
+		textBgColor(WHITE, BLACK);
 		Sleep(1000);
 		return;
 	}
 	strcpy(nameReader, llBorBook.pHead->brBook.Fullname);
+	askToPrintListBorBook(llBorBook);
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	char *isbnBook = new char[14];
+	if (isbnBook == NULL)
+		return;
+
 	Books *book = new Books;
+	if (book == NULL)
+		return;
 	int moneyRate = 1;
+	textBgColor(YELLOW, BLACK);
 	int choice = getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1);
 	switch(choice){
 		case 1: // có mất sách
@@ -112,7 +128,8 @@ void returnBook()
 			moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT;
 			printf("\n");
 			printReaderFromLL(llBorBook);
-			printf("Chon sach da mat <Nhap ISBN>: ");
+			textBgColor(WHITE, BLACK);
+			printf("Chon sach da mat <Nhap ISBN sach mat>\n");
 			
 			break;
 		default: // không bị mất sách
@@ -125,16 +142,17 @@ void returnBook()
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+	textBgColor(WHITE, BLACK);
 	getISBN(isbnBook);
 	transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
 	if (llBorBook.pHead == NULL)
 	{
+		textBgColor(RED, BLACK);
 		printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
+		textBgColor(WHITE, BLACK);
 		Sleep(1000);
-		return;
+		//return;
 	}
-	askToPrintListBorBook(llBorBook);
 
 	strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
 	numBor = llBorBook.total;
@@ -143,7 +161,9 @@ void returnBook()
 		scanf("%d", &numRet);
 		if (numRet > llBorBook.total)
 		{
+			textBgColor(RED, BLACK);
 			printf("So luong sach tra nhieu hon so luong sach da muon!\n");
+			textBgColor(WHITE, BLACK);
 			continue;
 		}
 		else 
@@ -184,7 +204,7 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 	system(cls);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("||                          >>HOA DON TRA SACH<<                                  ||\n");
+	printf("||                         >> HOA DON TRA SACH <<                                 ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|    Ten doc gia:\t%31s                            |\n", nameReader);

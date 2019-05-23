@@ -20,7 +20,7 @@ bool writeInfBookToFile();
 
 void viewInfABook(Books book); // Xem thông tin sách
 
-void editBook(Books &book);
+bool editBook(Books &book);
 
 void editBookToFile(); // chỉnh sửa thông tin sách qua ISBN
 

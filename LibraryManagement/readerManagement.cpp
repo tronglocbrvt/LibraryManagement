@@ -76,7 +76,7 @@ Readers *findReaderWithID(char *ID)	// Tìm kiếm độc giả theo ID
 void viewAllReader()	// đọc toàn bộ thông tin độc giả từ file và in ra
 {
 	Readers *reader = new Readers;
-
+	
 	FILE* fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 
 	if (fileReader == NULL || reader == NULL)
@@ -109,19 +109,22 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	{
 		return 0;
 	}
-
+	int flag = 0;
 	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
 		if (strcmpi(reader->Fullname, personName) == 0)
 		{
 			// thêm vào cuối danh sách
 			addAtTail(lsReader, *reader);
+			flag = 1;
 		}
 
 	}
 
 	delete reader;
 	fclose(fileReader);
-	return 1;
+	if (flag == 1)
+		return 1;
+	return 0;
 }
 
 bool printReaderFromLL(LLNodeReader ls){ // in ra thông tin độc giả từ Linked List
@@ -139,7 +142,6 @@ bool printReaderFromLL(LLNodeReader ls){ // in ra thông tin độc giả từ L
 		pNow = pNow->pNext;
 	}
 
-	freeLinkListReader(ls);
 	return 1;
 }
 
@@ -148,7 +150,7 @@ Readers addReader() // Thêm độc giả
 	Readers reader;
 	Readers *temp = new Readers;
 	FILE *f = fopen(_DIR_DATA_FOLDER_READER, "rb");
-
+	
 	long ID = 1l;
 	fseek(f, 0L, SEEK_END);
 	long size = ftell(f);
@@ -500,13 +502,11 @@ void searchNationID() // Tìm kiếm qua CMND
 		stopSceen();
 	}
 	delete reader;
-	
 }
 
 void searchFullName() // Tìm kiếm qua họ tên
 {
 	Readers *reader = new Readers;
-
 	if (reader == NULL)
 		return;
 
@@ -514,7 +514,7 @@ void searchFullName() // Tìm kiếm qua họ tên
 	showTitleFindReaderByName();
 
 	flushall();
-	printf("Nhap ho va ten: ");
+	printf("Nhap ten doc gia: ");
 	gets(reader->Fullname);
 
 	LLNodeReader lsReader;
