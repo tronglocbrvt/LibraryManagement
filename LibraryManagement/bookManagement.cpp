@@ -39,7 +39,7 @@ bool findListBookWithName(char *nameBook, LLNodeBook &lsBook){	// Tìm kiếm s�
 
 	int flag = 0;
 	while (fread(book, sizeof(Books), 1, fileBook) != 0){
-		if (strcmpi(book->nameBook, nameBook) == 0)
+		if (strcmp(book->nameBook, nameBook) == 0)
 		{
 			// thêm vào danh sách
 			addAtTail(lsBook, *book);
