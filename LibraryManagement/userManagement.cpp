@@ -292,16 +292,9 @@ void viewProfile()
 
 	system(cls);
 	showTitleAfterEditUser();
-	printf("||                       >> %-21s                          ||\n", curUser.Username);
+	printf("                         >> %-21s                          \n", curUser.Username);
 	printf("|----------------------------------------------------------------------------------|\n");
 	textBgColor(WHITE, BLACK);
-	// printf("--------------------------------------------------------\n");
-	// printf("Ho va ten: %s\n", curUser.Fullname);
-	// printf("Ngay sinh: ");
-	// printfDay(curUser.Birthday);
-	// printf("CMND: %s\n", curUser.NationID);
-	// printf("Dia chi: %s\n", curUser.Address);
-	// printf("Gioi tinh (nam la 1, nu la 0): %s\n", (curUser.Sex == 0 ? "Nu" : "Nam"));
 	printf("--------------------------------------------------------\n");
 	printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 	printf("|^   Ten:\t%-31s CMND:\t%-23s   v|\n", curUser.Fullname, curUser.NationID);
@@ -358,7 +351,7 @@ void editProfile()
 	do
 	{
 		textBgColor(WHITE, BLACK);
-		printf("1. Ho va ten    2. Ngay sinh    3. CMND    4. Dia chi    5. Gioi tinh    0. Quay ve");
+		printf("1. Ho va ten    2. Ngay sinh    3. CMND    4. Dia chi    5. Gioi tinh    0. Quay ve\n");
 		
 		switch (choice = getNumberPressKey(5,0))
 		{

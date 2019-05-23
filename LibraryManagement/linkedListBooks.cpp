@@ -43,23 +43,6 @@ NodeBook* addAtTail(LLNodeBook &ls, Books data){ // Thêm vào cuối danh sách
 	return no;
 }
 
-//LLNodeBook getReaderData()
-//{
-//
-//}
-
-//Books *findReaderAtNumberic(LLNodeBook *lsReader, int numberic){
-//	Books *reader = new Books();
-//	NodeBook *pNow = InitNode();
-//
-//	pNow = lsReader->pHead;
-//	while (pNow != NULL && numberic > 1){
-//		pNow = pNow->pNext;
-//		numberic--;
-//	}
-//
-//	return pNow->reader;
-//}
 
 void freeLinkListBook(LLNodeBook &ls)
 {
