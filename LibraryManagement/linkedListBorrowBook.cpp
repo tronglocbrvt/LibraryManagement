@@ -129,7 +129,7 @@ bool transformLLBorrowedBookWithISBN(LLNodeBorrowBook &llBorBook, char *isbnBook
 		if (strcmp(pNow->brBook.ISBN, isbnBook) != 0)
 		{
 			llBorBook.total -= pNow->brBook.numBook;
-			if (llBorBook.pHead != NULL && llBorBook.total == llBorBook.pHead->pNext == NULL)  // th còn 1 node
+			if (llBorBook.pHead != NULL && llBorBook.pHead->pNext == NULL)  // th còn 1 node
 			{
 				pNow = llBorBook.pHead;
 				delete pNow;
