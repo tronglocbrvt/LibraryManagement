@@ -214,7 +214,6 @@ bool deleteNodeReturnInFile(BorrowBooks BorBook){ // cập nhật lại file v�
 		}
 		fwrite(&BorBookTemp, sizeof(BorrowBooks), 1, ftemp);
 	}
-	printf(">>>>>\n");
 
 	fclose(fo);
 	fclose(ftemp);

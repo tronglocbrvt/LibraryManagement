@@ -111,7 +111,8 @@ bool findListReaderWithName(char *personName, LLNodeReader &lsReader){	// Tìm k
 	}
 	int flag = 0;
 	while (fread(reader, sizeof(Readers), 1 ,fileReader) != 0){
-		if (strcmpi(reader->Fullname, personName) == 0)
+		// if (strcmpi(reader->Fullname, personName) == 0)
+		if (strcmp(reader->Fullname, personName) == 0)
 		{
 			// thêm vào cuối danh sách
 			addAtTail(lsReader, *reader);

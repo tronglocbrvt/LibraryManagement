@@ -138,6 +138,7 @@ Books addBook()
 	scanf("%d", &book.yearPublish);
 
 	flushall();
+	getch();
 	printf("Nhap the loai: ");
 	gets(book.Category);
 
@@ -190,6 +191,7 @@ bool writeInfBookToFile() // thêm sách vào database
 
 				fwrite(&book, sizeof(Books), 1, f);
 				fclose(f);
+				
 				system(cls);
 				showTitleAddNewBook();
 				textBgColor(RED, BLACK);

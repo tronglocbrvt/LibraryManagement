@@ -187,7 +187,7 @@ void returnBook()
 		}
 		else 
 		{
-			if (choice != 1)
+			if (choice != 1) // nếu sách không bị mất mới cập nhật
 			{
 				returnNumberBorrwedBook(isbnBook, numRet);
 			}
@@ -247,4 +247,6 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 	printf("------------------------------------------------------------------------------------\n");
 
 }
+
+
 
