@@ -123,11 +123,21 @@ bool transformLLBorrowedBookWithISBN(LLNodeBorrowBook &llBorBook, char *isbnBook
 	pNow = llBorBook.pHead;
 	NodeBorrowBook *pTemp;
 
+	
+
 	while(pNow != NULL){
 		if (strcmp(pNow->brBook.ISBN, isbnBook) != 0)
 		{
 			llBorBook.total -= pNow->brBook.numBook;
-			if (pNow->pPrev == NULL) // node đầu tiên
+			if (llBorBook.pHead != NULL && llBorBook.total == llBorBook.pHead->pNext == NULL)  // th còn 1 node
+			{
+				pNow = llBorBook.pHead;
+				delete pNow;
+				llBorBook.pHead = NULL;
+				llBorBook.pTail = NULL;
+				break;
+			}
+			else if (pNow->pPrev == NULL) // node đầu tiên
 			{
 				llBorBook.pHead = pNow->pNext;
 				pNow->pNext->pPrev = NULL;
