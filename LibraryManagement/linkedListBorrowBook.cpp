@@ -82,6 +82,7 @@ bool printReaderFromLL(LLNodeBorrowBook llBorBook){ // in ra thông tin mượn 
 	pNow = llBorBook.pHead;
 	system(cls);
 	int index = 0;
+	textBgColor(WHITE, BLACK);
 	while(pNow != NULL){
 		printf("\nLan muon sach thu %d:\n", ++index);
 		viewInfAReader(pNow->brBook);
@@ -121,13 +122,24 @@ bool transformLLBorrowedBookWithISBN(LLNodeBorrowBook &llBorBook, char *isbnBook
 	}
 
 	pNow = llBorBook.pHead;
-	NodeBorrowBook *pTemp;
+
+	NodeBorrowBook *pTemp = new NodeBorrowBook;
+	if (pTemp == NULL)
+		return 0;
 
 	while(pNow != NULL){
 		if (strcmp(pNow->brBook.ISBN, isbnBook) != 0)
 		{
 			llBorBook.total -= pNow->brBook.numBook;
-			if (pNow->pPrev == NULL) // node đầu tiên
+
+			if (llBorBook.pHead != NULL && llBorBook.pHead->pNext == NULL)  // th còn 1 node
+			{
+				pNow = llBorBook.pHead;
+				llBorBook.pHead = NULL;
+				llBorBook.pTail = NULL;
+				break;
+			}
+			else if (pNow->pPrev == NULL) // node đầu tiên
 			{
 				llBorBook.pHead = pNow->pNext;
 				pNow->pNext->pPrev = NULL;
@@ -143,12 +155,11 @@ bool transformLLBorrowedBookWithISBN(LLNodeBorrowBook &llBorBook, char *isbnBook
 			}
 			pTemp = pNow;
 			pNow = pNow->pNext;
-			delete pTemp;
 			continue;
 		}
 		pNow = pNow->pNext;
 	}
-
+	delete pTemp;
 	delete pNow;
 	return 1;
 }
