@@ -6,7 +6,9 @@
 // CHỨC NĂNG ĐĂNG NHẬP - ĐĂNG XUẤT
 int checkLogin(char *Username, char *Password); //  Kiểm tra Username và Password có trong database hay không? 
 
-int Logout(); // Hàm đăng xuất
+void Logout(int &typeAccount); // Hàm đăng xuất
+
+void Menu(int &typeAccount);
 
 int Login(); // Hàm đăng nhập
 

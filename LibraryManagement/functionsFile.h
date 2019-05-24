@@ -9,18 +9,18 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 
-	#define _DIR_DATA_FOLDER_READER "Release/Reader/databaseReader.bin"
-	#define _DIR_DATA_FOLDER_READER_TEMP "Release/Reader/readerTemp.bin"
+	#define _DIR_DATA_FOLDER_READER "Database/Reader/databaseReader.bin"
+	#define _DIR_DATA_FOLDER_READER_TEMP "Database/Reader/readerTemp.bin"
 
-	#define _DIR_DATA_FOLDER_USER_CUR "Release/Current/currentUser.bin"
-	#define _DIR_DATA_FOLDER_USER_TEMP "Release/Users/userTemp.bin"
-	#define _DIR_DATA_FOLDER_USER "Release/Users/Users.bin"
+	#define _DIR_DATA_FOLDER_USER_CUR "Database/Current/currentUser.bin"
+	#define _DIR_DATA_FOLDER_USER_TEMP "Database/Users/userTemp.bin"
+	#define _DIR_DATA_FOLDER_USER "Database/Users//Users.bin"
 
-	#define _DIR_DATA_FOLDER_BOOK "Release/Book/databaseBook.bin"
-	#define _DIR_DATA_FOLDER_BOOK_TEMP "Release/Book/bookTemp.bin" 
+	#define _DIR_DATA_FOLDER_BOOK "Database/Book/databaseBook.bin"
+	#define _DIR_DATA_FOLDER_BOOK_TEMP "Database/Book/bookTemp.bin" 
 
-	#define _DIR_DATA_FOLDER_BOOK_BORROW "Release/BorrowBook/databaseBorrowBook.bin"
-	#define _DIR_DATA_FOLDER_BOOK_BORROW_TEMP "Release/BorrowBook/databaseBorrowBookTemp.bin"
+	#define _DIR_DATA_FOLDER_BOOK_BORROW "Database/BorrowBook/databaseBorrowBook.bin"
+	#define _DIR_DATA_FOLDER_BOOK_BORROW_TEMP "Database/BorrowBook/databaseBorrowBookTemp.bin"
 
 #else
 

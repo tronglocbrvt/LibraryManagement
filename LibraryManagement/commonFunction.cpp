@@ -21,7 +21,7 @@ int getNumberPressKey(int MAX, int MIN)
 {
 	int max = (MAX <= 9) ? MAX : 9;
 	char ch = ' ';
-	printf("Nhan so de chon chuc nang: ");
+	printf("\nNhan so de chon chuc nang: ");
 	enable_raw_mode();
 	while (1) {		
 			if (kbhit()) {
@@ -122,6 +122,27 @@ bool isPossibleDay(int Day, int Month, int Year)
 	return true;
 }
 
+void encryptPassword(char *name)
+{
+	char ch = ' ';
+	int index = 0;
+	while (1){
+		if (kbhit())
+		{
+			ch = getch();
+			if (ch != 10 && ch != 13)
+			{
+				printf("*");
+				*(name + index++) = ch;
+			}
+			else
+				break;
+		}
+	}
+	*(name + index) = '\0';
+	printf("\n");
+}
+
 // Hàm nhập Username
 void getUsername(char username[])
 {
@@ -133,7 +154,9 @@ void getUsername(char username[])
 		flushall();
 
 		if (!checkUsername(username)){
+			textBgColor(RED, BLACK);
 			printf("Username da ton tai. Vui long nhap Username khac.\n");
+			textBgColor(WHITE, BLACK);
 			continue;
 		}
 		else break;
@@ -161,7 +184,11 @@ void getBirthday(Day &birthday)
 
 		checkDay = isPossibleDay(birthday.Date, birthday.Month, birthday.Year);
 		if (!checkDay)
+		{
+			textBgColor(RED, BLACK);
 			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
+			textBgColor(WHITE, BLACK);
+		}
 	} while (checkDay == false);
 }
 
@@ -179,7 +206,9 @@ void getNationalID(char nationID[])
 		int i;
 		if (strlen(nationID) != 9 && strlen(nationID) != 12)
 		{
+			textBgColor(RED, BLACK);
 			printf("CMND khong hop le. Vui long nhap lai.\n");
+			textBgColor(WHITE, BLACK);
 			continue;
 		}
 
@@ -190,7 +219,9 @@ void getNationalID(char nationID[])
 			if (!isNumber(nationID[i]))
 			{
 				flag = 0;
+				textBgColor(RED, BLACK);
 				printf("CMND khong hop le. Vui long nhap lai.\n");
+				textBgColor(WHITE, BLACK);
 				break;
 			}
 		}
@@ -209,7 +240,11 @@ void getSex(int &sex)
 		int temp = getchar();
 
 		if (sex != 0 && sex != 1)
+		{
+			textBgColor(RED, BLACK);
 			printf("Vui long nhap lai. Nam nhap 1, Nu nhap 0.\n");
+			textBgColor(WHITE, BLACK);
+		}
 	} while (sex != 0 && sex != 1);
 }
 
@@ -226,7 +261,11 @@ void getStatus(bool &status)
 		int temp = getchar();
 
 		if (status != 0 && status != 1)
+		{
+			textBgColor(RED, BLACK);
 			printf("Vui long nhap lai. Actived nhap 1, Blocked nhap 0.\n");
+			textBgColor(WHITE, BLACK);
+		}
 	} while (status != 0 && status != 1);
 }
 
@@ -241,7 +280,11 @@ void getTypeAccount(Users &A)
 		int temp = getchar();
 
 		if (A.typeAccount != 2 && A.typeAccount != 3)
+		{
+			textBgColor(RED, BLACK);
 			printf("Vui long nhap lai. Chuyen vien nhap 2; quan ly nhap 3.\n");
+			textBgColor(WHITE, BLACK);
+		}
 	} while (A.typeAccount != 2 && A.typeAccount != 3);
 }
 
@@ -259,7 +302,9 @@ void getReaderID(char ID[])
 		int i;
 		if (strlen(ID) != 8)
 		{
+			textBgColor(RED, BLACK);
 			printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+			textBgColor(WHITE, BLACK);
 			continue;
 		}
 
@@ -270,7 +315,9 @@ void getReaderID(char ID[])
 			if (!isNumber(ID[i]))
 			{
 				flag = 0;
+				textBgColor(RED, BLACK);
 				printf("Ma doc gia khong hop le. Vui long nhap lai.\n");
+				textBgColor(WHITE, BLACK);
 				break;
 			}
 		}
@@ -291,7 +338,9 @@ void getISBN(char *ISBN)
 		int i;
 		if (strlen(ISBN) != 13)
 		{
+			textBgColor(RED, BLACK);
 			printf("ISBN phai co 13 chu so. Vui long nhap lai.\n");
+			textBgColor(WHITE, BLACK);
 			continue;
 		}
 
@@ -302,7 +351,9 @@ void getISBN(char *ISBN)
 			if (!isNumber(ISBN[i]))
 			{
 				flag = 0;
+				textBgColor(RED, BLACK);
 				printf("ISBN khong hop le. Vui long nhap lai.\n");
+				textBgColor(WHITE, BLACK);
 				break;
 			}
 		}
@@ -415,31 +466,15 @@ Day getDayFrmUser(){
 		temp = getchar();
 
 		if (!isPossibleDay(day.Date, day.Month, day.Year))
+		{
+			textBgColor(RED, BLACK);
 			printf("Ngay thang nam sinh khong hop le vui long nhap lai.\n");
+			textBgColor(WHITE, BLACK);
+		}
 		else break;
 	} while (1);
 	return day;
 }
-
-//Chỉnh màu chữ và màu nền
-/*
-0 black
-1 blue
-2 green
-3 aqua
-4 red
-5 purple
-6 yellow
-7 white
-8 gray
-9 light blue
-10 light green
-11 light aqua
-12 light red
-13 light purple
-14 light yellow
-15 bright white
-*/
 
 void printfDay(Day day){
 	printf("%d / %d / %d\n", day.Date, day.Month, day.Year);

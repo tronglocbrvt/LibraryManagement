@@ -47,6 +47,12 @@ void showTitleBorrow();
 void showTitleReturn();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>. sub meunu title
+void showTitleAnalyzingBooks();
+void showTitleAnalyzingCato();
+void showTitleAnalyzingReaders();
+void showTitleAnalyzingSex();
+void showTitleAnalyzingBorrowBook();
+void showTitleAnalyzingOverdue();
 void showTitleOverdue();
 void showTitleListBook();
 void showTitleCategory();

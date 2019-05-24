@@ -1,6 +1,11 @@
 ﻿#include "userManagement.h"
 #include "commonFunction.h"
 #include "Menu.h"
+#include "readerManagement.h"
+#include "bookManagement.h"
+#include "borrowedBooks.h"
+#include "returnedBooks.h"
+#include "analyzingLibrary.h"
 
 //  Kiểm tra Username và Password có trong database hay không?
 int checkLogin(char *Username, char *Password)
@@ -40,12 +45,54 @@ int checkLogin(char *Username, char *Password)
 }
 
 // Hàm đăng xuất
-int Logout()
+void Logout(int &typeAccount)
 {
 	remove((char*)_DIR_DATA_FOLDER_USER_CUR);
-	return -1;
+	textBgColor(RED, BLACK);
+	printf("Ban da dang xuat thanh cong!\n");
+	Sleep(1000);
+	system(cls);
+	typeAccount = Login();
+
 }
 
+void Menu(int &typeAccount)
+{
+	bool continueSwit = true;
+	while (continueSwit){
+		int choice = printLoginMenu();
+		switch (choice){
+		case 0:
+			continueSwit = false;
+			system(cls);
+			return;
+		case 1:
+			runMenuUser(typeAccount);
+			break;
+		case 2:
+			runReaderManagement(typeAccount);
+			break;
+		case 3:
+			runBookManagement(typeAccount);
+			break;
+		case 4:
+			borrowBook();
+			break;
+		case 5:
+			returnBook();
+			break;
+		case 6:
+			runningAnalyzing(typeAccount);
+			break;
+		case 7:
+			continueSwit = false;
+			Logout(typeAccount);
+			break;
+		default:
+			break;
+		}
+	}
+}
 /* Hàm đăng nhập, nếu đăng nhập thành công thì trả về
 1: Admin
 2: Chuyên viên
@@ -54,10 +101,10 @@ Hàm đăng nhập thất bại trả về 0
 */
 int Login()
 {
-	gotoxy(30, 1);
-	textBgColor(RED, LIGHTAQUA);
-	printf(" Moi ban dang nhap: \n\n");
-
+	showTitleHeader();
+	textBgColor(YELLOW, BLACK);
+	gotoxy(30, 7);
+	printf("MOI BAN DANG NHAP: \n");
 	textBgColor(WHITE, BLACK);
 	printf("Nhap ten tai khoan: ");
 	char *username = new char[21];
@@ -70,25 +117,7 @@ int Login()
 	if (password == NULL)
 		return -1;
 	
-	// char ch = ' ';
-	// int index = 0;
-	// while (1){
-	// 	if (kbhit())
-	// 	{
-	// 		ch = getch();
-	// 		if (ch != 10 && ch != 13)
-	// 		{
-	// 			printf("*");
-	// 			*(password + index++) = ch;
-	// 		}
-	// 		else
-	// 			break;
-	// 	}
-	// }
-	// *(password + index) = '\0';
-	// printf("\n");
-
-	scanf("%s", password);
+	encryptPassword(password);
 
 	int typeAccount = checkLogin(username, password);
 
@@ -230,13 +259,13 @@ void changePassword()
 		system(cls);
 		showTitleChangePassUser();
 		printf("Moi ban nhap mat khau cu: ");
-		scanf("%s", oldPassword);
+		encryptPassword(oldPassword);
 
 		printf("Moi ban nhap mat khau moi: ");
-		scanf("%s", newPassword1);
+		encryptPassword(newPassword1);
 
 		printf("Moi ban xac nhan mat khau moi: ");
-		scanf("%s", newPassword2);
+		encryptPassword(newPassword2);
 
 		if (strcmp(oldPassword, curUser.Password) != 0) // Mật khẩu không khớp với mật khẩu đã tạo
 		{
@@ -443,9 +472,9 @@ void inforDecentraliseUser()
 	while (fread(&A, sizeof(Users), 1, f) != 0)
 	{
 		if (A.typeAccount == 2)
-			printf("%s\t\t%s\n", A.Username, "Chuyen vien");
+			printf("%s                  %s\n", A.Username, "Chuyen vien");
 		else if (A.typeAccount == 3)
-			printf("%s\t\t%s\n", A.Username, "Quan li");
+			printf("%s                  %s\n", A.Username, "Quan li");
 	}
 
 	fclose(f);
@@ -464,7 +493,7 @@ void decentraliseUser()
 	do
 	{
 		textBgColor(WHITE, BLACK);
-		printf("Nhap Username ban muon phan quyen: ");
+		printf("\nNhap Username ban muon phan quyen: ");
 		scanf("%s", Username);
 
 		flag = checkUsername(Username); // flag = 0: tìm thấy Username; flag = 1: không tìm thấy Username.
@@ -529,11 +558,11 @@ void inforStatusUser()
 	{
 		if (A.Status == 0)
 		{
-			printf("%s\t\t%s\n", A.Username, "Blocked");
+			printf("%s                  %s\n", A.Username, "Blocked");
 		}
 		else if (A.Status == 1)
 		{
-			printf("%s\t\t%s\n", A.Username, "Actived");
+			printf("%s                  %s\n", A.Username, "Actived");
 		}
 	}
 
@@ -553,7 +582,7 @@ void changeStatusUser()
 	do
 	{
 		textBgColor(WHITE, BLACK);
-		printf("Nhap Username ban muon thay doi trang thai: ");
+		printf("\nNhap Username ban muon thay doi trang thai: ");
 		scanf("%s", Username);
 
 		flag = checkUsername(Username); // flag = 0: tìm thấy Username; flag = 1: không tìm thấy Username.

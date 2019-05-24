@@ -28,7 +28,7 @@ bool findListBorrowedWithIDPerson(char *personID, LLNodeBorrowBook &lsBB){	// T�
 }
 
 void askToPrintListBorBook(LLNodeBorrowBook llBorBook){
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon in ra danh sach sach muon khong?"), 1)){
+	switch(getNumberPressKey(askYesNoQuestion((char*)"\nBan co muon in ra danh sach sach muon khong"), 1)){
 		case 1:
 			printReaderFromLL(llBorBook);
 			break;
@@ -60,6 +60,8 @@ bool returnNumberBorrwedBook(char *isbnBook, int numRet){ // trả lại kho s�
 	}
 
 	fclose(fileBook);
+	fclose(fileBook);
+	fclose(fileBookTemp);
 	fclose(fileBookTemp);
 
 	remove((char*)_DIR_DATA_FOLDER_BOOK);
@@ -171,10 +173,10 @@ void returnBook()
 	do {
 		if (choice == 1)
 		{
-			printf("Nhap so luong sach bao mat: ");
+			printf("\nNhap so luong sach bao mat: ");
 		}
 		else {
-			printf("Nhap so luong sach muon tra: ");
+			printf("\nNhap so luong sach muon tra: ");
 		}
 		scanf("%d", &numRet);
 
@@ -193,7 +195,7 @@ void returnBook()
 			}
 			break;
 		}
-	}while(true);
+	} while(true);
 
 	if (choice == 1) // có mất sách
 	{
@@ -201,7 +203,9 @@ void returnBook()
 		moneyPayement = book->priceBook * numRet * moneyRate;
 		updateReturnBookToList(llBorBook, numRet);
 	}
-	else moneyPayement = moneyRate * updateReturnBookToList(llBorBook, numRet);
+	else 
+		moneyPayement = moneyRate * updateReturnBookToList(llBorBook, numRet);
+
 	updateReturnBookToFile(llBorBook);
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -229,12 +233,12 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("||                         >> HOA DON TRA SACH <<                                 ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
-	textBgColor(WHITE, BLACK);
 	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
 	printf("|    Ten doc gia:\t%31s                            |\n", nameReader);
 	printf("|----------------------------------------------------------------------------------|\n");
-	printf("|    Ten sach:                                      | So luong muon | So luong tra |\n");
-	printf("|    %-47s|       %-8d|      %-8d|\n", nameBook, numBor, numRet);
+	printf("|    Ten sach:                                  | So luong muon | So luong tra/mat |\n");
+	printf("|    %-43s|       %-8d|      %-12d|\n", nameBook, numBor, numRet);
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("|    So tien phai tra:                                      %18s     |\n", stringMoneyPayement);
 	printf("|----------------------------------------------------------------------------------|\n");

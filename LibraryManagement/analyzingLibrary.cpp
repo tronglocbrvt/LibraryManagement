@@ -4,9 +4,12 @@
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	NodeBook *pNow = lsbook.pHead;
+	if (pNow == NULL)
+		return 0;
 	char *stringMoneyPayement;
-	//stringMoneyPayement[18] = '\0';
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach trong thu vien khong"), 1)){
+	textBgColor(YELLOW, BLACK);
+	switch(getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach cac sach trong thu vien khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleListBook();
@@ -23,7 +26,7 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 				pNow = pNow->pNext;
 			}
 			showFooter();
-			
+			stopSceen();
 			return true;
 		default:
 			return false;
@@ -31,6 +34,8 @@ bool askToPrintAllBook(LLNodeBook lsbook){ //>> ll book
 	return true;
 }
 void analyzingBook(){
+	showTitleAnalyzingBooks();
+
 	FILE *fileBook = fopen(_DIR_DATA_FOLDER_BOOK, "rb");
 	if (fileBook == NULL)
 	{
@@ -48,30 +53,30 @@ void analyzingBook(){
 	printf("So luong sach trong thu vien hien co la: %d\n", lsbook.total);
 	if (lsbook.total != 0)
 	{
-		stopSceen();
 		askToPrintAllBook(lsbook);
 	}
-	stopSceen();
+	fclose(fileBook);
 	freeLinkListBook(lsbook);
-	
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
-	NodeCategory *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac The loai trong thu vien khong"), 1)){
+	NodeCategory *pNow = lsCate.pHead;
+	if (pNow == NULL)
+		return 0;
+	textBgColor(YELLOW, BLACK);
+	switch (getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach the loai sach trong thu vien khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleCategory();
-			pNow = lsCate.pHead;
+			printf("|----------------------------------------------------------------------------------|\n");
 			while(pNow != NULL){
-				printf("|\t%-41s\t|\t%6d\t\t   |\n", pNow->Category, pNow->numBookPerCategory);
+				printf("|\t%-41s\t|\t%6d quyen\t    |\n", pNow->Category, pNow->numBookPerCategory);
 				pNow = pNow->pNext;
 				printf("|----------------------------------------------------------------------------------|\n");
 			}
-			showFooter();
-			
-			// delete pNow;
+			stopSceen();
 			return true;
 		default:
 			return false;
@@ -80,6 +85,7 @@ bool askToPrintAllCato(LLNodeCategory lsCate){ // ll catogory
 	return true;
 }
 void analyzingCatoBook(){
+	showTitleAnalyzingCato();
 	FILE *fileBook = fopen(_DIR_DATA_FOLDER_BOOK, "rb");
 	if (fileBook == NULL)
 	{
@@ -97,24 +103,27 @@ void analyzingCatoBook(){
 		}
 	}
 
-	printf("Cac the loai trong thu vien hien co la %d The loai.\n", lsCate.total);
+	printf("Cac the loai sach trong thu vien hien co la %d The loai.\n", lsCate.total);
 	if (lsCate.total != 0)
 	{
-		stopSceen();
 		askToPrintAllCato(lsCate);
 	}
-	stopSceen();
+
+	fclose(fileBook);
 	freeLinkListBook(lsCate);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
-	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac doc gia trong thu vien khong"), 1)){
+	NodeReader *pNow = lsreader.pHead;
+	if (pNow == NULL)
+		return 0;
+	textBgColor(YELLOW, BLACK);
+	switch (getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach doc gia trong thu vien khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleListReader();
-			pNow = lsreader.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				printf("|^   ID:\t%-63s   v|\n", pNow->reader.ID);
@@ -126,8 +135,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			showFooter();
-			// delete pNow;
+			stopSceen();
 			return true;
 		default:
 			return false;
@@ -136,6 +144,7 @@ bool askToPrintAllReader(LLNodeReader lsreader){ // ll reader
 	return true;
 }
 void analyzingReader(){
+	showTitleAnalyzingReaders();
 	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 	if (fileReader == NULL)
 	{
@@ -153,21 +162,21 @@ void analyzingReader(){
 	printf("So luong doc gia dang dang ky voi Thu vien la: %d\n", lsreader.total);
 	if (lsreader.total != 0)
 	{
-		stopSceen();
 		askToPrintAllReader(lsreader);
 	}
-	stopSceen();
+	fclose(fileReader);
 	freeLinkListReader(lsreader);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleReader){ // 2 ll sex
-	NodeReader *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia theo gioi tinh trong thu vien khong"), 1)){
+	NodeReader *pNow = lsMaleReader.pHead;
+	textBgColor(YELLOW, BLACK);
+	switch (getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach doc gia trong gioi tinh khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleMaleReader();
-			pNow = lsMaleReader.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				printf("|^   ID:\t%-63s   v|\n", pNow->reader.ID);
@@ -179,7 +188,6 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			showFooter();
 			stopSceen();
 			system(cls);
 			showTitleFemaleReader();
@@ -195,8 +203,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			showFooter();
-			// delete pNow;
+			stopSceen();
 			return true;
 		default:
 			return false;
@@ -205,6 +212,7 @@ bool askToPrintAllSexReader(LLNodeReader lsMaleReader, LLNodeReader lsFemaleRead
 	return true;
 }
 void analyzingSexReader(){
+	showTitleAnalyzingSex();
 	FILE *fileReader = fopen(_DIR_DATA_FOLDER_READER, "rb");
 	if (fileReader == NULL)
 	{
@@ -231,22 +239,22 @@ void analyzingSexReader(){
 	printf("Thu vien co %d doc gia nam va co %d doc gia nu.\n", lsMaleReader.total, lsFemaleReader.total);
 	if (lsMaleReader.total != 0 || lsFemaleReader.total != 0)
 	{
-		stopSceen();
 		askToPrintAllSexReader(lsMaleReader, lsFemaleReader);
 	}
-	stopSceen();
+	fclose(fileReader);
 	freeLinkListReader(lsMaleReader);
 	freeLinkListReader(lsFemaleReader);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
-	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien danh sach cac sach dang duoc muon trong thu vien khong"), 1)){
+	NodeBorrowBook *pNow = lsBorBook.pHead;;
+	textBgColor(YELLOW, BLACK);
+	switch (getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach cac sach dang duoc muon khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleListBorrowing();
-			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				printf("|^   ID:     %-14s |   Ten doc gia:\t%-31s   v|\n", pNow->brBook.ID, pNow->brBook.Fullname);
@@ -256,16 +264,14 @@ bool askToPrintAllBorrowingBook(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			showFooter();
-			// delete pNow;
 			return true;
 		default:
 			return false;
 	}
-
 	return true;
 }
 void analyzingBorrowingBook(){
+	showTitleAnalyzingBorrowBook();
 	FILE *fileBorBook = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 	if (fileBorBook == NULL)
 	{
@@ -283,21 +289,21 @@ void analyzingBorrowingBook(){
 	printf("So luong sach ma doc gia dang muon trong thu vien hien co la:\t%d\n", lsBorBook.total);
 	if (lsBorBook.total != 0)
 	{
-		stopSceen();
 		askToPrintAllBorrowingBook(lsBorBook);
 	}
-	stopSceen();
+	fclose(fileBorBook);
 	freeLinkListBorrowBook(lsBorBook);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
-	NodeBorrowBook *pNow;
-	switch(getNumberPressKey(askYesNoQuestion((char*)"Co muon hien thi danh sach cac doc gia dang bi tre han tra sach trong thu vien khong"), 1)){
+	NodeBorrowBook *pNow = lsBorBook.pHead;
+	textBgColor(YELLOW, BLACK);
+	switch (getNumberPressKey(askYesNoQuestion((char*)"Ban co muon hien danh sach cac doc gia bi tre han tra sach khong"), 0)){
+		textBgColor(WHITE, BLACK);
 		case 1:
 			system(cls);
 			showTitleOverdue();
-			pNow = lsBorBook.pHead;
 			while(pNow != NULL){
 				printf("|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|\n");
 				printf("|^   ID:     %-14s |   Ten doc gia:\t%-31s   v|\n", pNow->brBook.ID, pNow->brBook.Fullname);
@@ -307,8 +313,6 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 				printf("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n");
 				pNow = pNow->pNext;
 			}
-			showFooter();
-			// delete pNow;
 			return true;
 		default:
 			return false;
@@ -317,6 +321,7 @@ bool askToPrintAllOverdueReader(LLNodeBorrowBook lsBorBook){ // ll borrowbook
 	return true;
 }
 void analyzingOverdueReader(){
+	showTitleAnalyzingOverdue();
 	FILE *fileBorBook = fopen(_DIR_DATA_FOLDER_BOOK_BORROW, "rb");
 	if (fileBorBook == NULL)
 	{
@@ -337,10 +342,9 @@ void analyzingOverdueReader(){
 	printf("So luong doc gia trong thu vien dang bi tre han tra sach:\t%d\n", lsBorBook.total);
 	if (lsBorBook.total != 0)
 	{
-		stopSceen();
 		askToPrintAllOverdueReader(lsBorBook);
 	}
-	stopSceen();
+	fclose(fileBorBook);
 	freeLinkListBorrowBook(lsBorBook);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -372,7 +376,6 @@ void runningAnalyzingForAdmin(){
 			default:
 				break;
 		}
-		// Sleep(1000);
 	} while (choice != 0);
 }
 void runningAnalyzingForExpert(){
@@ -381,18 +384,6 @@ void runningAnalyzingForExpert(){
 		choice = getNumberPressKey(analyzingMenuForExpert(), 0);
 		system(cls);
 		switch (choice){
-			// case 1: // Thống kê số lượng sách trong thư viện
-			// 	analyzingBook();
-			// 	break;
-			// case 2: // Thống kê số lượng sách theo thể loại
-			// 	analyzingCatoBook();
-			// 	break;
-			// case 3: // Thống kê số lượng độc giả
-			// 	analyzingReader();
-			// 	break;
-			// case 4: // Thống kê số lượng độc giả theo giới tính
-			// 	analyzingSexReader();
-			// 	break;
 			case 1: // Thống kê số sách đang được mượn
 				analyzingBorrowingBook();
 				break;
@@ -402,7 +393,6 @@ void runningAnalyzingForExpert(){
 			default:
 				break;
 		}
-		// Sleep(1000);
 	} while (choice != 0);
 }
 void runningAnalyzingForManager(){
@@ -432,7 +422,6 @@ void runningAnalyzingForManager(){
 			default:
 				break;
 		}
-		// Sleep(1000);
 	} while (choice != 0);
 }
 

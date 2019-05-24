@@ -15,6 +15,8 @@ int numDaysOfMonth(int Month, int Year);
 
 bool isPossibleDay(int Day, int Month, int Year);
 
+void encryptPassword(char *name);
+
 void getUsername(char username[]);
 
 void getBirthday(Day &birthday);

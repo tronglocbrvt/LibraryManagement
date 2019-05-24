@@ -244,12 +244,13 @@ void borrowBookBill(char *ID, char *Fullname)
 		return;
 	
 	system(cls);
-	textBgColor(WHITE, BLACK);
+	textBgColor(PURPLE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("||                           >> PHIEU MUON SACH <<                                ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("------------------------------------------------------------------------------------\n");
+	textBgColor(WHITE, BLACK);
 	printf("|        Ma doc gia: %8s          Ho va ten: %-31s  |\n", ID, Fullname);
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("|    ISBN     |           Ten sach            | So luong | Ngay muon  |  Ngay tra  |\n");
