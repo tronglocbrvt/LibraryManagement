@@ -157,7 +157,7 @@ void returnBook()
 	strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
 	numBor = llBorBook.total;
 	do {
-		printf("Nhap so luong sach muon tra: ");
+		printf("Nhap so luong sach: ");
 		scanf("%d", &numRet);
 		if (numRet > llBorBook.total)
 		{
