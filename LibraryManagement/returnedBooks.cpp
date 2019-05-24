@@ -121,44 +121,54 @@ void returnBook()
 		return;
 	int moneyRate = 1;
 	textBgColor(YELLOW, BLACK);
-	int choice = getNumberPressKey(askYesNoQuestion((char *)"Sach co bi mat khong"),1);
-	switch(choice){
-		case 1: // có mất sách
-			// book = findBookWithISBN(isbnBook);
-			moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT;
-			printf("\n");
-			printReaderFromLL(llBorBook);
-			textBgColor(WHITE, BLACK);
-			printf("Chon sach da mat <Nhap ISBN sach mat>\n");
-			
-			break;
-		default: // không bị mất sách
-			moneyRate = _SO_TIEN_PHAT;
-			printf("\n");
-			// askToPrintListBorBook(llBorBook);
+	int choice = getNumberPressKey(askYesNoQuestion((char *)"\nSach co bi mat khong"), 1);
+	switch (choice){
+	case 1: // có mất sách
+		// book = findBookWithISBN(isbnBook);
+		moneyRate = _SO_PHAN_TRAM_PHAT_KHI_MAT;
+		printf("\n");
+		printReaderFromLL(llBorBook);
+		textBgColor(BLUE, BLACK);
+		printf("Chon sach da mat <Nhap ISBN sach mat>\n");
+		textBgColor(WHITE, BLACK);
 
-			break;
+		break;
+	default: // không bị mất sách
+		moneyRate = _SO_TIEN_PHAT;
+		printf("\n");
+		// askToPrintListBorBook(llBorBook);
+
+		break;
 	}
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	textBgColor(WHITE, BLACK);
 	getISBN(isbnBook);
-	transformLLBorrowedBookWithISBN(llBorBook, isbnBook);
+	if (findBookWithISBN(isbnBook) == NULL) // Kiểm tra sách có trong kho hay không?
+	{
+		textBgColor(RED, BLACK);
+		printf("Sach nay khong ton tai trong thu vien.\n");
+		textBgColor(WHITE, BLACK);
+		Sleep(1000);
+		return;
+	}
+	transformLLBorrowedBookWithISBN(llBorBook, isbnBook); // Kiểm tra độc giả có mượn cuốn sách này trong thư viện hay không?
 	if (llBorBook.pHead == NULL)
 	{
 		textBgColor(RED, BLACK);
 		printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
 		textBgColor(WHITE, BLACK);
 		Sleep(1000);
-		//return;
+		return;
 	}
 
 	strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
 	numBor = llBorBook.total;
 	do {
-		printf("Nhap so luong sach: ");
+		printf("Nhap so luong sach muon tra (neu bi mat tat ca, nhap 0): ");
 		scanf("%d", &numRet);
+
 		if (numRet > llBorBook.total)
 		{
 			textBgColor(RED, BLACK);
@@ -173,7 +183,7 @@ void returnBook()
 		}
 	}while(true);
 
-	if (choice == 1) // co mat sach
+	if (choice == 1) // có mất sách
 	{
 		book = findBookWithISBN(isbnBook);
 		moneyPayement = book->priceBook * numRet * moneyRate;
@@ -202,10 +212,12 @@ void returnBookBill(char *nameReader, char *nameBook, int numBor, int numRet, lo
 {
 	char *stringMoneyPayement = intMoneyToStringMoney(moneyPayement);
 	system(cls);
+	textBgColor(PURPLE, LIGHTAQUA);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 	printf("||                         >> HOA DON TRA SACH <<                                 ||\n");
 	printf("|----------------------------------------------------------------------------------|\n");
+	textBgColor(WHITE, BLACK);
 	printf("------------------------------------------------------------------------------------\n");
 	printf("|    Ten doc gia:\t%31s                            |\n", nameReader);
 	printf("|----------------------------------------------------------------------------------|\n");
