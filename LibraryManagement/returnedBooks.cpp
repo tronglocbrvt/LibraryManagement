@@ -122,7 +122,7 @@ void returnBook()
 	int moneyRate = 1;
 	textBgColor(YELLOW, BLACK);
 	int choice = getNumberPressKey(askYesNoQuestion((char *)"\nSach co bi mat khong"), 1);
-	int flags = 0;
+
 	switch (choice){
 	case 1: // có mất sách
 		// book = findBookWithISBN(isbnBook);
@@ -132,7 +132,6 @@ void returnBook()
 		textBgColor(BLUE, BLACK);
 		printf("Chon sach da mat <Nhap ISBN sach mat>\n");
 		textBgColor(WHITE, BLACK);
-		flags = 1;
 
 		break;
 	default: // không bị mất sách
@@ -153,7 +152,7 @@ void returnBook()
 		printf("Sach nay khong ton tai trong thu vien.\n");
 		textBgColor(WHITE, BLACK);
 		Sleep(1000);
-		flags = 0;
+		choice = 0;
 		return;
 	}
 	transformLLBorrowedBookWithISBN(llBorBook, isbnBook); // Kiểm tra độc giả có mượn cuốn sách này trong thư viện hay không?
@@ -163,14 +162,14 @@ void returnBook()
 		printf("Doc gia nay khong muon cuon sach nay trong thu vien!\n");
 		textBgColor(WHITE, BLACK);
 		Sleep(1000);
-		flags = 0;
+		choice = 0;
 		return;
 	}
 
 	strcpy(nameBook, llBorBook.pHead->brBook.nameBook);
 	numBor = llBorBook.total;
 	do {
-		if (flags == 1)
+		if (choice == 1)
 		{
 			printf("Nhap so luong sach bao mat: ");
 		}
@@ -188,7 +187,10 @@ void returnBook()
 		}
 		else 
 		{
-			returnNumberBorrwedBook(isbnBook, numRet);
+			if (choice != 1)
+			{
+				returnNumberBorrwedBook(isbnBook, numRet);
+			}
 			break;
 		}
 	}while(true);
