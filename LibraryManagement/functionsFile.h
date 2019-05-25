@@ -38,10 +38,3 @@
 	#define _DIR_DATA_FOLDER_BOOK_BORROW_TEMP "Documents/Github/LibraryManagement/LibraryManagement/Database/BorrowBook/databaseBorrowBookTemp.bin"
 
 #endif
-
-// #define _NAME_FILE_VIEW "CurAccount.txt"
-// #define _MAX_CHAR_OF_INF_ 32
-// #define _END_LINE_MACOS_ 2
-// #define _STRING_LOREM ""
-
-FILE *openFile(char* dir, char *nameFile, char *mode);
