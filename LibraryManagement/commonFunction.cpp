@@ -132,8 +132,16 @@ void encryptPassword(char *name)
 			ch = getch();
 			if (ch != 10 && ch != 13)
 			{
-				printf("*");
-				*(name + index++) = ch;
+				if (ch == 8)
+				{
+					printf("%c\n", 8);
+				}
+				else
+				{
+					printf("*");
+					*(name + index++) = ch;
+				}	
+					
 			}
 			else
 				break;
